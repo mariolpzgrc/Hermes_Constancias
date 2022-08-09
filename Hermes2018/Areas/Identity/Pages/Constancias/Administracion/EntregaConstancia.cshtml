@@ -1,0 +1,143 @@
+﻿@page "/Constancias/EntregaConstancia"
+@model Hermes2018.Areas.Identity.Pages.Constancias.Administracion.EntregaConstanciaModel
+@section Styles{
+    <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/codemirror.min.css">
+    <link type="text/css" rel="stylesheet" href="~/lib/tagify/css/tagify.css" />
+    @*<link href="~/lib/bootstrap-select/dist/css/bootstrap-select.min.css" rel="stylesheet" />*@
+    <link href="~/lib/bootstrap-select-1.13.14/dist/css/bootstrap-select.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/lib/flatpickr/flatpickr.min.css" />
+    <link type="text/css" rel="stylesheet" href="~/lib/easy-autocomplete/dist/easy-autocomplete.min.css" />
+    <link type="text/css" rel="stylesheet" href="~/lib/easy-autocomplete/dist/easy-autocomplete.themes.min.css" />
+    <link type="text/css" rel="stylesheet" href="~/lib/max-favilli-tagmanager/tagmanager.min.css" />
+    <link type="text/css" rel="stylesheet" href="~/lib/bootstrap-notify/animate.min.css" />
+    <link type="text/css" rel="stylesheet" href="~/css/Areas/Identity/Pages/Correspondencia/Lectura.min.css" asp-append-version="true" />
+}
+
+@section ScriptsPrioritarios
+    {
+    <script type="text/javascript" src="~/lib/max-favilli-tagmanager/tagmanager.js"></script>
+
+    <script src="~/lib/flatpickr/flatpickr.min.js"></script>
+    <script src="~/lib/flatpickr/l10n/es.js"></script>
+
+
+    <script type="text/javascript" src="~/lib/jspdf/jspdf.min.js"></script>
+    <script type="text/javascript" src="~/lib/html2canvas/html2canvas.js"></script>
+    @*<script type="text/javascript" src="~/lib/jspdf-autotable/jspdf.plugin.autotable.min.js"></script>*@
+    <script type="text/javascript" src="~/lib/bootstrap-notify/bootstrap-notify.min.js"></script>
+    <script type="text/javascript" src="~/lib/tagify/js/tagify.min.js"></script>
+
+    @*select with search*@
+    <script src="~/lib/bootstrap-select-1.13.14/dist/js/bootstrap-select.min.js"></script>
+}
+<div class="content-wrapper pt-0">
+    <div class="container-fluid">
+        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+            <ol class="breadcrumb-2 mt-0 mb-0 display-inline">
+                <li class="breadcrumb-2-item active display-flex">
+                    Entrega de constancia
+                </li>
+                <li class="flex-right">
+                    <a class="md-btn md-btn-raised md-btn-ripple bg-secondary mr-1" asp-area="Identity" asp-page="/Constancias/Administracion/AdministracionConstancia">Cancelar</a>
+                </li>
+            </ol>
+            <hr class="hr-thick mt-2 mb-2" />
+            <div class="info-border pb-1">
+                <div class="p-2 mb-1 border-top border-bottom-0 bg-light">
+                    <strong>Información de la constancia</strong>
+                    <button type="button" class="btn btn-link float-right btn-sm" id="control-toggle"><i class="fas fa-angle-down"></i></button>
+                </div>
+                <div class="pt-0 pb-0 pl-1 pr-0" id="contenidoConstancia">
+                    <div class="pb-1"><label class="font-weight-bold font-dark-gray">No. de Personal: </label> <span id="numeroPersonal"></span></div>
+                    <div class="pb-1"><label class="font-weight-bold font-dark-gray">Solicitante: </label> <span id="solicitante"></span></div>
+                    <div class="pb-1"><label class="font-weight-bold font-dark-gray">Folio: </label> <span id="folio"></span></div>
+                    <div class="pb-1"><label class="font-weight-bold font-dark-gray">Tipo de constancia: </label> <span id="tipoConstancia"></span></div>
+                    <div class="pb-1"><label class="font-weight-bold font-dark-gray">Fecha de solicitud: </label> <span id="fechaSolicitud"></span></div>
+                    <div class="pb-1"><label class="font-weight-bold font-dark-gray">Fecha de autorización: </label> <span id="fechaGeneracion"></span></div>
+                </div>
+
+                <div class="p-2 mb-1 border-top border-bottom-0 bg-light">
+                    <strong>Entrega de la constancia</strong>
+                    <button type="button" class="btn btn-link float-right btn-sm" id="control-toggle"><i class="fas fa-angle-down"></i></button>
+                </div>
+                <div class="pt-0 pb-0 pl-1 pr-0" id="formEntregaConstancia">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-3 col-lg-3 col-xl-3">
+                                    <label for="fechEntrega">Fecha de Entrega:</label>
+                                    <div class="input-group">
+                                        <input class="form-control form-control-sm pr-4" id="fechaEntrega" type="date" maxlength="100">
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-3 col-lg-3 col-xl-3">
+                                    <label for="selected-usuario">Entrega:</label>
+                                    <div class="form-group">
+                                        <select id="selected-usuario" class="form-control form-control-sm">
+                                            <option value="">[Seleccione el personal]</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-xs-4 col-sm-1 col-lg-1 col-xl-1">
+                                    <label for="noper-recibio">No. Per:</label>
+                                    <div class="input-group">
+                                        <input class="form-control form-control-sm pr-4" id="noper-recibio" type="search" name="busqueda" placeholder="Buscar..." maxlength="100">
+                                        <span id="btn-x-search" class="btn bg-transparent d-none"><i class="fa fa-times"></i></span>
+                                    </div>
+                                </div>
+                                <div class="col-xs-8 col-sm-5 col-lg-5 col-xl-5">
+                                    <label for="per-recibio">Recibe:</label>
+                                    <div class="input-group">
+                                        <input class="form-control form-control-sm pr-4" id="per-recibio" type="text" maxlength="100">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="row">
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="text-center">
+                                <button type="button" onclick="GuardarEntrega()" class="md-btn md-btn-raised md-btn-ripple mt-2">Aceptar</button>
+                            </div>
+
+                            <!--Modal-->
+                            <div class="modal fade" id="entregaModal" tabindex="-1" role="dialog" aria-labelledby="solicitudModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h3 class="text-center" id="solicitudModalLabel">Entrega exitosa</h3>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <h3 class="text-center">Se ha realizado correctamente la operación</h3>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <!--<button type="submit" class="btn btn-primary btn-sm" data-dismiss="modal">Aceptar</button>-->
+                                            <a asp-area="Identity" asp-page="/Constancias/Administracion/AdministracionConstancia" class="btn btn-primary btn-sm">Aceptar</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts
+    {
+    <partial name="_ValidationScriptsPartial" />
+    <script type="text/javascript" src="~/js/Areas/Identity/Pages/Constancias/Administracion/EntregaConstancia.js" asp-append-version="true"></script>
+}

@@ -1,0 +1,51 @@
+﻿@page  "/Bandejas/Historico"
+@model HistoricoModel
+
+<div class="content-wrapper pt-0">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 pt-2">
+                        <ol class="breadcrumb-2 mt-0 mb-0 pt-1 pb-1 display-inline">
+                            <li class="breadcrumb-2-item">
+                                <a asp-area="" asp-controller="Home" asp-action="Index" asp-route-id="">Inicio</a>
+                            </li>
+
+                            <li class="breadcrumb-2-item active">
+                                Historico
+                            </li>
+                        </ol>
+                    </div>
+                    <div class="col-12">
+                        <hr class="hr-thick mb-1 mt-1" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-xs-12 col-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5>Histórico por persona</h5>
+                                <a asp-area="Identity" asp-page="/Historico/Persona" class="btn btn-primary btn-sm">Entrar</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    @if (Model.PuestoEsUnico)
+                    {
+                        <div class="col-6">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5>Histórico por área</h5>
+                                    <a asp-area="Identity" asp-page="/Historico/Area" class="btn btn-primary btn-sm">Entrar</a>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,20 @@
+﻿.dropdown-menu > .active > a, 
+.dropdown-menu > .active > a:hover, 
+.dropdown-menu > .active > a:focus {
+    background-color: var(--blue);
+    background-image: -webkit-linear-gradient(top,var(--blue) 0%,var(--blue) 100%);
+    background-image: -o-linear-gradient(top,#337ab7 0%,#2e6da4 100%);
+    background-image: -webkit-gradient(linear,left top,left bottom,from(var(--blue)),to(var(--blue)));
+    background-image: linear-gradient(to bottom,var(--blue) 0%,var(--blue) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff337ab7',endColorstr='#ff2e6da4',GradientType=0);
+    background-repeat: repeat-x;
+    color: #fff;
+}
+
+.dropdown-menu {
+    font-size: .875rem;
+}
+
+.popover-header {
+    font-size: .875rem;
+}

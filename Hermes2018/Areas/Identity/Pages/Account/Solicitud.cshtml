@@ -1,0 +1,139 @@
+﻿@page "/Acceso/Solicitud"
+@model Hermes2018.Areas.Identity.Pages.Account.SolicitudModel
+@using Hermes2018.Helpers
+@using Newtonsoft.Json
+
+@{
+    ViewData["Title"] = "Hermes";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <meta name="keywords" content="universidad veracruzana, uv, hermes, oficio, institucional, correspondencia, seguimiento, sistema">
+    <meta name="description" content="Sistema de Administración y Seguimiento de Correspondencia (HERMES)">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <meta name="author" content="Universidad Veracruzana">
+    <meta name="application-name" content="Hermes">
+    <title>@ViewData["Title"]</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="~/favicon.ico">
+    <!-- Google Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto" />
+    <!-- Font Awesome Icons-->
+    <link type="text/css" rel="stylesheet" href="~/lib/font-awesome/css/all.min.css" />
+    <!-- Bootstrap core CSS -->
+    <link type="text/css" rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <!-- Custom styles for this template -->
+    <link type="text/css" rel="stylesheet" href="~/lib/bootstrap/dist/css/navbar.min.css" />
+    <!--  CSS site -->
+    <link type="text/css" rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+    <!--  CSS details -->
+    <link type="text/css" rel="stylesheet" href="~/css/detail.min.css" asp-append-version="true" />
+    <!--  Material Buttons -->
+    <link type="text/css" rel="stylesheet" href="~/css/material-btns.min.css" />
+    <!--  Material Buttons v2 -->
+    <link type="text/css" rel="stylesheet" href="~/css/material-btns-v2.min.css" />
+    <!--  Sidebar -->
+    <link type="text/css" rel="stylesheet" href="~/lib/bootstrap/dist/css/template.sb-admin.min.css" />
+    <!--  Bootstrap Theme (?)-->
+    <link type="text/css" rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap-theme.min.css" />
+    <!--  Material Input fields -->
+    <link type="text/css" rel="stylesheet" href="~/css/material-input.min.css" />
+
+    <!-- EasyAutoComplete -->
+    <link type="text/css" rel="stylesheet" href="~/lib/easy-autocomplete/dist/easy-autocomplete.min.css" />
+    <link type="text/css" rel="stylesheet" href="~/lib/easy-autocomplete/dist/easy-autocomplete.themes.min.css" />
+    <!--  CSS site -->
+    <link type="text/css" rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+</head>
+<body class="bg-gray">
+    @*<section class="registerUser">*@
+        <div class="container">
+            <div id="centrado-vertical" class="row align-items-center">
+                <input id="routeWebRoot" value="@Url.Content("~/")" hidden />
+                <input id="usuarioAnonimo" value="@ConstApiUsuario.Anonimo" hidden />
+
+                <div class="card col-xs-6 col-md-9 col-xl-9">
+                    <div class="card-body material-card-height material-padding mt-2">
+                        <div class="text-center h4">Solicite acceso a Hermes</div>
+                        <div class="material-label-gray text-center">Por favor llene la información solicitada.</div>
+                        <br />
+                        @if (Model.TempData.ContainsKey("UserName") && Model.Solicitud != null)
+                    {
+                    <form method="post" class="mt-2">
+                        <div asp-validation-summary="ModelOnly" class="text-danger error-list-clean"></div>
+
+                        <div class="form-group row mt-1">
+                            <label asp-for="Solicitud.Usuario" class="align-text-left text-sm-right text-md-right text-lg-right col-sm-3 material-label-sm"></label>
+                            <div class="col-sm-9">
+                                <div class="align-text-left font-regular-12">@Model.Solicitud.Usuario</div>
+                            </div>
+                            <input asp-for="Solicitud.Usuario" class="sin-indicador" />
+                        </div>
+                        <div class="form-group row mt-1">
+                            <label asp-for="Solicitud.Nombre" class="align-text-left text-sm-right text-md-right text-lg-right col-sm-3 material-label-sm"></label>
+                            <div class="col-sm-9">
+                                <div class="align-text-left font-regular-12">@Model.Solicitud.Nombre</div>
+                            </div>
+                            <input asp-for="Solicitud.Nombre" class="sin-indicador" />
+                        </div>
+                        <div class="form-group row mt-1">
+                            <label asp-for="Solicitud.Correo" class="align-text-left text-sm-right text-md-right text-lg-right col-sm-3 material-label-sm"></label>
+                            <div class="col-sm-9">
+                                <div class="align-text-left font-regular-12">@Model.Solicitud.Correo</div>
+                            </div>
+                            <input asp-for="Solicitud.Correo" class="sin-indicador" />
+                        </div>
+                        <div class="form-group row mt-1">
+                            <label asp-for="Solicitud.AreaId" class="align-text-left text-sm-right text-md-right text-lg-right col-sm-3 material-label-sm"></label>
+                            <div class="col-sm-9">
+                                <select asp-for="Solicitud.AreaId" asp-items="Model.Areas" class="form-control form-control-sm form-control-x">
+                                    <option selected value="">[Seleccione un área]</option>
+                                </select>
+                                <input asp-for="Solicitud.Area" class="sin-indicador" />
+                                <span asp-validation-for="Solicitud.AreaId" class="text-danger font-regular-11"></span>
+                            </div>
+                            <input asp-for="Solicitud.Puesto" class="sin-indicador" />
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-12 pt-3 text-center">
+                                <small class="form-text text-muted">Su solicitud será enviada a su entidad, en cuanto sea validada, se le notificará vía correo electrónico.</small>
+                            </div>
+                        </div>
+                        <div class="form-group row mt-4">
+                            <div class="col-sm-6"></div>
+                            <div class="col-sm-6 text-right">
+                                <a asp-area="Identity" asp-page="/Account/Login" class="btn btn-light">Cancelar</a>
+                                <button id="btn-registra-usuario" type="submit" class="btn btn-primary">Enviar</button>
+                            </div>
+                        </div>
+                    </form>
+                        }
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    @*</section>*@
+
+    <!-- Bootstrap core JavaScript-->
+    <script type="text/javascript" src="~/lib/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="~/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
+    <!-- Core plugin JavaScript-->
+    <script type="text/javascript" src="~/lib/bootstrap/dist/js/jquery.easing.min.js"></script>
+    <!-- Validate JS-->
+    <script type="text/javascript" src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <!-- EasyAutoComplete JS-->
+    <script type="text/javascript" src="~/lib/easy-autocomplete/dist/jquery.easy-autocomplete.min.js"></script>
+
+    <partial name="_ValidationScriptsPartial" />
+    <script type="text/javascript" src="~/js/Areas/Identity/Pages/Account/Solicitud.min.js" asp-append-version="true"></script>
+</body>
+</html>

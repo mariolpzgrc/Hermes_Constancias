@@ -1,0 +1,54 @@
+﻿.leyenda-recibidos {
+    color: #039;
+    font-family: Roboto !important;
+}
+
+.leyenda-recibidos p {
+    letter-spacing: 4px;
+    font-size: 10pt;
+}
+
+#nameTag::-webkit-input-placeholder {
+    font-size: 10pt;
+}
+
+#nameTag::-moz-placeholder {
+    font-size: 10pt;
+}
+
+#nameTag:-ms-input-placeholder {
+    font-size: 10pt;
+}
+
+#nameTag::placeholder {
+    font-size: 10pt;
+}
+
+.modal-footer {
+    border-top: 0px !important;
+}
+
+.text-izq {
+    text-align: left !important;
+}
+
+/*.validaCorreo{
+    display:none;
+}*/
+
+.tabla-pdf {
+    margin-top: 15px;
+}
+
+input.form-control-sm,
+input.form-control-sm::-webkit-input-placeholder {
+    font-size: 0.875rem !important;
+    -webkit-user-select: text;
+    height: 25px;
+}
+
+.historial-correo {
+    height: 365px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}

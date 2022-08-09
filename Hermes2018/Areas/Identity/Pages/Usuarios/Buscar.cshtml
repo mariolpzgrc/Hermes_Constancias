@@ -1,0 +1,207 @@
+﻿@page "/Usuarios/Buscar/{id:int?}"
+@model Hermes2018.Areas.Identity.Pages.Usuarios.BuscarModel
+
+@section Styles {
+    <link type="text/css" rel="stylesheet" href="~/lib/jquery-flexdatalist/jquery.flexdatalist.min.css" />
+    <link type="text/css" rel="stylesheet" href="~/lib/bootstrap4-toggle/css/bootstrap4-toggle.min.css">
+}
+
+@section ScriptsPrioritarios
+    {
+    <script type="text/javascript" src="~/lib/jquery-flexdatalist/jquery.flexdatalist.min.js"></script>
+    <script type="text/javascript" src="~/lib/bootstrap4-toggle/js/bootstrap4-toggle.min.js"></script>
+}
+
+<div class="@string.Format("{0}", (ConstRol.RolUsuario.Contains(Model.Info.InfoUsuarioClaims.Rol))? "content-wrapper pt-1": "content-wrapper ml-0 bg-white pt-0")">
+    <div class="container-fluid" id="@string.Format("{0}", (ConstRol.RolUsuario.Contains(Model.Info.InfoUsuarioClaims.Rol))? string.Empty:"logged-in" )">
+        <div class="row">
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 pt-2">
+                        <ol class="breadcrumb-2 mt-0 mb-0 pb-1 pt-1 display-inline">
+                            <li class="breadcrumb-2-item">
+                                <a asp-area="" asp-controller="Home" asp-action="Index" asp-route-id="">Inicio</a>
+                            </li>
+
+                            <li class="breadcrumb-2-item"><a asp-area="Identity" asp-page="/Usuarios/Index">Usuarios</a></li>
+                            <li class="breadcrumb-2-item active" aria-current="page">Buscar Usuario</li>
+                        </ol>
+                    </div>
+                    <div class="col-12">
+                        <hr class="hr-thick mb-1 mt-1" />
+                        <h5>Buscar un usuario</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+
+                <form method="post">
+                    @*<div asp-validation-summary="ModelOnly" class="text-danger error-list-clean"></div>*@
+                    <div class="row">
+                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
+                            <div class="form-group" id="control-busqueda">
+                                @*<label asp-for="NombreUsuario" class="col-form-label font-bold-12"></label>*@
+                                <div class="">
+                                    <input type="text" asp-for="Info.HER_UserName" class="form-control" placeholder="Buscar" />
+                                    <small class="form-text text-muted">Escriba el nombre de usuario.</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <label class=" col-form-label pb-0 font-weight-bold">Nombre</label>
+                                <div>
+                                    <p id="Info_HER_NombreCompleto" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <label class=" col-form-label pb-0 font-weight-bold">Usuario</label>
+                                <div>
+                                    <p id="Info_HER_NombreUsuario" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <label class=" col-form-label pb-0 font-weight-bold">Correo</label>
+                                <div>
+                                    <p id="Info_HER_Correo" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <label class=" col-form-label pb-0 font-weight-bold">Rol</label>
+                                <div>
+                                    <p id="Info_HER_Tipo" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <label class=" col-form-label pb-0 font-weight-bold">Puesto</label>
+                                <div>
+                                    <p id="Info_HER_Puesto" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <label class=" col-form-label pb-0 font-weight-bold">Es Único</label>
+                                <div>
+                                    <p id="Info_HER_EsUnico" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <label class=" col-form-label pb-0 font-weight-bold">Área</label>
+                                <div>
+                                    <a href="" id="ligaArea">
+                                        <p id="Info_HER_Area"></p>
+                                    </a>
+                                </div>
+                                <input id="idArea" hidden />
+                            </div>
+                        </div>
+                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <label class=" col-form-label pb-0 font-weight-bold">Región</label>
+                                <div>
+                                    <p id="Info_HER_Region" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <label class=" col-form-label pb-0 font-weight-bold">Aprobado</label>
+                                <div>
+                                    <p id="Info_HER_Aprobado" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <label class=" col-form-label pb-0 font-weight-bold">Fecha de Aprobación</label>
+                                <div>
+                                    <p id="Info_HER_FechaAprobacion" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <label class=" col-form-label pb-0 font-weight-bold">Titular</label>
+                                <div>
+                                    <p id="Info_HER_Titular" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <label class=" col-form-label pb-0 font-weight-bold">Estado</label>
+                                <div>
+                                    <p id="Info_HER_Estado" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <label class=" col-form-label pb-0 font-weight-bold">Acepto Términos</label>
+                                <div>
+                                    <p id="Info_HER_AceptoTerminos" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <label class=" col-form-label pb-0 font-weight-bold">Permiso como administrador del área</label>
+                                <div>
+                                    <p id="Info_HER_PermisoAdministradorArea" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <label class=" col-form-label pb-0 font-weight-bold">Fecha en la que aceptó los términos</label>
+                                <div>
+                                    <p id="Info_HER_FechaTerminos" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <label class=" col-form-label pb-0 font-weight-bold">Fecha de registro</label>
+                                <div>
+                                    <p id="Info_HER_FechaRegistro" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <label class=" col-form-label pb-0 font-weight-bold">Fecha de actualización</label>
+                                <div>
+                                    <p id="Info_HER_FechaActualizacion" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group mt-2">
+                        <div>
+                            <a asp-area="Identity" asp-page="/Usuarios/Index" class="btn btn-light">Regresar</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script type="text/javascript" src="~/js/Areas/Identity/Pages/Usuarios/Buscar.min.js" asp-append-version="true"></script>
+}

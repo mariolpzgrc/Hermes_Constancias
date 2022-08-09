@@ -1,0 +1,40 @@
+﻿@model Hermes2018.Models.Categoria.HER_Categoria
+
+<div class="content-wrapper pt-0">
+	<div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 pt-2">
+                        <ol class="breadcrumb-2 mt-0 mb-0 pb-1 pt-1 display-inline">
+                            <li class="breadcrumb-2-item">
+                                <a asp-area="" asp-controller="Home" asp-action="Index" asp-route-id="">Inicio</a>
+                            </li>
+
+                            <li class="breadcrumb-2-item">
+                                <a asp-area="" asp-action="Index" asp-controller="Categorias">Categorías</a>
+                            </li>
+                            <li class="breadcrumb-2-item active display-flex" aria-current="page">Detalle categoría</li>
+                        </ol>
+                    </div>
+                    @*<div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 pt-2">
+                        <div class="float-right pt-2">
+                            <a asp-area="" asp-action="Borrar" asp-controller="Categorias" asp-route-id="@Model.HER_CategoriaId" class="btn btn-danger btn-sm" title="Borrar la categoría">Borrar</a>
+                            <a asp-area="" asp-action="Editar" asp-controller="Categorias" asp-route-id="@Model.HER_CategoriaId" class="btn btn-primary btn-sm" title="Editar la categoría">Editar</a>
+                        </div>
+                    </div>*@
+                    <div class="col-12">
+                        <hr class="hr-thick mb-1 mt-1" />
+                        <h5>Detalle categoría</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <dl>
+                    <dt>@Html.DisplayNameFor(x => x.HER_Nombre)</dt>
+                    <dd>@Html.DisplayFor(x => x.HER_Nombre)</dd>
+                </dl>
+            </div>
+        </div>
+	</div>
+</div>

@@ -1,0 +1,108 @@
+﻿@page "/Constancias/Administracion/SolicitudOficio"
+@model Hermes2018.Areas.Identity.Pages.Constancias.Administracion.SolicitudOficioBajaModel
+@section Styles{
+    <link type="text/css" rel="stylesheet" href="~/lib/bootstrap-daterangepicker/daterangepicker.min.css" />
+    <link type="text/css" rel="stylesheet" href="~/css/linear-activity.min.css" />
+}
+
+@section ScriptsPrioritarios{
+    <script type="text/javascript" src="~/lib/moment/min/moment-with-locales.min.js"></script>
+    <script type="text/javascript" src="~/lib/bootstrap-daterangepicker/daterangepicker.min.js"></script>
+    <script type="text/javascript" src="~/lib/twbs-pagination/jquery.twbsPagination.min.js"></script>
+}
+
+<div class="content-wrapper pt0">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 mb-1">
+                <h5>Solicitud de oficios de baja</h5>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2 col-xl-2">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="oficios" id="oficioIPE" value="1" />
+                            <label class="form-check-label" for="oficioIPE">Baja de IPE</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="oficios" id="oficioMag" value="2" />
+                            <label class="form-check-label" for="oficioMag">Baja de Magisterio</label>
+                        </div>
+                    </div>
+                    <div class="col-xs-4 col-sm-6 col-md-2 col-lg-3 col-xl-2">
+                        <label for="noper-recibio">Número de Personal:</label>
+                        <div class="input-group">
+                            <input class="form-control form-control-sm pr-4" id="noper-recibio" type="search" maxlength="100">
+                        </div>
+                    </div>
+                    <div class="col-xs-8 col-sm-8 col-md-4 col-lg-4 col-xl-5">
+                        <label for="per-recibio">Nombre del personal:</label>
+                        <div class="input-group">
+                            <input class="form-control form-control-sm pr-4" id="per-recibio" readonly type="text" maxlength="100">
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-4 col-md-3 col-lg-3  col-xl-3">
+                        <label for="fechEntrega">Fecha de Baja</label>
+                        <div class="input-group">
+                            <input class="form-control form-control-sm pr-4" id="fechaEntrega" type="date" maxlength="100">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="text-center">
+                            <button type="button" onclick="" class="md-btn md-btn-raised md-btn-ripple mt-2">Enviar</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <hr class="hr-thick mt-2 mb-2" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 col-md-9 col-lg-12 col-xl-10 pb-3">
+
+                    </div>
+                    <div class="col-sm-12 col-md-3 col-lg-12 col-xl-2 right-sidebar" id="division-derecha">
+                        <div class="form-group mt-3">
+                            <button type="button" class="md-btn md-btn-raised md-btn-ripple bg-secondary">Autorizar oficio</button>
+                        </div>
+                        <div class="form-group mt-3">
+                            <button type="button" class="md-btn md-btn-raised md-btn-ripple bg-secondary">Cancelar oficio</button>
+                        </div>
+                        <div class="form-group mt-3">
+                            <button type="button" class="md-btn md-btn-raised md-btn-ripple bg-secondary" data-toggle="modal" data-target="oficioImpresionModal">Imprimir oficio</button>
+                            <!--Modal-->
+                            <div class="modal fade" id="oficioImpresionModal" tabindex="-1" role="dialog" aria-labelledby="solicitudModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered modal-custom" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h3 class="text-center" id="solicitudModalLabel">Imprimir constancia</h3>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div id="constanciaFile"></div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-primary btn-sm" onclick="GuardarEstadoConstanciaImpresa()" aria-label="Close">
+                                                <span aria-hidden="true">Aceptar</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group mt-3">
+                            <button type="button" class="md-btn md-btn-raised md-btn-ripple bg-secondary">Reimprimir oficio</button>
+                        </div>
+                        <div class="form-group mt-3">
+                            <button type="button" onclick="" class="md-btn md-btn-raised md-btn-ripple mt-2">Entregar</button>
+                        </div>
+                    </div>
+                </div>
+            </diV>
+        </div>
+    </div>
+</div>

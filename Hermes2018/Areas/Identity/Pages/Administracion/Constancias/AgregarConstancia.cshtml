@@ -1,0 +1,120 @@
+﻿@page  "/Administracion/Constancias/AgregarConstancia"
+@model Hermes2018.Areas.Identity.Pages.Administracion.Constancias.AgregarConstanciaModel
+
+@section styles
+    {
+    <link type="text/css" rel="stylesheet" href="~/lib/bootstrap4-toggle/css/bootstrap4-toggle.min.css">
+    <link type="text/css" rel="stylesheet" href="~/lib/jquery-bootstrap-touchspin/jquery.bootstrap-touchspin.min.css">
+    <link type="text/css" rel="stylesheet" href="~/lib/max-favilli-tagmanager/tagmanager.css" />
+}
+@section ScriptsPrioritarios
+    {
+    <script type="text/javascript" src="~/lib/bootstrap4-toggle/js/bootstrap4-toggle.min.js"></script>
+    <script type="text/javascript" src="~/lib/jquery-bootstrap-touchspin/jquery.bootstrap-touchspin.min.js"></script>
+}
+
+<div class="content-wrapper ml-0 bg-white pt-0">
+    <div class="container-fluid" id="logged-in">
+        <div class="row">
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-10 col-sm-10 col-md-6 col-lg-6 col-xl-6 pt-2">
+                        <ol class="breadcrumb-2 mt-0 mb-0 pb-1 pt-1 display-inline">
+                            <li class="breadcrumb-2-item">
+                                <a asp-area="" asp-controller="Home" asp-action="Index" asp-route-id="">Inicio</a>
+                            </li>
+                            <li class="breadcrumb-2-item">
+                                <a asp-area="Identity" asp-page="/Administracion/Constancias/Index">Constancias</a>
+                            </li>
+                            <li class="breadcrumb-2-item active display-flex" aria-current="page">Agregar Constancias</li>
+                        </ol>
+                    </div>
+                    <div class="col-2 col-sm-2 col-md-6 col-lg-6 col-xl-6 pt-2">
+                        <div class="float-right">
+                            <a class="btn btn-sm md-btn-raised md-btn-ripple bg-primary">Aceptar</a>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <hr class="hr-thick mb-1 mt-1" />
+                        <h5>Agregar Constancia</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <form method="post" enctype="multipart/form-data" id="formRelacion">
+                    <div class="row">
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                            <div asp-validation-summary="ModelOnly" class="text-danger error-list-clean"></div>
+                            <div>
+                                <input class="sin-indicador" />
+                                <input class="sin-indicador" />
+                                <input class="sin-indicador" />
+                            </div>
+
+                            <div class="row">
+                                <div class="col-12 col-sm-10 col-md-8 col-lg-8 col-xl-8">
+                                    <div class="form-group">
+                                        <label class="col-form-label font-bold-12">Constancia</label>
+                                        <div class="">
+                                            <input type="text" class="form-control form-control-sm" placeholder="Escriba el nombre de la constancia" />
+                                            <small class="form-text text-muted"></small>
+                                            <span class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3">
+                                    <div class="form-group">
+                                        <label class="col-form-label font-bold-12">Número de días de atención</label>
+                                        <div class="">
+                                            <input id="dias-atencion" name="dias-atencion" type="text" class="form-control form-control-sm" placeholder="" />
+                                            <small class="form-text text-muted">Solo se toman en cuenta los días hábiles</small>
+                                            <span class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="col-12">
+                                    <div class="table-responsive alto-minimo-bandejas">
+                                        <table class="table table-hover table-sm mb-0 responsive">
+                                            <thead class="bg-light">
+                                                <tr>
+                                                    <th colspan="2" class="text-center" scope="col">Tipo de personal</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>Funcionario</td>
+                                                    <td><input type="checkbox" /></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>ATM (Administrativo, Técnico y Manual)</td>
+                                                    <td><input type="checkbox" /></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Confianza</td>
+                                                    <td><input type="checkbox" /></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Académico</td>
+                                                    <td><input type="checkbox" /></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Eventual</td>
+                                                    <td><input type="checkbox" /></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script type="text/javascript" src="~/js/Areas/Identity/Pages/Administracion/Constancias/AgregarConstancia.js"></script>
+}

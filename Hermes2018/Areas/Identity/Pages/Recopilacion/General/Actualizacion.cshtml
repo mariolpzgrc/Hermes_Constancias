@@ -1,0 +1,46 @@
+﻿@page "/Recopilacion/General/Actualizacion"
+@model Hermes2018.Areas.Identity.Pages.Recopilacion.General.ActualizacionModel
+
+<div class="content-wrapper ml-0 bg-white pt-0">
+    <div class="container-fluid" id="logged-in">
+        <div class="row">
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 pt-2">
+                        <ol class="breadcrumb-2 mt-0 mb-0 pb-1 pt-1 display-inline">
+                            <li class="breadcrumb-2-item">
+                                <a asp-area="" asp-controller="Home" asp-action="Index" asp-route-id="">Inicio</a>
+                            </li>
+                            <li class="breadcrumb-2-item">
+                                <a asp-area="Identity" asp-page="/Recopilacion/General/Index" asp-route-id="">Recopilación</a>
+                            </li>
+                            <li class="breadcrumb-2-item active display-flex" aria-current="page">Actualizar recopilación</li>
+                        </ol>
+                    </div>
+                    <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 pt-2"></div>
+                    <div class="col-12">
+                        <hr class="hr-thick mb-1 mt-1" />
+                        <h5>Actualizar</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="row justify-content-center">
+                    <div class="col-12 col-xs-8 col-sm-8 col-md-8 col-lg-6 col-xl-6 ">
+                        <form method="post">
+                            <div class="card">
+                                <div class="card-header text-center pt-2 pb-2">
+                                    <h5 class="m-0 p-0">Actualizar manualmente la información</h5>
+                                </div>
+                                <div asp-validation-summary="ModelOnly" class="text-danger error-list-clean"></div>
+                                <div class="card-footer text-center bg-white">
+                                    <button type="submit" class="btn btn-primary">Actualizar</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

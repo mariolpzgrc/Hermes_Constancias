@@ -1,0 +1,134 @@
+﻿@page "/Configuracion/Usuario/Editar/{id:int}"
+@model EditarModel
+
+@section styles
+    {
+    <link type="text/css" rel="stylesheet" href="~/lib/bootstrap4-toggle/css/bootstrap4-toggle.min.css">
+}
+@section ScriptsPrioritarios
+    {
+    <script type="text/javascript" src="~/lib/bootstrap4-toggle/js/bootstrap4-toggle.min.js"></script>
+}
+
+<div class="content-wrapper pt-2">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 pt-2">
+                        <ol class="breadcrumb-2 mt-0 mb-0 pb-1 pt-1 display-inline">
+                            <li class="breadcrumb-2-item">
+                                <a asp-area="" asp-controller="Home" asp-action="Index" asp-route-id="">Inicio</a>
+                            </li>
+
+                            <li class="breadcrumb-2-item">
+                                <a asp-area="Identity" asp-page="/Configuracion/Usuario/Index">Configuración del usuario</a>
+                            </li>
+                            <li class="breadcrumb-2-item active" aria-current="page">Editar configuración</li>
+                        </ol>
+                    </div>
+                    <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 pt-2">
+                        <div class="float-right pt-2">
+
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <hr class="hr-thick mb-1 mt-1" />
+                        <h5>Editar configuración</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-4">
+                <form id="form-add-User-group" method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger error-list-clean"></div>
+
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label asp-for="Editar.NotificacionesActivas" class="col-form-label font-bold-12"></label>
+                                <div class="">
+                                    <input asp-for="Editar.NotificacionesActivas" type="checkbox" data-toggle="toggle" data-size="sm" data-on="Si" data-off="No" data-width="50" data-onstyle="secondary" data-offstyle="light" data-style="border" class="form-control mh-100 w-25 form-control-sm" />
+                                    <span asp-validation-for="Editar.NotificacionesActivas" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <input asp-for="Editar.ConfiguracionUsuarioId" class="sin-indicador" />
+
+                            <div class="form-group">
+                                <label asp-for="Editar.ElementosPorPagina" class="col-form-label font-bold-12"></label>
+                                <div class="">
+                                    <select class="form-control form-control-sm" type="number" asp-for="Editar.ElementosPorPagina">
+                                        <option selected value="">[Seleccione una opción]</option>
+                                        <option>25</option>
+                                        <option>50</option>
+                                        <option>100</option>
+                                    </select>
+                                    <span asp-validation-for="Editar.ElementosPorPagina" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        @*<div class="col-12">
+                            <div class="form-group">
+                                <label asp-for="Editar.ColorId" class="col-form-label font-bold-12"></label>
+                                <div>
+                                    <select asp-items="Model.Editar.Colores" asp-for="Editar.ColorId" class="form-control form-control-sm">
+                                        <option selected value="">[Seleccione un color]</option>
+                                    </select>
+                                    <span asp-validation-for="Editar.ColorId" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>*@
+
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label asp-for="Editar.Puesto" class="col-form-label font-bold-12"></label>
+                                <div class="input-group">
+                                    <input asp-for="Editar.Puesto" class="form-control" placeholder="Puesto" />
+                                </div>
+                                <span asp-validation-for="Editar.Puesto" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label asp-for="Editar.Direccion" class="col-form-label font-bold-12"></label>
+                                <div class="input-group">
+                                    <textarea asp-for="Editar.Direccion" class="form-control" placeholder="Dirección" rows="4"></textarea>
+                                </div>
+                                <small class="form-text text-muted">La dirección debe ser como máximo de 200 caracteres.</small>
+                                <span asp-validation-for="Editar.Direccion" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label asp-for="Editar.Telefono" class="col-form-label font-bold-12"></label>
+                                <div class="input-group date">
+                                    <input asp-for="Editar.Telefono" type="text" class="form-control form-control-sm" placeholder="" />
+                                </div>
+                                <span asp-validation-for="Editar.Telefono" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <div class="pt-3">
+                                <a asp-area="Identity" asp-page="/Configuracion/Usuario/Index" class="btn btn-light">Cancelar</a>
+                                <button type="submit" class="btn btn-primary">Actualizar</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+@section scripts
+    {
+    <partial name="_ValidationScriptsPartial" />
+}

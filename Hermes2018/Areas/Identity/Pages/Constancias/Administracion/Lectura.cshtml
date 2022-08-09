@@ -1,0 +1,333 @@
+﻿@page "/Constancias/Lectura/{idConstanciaSolicitada:int}/{idConstancia:int}/"
+@model Hermes2018.Areas.Identity.Pages.Constancias.LecturaModel
+@section Styles
+    {
+    <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/codemirror.min.css">
+    <link type="text/css" rel="stylesheet" href="~/lib/froala-editor/css/froala_editor.pkgd.min.css" />
+    <link type="text/css" rel="stylesheet" href="~/lib/froala-editor/css/froala_style.min.css" />
+    <link type="text/css" rel="stylesheet" href="~/lib/froala-editor/css/plugins/image.min.css" />
+    <link type="text/css" rel="stylesheet" href="~/lib/froala-editor/css/themes/gray.min.css" />
+    <link type="text/css" rel="stylesheet" href="~/lib/tagify/css/tagify.css" />
+    @*<link href="~/lib/bootstrap-select/dist/css/bootstrap-select.min.css" rel="stylesheet" />*@
+    <link href="~/lib/bootstrap-select-1.13.14/dist/css/bootstrap-select.min.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="~/lib/flatpickr/flatpickr.min.css">
+
+    <link type="text/css" rel="stylesheet" href="~/lib/easy-autocomplete/dist/easy-autocomplete.min.css" />
+    <link type="text/css" rel="stylesheet" href="~/lib/easy-autocomplete/dist/easy-autocomplete.themes.min.css" />
+    <link type="text/css" rel="stylesheet" href="~/lib/max-favilli-tagmanager/tagmanager.min.css" />
+    <link type="text/css" rel="stylesheet" href="~/lib/bootstrap-notify/animate.min.css" />
+    <link type="text/css" rel="stylesheet" href="~/css/Areas/Identity/Pages/Constancias/Administracion/Lectura.css" asp-append-version="true" />
+
+}
+
+@section ScriptsPrioritarios
+    {
+    <script type="text/javascript" src="~/lib/max-favilli-tagmanager/tagmanager.js"></script>
+
+    <script src="~/lib/flatpickr/flatpickr.min.js"></script>
+    <script src="~/lib/flatpickr/l10n/es.js"></script>
+
+
+    <script type="text/javascript" src="~/lib/jspdf/jspdf.min.js"></script>
+    <script type="text/javascript" src="~/lib/html2canvas/html2canvas.js"></script>
+    @*<script type="text/javascript" src="~/lib/jspdf-autotable/jspdf.plugin.autotable.min.js"></script>*@
+    <script type="text/javascript" src="~/lib/bootstrap-notify/bootstrap-notify.min.js"></script>
+    <script type="text/javascript" src="~/lib/tagify/js/tagify.min.js"></script>
+
+    @*select with search*@
+    <script src="~/lib/bootstrap-select-1.13.14/dist/js/bootstrap-select.min.js"></script>
+}
+
+<div class="content-wrapper pt-3">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12 col-md-9 col-lg-12 col-xl-10 pb-3">
+                <ol class="breadcrumb-2 mt-0 mb-0 display-inline">
+                    <li class="breadcrumb-2-item active display-flex font-weight-bold">
+                        LECTURA
+                    </li>
+                    <li class="flex-right">
+                        <a asp-area="Identity" asp-page="/Constancias/Administracion/AdministracionConstancia" class="md-btn md-btn-raised md-btn-ripple bg-secondary mr-1" title="Regresar">Regresar</a>
+                    </li>
+                </ol>
+                <hr class="hr-thick mt-2 mb-2" />
+                <div class="mt-0 mb-0">
+                    <div class="form-group row font-dark-gray">
+                        <div class="col-sm-12">
+                            <div class="pb-2">
+                                <label><b class="font-regular-13">Folio: </b></label>
+                                <span id="folio"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row font-dark-gray">
+                        <div class="col-sm-12">
+                            <div class="pb-2">
+                                <label><b class="font-regular-13">Tipo de constancia:  </b></label>
+                                <span id="tipoConstancia"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row font-dark-gray mb-0">
+                        <div class="col-sm-12">
+                            <!-- Remitente -->
+                            <label for="inputEmail"><b>Para: </b></label> <span id="constanciaPara"></span>
+                            <label id="labelfrom" data-toggle="tooltip" data-placement="top"></label>
+                            <br />
+
+                            <hr class="mt-0 mb-1" />
+                        </div>
+                    </div>
+                    <div class="container" id="constancia" style="width:870px">
+                        @if (Model.IdConstancia != 7 && Model.IdConstancia != 8)
+                        {
+                            <div id="impresionPDF">
+                                <style>
+                                    table.colapsado {
+                                        border-collapse: collapse;
+                                    }
+                                </style>
+                                <page backtop="25mm" backleft="30mm" backbottom="30mm" backright="25mm">
+                                <page_header>
+                                    <table style="width: 100%; border:none;">
+                                        <tbody>
+                                            <tr>
+                                                <td style="width: 8.0000%;">
+                                                    <br>
+                                                </td>
+                                                <td style="width: 12.0000%;">
+                                                    <img src="https://seeklogo.com/images/E/escudo-heraldico-universidad-veracruzana-logo-81906E41A1-seeklogo.com.png"
+                                                         style="width: 120px;height:100px" class="fr-fic fr-dib">
+                                                </td>
+                                                <td style="width: 60%; vertical-align: middle;">
+                                                    <p style="text-align: center;">
+                                                        <span style="font-family: Arial,Helvetica,sans-serif; font-size: 14pt;">
+                                                            <strong>
+                                                                SECRETARÍA DE ADMINISTRACIÓN
+                                                                Y FINANZAS
+                                                            </strong>
+                                                        </span>
+                                                        <br><strong>
+                                                            <span style="font-family: Arial,Helvetica,sans-serif; font-size: 12pt;">
+                                                                DIRECCIÓN GENERAL DE
+                                                                RECURSOS HUMANOS
+                                                            </span>
+                                                        </strong>
+                                                        <br><strong>
+                                                            <span style="font-family: Arial,Helvetica,sans-serif; font-size: 12pt;">
+                                                                DIRECCIÓN DE
+                                                                PERSONAL
+                                                            </span>
+                                                        </strong>
+                                                        <br><br>
+                                                        <span style="font-family: Arial,Helvetica,sans-serif; font-size: 13pt;">
+                                                            <strong>
+                                                                Constancia de <span id="tituloConstancia"></span>
+                                                            </strong>&nbsp;
+                                                        </span>
+                                                    </p>
+                                                    <br>
+                                                </td>
+                                                <td style="width: 20.0000%;">
+                                                    <br>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </page_header>
+                                <p>
+                                    <br />
+                                    <br />
+                                </p>
+                                <p style="text-align: justify;">
+                                    <strong>
+                                        <span style="font-family: Arial, Helvetica, sans-serif; font-size: 11pt;">
+                                            A QUIEN
+                                            CORRESPONDA:
+                                        </span>
+                                    </strong>
+                                </p>
+
+                                <p style="text-align: justify;">
+                                    <span style="font-size: 11pt;">
+                                        <span style="font-family: Arial,Helvetica,sans-serif;">
+                                            El(La) que suscribe Director(a)
+                                            de Personal de la Universidad Veracruzana en esta ciudad
+                                        </span>
+                                    </span>
+                                </p>
+
+                                <p style="text-align: center;">
+                                    <span style="font-size: 11pt;">
+                                        <span style="font-family: Arial,Helvetica,sans-serif;">
+                                            <strong>
+                                                HACE CONSTAR
+                                                QUE
+                                            </strong>
+                                        </span>
+                                    </span>
+                                </p>
+                                <br>
+                                <div id="cuerpoConstancia">
+                                </div>
+                                <div id="seccionDespedida">
+                                    <p style="text-align: justify; line-height: 200%;">
+                                        <span style="font-size: 11pt;font-family: Arial,Helvetica,sans-serif;">
+                                            A petición de la parte  interesada y para los efectos legales que a la misma convenga, se expide la presente <strong>CONSTANCIA&nbsp;</strong>en la ciudad de Xalapa, Eqz., Veracruz  al <span id="fechaGeneracion"></span>
+                                        </span>.
+                                    </p>   
+                                </div>
+                                <br />
+                                <br />
+                                <div id="seccionDirector">                                
+                                </div>    
+                                <page_footer>
+                                    <hr style="border-top: 1px solid black; border-bottom: 1px solid black; align-content: center; height: 3px;">
+                                    <table style="width: 100%;border:none;">
+                                        <tbody>
+                                            <tr>
+                                                <td style="width: 15%;">
+                                                    <br>
+                                                </td>
+                                                <td style="width: 30%;">
+                                                    <span style="font-size: 8pt;">
+                                                        Edificio &quot;A&quot; de Rector&iacute;a, Planta Baja
+                                                    </span>
+                                                    <br>
+                                                </td>
+                                                <td style="width: 10%;">
+                                                    <br>
+                                                </td>
+                                                <td style="width: 10%;">
+                                                    <br>
+                                                </td>
+                                                <td style="width: 20%;">
+                                                    <span style="font-size: 8pt;">
+                                                        Teléfono 842-17-00 Ext.11705
+                                                    </span>
+                                                    <br>
+                                                </td>
+                                                <td style="width: 20%; vertical-align: middle; text-align: center;">
+                                                    <br />
+                                                </td>
+                                                <td style="width: 15%;">
+                                                    <br>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </page_footer>
+                            </page>
+                            </div>
+                         }
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-3 col-lg-12 col-xl-2 right-sidebar" id="division-derecha">
+                <div class="form-group mt-3">
+                    <button type="button" onclick="ConfirmarConstancia()" class="md-btn md-btn-raised md-btn-ripple bg-secondary" id="confirmarConstancia">Autorizar constancia</button>
+
+                    <!--Modal-->
+                    <div class="modal fade" id="modalConstanciaConfirmada" tabindex="-1" role="dialog" aria-labelledby="confirmarConstanciaLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h3 class="text-center" id="confirmarConstanciaLabel">Autorizar constancia</h3>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <h3 class="text-center">La constancia se ha autorizado con éxito</h3>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-primary btn-sm" data-dismiss="modal">
+                                        <span aria-hidden="true">Aceptar</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group mt-3">
+                    <button type="button" onclick="CancelarConstancia()" class="md-btn md-btn-raised md-btn-ripple bg-secondary" id="cancelarConstancia">Cancelar constancia</button>
+
+                    <!--Modal-->
+                    <div class="modal fade" id="modalConstanciaCancelada" tabindex="-1" role="dialog" aria-labelledby="cancelarConstanciaLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h3 class="text-center">Cancelar Constancia</h3>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="">
+                                        <textarea id="motivoCancelacion" class="form-control" placeholder="Motivo de la cancelación de esta constancia" rows="4"></textarea>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Cancelar</button>
+                                    <button type="button" class="btn btn-primary btn-sm" onclick="GuardarEstadoConstaciaCancelada()">
+                                        <span aria-hidden="true">Aceptar</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr class="mt-2 mb-2" />
+                </div>
+                <!--<div id="ImprimirConstancia">
+                    <form method="post" id="DescargarConstancia">
+                        <div class="form-group mt-3" id="impresion">
+                            <button type="submit" class="md-btn md-btn-raised md-btn-ripple bg-secondary">
+                                Imprimir Constancia
+                            </button>
+                        </div>
+                    </form>
+                </div>-->
+                <div id="imprimirConstanciaAjax">
+                    <div class="form-group mt-3" id="impresion">
+                        <button type="button" onclick="DescargarConstancia()" class="md-btn md-btn-raised md-btn-ripple bg-secondary" id="getConstancia">
+                            Imprimir constancia
+                        </button>
+                    </div>
+                    <!--Modal-->
+                    <div class="modal fade" id="constanciaModal" tabindex="-1" role="dialog" aria-labelledby="solicitudModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered modal-custom" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h3 class="text-center" id="solicitudModalLabel">Imprimir constancia</h3>                                  
+                                </div>
+                                <div class="modal-body">
+                                    <div id="constanciaFile"></div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-primary btn-sm" onclick="GuardarEstadoConstanciaImpresa()" aria-label="Close">
+                                        <span aria-hidden="true">Aceptar</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group mt-3">
+                    <button type="button" class="md-btn md-btn-raised md-btn-ripple bg-secondary"  onclick="ReimprimirConstancia()" id="reimprimirConstancia">Reimprimir constancia</button>
+                    <hr class="mt-2 mb-2" />
+                </div>
+                <div class="form-group mt-3">
+                    <button asp-area="Identity" onclick="entregarConstancia()" class="md-btn md-btn-raised md-btn-ripple mt-2" id="entregarConstancia">Entregar constancia</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts
+    {
+    <partial name="_ValidationScriptsPartial" />
+    <script type="text/javascript" src="~/js/Areas/Identity/Pages/Constancias/Administracion/Lectura.js" asp-append-version="true"></script>
+}

@@ -1,0 +1,87 @@
+﻿@page  "/Subcarpetas/Detalles/{id:int}/{carpetaPadreId:int}"
+@model DetallesModel
+
+<div class="content-wrapper pt-0">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-9 col-sm-9 col-md-9 col-lg-9 col-xl-9 pt-2">
+                        <ol class="breadcrumb-2 mt-0 mb-0 pb-1 pt-1 display-inline">
+                            <li class="breadcrumb-2-item">
+                                <a asp-area="" asp-controller="Home" asp-action="Index" asp-route-id="">Inicio</a>
+                            </li>
+
+                            <li class="breadcrumb-2-item">
+                                <a asp-area="Identity" asp-page="/Carpetas/Index">Carpetas</a>
+                            </li>
+                            <li class="breadcrumb-2-item">
+                                <a asp-area="Identity" asp-page="/Subcarpetas/Index" asp-route-id="@Model.Detalles.CarpetaPadreId">Subcarpetas</a>
+                            </li>
+                            <li class="breadcrumb-2-item active display-flex" aria-current="page">Detalle de la subcarpeta</li>
+                        </ol>
+                    </div>
+                    @*<div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 pt-2">
+                        <div class="float-right pt-2">
+                            <a asp-area="Identity" asp-page="/Subcarpetas/Editar" asp-route-id="@Model.Detalles.CarpetaId" asp-route-carpetapadreid="@Model.Detalles.CarpetaPadreId" class="btn btn-primary btn-sm">Editar</a>
+                        </div>
+                    </div>*@
+                    <div class="col-12">
+                        <hr class="hr-thick mb-1 mt-1" />
+                        <h5>Detalle de la subcarpeta</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <input asp-for="@Model.Detalles.CarpetaId" class="sin-indicador" />
+                <input asp-for="@Model.Detalles.CarpetaPadreId" class="sin-indicador" />
+                <div class="row">
+                    <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 col-12">
+                        <div class="form-group">
+                            <label class="col-form-label pb-0 font-weight-bold">@Html.DisplayNameFor(model => model.Detalles.Nombre)</label>
+                            <div class="">
+                                @Html.DisplayFor(model => model.Detalles.Nombre)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
+                        <div class="form-group">
+                            <label class="col-form-label pb-0 font-weight-bold">@Html.DisplayNameFor(model => model.Detalles.Nivel)</label>
+                            <div class="">
+                                @Html.DisplayFor(model => model.Detalles.Nivel)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
+                        <div class="form-group">
+                            <label class="col-form-label pb-0 font-weight-bold">@Html.DisplayNameFor(model => model.Detalles.Fecha_Creacion)</label>
+                            <div class="">
+                                @Html.DisplayFor(model => model.Detalles.Fecha_Creacion)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
+                        <div class="form-group">
+                            <label class="col-form-label pb-0 font-weight-bold">@Html.DisplayNameFor(model => model.Detalles.Fecha_Modificacion)</label>
+                            <div class="">
+                                @Html.DisplayFor(model => model.Detalles.Fecha_Modificacion)
+                            </div>
+                        </div>
+                    </div>
+
+                    @if (!string.IsNullOrEmpty(Model.Detalles.CarpetaPadre))
+                    {
+                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
+                            <div class="form-group">
+                                <label class="col-form-label pb-0 font-weight-bold">@Html.DisplayNameFor(model => model.Detalles.CarpetaPadre)</label>
+                                <div class="">
+                                    @Html.DisplayFor(model => model.Detalles.CarpetaPadre)
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

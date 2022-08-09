@@ -1,0 +1,29 @@
+﻿@model int
+
+@switch (Model)
+{
+    case ConstEstadoEnvio.EstadoEnvioN1:
+        <i class="fas fa-circle font-yellow" title="@ConstEstadoEnvio.EstadoEnvioT1"></i>
+        break;
+    case ConstEstadoEnvio.EstadoEnvioN2:
+        <i class="fas fa-circle font-green" title="@ConstEstadoEnvio.EstadoEnvioT2"></i>
+        break;
+    case ConstEstadoEnvio.EstadoEnvioN3:
+        <i class="fas fa-circle font-orange" title="@ConstEstadoEnvio.EstadoEnvioT3"></i>
+        break;
+    case ConstEstadoEnvio.EstadoEnvioN4:
+        <i class="fas fa-circle font-red" title="@ConstEstadoEnvio.EstadoEnvioT4"></i>
+        break;
+    case ConstEstadoEnvio.EstadoEnvioN5:
+        <i class="fas fa-circle font-green" title="@ConstEstadoEnvio.EstadoEnvioT5"></i>
+        break;
+    case ConstEstadoEnvio.EstadoEnvioN6:
+        <i class="fas fa-circle font-orange" title="@ConstEstadoEnvio.EstadoEnvioT6"></i>
+        break;
+    case ConstEstadoEnvio.EstadoEnvioN7:
+        <i class="fas fa-circle font-gray" title="@ConstEstadoEnvio.EstadoEnvioT7"></i>
+        break;
+    case ConstEstadoEnvio.EstadoEnvioN8:
+        <i class="far fa-circle font-dark-gray" title="@ConstEstadoEnvio.EstadoEnvioT8"></i>
+        break;
+}

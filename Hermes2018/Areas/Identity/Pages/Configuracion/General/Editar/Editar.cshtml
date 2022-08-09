@@ -1,0 +1,117 @@
+﻿@page "/Configuracion/General/Editar/{id:int}"
+@model EditarModel
+
+@section styles
+    {
+    <link type="text/css" rel="stylesheet" href="~/lib/fontawesome/css/font-awesome.min.css" />
+    @*<link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />*@
+    <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/codemirror.min.css">
+    <link type="text/css" rel="stylesheet" href="~/lib/froala-editor/css/froala_editor.pkgd.min.css" />
+    <link type="text/css" rel="stylesheet" href="~/lib/froala-editor/css/froala_style.min.css" />
+    <link type="text/css" rel="stylesheet" href="~/lib/froala-editor/css/plugins/image.min.css" />
+    <link type="text/css" rel="stylesheet" href="~/lib/froala-editor/css/themes/gray.min.css" />
+
+    <link type="text/css" rel="stylesheet" href="~/lib/bootstrap-datepicker-1.6.4-dist/css/bootstrap-datepicker.standalone.min.css" />
+}
+
+@section ScriptsPrioritarios
+    {
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/codemirror.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/mode/xml/xml.min.js"></script>
+    <script type="text/javascript" src="~/lib/froala-editor/js/froala_editor.pkgd.min.js"></script>
+    <script type="text/javascript" src="~/lib/froala-editor/js/languages/es.js"></script>
+    <script type="text/javascript" src="~/lib/froala-editor/js/plugins/image.min.js"></script>
+    <script type="text/javascript" src="~/lib/froala-editor/js/plugins/font_size.min.js"></script>
+
+    <script type="text/javascript" src="~/lib/moment/min/moment-with-locales.min.js"></script>
+    <script type="text/javascript" src="~/lib/bootstrap-datepicker-1.6.4-dist/js/bootstrap-datepicker.min.js"></script>
+    <script type="text/javascript" src="~/lib/bootstrap-datepicker-1.6.4-dist/locales/bootstrap-datepicker.es.min.js"></script>
+}
+
+<div class="content-wrapper ml-0 bg-white pt-0">
+    <div class="container-fluid" id="logged-in">
+        <div class="row">
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 pt-2">
+                        <ol class="breadcrumb-2 mt-0 mb-0 pb-1 pt-1 display-inline">
+                            <li class="breadcrumb-2-item">
+                                <a asp-area="" asp-controller="Home" asp-action="Index" asp-route-id="">Inicio</a>
+                            </li>
+
+                            <li class="breadcrumb-2-item">
+                                <a asp-area="Identity" asp-page="/Configuracion/General/Index">Configuracion general</a>
+                            </li>
+                            <li class="breadcrumb-2-item active display-flex">Editar propiedad</li>
+                        </ol>
+                    </div>
+                    <div class="col-12">
+                        <hr class="hr-thick mb-1 mt-1" />
+                        <h5>Editar propiedad</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <form method="post">
+                    <div class="row">
+                        <div class="col-7">
+                            <input asp-for="Editar.ConfiguracionId" class="sin-indicador" />
+                            <input asp-for="Editar.PropiedadClave" class="sin-indicador" />
+
+                            <input id="Propiedad4" value="@ConstConfiguracionGeneral.Propiedad4" hidden />
+                            <input id="Propiedad13" value="@ConstConfiguracionGeneral.Propiedad13" hidden />
+                            <input id="Propiedad14" value="@ConstConfiguracionGeneral.Propiedad14" hidden />
+                            <input id="Propiedad15" value="@ConstConfiguracionGeneral.Propiedad15" hidden />
+
+                            <div class="form-group">
+                                <label asp-for="Editar.Propiedad" class="col-form-label font-bold-12"></label>
+                                <div class="">
+                                    <input asp-for="Editar.Propiedad" />
+                                    @Html.DisplayFor(x => x.Editar.Propiedad)
+                                    <span asp-validation-for="Editar.Propiedad" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        @if (ConstConfiguracionGeneral.Propiedad4 == Model.Editar.Propiedad || ConstConfiguracionGeneral.Propiedad13 == Model.Editar.Propiedad)
+                        {
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label asp-for="Editar.Valor" class="col-form-label font-bold-12"></label>
+                                    <div class="">
+                                        <textarea asp-for="Editar.Valor" class="form-control form-control-sm w-100" placeholder=""></textarea>
+                                        <span asp-validation-for="Editar.Valor" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="col-7">
+                                <div class="form-group">
+                                    <label asp-for="Editar.Valor" class="col-form-label font-bold-12"></label>
+                                    <div class="">
+                                        <input asp-for="Editar.Valor" class="form-control form-control-sm w-100" placeholder="" />
+                                        <span asp-validation-for="Editar.Valor" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+
+                        <div class="col-12">
+                            <div class="pt-3">
+                                <a asp-area="Identity" asp-page="/Configuracion/General/Index" class="btn btn-light">Cancelar</a>
+                                <button type="submit" class="btn btn-primary">Actualizar</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <partial name="_ValidationScriptsPartial" />
+    <script type="text/javascript" src="~/js/Areas/Identity/Pages/Configuracion/General/Editar.min.js" asp-append-version="true"></script>
+}

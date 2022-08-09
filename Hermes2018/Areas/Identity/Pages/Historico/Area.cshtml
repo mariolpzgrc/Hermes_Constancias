@@ -1,0 +1,60 @@
+﻿@page "/Historico/Area"
+@model AreaModel
+
+<div class="content-wrapper  pt-0">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 pt-2">
+                        <ol class="breadcrumb-2 mt-0 mb-0 pb-1 pt-1 display-inline">
+                            <li class="breadcrumb-2-item">
+                                <a asp-area="" asp-controller="Home" asp-action="Index" asp-route-id="">Inicio</a>
+                            </li>
+
+                            <li class="breadcrumb-2-item">
+                                <a asp-area="Identity" asp-page="/Bandejas/Historico" asp-route-id="">Historico</a>
+                            </li>
+                            <li class="breadcrumb-2-item active">
+                                Histórico por área
+                            </li>
+                        </ol>
+                    </div>
+                    <div class="col-12">
+                        <hr class="hr-thick mb-1 mt-1" />
+                        <h5>Histórico por área</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="table-responsive mt-0">
+                    <table class="table table-hover table-sm border border-light border-bottom">
+                        <thead class="bg-light">
+                            <tr>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Usuario</th>
+                                <th scope="col">Puesto</th>
+                                <th scope="col">Registro</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var registro in Model.ListadoHistorico)
+                            {
+                                <tr>
+                                    <td>@registro.NombreCompleto</td>
+                                    <td>@registro.UserName</td>
+                                    <td>@registro.Puesto</td>
+                                    <td>@registro.FechaRegistro</td>
+                                    <td>
+                                        <a asp-area="Identity" asp-page="/Historico/Bandejas" asp-route-infoUsuarioId="@registro.InfoUsuarioId" asp-route-tipoHistorico="@ConstHistorico.ConstTipoN2" class="pl-2 pr-2" title="Entrar"><i class="fab fa-wpforms font-gray"></i></a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

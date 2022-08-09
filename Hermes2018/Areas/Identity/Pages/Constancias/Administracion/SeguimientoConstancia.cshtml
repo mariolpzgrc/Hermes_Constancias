@@ -1,0 +1,87 @@
+﻿@page "/Constancias/Seguimiento/{id:int}"
+@model Hermes2018.Areas.Identity.Pages.Constancias.Administracion.SeguimientoConstanciaModel
+@section Styles
+    {
+    <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/codemirror.min.css" />
+    <link type="text/css" rel="stylesheet" href="~/lib/froala-editor/css/froala_editor.pkgd.min.css" />
+    <link type="text/css" rel="stylesheet" href="~/lib/froala-editor/css/froala_style.min.css" />
+    <link type="text/css" rel="stylesheet" href="~/lib/froala-editor/css/plugins/image.min.css" />
+    <link type="text/css" rel="stylesheet" href="~/lib/froala-editor/css/themes/gray.min.css" />
+    <link type="text/css" rel="stylesheet" href="~/lib/max-favilli-tagmanager/tagmanager.min.css" />
+}
+
+@section ScriptsPrioritarios
+    {
+    <script type="text/javascript" src="~/lib/moment/min/moment-with-locales.min.js"></script>
+    <script type="text/javascript" src="~/lib/max-favilli-tagmanager/tagmanager.js"></script>
+    <script type="text/javascript" src="~/lib/twbs-pagination/jquery.twbsPagination.min.js"></script>
+}
+
+<div class="content-wrapper pt-3">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                <ol class="breadcrumb-2 mt-0 mb-0 display-inline">
+                    <li class="breadcrumb-2-item active display-flex">
+                        Seguimiento de constancias
+                    </li>
+                    <li class="flex-right">
+                        <a asp-area="Identity" asp-page="/Constancias/Administracion/AdministracionConstancia" class="md-btn md-btn-raised md-btn-ripple bg-secondary">Regresar</a>
+                    </li>
+                </ol>
+                <hr class="hr-thick mt-2 mb-2" />
+                <div class="info-border pb-1">
+                    <div class="p-2 mb-1 border-top border-bottom-0 bg-light">
+                        <strong>Información de la constancia</strong>
+                        <button type="button" class="btn btn-link float-right btn-sm" id="control-toggle"><i class="fas fa-angle-down"></i></button>
+                    </div>
+                    <div class="pt-0 pb-0 pl-1 pr-0" id="contenido-info">
+                        <div class="form-group row font-dark-gray">
+                            <div class="col-sm-12">
+                                <div class="pb-2">
+                                    <label><b class="font-regular-13">Folio: </b></label>
+                                    <span id="folio"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row font-dark-gray">
+                            <div class="col-sm-12">
+                                <div class="pb-2">
+                                    <label><b class="font-regular-13">Tipo de constancia:  </b></label>
+                                    <span id="tipoConstancia"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row font-dark-gray mb-0">
+                            <div class="col-sm-12">
+                                <!-- Remitente -->
+                                <div class="pb-2">
+                                    <label for="inputEmail"><b>Para: </b></label>
+                                    <span id="constanciaPara"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row font-dark-gray mb-0">
+                            <div class="col-sm-12">
+                                <!-- Remitente -->
+                                <div class="pb-2">
+                                    <label for="inputEmail"><b>Entidad/Dependencia: </b></label>
+                                    <span id="dependencia"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr class="mt-0 mb-1" />
+                <div class="info-border pb-1">
+                    <div class="form-group row font-dark-gray" id="infoEstado"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts
+    {
+    <script type="text/javascript" src="~/js/Areas/Identity/Pages/Constancias/Administracion/Seguimiento.js" asp-append-version="true"></script>
+}

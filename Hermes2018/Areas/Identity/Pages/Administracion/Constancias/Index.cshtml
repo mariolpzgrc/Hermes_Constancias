@@ -1,0 +1,75 @@
+﻿@page "/Administracion/Constancias"
+@model Hermes2018.Areas.Identity.Pages.Administracion.Constancias.IndexModel
+
+<div class="content-wrapper ml-0 bg-white pt-0">
+    <div class="container-fluid" id="logged-in">
+        <div class="row">
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-6 col-sm-6 col-lg-6 col-xl-6 pt-2">
+                        <ol class="breadcrumb-2 mt-0 mb-0 pb-1 pt-1 display-inline">
+                            <li class="breadcrumb-2-item">
+                                <a asp-area="" asp-controller="Home" asp-action="Index" asp-route-id="">Inicio</a>
+                            </li>
+                            <li class="breadcrumb-2-item active display-flex" aria-current="page">Constancias</li>
+                        </ol>
+                    </div>
+                    <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 pt-2">
+                        <div class="float-right">
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <hr class="hr-thick mb-1  mt-1"/>
+                        <h5>Constancias</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="table-responsive">
+                    <table class="table table-hover table-sm border-bottom responsive">
+                        <thead class="bg-light">
+                            <tr>
+                                <th scope="col">Módulo</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    Catálogo de Tipo de Constancias
+                                </td>
+                                <td>
+                                    <a asp-area="Identity" asp-page="/Administracion/Constancias/Catalogo" class="pl-2 pr-2" title="Entrar"><i class="fab fa-wpforms font-gray "></i></a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Catálogo de Usuarios
+                                </td>
+                                <td>
+                                    <a asp-area="Identity" asp-page="/Administracion/Constancias/CatalogoUsuarios" class="pl-2 pr-2" title="Entrar"><i class="fab fa-wpforms font-gray "></i></a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Relación  de Constancias con Tipo de Personal y Objeto
+                                </td>
+                                <td>
+                                    <a asp-area="Identity" asp-page="/Administracion/Constancias/Relacion" class="pl-2 pr-2" title="Entrar"><i class="fab fa-wpforms font-gray "></i></a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Mantenimiento de Catalogo de Personal que Entregará Constancias
+                                </td>
+                                <td>
+                                    <a asp-area="Identity" asp-page="/Administracion/Constancias/Mantenimiento" class="pl-2 pr-2" title="Entrar"><i class="fab fa-wpforms font-gray "></i></a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,523 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup Label="Globals">
+    <SccProjectName>SAK</SccProjectName>
+    <SccProvider>SAK</SccProvider>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccLocalPath>SAK</SccLocalPath>
+    <TypeScriptToolsVersion>3.0</TypeScriptToolsVersion>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <UserSecretsId>aspnet-Hermes2018-CD586C5B-575B-4101-A79F-C3BA4FDA8771</UserSecretsId>
+    <ApplicationIcon>wwwroot\favicon.ico</ApplicationIcon>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Areas\Identity\Pages\Constancias\Solicitud\ResumenConstancia\**" />
+    <Compile Remove="Data\Migrations\**" />
+    <Compile Remove="wwwroot\lib\Chart.js-2.8.0\.github\**" />
+    <Compile Remove="wwwroot\lib\Chart.js-2.8.0\NewFolder\**" />
+    <Content Remove="Areas\Identity\Pages\Constancias\Solicitud\ResumenConstancia\**" />
+    <Content Remove="Data\Migrations\**" />
+    <Content Remove="wwwroot\lib\Chart.js-2.8.0\.github\**" />
+    <Content Remove="wwwroot\lib\Chart.js-2.8.0\NewFolder\**" />
+    <EmbeddedResource Remove="Areas\Identity\Pages\Constancias\Solicitud\ResumenConstancia\**" />
+    <EmbeddedResource Remove="Data\Migrations\**" />
+    <EmbeddedResource Remove="wwwroot\lib\Chart.js-2.8.0\.github\**" />
+    <EmbeddedResource Remove="wwwroot\lib\Chart.js-2.8.0\NewFolder\**" />
+    <None Remove="Areas\Identity\Pages\Constancias\Solicitud\ResumenConstancia\**" />
+    <None Remove="Data\Migrations\**" />
+    <None Remove="wwwroot\lib\Chart.js-2.8.0\.github\**" />
+    <None Remove="wwwroot\lib\Chart.js-2.8.0\NewFolder\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Migrations\20180924172816_version1-24092018.cs" />
+    <Compile Remove="Migrations\20180924172816_version1-24092018.Designer.cs" />
+    <Compile Remove="Migrations\20180925180224_changeHER_UsuarioForHER_InfoUsuario.cs" />
+    <Compile Remove="Migrations\20180925180224_changeHER_UsuarioForHER_InfoUsuario.Designer.cs" />
+    <Compile Remove="Migrations\20181001235905_UsersGroups.cs" />
+    <Compile Remove="Migrations\20181001235905_UsersGroups.Designer.cs" />
+    <Compile Remove="Migrations\20181002144732_Delegar1.cs" />
+    <Compile Remove="Migrations\20181002144732_Delegar1.Designer.cs" />
+    <Compile Remove="Migrations\20181002145045_Delegar1.cs" />
+    <Compile Remove="Migrations\20181002145045_Delegar1.Designer.cs" />
+    <Compile Remove="Migrations\20181002150851_Delegar1.cs" />
+    <Compile Remove="Migrations\20181002150851_Delegar1.Designer.cs" />
+    <Compile Remove="Migrations\20181002151717_relationShipHER_InfoUsuarioToHER_Groups.cs" />
+    <Compile Remove="Migrations\20181002151717_relationShipHER_InfoUsuarioToHER_Groups.Designer.cs" />
+    <Compile Remove="Migrations\20181002151940_addDelegar1.cs" />
+    <Compile Remove="Migrations\20181002151940_addDelegar1.Designer.cs" />
+    <Compile Remove="Migrations\20181002162938_addDelegar1.cs" />
+    <Compile Remove="Migrations\20181002162938_addDelegar1.Designer.cs" />
+    <Compile Remove="Migrations\20181002163312_addDelegar1.cs" />
+    <Compile Remove="Migrations\20181002163312_addDelegar1.Designer.cs" />
+    <Compile Remove="Migrations\20181002171240_addDelegar1.cs" />
+    <Compile Remove="Migrations\20181002171240_addDelegar1.Designer.cs" />
+    <Compile Remove="Migrations\20181002171805_addDelegar1.cs" />
+    <Compile Remove="Migrations\20181002171805_addDelegar1.Designer.cs" />
+    <Compile Remove="Migrations\20181002174628_addDelegar1.cs" />
+    <Compile Remove="Migrations\20181002174628_addDelegar1.Designer.cs" />
+    <Compile Remove="Migrations\20181002223831_changesForward.cs" />
+    <Compile Remove="Migrations\20181002223831_changesForward.Designer.cs" />
+    <Compile Remove="Migrations\20181004143716_addColumnaBandeja.cs" />
+    <Compile Remove="Migrations\20181004143716_addColumnaBandeja.Designer.cs" />
+    <Compile Remove="Migrations\20181004184733_statusoficio.cs" />
+    <Compile Remove="Migrations\20181004184733_statusoficio.Designer.cs" />
+    <Compile Remove="Migrations\20181005003748_addColumnaBandeja2.cs" />
+    <Compile Remove="Migrations\20181005003748_addColumnaBandeja2.Designer.cs" />
+    <Compile Remove="Migrations\20181005234346_addNotificacion2.cs" />
+    <Compile Remove="Migrations\20181005234346_addNotificacion2.Designer.cs" />
+    <Compile Remove="Migrations\20181008145222_changes.cs" />
+    <Compile Remove="Migrations\20181008145222_changes.Designer.cs" />
+    <Compile Remove="Migrations\20181008152618_changesEnvio.cs" />
+    <Compile Remove="Migrations\20181008152618_changesEnvio.Designer.cs" />
+    <Compile Remove="Migrations\20181008233829_changesEnvio2.cs" />
+    <Compile Remove="Migrations\20181008233829_changesEnvio2.Designer.cs" />
+    <Compile Remove="Migrations\20181009183441_cambiosoficios.cs" />
+    <Compile Remove="Migrations\20181009183441_cambiosoficios.Designer.cs" />
+    <Compile Remove="Migrations\20181009184030_temporal.cs" />
+    <Compile Remove="Migrations\20181009184030_temporal.Designer.cs" />
+    <Compile Remove="Migrations\20181009223408_OficiosEnvios.cs" />
+    <Compile Remove="Migrations\20181009223408_OficiosEnvios.Designer.cs" />
+    <Compile Remove="Migrations\20181011005156_changesOficios1.cs" />
+    <Compile Remove="Migrations\20181011005156_changesOficios1.Designer.cs" />
+    <Compile Remove="Migrations\20181011182117_migrationOficios.cs" />
+    <Compile Remove="Migrations\20181011182117_migrationOficios.Designer.cs" />
+    <Compile Remove="Migrations\20181024235753_addDestinatarios_extra01.cs" />
+    <Compile Remove="Migrations\20181024235753_addDestinatarios_extra01.Designer.cs" />
+    <Compile Remove="Migrations\20181025001203_addDestinatarios_extra01.cs" />
+    <Compile Remove="Migrations\20181025001203_addDestinatarios_extra01.Designer.cs" />
+    <Compile Remove="Migrations\20181025002549_addTitularEnOficio01.cs" />
+    <Compile Remove="Migrations\20181025002549_addTitularEnOficio01.Designer.cs" />
+    <Compile Remove="Migrations\20181025003422_addTitularEnOficio01.cs" />
+    <Compile Remove="Migrations\20181025003422_addTitularEnOficio01.Designer.cs" />
+    <Compile Remove="Migrations\20181025004111_addTitularEnOficio01.cs" />
+    <Compile Remove="Migrations\20181025004111_addTitularEnOficio01.Designer.cs" />
+    <Compile Remove="Migrations\20181025165347_addCambios_oficio01.cs" />
+    <Compile Remove="Migrations\20181025165347_addCambios_oficio01.Designer.cs" />
+    <Compile Remove="Migrations\20181025184533_addCambios_oficio02.cs" />
+    <Compile Remove="Migrations\20181025184533_addCambios_oficio02.Designer.cs" />
+    <Compile Remove="Migrations\20181025232352_addCambios_oficio03.cs" />
+    <Compile Remove="Migrations\20181025232352_addCambios_oficio03.Designer.cs" />
+    <Compile Remove="Migrations\20181030155355_addCambios_anexos1.cs" />
+    <Compile Remove="Migrations\20181030155355_addCambios_anexos1.Designer.cs" />
+    <Compile Remove="Migrations\20181030175313_addcambios_anexos02.cs" />
+    <Compile Remove="Migrations\20181030175313_addcambios_anexos02.Designer.cs" />
+    <Compile Remove="Migrations\20181030181024_addcambios_anexos03.cs" />
+    <Compile Remove="Migrations\20181030181024_addcambios_anexos03.Designer.cs" />
+    <Compile Remove="Migrations\20181030184807_addcambios_anexos03.cs" />
+    <Compile Remove="Migrations\20181030184807_addcambios_anexos03.Designer.cs" />
+    <Compile Remove="Migrations\20181030185614_addcambios_anexos04.cs" />
+    <Compile Remove="Migrations\20181030185614_addcambios_anexos04.Designer.cs" />
+    <Compile Remove="Migrations\20181030191902_addcambios_anexos05.cs" />
+    <Compile Remove="Migrations\20181030191902_addcambios_anexos05.Designer.cs" />
+    <Compile Remove="Migrations\20181030194014_addcambios_anexos06.cs" />
+    <Compile Remove="Migrations\20181030194014_addcambios_anexos06.Designer.cs" />
+    <Compile Remove="Migrations\20181105231536_addcambios_anexo06.cs" />
+    <Compile Remove="Migrations\20181105231536_addcambios_anexo06.Designer.cs" />
+    <Compile Remove="Migrations\20181109183138_addcambios_grupos01.cs" />
+    <Compile Remove="Migrations\20181109183138_addcambios_grupos01.Designer.cs" />
+    <Compile Remove="Migrations\20181109184414_addcambios_grupos02.cs" />
+    <Compile Remove="Migrations\20181109184414_addcambios_grupos02.Designer.cs" />
+    <Compile Remove="Migrations\20181114011623_addcambios_grupos03.cs" />
+    <Compile Remove="Migrations\20181114011623_addcambios_grupos03.Designer.cs" />
+    <Compile Remove="Migrations\20181114151755_addcambios_grupos04.cs" />
+    <Compile Remove="Migrations\20181114151755_addcambios_grupos04.Designer.cs" />
+    <Compile Remove="Migrations\20181114153528_addcambios_grupos04.cs" />
+    <Compile Remove="Migrations\20181114153528_addcambios_grupos04.Designer.cs" />
+    <Compile Remove="Migrations\20181114175047_addcambios_grupos05.cs" />
+    <Compile Remove="Migrations\20181114175047_addcambios_grupos05.Designer.cs" />
+    <Compile Remove="Migrations\20181114180116_addcambios_servicios01.cs" />
+    <Compile Remove="Migrations\20181114180116_addcambios_servicios01.Designer.cs" />
+    <Compile Remove="Migrations\20181115170518_addcambios_servicios_grupos01.cs" />
+    <Compile Remove="Migrations\20181115170518_addcambios_servicios_grupos01.Designer.cs" />
+    <Compile Remove="Migrations\20181126231607_addCategorias01.cs" />
+    <Compile Remove="Migrations\20181126231607_addCategorias01.Designer.cs" />
+    <Compile Remove="Migrations\20181126235924_addCategoria02.cs" />
+    <Compile Remove="Migrations\20181126235924_addCategoria02.Designer.cs" />
+    <Compile Remove="Migrations\20181127014649_addCategoria02.cs" />
+    <Compile Remove="Migrations\20181127014649_addCategoria02.Designer.cs" />
+    <Compile Remove="Migrations\20181127170345_addCategoria03.cs" />
+    <Compile Remove="Migrations\20181127170345_addCategoria03.Designer.cs" />
+    <Compile Remove="Migrations\20181129183032_addCategoria04.cs" />
+    <Compile Remove="Migrations\20181129183032_addCategoria04.Designer.cs" />
+    <Compile Remove="Migrations\20181130172652_addCategoria05.cs" />
+    <Compile Remove="Migrations\20181130172652_addCategoria05.Designer.cs" />
+    <Compile Remove="Migrations\20181203195241_AddCambiosDatosOficio01.cs" />
+    <Compile Remove="Migrations\20181203195241_AddCambiosDatosOficio01.Designer.cs" />
+    <Compile Remove="Migrations\20181203234514_AddCambiosDatosOficio02.cs" />
+    <Compile Remove="Migrations\20181203234514_AddCambiosDatosOficio02.Designer.cs" />
+    <Compile Remove="Migrations\20181207191716_AddCambiosDatosOficio03.cs" />
+    <Compile Remove="Migrations\20181207191716_AddCambiosDatosOficio03.Designer.cs" />
+    <Compile Remove="Migrations\20181208020334_AddCambiosRevision01.cs" />
+    <Compile Remove="Migrations\20181208020334_AddCambiosRevision01.Designer.cs" />
+    <Compile Remove="Migrations\20181208020458_AddCambiosRevision02.cs" />
+    <Compile Remove="Migrations\20181208020458_AddCambiosRevision02.Designer.cs" />
+    <Compile Remove="Migrations\20181211160104_AddCambiosRevision03.cs" />
+    <Compile Remove="Migrations\20181211160104_AddCambiosRevision03.Designer.cs" />
+    <Compile Remove="Migrations\20181212170228_AddCambiosRevision04.cs" />
+    <Compile Remove="Migrations\20181212170228_AddCambiosRevision04.Designer.cs" />
+    <Compile Remove="Migrations\20181213010441_AddCambiosRevision05.cs" />
+    <Compile Remove="Migrations\20181213010441_AddCambiosRevision05.Designer.cs" />
+    <Compile Remove="Migrations\20190108151950_AddInicio.cs" />
+    <Compile Remove="Migrations\20190108151950_AddInicio.Designer.cs" />
+    <Compile Remove="Migrations\20190122182859_Inicial.cs" />
+    <Compile Remove="Migrations\20190122182859_Inicial.Designer.cs" />
+    <Compile Remove="Migrations\20190122183828_Inicial.cs" />
+    <Compile Remove="Migrations\20190122183828_Inicial.Designer.cs" />
+    <Compile Remove="Migrations\20190122183953_Inicial.cs" />
+    <Compile Remove="Migrations\20190122183953_Inicial.Designer.cs" />
+    <Compile Remove="Migrations\20190122184448_Inicial.cs" />
+    <Compile Remove="Migrations\20190122184448_Inicial.Designer.cs" />
+    <Compile Remove="Migrations\20190122190601_Inicial.cs" />
+    <Compile Remove="Migrations\20190122190601_Inicial.Designer.cs" />
+    <Compile Remove="Migrations\20190122191317_Inicial.cs" />
+    <Compile Remove="Migrations\20190122191317_Inicial.Designer.cs" />
+    <Compile Remove="Migrations\20190123175001_Add_Envio_01.cs" />
+    <Compile Remove="Migrations\20190123175001_Add_Envio_01.Designer.cs" />
+    <Compile Remove="Migrations\20190123190455_Add_Envio_01.cs" />
+    <Compile Remove="Migrations\20190123190455_Add_Envio_01.Designer.cs" />
+    <Compile Remove="Migrations\20190124005152_Add_Envio_01.cs" />
+    <Compile Remove="Migrations\20190124005152_Add_Envio_01.Designer.cs" />
+    <Compile Remove="Migrations\20190124183311_Inicial.cs" />
+    <Compile Remove="Migrations\20190124183311_Inicial.Designer.cs" />
+    <Compile Remove="Migrations\20190124183714_Add_Envio_01.cs" />
+    <Compile Remove="Migrations\20190124183714_Add_Envio_01.Designer.cs" />
+    <Compile Remove="Migrations\20190125153415_Inicial.cs" />
+    <Compile Remove="Migrations\20190125153415_Inicial.Designer.cs" />
+    <Compile Remove="Migrations\20190125170718_Inicial.cs" />
+    <Compile Remove="Migrations\20190125170718_Inicial.Designer.cs" />
+    <Compile Remove="Migrations\20190128194709_Add_Recepcion_01.cs" />
+    <Compile Remove="Migrations\20190128194709_Add_Recepcion_01.Designer.cs" />
+    <Compile Remove="Migrations\20190129001441_Inicial.cs" />
+    <Compile Remove="Migrations\20190129001441_Inicial.Designer.cs" />
+    <Compile Remove="Migrations\20190201001750_Inicial.cs" />
+    <Compile Remove="Migrations\20190201001750_Inicial.Designer.cs" />
+    <Compile Remove="Migrations\20190201002202_Inicial.cs" />
+    <Compile Remove="Migrations\20190201002202_Inicial.Designer.cs" />
+    <Compile Remove="Migrations\20190207160316_Inicial.cs" />
+    <Compile Remove="Migrations\20190207160316_Inicial.Designer.cs" />
+    <Compile Remove="Migrations\20190207162636_Inicial.cs" />
+    <Compile Remove="Migrations\20190207162636_Inicial.Designer.cs" />
+    <Compile Remove="Migrations\20190207165428_Inicial.cs" />
+    <Compile Remove="Migrations\20190207165428_Inicial.Designer.cs" />
+    <Compile Remove="Migrations\20190207172951_Inicial.cs" />
+    <Compile Remove="Migrations\20190207172951_Inicial.Designer.cs" />
+    <Compile Remove="Migrations\20190208224949_Inicial.cs" />
+    <Compile Remove="Migrations\20190208224949_Inicial.Designer.cs" />
+    <Compile Remove="Migrations\20190214185238_Add_Cambios01.cs" />
+    <Compile Remove="Migrations\20190214185238_Add_Cambios01.Designer.cs" />
+    <Compile Remove="Migrations\20190214185450_Inicial.cs" />
+    <Compile Remove="Migrations\20190214185450_Inicial.Designer.cs" />
+    <Compile Remove="Migrations\20190214194707_Add-Agregados01.cs" />
+    <Compile Remove="Migrations\20190214194707_Add-Agregados01.Designer.cs" />
+    <Compile Remove="Migrations\20190218160059_Inicial.cs" />
+    <Compile Remove="Migrations\20190218160059_Inicial.Designer.cs" />
+    <Compile Remove="Migrations\20190218233326_Add_Calendario.cs" />
+    <Compile Remove="Migrations\20190218233326_Add_Calendario.Designer.cs" />
+    <Compile Remove="Migrations\20190228011900_Add_Cambios01.cs" />
+    <Compile Remove="Migrations\20190228011900_Add_Cambios01.Designer.cs" />
+    <Compile Remove="Migrations\20190228154958_Add_Cambios02.cs" />
+    <Compile Remove="Migrations\20190228154958_Add_Cambios02.Designer.cs" />
+    <Compile Remove="Migrations\20190228190605_Add_Cambios03.cs" />
+    <Compile Remove="Migrations\20190228190605_Add_Cambios03.Designer.cs" />
+    <Compile Remove="Migrations\20190308230507_Add_Cambios04.cs" />
+    <Compile Remove="Migrations\20190308230507_Add_Cambios04.Designer.cs" />
+    <Compile Remove="Migrations\20190311170341_Add_Cambios05.cs" />
+    <Compile Remove="Migrations\20190311170341_Add_Cambios05.Designer.cs" />
+    <Compile Remove="Migrations\20190311181850_Add_Cambios06.cs" />
+    <Compile Remove="Migrations\20190311181850_Add_Cambios06.Designer.cs" />
+    <Compile Remove="Migrations\20190315191055_Inicial.cs" />
+    <Compile Remove="Migrations\20190315191055_Inicial.Designer.cs" />
+    <Compile Remove="Migrations\20190316010442_Add_CAmbios01.cs" />
+    <Compile Remove="Migrations\20190316010442_Add_CAmbios01.Designer.cs" />
+    <Compile Remove="Migrations\20190316010758_Inicial.cs" />
+    <Compile Remove="Migrations\20190316010758_Inicial.Designer.cs" />
+    <Compile Remove="Migrations\20190322004537_Inicial.cs" />
+    <Compile Remove="Migrations\20190322004537_Inicial.Designer.cs" />
+    <Compile Remove="Migrations\20190516232932_Cambios_Envio.cs" />
+    <Compile Remove="Migrations\20190516232932_Cambios_Envio.Designer.cs" />
+    <Compile Remove="Migrations\20190517210037_Cambios_Carpetas_01.cs" />
+    <Compile Remove="Migrations\20190517210037_Cambios_Carpetas_01.Designer.cs" />
+    <Compile Remove="Migrations\20190518001739_Cambios_Carpetas_02.cs" />
+    <Compile Remove="Migrations\20190518001739_Cambios_Carpetas_02.Designer.cs" />
+    <Compile Remove="Migrations\20190520220237_Cambios_Carpetas_02.cs" />
+    <Compile Remove="Migrations\20190520220237_Cambios_Carpetas_02.Designer.cs" />
+    <Compile Remove="Migrations\20190531230939_Primera.cs" />
+    <Compile Remove="Migrations\20190531230939_Primera.Designer.cs" />
+    <Compile Remove="Migrations\20190607181903_Cambios_InfoUsuario.cs" />
+    <Compile Remove="Migrations\20190607181903_Cambios_InfoUsuario.Designer.cs" />
+    <Compile Remove="Migrations\20190626004443_inicialyunico.cs" />
+    <Compile Remove="Migrations\20190626004443_inicialyunico.Designer.cs" />
+    <Compile Remove="Migrations\20190704183323_inicialyunico.cs" />
+    <Compile Remove="Migrations\20190704183323_inicialyunico.Designer.cs" />
+    <Compile Remove="Migrations\20190809153631_Add_TipoEnvio.cs" />
+    <Compile Remove="Migrations\20190809153631_Add_TipoEnvio.Designer.cs" />
+    <Compile Remove="Migrations\20190813211750_Agregar_Disponibilidad.cs" />
+    <Compile Remove="Migrations\20190813211750_Agregar_Disponibilidad.Designer.cs" />
+    <Compile Remove="Migrations\20190813212012_Agregar_Disponibilidad02.cs" />
+    <Compile Remove="Migrations\20190813212012_Agregar_Disponibilidad02.Designer.cs" />
+    <Compile Remove="Migrations\20190816011119_AddAreasPuestos_Visible.cs" />
+    <Compile Remove="Migrations\20190816011119_AddAreasPuestos_Visible.Designer.cs" />
+    <Compile Remove="Migrations\20190821224921_Cambios_Configuracion.cs" />
+    <Compile Remove="Migrations\20190821224921_Cambios_Configuracion.Designer.cs" />
+    <Compile Remove="Migrations\20190821231054_NuevoInicial.cs" />
+    <Compile Remove="Migrations\20190821231054_NuevoInicial.Designer.cs" />
+    <Compile Remove="Migrations\20190821231528_NuevoInicial.cs" />
+    <Compile Remove="Migrations\20190821231528_NuevoInicial.Designer.cs" />
+    <Compile Remove="Migrations\20190821234806_NuevoInicial.cs" />
+    <Compile Remove="Migrations\20190821234806_NuevoInicial.Designer.cs" />
+    <Compile Remove="Migrations\20190822003141_NuevoInicial.cs" />
+    <Compile Remove="Migrations\20190822003141_NuevoInicial.Designer.cs" />
+    <Compile Remove="Migrations\20190822154534_NuevoInicial.cs" />
+    <Compile Remove="Migrations\20190822154534_NuevoInicial.Designer.cs" />
+    <Compile Remove="Migrations\20190823204811_NuevoInicial.cs" />
+    <Compile Remove="Migrations\20190823204811_NuevoInicial.Designer.cs" />
+    <Compile Remove="Migrations\20190829234535_Inicial_Plus.cs" />
+    <Compile Remove="Migrations\20190829234535_Inicial_Plus.Designer.cs" />
+    <Compile Remove="Migrations\20190831001453_Cambios_Anexo_Especial.cs" />
+    <Compile Remove="Migrations\20190831001453_Cambios_Anexo_Especial.Designer.cs" />
+    <Compile Remove="Migrations\20190902154413_InicialPlus.cs" />
+    <Compile Remove="Migrations\20190902154413_InicialPlus.Designer.cs" />
+    <Compile Remove="Migrations\20190902155009_InicialPlus.cs" />
+    <Compile Remove="Migrations\20190902155009_InicialPlus.Designer.cs" />
+    <Compile Remove="Migrations\20190902162106_Extra.cs" />
+    <Compile Remove="Migrations\20190902162106_Extra.Designer.cs" />
+    <Compile Remove="Migrations\20190902162333_Extra.cs" />
+    <Compile Remove="Migrations\20190902162333_Extra.Designer.cs" />
+    <Compile Remove="Migrations\20190902162826_InicialPlus.cs" />
+    <Compile Remove="Migrations\20190902162826_InicialPlus.Designer.cs" />
+    <Compile Remove="Migrations\20190902163733_InicialPlus.cs" />
+    <Compile Remove="Migrations\20190902163733_InicialPlus.Designer.cs" />
+    <Compile Remove="Migrations\20190902170821_InicialPlus.cs" />
+    <Compile Remove="Migrations\20190902170821_InicialPlus.Designer.cs" />
+    <Compile Remove="Migrations\20191001163755_InicialPlus.cs" />
+    <Compile Remove="Migrations\20191001163755_InicialPlus.Designer.cs" />
+    <Compile Remove="Migrations\20191001225024_InicialPlus.cs" />
+    <Compile Remove="Migrations\20191001225024_InicialPlus.Designer.cs" />
+    <Compile Remove="Migrations\20191002163720_InicialPlus.cs" />
+    <Compile Remove="Migrations\20191002163720_InicialPlus.Designer.cs" />
+    <Compile Remove="Migrations\20191003225117_InicialPlus.cs" />
+    <Compile Remove="Migrations\20191003225117_InicialPlus.Designer.cs" />
+    <Compile Remove="Migrations\20191004004821_InicialPlus.cs" />
+    <Compile Remove="Migrations\20191004004821_InicialPlus.Designer.cs" />
+    <Compile Remove="Migrations\20191008155004_InicialPlus.cs" />
+    <Compile Remove="Migrations\20191008155004_InicialPlus.Designer.cs" />
+    <Compile Remove="Migrations\20191009171318_InicialPlus.cs" />
+    <Compile Remove="Migrations\20191009171318_InicialPlus.Designer.cs" />
+    <Compile Remove="Migrations\20191009172053_InicialPlus.cs" />
+    <Compile Remove="Migrations\20191009172053_InicialPlus.Designer.cs" />
+    <Compile Remove="Migrations\20191111191313_PermisoAA.cs" />
+    <Compile Remove="Migrations\20191111191313_PermisoAA.Designer.cs" />
+    <Compile Remove="Migrations\20191205011323_CambioArea.cs" />
+    <Compile Remove="Migrations\20191205011323_CambioArea.Designer.cs" />
+    <Compile Remove="Migrations\20191210232219_RenombrarCampoInfoUsuario.cs" />
+    <Compile Remove="Migrations\20191210232219_RenombrarCampoInfoUsuario.Designer.cs" />
+    <Compile Remove="Migrations\20191212232556_AgregarCamposEnvio.cs" />
+    <Compile Remove="Migrations\20191212232556_AgregarCamposEnvio.Designer.cs" />
+    <Compile Remove="Migrations\20200109164354_AgregaClavePuesto.cs" />
+    <Compile Remove="Migrations\20200109164354_AgregaClavePuesto.Designer.cs" />
+    <Compile Remove="Migrations\20200123224508_CAmbios_fecha.cs" />
+    <Compile Remove="Migrations\20200123224508_CAmbios_fecha.Designer.cs" />
+    <Compile Remove="Migrations\20200127155824_AddCampoSexoInfoUsuario.cs" />
+    <Compile Remove="Migrations\20200127155824_AddCampoSexoInfoUsuario.Designer.cs" />
+    <Compile Remove="Migrations\20200127194733_AddCampoNombre2Puesto.cs" />
+    <Compile Remove="Migrations\20200127194733_AddCampoNombre2Puesto.Designer.cs" />
+    <Compile Remove="Migrations\20200207014813_Base.cs" />
+    <Compile Remove="Migrations\20200207014813_Base.Designer.cs" />
+    <Compile Remove="Migrations\20200207170800_Base.cs" />
+    <Compile Remove="Migrations\20200207170800_Base.Designer.cs" />
+    <Compile Remove="Migrations\20200207171718_Base.cs" />
+    <Compile Remove="Migrations\20200207171718_Base.Designer.cs" />
+    <Compile Remove="Migrations\20200207172411_Inicial.cs" />
+    <Compile Remove="Migrations\20200207172411_Inicial.Designer.cs" />
+    <Compile Remove="Migrations\20200207173236_Inicial.cs" />
+    <Compile Remove="Migrations\20200207173236_Inicial.Designer.cs" />
+    <Compile Remove="Migrations\20200207182607_General.cs" />
+    <Compile Remove="Migrations\20200207182607_General.Designer.cs" />
+    <Compile Remove="Migrations\20200207185252_General.cs" />
+    <Compile Remove="Migrations\20200207185252_General.Designer.cs" />
+    <Compile Remove="Migrations\20200207195257_General.cs" />
+    <Compile Remove="Migrations\20200207195257_General.Designer.cs" />
+    <Compile Remove="Migrations\20200207201637_General.cs" />
+    <Compile Remove="Migrations\20200207201637_General.Designer.cs" />
+    <Compile Remove="Migrations\20200207203037_General.cs" />
+    <Compile Remove="Migrations\20200207203037_General.Designer.cs" />
+    <Compile Remove="Migrations\20200207210247_General.cs" />
+    <Compile Remove="Migrations\20200207210247_General.Designer.cs" />
+    <Compile Remove="Migrations\20200319175531_Principal.cs" />
+    <Compile Remove="Migrations\20200319175531_Principal.Designer.cs" />
+    <Compile Remove="Migrations\20200326182128_Cambios_Envio.cs" />
+    <Compile Remove="Migrations\20200326182128_Cambios_Envio.Designer.cs" />
+    <Compile Remove="Migrations\20200403010543_AddGrupoEnvio.cs" />
+    <Compile Remove="Migrations\20200403010543_AddGrupoEnvio.Designer.cs" />
+    <Compile Remove="Migrations\20200413183338_Add_Compromiso.cs" />
+    <Compile Remove="Migrations\20200413183338_Add_Compromiso.Designer.cs" />
+    <Compile Remove="Migrations\20200420221154_CambiosDocumentoBase01.cs" />
+    <Compile Remove="Migrations\20200420221154_CambiosDocumentoBase01.Designer.cs" />
+    <Compile Remove="Migrations\20200513225348_HistorialCorreo.cs" />
+    <Compile Remove="Migrations\20200513225348_HistorialCorreo.Designer.cs" />
+    <Compile Remove="Migrations\20200514172206_HistorialCorreo.cs" />
+    <Compile Remove="Migrations\20200514172206_HistorialCorreo.Designer.cs" />
+    <Compile Remove="Migrations\20200604195036_Estadistica.cs" />
+    <Compile Remove="Migrations\20200604195036_Estadistica.Designer.cs" />
+    <Compile Remove="Migrations\20200608154052_Recopilacion.cs" />
+    <Compile Remove="Migrations\20200608154052_Recopilacion.Designer.cs" />
+    <Compile Remove="Migrations\20200608154926_Recopilacion01.cs" />
+    <Compile Remove="Migrations\20200608154926_Recopilacion01.Designer.cs" />
+    <Compile Remove="Migrations\20200608155935_TodoEnUno.cs" />
+    <Compile Remove="Migrations\20200608155935_TodoEnUno.Designer.cs" />
+    <Compile Remove="Migrations\20200706183633_ActualizaHistorialCorreo.cs" />
+    <Compile Remove="Migrations\20200706183633_ActualizaHistorialCorreo.Designer.cs" />
+    <Compile Remove="Migrations\20200707163843_HistorialCorreoActualizacion.cs" />
+    <Compile Remove="Migrations\20200707163843_HistorialCorreoActualizacion.Designer.cs" />
+    <Compile Remove="Migrations\20200717001957_MotivoDeCambioDeFechaCompromiso.cs" />
+    <Compile Remove="Migrations\20200717001957_MotivoDeCambioDeFechaCompromiso.Designer.cs" />
+    <Compile Remove="Migrations\20200717201234_NuevoCambioMotivo.cs" />
+    <Compile Remove="Migrations\20200717201234_NuevoCambioMotivo.Designer.cs" />
+    <Compile Remove="Migrations\20200724001302_CambiosAnexosGeneralArea.cs" />
+    <Compile Remove="Migrations\20200724001302_CambiosAnexosGeneralArea.Designer.cs" />
+    <Compile Remove="Migrations\20200831200001_AnexoRutaBase.cs" />
+    <Compile Remove="Migrations\20200831200001_AnexoRutaBase.Designer.cs" />
+    <Compile Remove="Migrations\20200903235503_AnexoRuta2.cs" />
+    <Compile Remove="Migrations\20200903235503_AnexoRuta2.Designer.cs" />
+    <Compile Remove="Migrations\20200904232404_Principal040920.cs" />
+    <Compile Remove="Migrations\20200904232404_Principal040920.Designer.cs" />
+    <Compile Remove="Migrations\20200905002350_PrincipalSept.cs" />
+    <Compile Remove="Migrations\20200905002350_PrincipalSept.Designer.cs" />
+    <Compile Remove="Migrations\20200915232236_CambioCancelarOficio.cs" />
+    <Compile Remove="Migrations\20200915232236_CambioCancelarOficio.Designer.cs" />
+    <Compile Remove="Migrations\20201002150856_EliminaPuesto.cs" />
+    <Compile Remove="Migrations\20201002150856_EliminaPuesto.Designer.cs" />
+    <Compile Remove="Migrations\20201029174130_PrincipalOct.cs" />
+    <Compile Remove="Migrations\20201029174130_PrincipalOct.Designer.cs" />
+    <Compile Remove="Migrations\20210225031501_AddTramiteYFirma.cs" />
+    <Compile Remove="Migrations\20210225031501_AddTramiteYFirma.Designer.cs" />
+    <Compile Remove="Migrations\20210225034626_AddTramiteYFirma2.cs" />
+    <Compile Remove="Migrations\20210225034626_AddTramiteYFirma2.Designer.cs" />
+    <Compile Remove="Migrations\20210225045212_AddTramiteEstado.cs" />
+    <Compile Remove="Migrations\20210225045212_AddTramiteEstado.Designer.cs" />
+    <Compile Remove="Migrations\20210303045019_LlaveForaneaTramite.cs" />
+    <Compile Remove="Migrations\20210303045019_LlaveForaneaTramite.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Areas\Identity\Pages\Constancias\Solicitud\SolicitudMasiva.cshtml" />
+    <Content Remove="compilerconfig.json" />
+    <Content Remove="wwwroot\js\Areas\Identity\Pages\Areas\Buscar.min.js" />
+    <Content Remove="wwwroot\js\descargaPdf.min.js" />
+    <Content Remove="wwwroot\lib\dropzone\dist\dropzone.min.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Areas\Identity\Pages\Constancias\Solicitud\SolicitudMasiva.cshtml" />
+    <_ContentIncludedByDefault Remove="wwwroot\css\Areas\Identity\Pages\Administracion\Usuarios\Crear.min.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\js\Areas\Identity\Pages\Areas\Buscar.min.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\js\descargaPdf.min.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\lib\dropzone\dist\dropzone.min.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Areas\Identity\Pages\Constancias\Solicitud\SolicitudMasiva.cshtml" />
+    <None Include="compilerconfig.json" />
+    <None Include="wwwroot\js\Areas\Identity\Pages\Areas\Buscar.min.js" />
+    <None Include="wwwroot\js\Areas\Identity\Pages\Constancias\Administracion\Seguimiento.js" />
+    <None Include="wwwroot\js\descargaPdf.min.js" />
+    <None Include="wwwroot\lib\bootstrap-datepicker-1.6.4-dist\css\bootstrap-datepicker.css.map" />
+    <None Include="wwwroot\lib\bootstrap-datepicker-1.6.4-dist\js\bootstrap-datepicker.js" />
+    <None Include="wwwroot\lib\bootstrap-datepicker-1.6.4-dist\js\bootstrap-datepicker.min.js" />
+    <None Include="wwwroot\lib\bootstrap-datepicker-1.6.4-dist\locales\bootstrap-datepicker.es.min.js" />
+    <None Include="wwwroot\lib\Chart.js-2.8.0\dist\Chart.bundle.js" />
+    <None Include="wwwroot\lib\Chart.js-2.8.0\dist\Chart.bundle.min.js" />
+    <None Include="wwwroot\lib\Chart.js-2.8.0\dist\Chart.js" />
+    <None Include="wwwroot\lib\Chart.js-2.8.0\dist\Chart.min.js" />
+    <None Include="wwwroot\lib\dropzone\dist\dropzone.min.js" />
+    <None Include="wwwroot\lib\fontawesome\css\font-awesome.css.map" />
+    <None Include="wwwroot\lib\fontawesome\fonts\fontawesome-webfont.svg" />
+    <None Include="wwwroot\lib\fontawesome\fonts\fontawesome-webfont.woff2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Haukcode.DinkToPdf" Version="1.1.2" />
+    <PackageReference Include="HtmlAgilityPack" Version="1.11.24" />
+	<PackageReference Include="iTextSharp.LGPLv2.Core" Version="1.6.7" />
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.1.14" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.1.14" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer.Design" Version="1.1.6" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.1.14">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.10" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.Windows.Compatibility" Version="2.0.1" />
+    <PackageReference Include="Oracle.ManagedDataAccess.Core" Version="2.19.50" />
+    <PackageReference Include="QRCoder" Version="1.3.9" />
+    <PackageReference Include="Serilog.Extensions.Logging.File" Version="2.0.0" />
+    <PackageReference Include="System.Drawing.Common" Version="4.7.0" />
+    <PackageReference Include="System.Private.ServiceModel" Version="4.5.3" />
+    <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="4.7.0" />
+    <PackageReference Include="System.ServiceModel.Duplex" Version="4.4.*" />
+    <PackageReference Include="System.ServiceModel.Http" Version="4.4.*" />
+    <PackageReference Include="System.ServiceModel.NetTcp" Version="4.4.*" />
+    <PackageReference Include="System.ServiceModel.Security" Version="4.4.*" />
+    <PackageReference Include="System.Text.Encoding.CodePages" Version="4.7.0" />
+    <PackageReference Include="X.PagedList.Mvc.Core" Version="7.6.0" />
+  </ItemGroup>
+
+  <Target Name="CopySPSM" BeforeTargets="Build">
+    <Copy SourceFiles="$(USERPROFILE)\.nuget\packages\system.private.servicemodel\4.5.3\runtimes\win\lib\netstandard2.0\System.Private.ServiceModel.dll" DestinationFolder="$(OutputPath)\bin" />
+  </Target>
+  
+  <ItemGroup>
+    <Compile Update="Resources\SharedResource.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>SharedResource.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Resources\SharedResource.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>SharedResource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Logs\" />
+    <Folder Include="Properties\" />
+    <Folder Include="wwwroot\images\logo_areas\" />
+    <Folder Include="wwwroot\uploads\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="Areas\Identity\Pages\Grupos\Borrar.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Areas\Identity\Pages\Grupos\Integrantes\Agregar.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Areas\Identity\Pages\Grupos\Editar.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="wwwroot\js\Areas\Identity\Pages\Constancias\Solicitud\ResumenConstancia\Resumen.js">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services" />
+  </ItemGroup>
+
+  <ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Areas\Identity\Pages\Constancias\Solicitud\SolicitudMasiva.cshtml" />
+  </ItemGroup>
+
+</Project>

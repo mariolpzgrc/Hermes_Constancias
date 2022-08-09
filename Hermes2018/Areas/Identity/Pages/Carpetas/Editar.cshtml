@@ -1,0 +1,62 @@
+﻿@page "/Carpetas/Editar/{id:int}"
+@model EditarModel
+
+<div class="content-wrapper pt-0">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 pt-2">
+                        <ol class="breadcrumb-2 mt-0 mb-0 pb-1 pt-1 display-inline">
+                            <li class="breadcrumb-2-item">
+                                <a asp-area="" asp-controller="Home" asp-action="Index" asp-route-id="">Inicio</a>
+                            </li>
+
+                            <li class="breadcrumb-2-item">
+                                <a asp-area="Identity" asp-page="/Carpetas/Index">Carpetas</a>
+                            </li>
+                            <li class="breadcrumb-2-item active display-flex" aria-current="page">Editar carpeta</li>
+                        </ol>
+                    </div>
+                    <div class="col-12">
+                        <hr class="hr-thick mb-1 mt-1" />
+                        <h5>Editar carpeta</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <form id="form-add-User-group" method="post">
+                    <div class="row">
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                            <div asp-validation-summary="ModelOnly" class="text-danger error-list-clean"></div>
+
+                            <input asp-for="Existe" class="sin-indicador" />
+                            <input asp-for="InfoUsuarioId" class="sin-indicador" />
+                            <input asp-for="Editar.CarpetaId" class="sin-indicador" />
+
+                            <div class="form-group">
+                                <label asp-for="Editar.NombreCarpeta" class="col-form-label font-bold-12"></label>
+                                <div class="">
+                                    <input asp-for="Editar.NombreCarpeta" class="form-control form-control-sm" placeholder="Carpeta" />
+                                    <small class="form-text text-muted">El nombre de la carpeta debe ser como máximo de 30 caracteres.</small>
+                                    <span asp-validation-for="Editar.NombreCarpeta" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="pt-2">
+                                <a asp-area="Identity" asp-page="/Carpetas/Index" class="btn btn-light">Cancelar</a>
+                                <button type="submit" class="btn btn-primary">Actualizar</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+    <partial name="_ValidationScriptsPartial" />
+}

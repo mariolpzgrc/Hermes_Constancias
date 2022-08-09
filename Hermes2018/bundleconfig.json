@@ -1,0 +1,836 @@
+[
+  {
+    "outputFileName": "wwwroot/js/IdentityAccountRegistro.min.js",
+    "inputFiles": [
+      "wwwroot/js/IdentityAccountRegistro.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/UsuariosCrear.min.js",
+    "inputFiles": [
+      "wwwroot/js/UsuariosCrear.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/SolicitudesResponder.min.js",
+    "inputFiles": [
+      "wwwroot/js/SolicitudesResponder.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/DelegarCrear.min.js",
+    "inputFiles": [
+      "wwwroot/js/DelegarCrear.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/site.min.css",
+    "inputFiles": [
+      "wwwroot/css/site.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/NotificacionUsuario.min.js",
+    "inputFiles": [
+      "wwwroot/js/NotificacionUsuario.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/Areas/Identity/Pages/Grupos/Crear.min.js",
+    "inputFiles": [
+      "wwwroot/js/Areas/Identity/Pages/Grupos/Crear.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/Areas/Identity/Pages/Correspondencia/Crear.min.js",
+    "inputFiles": [
+      "wwwroot/js/Areas/Identity/Pages/Correspondencia/Create.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/Areas/Identity/Pages/Correspondencia/Editar.min.js",
+    "inputFiles": [
+      "wwwroot/js/Areas/Identity/Pages/Correspondencia/Editar.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/Areas/Identity/Pages/Correspondencia/Revision.min.js",
+    "inputFiles": [
+      "wwwroot/js/Areas/Identity/Pages/Correspondencia/Revision.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/Areas/Identity/Pages/Correspondencia/Lectura.min.js",
+    "inputFiles": [
+      "wwwroot/js/Areas/Identity/Pages/Correspondencia/Lectura.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/turnar.min.css",
+    "inputFiles": [
+      "wwwroot/css/turnar.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/Areas/Identity/Pages/Correspondencia/Turnar.min.js",
+    "inputFiles": [
+      "wwwroot/js/Areas/Identity/Pages/Correspondencia/Turnar.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/Areas/Identity/Pages/Correspondencia/Responder.min.js",
+    "inputFiles": [
+      "wwwroot/js/Areas/Identity/Pages/Correspondencia/Responder.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/Areas/Identity/Pages/Correspondencia/Seguimiento.min.js",
+    "inputFiles": [
+      "wwwroot/js/Areas/Identity/Pages/Correspondencia/Seguimiento.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/Areas/Identity/Pages/Correspondencia/Crear.min.css",
+    "inputFiles": [
+      "wwwroot/css/Areas/Identity/Pages/Correspondencia/Crear.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/Areas/Identity/Pages/Correspondencia/Editar.min.css",
+    "inputFiles": [
+      "wwwroot/css/Areas/Identity/Pages/Correspondencia/Editar.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/Areas/Identity/Pages/Correspondencia/Responder.min.css",
+    "inputFiles": [
+      "wwwroot/css/Areas/Identity/Pages/Correspondencia/Responder.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/Areas/Identity/Pages/Account/IdentityAccountRegistro.min.js",
+    "inputFiles": [
+      "wwwroot/js/Areas/Identity/Pages/Account/IdentityAccountRegistro.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/Views/Usuarios/UsuariosReasignar.min.js",
+    "inputFiles": [
+      "wwwroot/js/Views/Usuarios/UsuariosReasignar.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/Areas/Identity/Pages/Servicios/Crear.min.js",
+    "inputFiles": [
+      "wwwroot/js/Areas/Identity/Pages/Servicios/Crear.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/Views/Usuarios/UsuariosCrear.min.js",
+    "inputFiles": [
+      "wwwroot/js/Views/Usuarios/UsuariosCrear.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/Views/Home/Index.min.js",
+    "inputFiles": [
+      "wwwroot/js/Views/Home/Index.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/Areas/Identity/Pages/Correspondencia/Crear.min.js",
+    "inputFiles": [
+      "wwwroot/js/Areas/Identity/Pages/Correspondencia/Crear.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/Areas/Identity/Pages/Correspondencia/Editar.min.js",
+    "inputFiles": [
+      "wwwroot/js/Areas/Identity/Pages/Correspondencia/Editar.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/Areas/Identity/Pages/Correspondencia/Lectura.min.js",
+    "inputFiles": [
+      "wwwroot/js/Areas/Identity/Pages/Correspondencia/Lectura.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/Areas/Identity/Pages/Correspondencia/Responder.min.js",
+    "inputFiles": [
+      "wwwroot/js/Areas/Identity/Pages/Correspondencia/Responder.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/Areas/Identity/Pages/Correspondencia/Revision.min.js",
+    "inputFiles": [
+      "wwwroot/js/Areas/Identity/Pages/Correspondencia/Revision.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/Areas/Identity/Pages/Correspondencia/Seguimiento.min.js",
+    "inputFiles": [
+      "wwwroot/js/Areas/Identity/Pages/Correspondencia/Seguimiento.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/Areas/Identity/Pages/Correspondencia/Turnar.min.js",
+    "inputFiles": [
+      "wwwroot/js/Areas/Identity/Pages/Correspondencia/Turnar.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/Areas/Identity/Pages/Bandejas/Borradores.min.js",
+    "inputFiles": [
+      "wwwroot/js/Areas/Identity/Pages/Bandejas/Borradores.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/Areas/Identity/Pages/Bandejas/Enviados.min.js",
+    "inputFiles": [
+      "wwwroot/js/Areas/Identity/Pages/Bandejas/Enviados.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/Areas/Identity/Pages/Bandejas/Revision.min.js",
+    "inputFiles": [
+      "wwwroot/js/Areas/Identity/Pages/Bandejas/Revision.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/Areas/Identity/Pages/Correspondencia/Responder.min.css",
+    "inputFiles": [
+      "wwwroot/css/Areas/Identity/Pages/Correspondencia/Responder.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/site-login.min.css",
+    "inputFiles": [
+      "wwwroot/css/site-login.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/Areas/Identity/Pages/Bandejas/Recibidos.min.js",
+    "inputFiles": [
+      "wwwroot/js/Areas/Identity/Pages/Bandejas/Recibidos.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/Areas/Identity/Pages/Bandejas/Recibidos.min.css",
+    "inputFiles": [
+      "wwwroot/css/Areas/Identity/Pages/Bandejas/Recibidos.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/linear-activity.min.css",
+    "inputFiles": [
+      "wwwroot/css/linear-activity.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/Areas/Identity/Pages/Bandejas/Enviados.min.css",
+    "inputFiles": [
+      "wwwroot/css/Areas/Identity/Pages/Bandejas/Enviados.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/Areas/Identity/Pages/Bandejas/Borradores.min.css",
+    "inputFiles": [
+      "wwwroot/css/Areas/Identity/Pages/Bandejas/Borradores.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/Areas/Identity/Pages/Bandejas/Revision.min.css",
+    "inputFiles": [
+      "wwwroot/css/Areas/Identity/Pages/Bandejas/Revision.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/Areas/Identity/Pages/Historico/Borradores.min.css",
+    "inputFiles": [
+      "wwwroot/css/Areas/Identity/Pages/Historico/Borradores.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/Areas/Identity/Pages/Historico/Enviados.min.css",
+    "inputFiles": [
+      "wwwroot/css/Areas/Identity/Pages/Historico/Enviados.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/Areas/Identity/Pages/Historico/Recibidos.min.css",
+    "inputFiles": [
+      "wwwroot/css/Areas/Identity/Pages/Historico/Recibidos.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/Areas/Identity/Pages/Historico/Revision.min.css",
+    "inputFiles": [
+      "wwwroot/css/Areas/Identity/Pages/Historico/Revision.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/Areas/Identity/Pages/Historico/Borradores.min.js",
+    "inputFiles": [
+      "wwwroot/js/Areas/Identity/Pages/Historico/Borradores.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/Areas/Identity/Pages/Historico/Enviados.min.js",
+    "inputFiles": [
+      "wwwroot/js/Areas/Identity/Pages/Historico/Enviados.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/Areas/Identity/Pages/Historico/Recibidos.min.js",
+    "inputFiles": [
+      "wwwroot/js/Areas/Identity/Pages/Historico/Recibidos.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/Areas/Identity/Pages/Historico/Revision.min.js",
+    "inputFiles": [
+      "wwwroot/js/Areas/Identity/Pages/Historico/Revision.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/Areas/Identity/Pages/Correspondencia/Visualizacion.min.js",
+    "inputFiles": [
+      "wwwroot/js/Areas/Identity/Pages/Correspondencia/Visualizacion.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/Areas/Identity/Pages/Configuration/Manage.min.js",
+    "inputFiles": [
+      "wwwroot/js/Areas/Identity/Pages/Configuration/Manage.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/Areas/Identity/Pages/Estadisticas/Estadisticas.min.js",
+    "inputFiles": [
+      "wwwroot/js/Areas/Identity/Pages/Estadisticas/Estadisticas.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/_Layout.min.js",
+    "inputFiles": [
+      "wwwroot/js/_Layout.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/my-froala-config.min.js",
+    "inputFiles": [
+      "wwwroot/js/my-froala-config.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/Areas/Identity/Pages/Bandejas/Personales.min.css",
+    "inputFiles": [
+      "wwwroot/css/Areas/Identity/Pages/Bandejas/Personales.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/Areas/Identity/Pages/Bandejas/Personales.min.js",
+    "inputFiles": [
+      "wwwroot/js/Areas/Identity/Pages/Bandejas/Personales.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/Areas/Identity/Pages/Correspondencia/Lectura.min.css",
+    "inputFiles": [
+      "wwwroot/css/Areas/Identity/Pages/Correspondencia/Lectura.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/Areas/Identity/Pages/Correspondencia/Visualizacion.min.css",
+    "inputFiles": [
+      "wwwroot/css/Areas/Identity/Pages/Correspondencia/Visualizacion.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/Areas/Identity/Pages/Correspondencia/Seguimiento.min.css",
+    "inputFiles": [
+      "wwwroot/css/Areas/Identity/Pages/Correspondencia/Seguimiento.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/Areas/Identity/Pages/Calendarios/Crear.min.js",
+    "inputFiles": [
+      "wwwroot/js/Areas/Identity/Pages/Calendarios/Crear.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/Areas/Identity/Pages/Calendarios/Crear.min.css",
+    "inputFiles": [
+      "wwwroot/css/Areas/Identity/Pages/Calendarios/Crear.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/Areas/Identity/Pages/Calendarios/Contenido.min.css",
+    "inputFiles": [
+      "wwwroot/css/Areas/Identity/Pages/Calendarios/Contenido.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/Areas/Identity/Pages/Calendarios/Contenido/Crear.min.js",
+    "inputFiles": [
+      "wwwroot/js/Areas/Identity/Pages/Calendarios/Contenido/Crear.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/Views/Delegar/Crear.min.js",
+    "inputFiles": [
+      "wwwroot/js/Views/Delegar/Crear.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/Areas/Identity/Pages/Plantillas/Editar.min.js",
+    "inputFiles": [
+      "wwwroot/js/Areas/Identity/Pages/Plantillas/Editar.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/Areas/Identity/Pages/Plantillas/Crear.min.js",
+    "inputFiles": [
+      "wwwroot/js/Areas/Identity/Pages/Plantillas/Crear.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/Areas/Identity/Pages/Historico/Lectura.min.js",
+    "inputFiles": [
+      "wwwroot/js/Areas/Identity/Pages/Historico/Lectura.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/Areas/Identity/Pages/Historico/Visualizacion.min.js",
+    "inputFiles": [
+      "wwwroot/js/Areas/Identity/Pages/Historico/Visualizacion.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/site.min.js",
+    "inputFiles": [
+      "wwwroot/js/site.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/lib/bootstrap/dist/js/sb-admin.min.js",
+    "inputFiles": [
+      "wwwroot/lib/bootstrap/dist/js/sb-admin.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/Areas/Identity/Pages/Puestos/Editar.min.js",
+    "inputFiles": [
+      "wwwroot/js/Areas/Identity/Pages/Puestos/Editar.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/Areas/Identity/Pages/Areas/Crear.min.js",
+    "inputFiles": [
+      "wwwroot/js/Areas/Identity/Pages/Areas/Crear.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/Areas/Identity/Pages/Areas/Editar.min.js",
+    "inputFiles": [
+      "wwwroot/js/Areas/Identity/Pages/Areas/Editar.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/Areas/Identity/Pages/Correspondencia/Turnar.min.css",
+    "inputFiles": [
+      "wwwroot/css/Areas/Identity/Pages/Correspondencia/Turnar.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/Areas/Identity/Pages/Configuracion/General/Editar.min.js",
+    "inputFiles": [
+      "wwwroot/js/Areas/Identity/Pages/Configuracion/General/Editar.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/Areas/Identity/Pages/Configuracion/General/Coleccion.min.js",
+    "inputFiles": [
+      "wwwroot/js/Areas/Identity/Pages/Configuracion/General/Coleccion.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/descargarDocumento.min.js",
+    "inputFiles": [
+      "wwwroot/js/descargarDocumento.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/Areas/Identity/Pages/Areas/Crear.min.css",
+    "inputFiles": [
+      "wwwroot/css/Areas/Identity/Pages/Areas/Crear.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/material-btns.min.css",
+    "inputFiles": [
+      "wwwroot/css/material-btns.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/material-btns-v2.min.css",
+    "inputFiles": [
+      "wwwroot/css/material-btns-v2.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/material-input.min.css",
+    "inputFiles": [
+      "wwwroot/css/material-input.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/lib/bootstrap/dist/css/bootstrap.min.css",
+    "inputFiles": [
+      "wwwroot/lib/bootstrap/dist/css/bootstrap.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/lib/bootstrap/dist/css/bootstrap-theme.min.css",
+    "inputFiles": [
+      "wwwroot/lib/bootstrap/dist/css/bootstrap-theme.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/lib/bootstrap/dist/css/dataTables.checkboxes.min.css",
+    "inputFiles": [
+      "wwwroot/lib/bootstrap/dist/css/dataTables.checkboxes.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/lib/bootstrap/dist/css/jquery.dataTables.min.css",
+    "inputFiles": [
+      "wwwroot/lib/bootstrap/dist/css/jquery.dataTables.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/lib/bootstrap/dist/css/navbar.min.css",
+    "inputFiles": [
+      "wwwroot/lib/bootstrap/dist/css/navbar.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/lib/bootstrap/dist/js/bootstrap.min.js",
+    "inputFiles": [
+      "wwwroot/lib/bootstrap/dist/js/bootstrap.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/lib/bootstrap/dist/js/sb-admin-charts.min.js",
+    "inputFiles": [
+      "wwwroot/lib/bootstrap/dist/js/sb-admin-charts.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/lib/bootstrap/dist/js/sb-admin-datatables.min.js",
+    "inputFiles": [
+      "wwwroot/lib/bootstrap/dist/js/sb-admin-datatables.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/lib/font-awesome/css/all.min.css",
+    "inputFiles": [
+      "wwwroot/lib/font-awesome/css/all.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/lib/dropzone/dist/basic.min.css",
+    "inputFiles": [
+      "wwwroot/lib/dropzone/dist/basic.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/lib/dropzone/dist/dropzone.min.css",
+    "inputFiles": [
+      "wwwroot/lib/dropzone/dist/dropzone.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/lib/dropzone/dist/dropzone.min.js",
+    "inputFiles": [
+      "wwwroot/lib/dropzone/dist/dropzone.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/lib/dropzone/dist/dropzone-amd-module.min.js",
+    "inputFiles": [
+      "wwwroot/lib/dropzone/dist/dropzone-amd-module.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/Areas/Identity/Pages/Calendarios/Contenido/Crear.min.css",
+    "inputFiles": [
+      "wwwroot/css/Areas/Identity/Pages/Calendarios/Contenido/Crear.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.min.js",
+    "inputFiles": [
+      "wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/lib/jhxlsx/jhxlsx.min.js",
+    "inputFiles": [
+      "wwwroot/lib/jhxlsx/jhxlsx.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/lib/font-awesome/css/brands.min.css",
+    "inputFiles": [
+      "wwwroot/lib/font-awesome/css/brands.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/detail.min.css",
+    "inputFiles": [
+      "wwwroot/css/detail.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/lib/bootstrap/dist/css/template.sb-admin.min.min.css",
+    "inputFiles": [
+      "wwwroot/lib/bootstrap/dist/css/template.sb-admin.min.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/lib/jquery-flexdatalist/jquery.flexdatalist.min.js",
+    "inputFiles": [
+      "wwwroot/lib/jquery-flexdatalist/jquery.flexdatalist.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/lib/max-favilli-tagmanager/tagmanager.min.js",
+    "inputFiles": [
+      "wwwroot/lib/max-favilli-tagmanager/tagmanager.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/Views/Usuarios/Crear.min.css",
+    "inputFiles": [
+      "wwwroot/css/Views/Usuarios/Crear.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/Areas/Identity/Pages/Grupos/Crear.min.css",
+    "inputFiles": [
+      "wwwroot/css/Areas/Identity/Pages/Grupos/Crear.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/Areas/Identity/Pages/Servicios/Crear.min.css",
+    "inputFiles": [
+      "wwwroot/css/Areas/Identity/Pages/Servicios/Crear.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/Views/Delegar/Crear.min.css",
+    "inputFiles": [
+      "wwwroot/css/Views/Delegar/Crear.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/Views/Usuarios/Reasignar.min.css",
+    "inputFiles": [
+      "wwwroot/css/Views/Usuarios/Reasignar.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/Views/Solicitudes/Responder.min.js",
+    "inputFiles": [
+      "wwwroot/js/Views/Solicitudes/Responder.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/Areas/Identity/Pages/Account/Solicitud.min.js",
+    "inputFiles": [
+      "wwwroot/js/Areas/Identity/Pages/Account/Solicitud.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/Areas/Identity/Pages/Administracion/Areas/Agregar.min.css",
+    "inputFiles": [
+      "wwwroot/css/Areas/Identity/Pages/Administracion/Areas/Agregar.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/Areas/Identity/Pages/Administracion/Areas/Agregar.min.js",
+    "inputFiles": [
+      "wwwroot/js/Areas/Identity/Pages/Administracion/Areas/Agregar.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/login.min.js",
+    "inputFiles": [
+      "wwwroot/js/login.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/Areas/Identity/Pages/Administracion/Areas/Crear.min.css",
+    "inputFiles": [
+      "wwwroot/css/Areas/Identity/Pages/Administracion/Areas/Crear.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/Areas/Identity/Pages/Administracion/Areas/Crear.min.js",
+    "inputFiles": [
+      "wwwroot/js/Areas/Identity/Pages/Administracion/Areas/Crear.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/Areas/Identity/Pages/Administracion/Usuarios/Crear.min.css",
+    "inputFiles": [
+      "wwwroot/css/Areas/Identity/Pages/Administracion/Usuarios/Crear.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/Areas/Identity/Pages/Administracion/Usuarios/Crear.min.js",
+    "inputFiles": [
+      "wwwroot/js/Areas/Identity/Pages/Administracion/Usuarios/Crear.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/Areas/Identity/Pages/Administracion/Areas/Editar.min.js",
+    "inputFiles": [
+      "wwwroot/js/Areas/Identity/Pages/Administracion/Areas/Editar.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/Areas/Identity/Pages/Administracion/Usuarios/Reasignar.min.js",
+    "inputFiles": [
+      "wwwroot/js/Areas/Identity/Pages/Administracion/Usuarios/Reasignar.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/Areas/Identity/Pages/Administracion/Usuarios/Reasignar.min.css",
+    "inputFiles": [
+      "wwwroot/css/Areas/Identity/Pages/Administracion/Usuarios/Reasignar.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/Areas/Identity/Pages/Delegar/Crear.min.css",
+    "inputFiles": [
+      "wwwroot/css/Areas/Identity/Pages/Delegar/Crear.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/Areas/Identity/Pages/Delegar/Crear.min.js",
+    "inputFiles": [
+      "wwwroot/js/Areas/Identity/Pages/Delegar/Crear.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/Views/Solicitudes/Responder.min.css",
+    "inputFiles": [
+      "wwwroot/css/Views/Solicitudes/Responder.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/Areas/Identity/Pages/Grupos/Agregar.min.js",
+    "inputFiles": [
+      "wwwroot/js/Areas/Identity/Pages/Grupos/Agregar.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/Areas/Identity/Pages/Correspondencia/Reenviar.min.css",
+    "inputFiles": [
+      "wwwroot/css/Areas/Identity/Pages/Correspondencia/Reenviar.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/Areas/Identity/Pages/Correspondencia/Reenviar.min.js",
+    "inputFiles": [
+      "wwwroot/js/Areas/Identity/Pages/Correspondencia/Reenviar.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/Areas/Identity/Pages/Areas/WSC.min.js",
+    "inputFiles": [
+      "wwwroot/js/Areas/Identity/Pages/Areas/WSC.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/descargaPdf.min.js",
+    "inputFiles": [
+      "wwwroot/js/descargaPdf.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/Areas/Identity/Pages/Areas/Agregar.min.js",
+    "inputFiles": [
+      "wwwroot/js/Areas/Identity/Pages/Areas/Agregar.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/Areas/Identity/Pages/Correspondencia/Revision.min.css",
+    "inputFiles": [
+      "wwwroot/css/Areas/Identity/Pages/Correspondencia/Revision.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/Areas/Identity/Pages/Usuarios/Crear.min.js",
+    "inputFiles": [
+      "wwwroot/js/Areas/Identity/Pages/Usuarios/Crear.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/Areas/Identity/Pages/Usuarios/Crear.min.css",
+    "inputFiles": [
+      "wwwroot/css/Areas/Identity/Pages/Usuarios/Crear.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/Areas/Identity/Pages/Usuarios/Reasignar.min.js",
+    "inputFiles": [
+      "wwwroot/js/Areas/Identity/Pages/Usuarios/Reasignar.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/Areas/Identity/Pages/Usuarios/Reasignar.min.css",
+    "inputFiles": [
+      "wwwroot/css/Areas/Identity/Pages/Usuarios/Reasignar.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/Views/Usuarios/UsuariosBuscar.min.js",
+    "inputFiles": [
+      "wwwroot/js/Views/Usuarios/UsuariosBuscar.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/Areas/Identity/Pages/Usuarios/Buscar.min.js",
+    "inputFiles": [
+      "wwwroot/js/Areas/Identity/Pages/Usuarios/Buscar.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/Areas/Identity/Pages/Areas/Buscar.min.js",
+    "inputFiles": [
+      "wwwroot/js/Areas/Identity/Pages/Areas/Buscar.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/Areas/Identity/Pages/Areas/Buscar.min.css",
+    "inputFiles": [
+      "wwwroot/css/Areas/Identity/Pages/Areas/Buscar.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/lib/froala-editor/js/plugins/char_counter.min.min.js",
+    "inputFiles": [
+      "wwwroot/lib/froala-editor/js/plugins/char_counter.min.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/lib/select-picker-master/src/picker.min.js",
+    "inputFiles": [
+      "wwwroot/lib/select-picker-master/src/picker.js"
+    ]
+  }
+]

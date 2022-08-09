@@ -1,0 +1,29 @@
+﻿@model List<NotificacionProximosVencerViewModel>
+
+<li class="nav-item dropdown">
+    <a class="nav-link nav-link-white" id="messagesDropdown" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <i class="fas fa-hourglass-half"></i>
+        <span class="d-lg-none">
+            Próximos a vencer
+            <span class="badge badge-pill badge-danger">@Model.Count</span>
+        </span>
+        <span class="d-none d-lg-inline badge badge-pill badge-danger">@Model.Count</span>
+    </a>
+    <!-- Dropdown-->
+    <div class="pt-0 pb-0 dropdown-menu dropdown-menu-right" aria-labelledby="messagesDropdown">
+        <h6 class="dropdown-header pt-2 pb-1">Próximos a vencer:</h6>
+        <div class="dropdown-divider mt-1 mb-1"></div>
+        <div class="contenedorSolicitudes">
+            @foreach (var documento in Model)
+            {
+                <a class="dropdown-item" asp-area="Identity" asp-page="/Correspondencia/Lectura" asp-route-id="@documento.EnvioId" asp-route-tipo="@documento.TipoEnvio">
+                    <strong>@documento.Asunto</strong>
+                    <span class="small float-right text-muted">@documento.Compromiso.ToString("d/MM/yyyy")</span>
+                    <div class="dropdown-message small">@documento.Remitente</div>
+                </a>
+                <div class="dropdown-divider"></div>
+            }
+        </div>
+        <a class="dropdown-item small" asp-area="Identity" asp-page="/Bandejas/Recibidos" asp-route-id="">Ver todos los documentos</a>
+    </div>
+</li>

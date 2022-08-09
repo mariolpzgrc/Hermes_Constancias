@@ -1,0 +1,10 @@
+﻿@model Hermes2018.ViewComponentsModels.CambiarBandejaViewComponentModel
+
+<div class="align-text-left pl-0 mb-0">
+    <form asp-area="" asp-action="Index" asp-controller="Home" method="post">
+        <div>
+            <span>@Model.Leyenda </span>
+            <select asp-items="@(new SelectList(Model.Bandejas, "Usuario", "NombreCompleto"))" asp-for="Usuario" class="h-auto p-0 border-0 font-weight-bold form-control d-inline" style="width: auto!important;" onchange="this.form.submit()"></select>
+        </div>
+    </form>
+</div>

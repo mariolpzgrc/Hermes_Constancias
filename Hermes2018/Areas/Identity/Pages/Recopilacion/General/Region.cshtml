@@ -1,0 +1,62 @@
+﻿@page "/Recopilacion/General/Region"
+@model Hermes2018.Areas.Identity.Pages.Recopilacion.General.RegionModel
+
+<div class="content-wrapper ml-0 bg-white pt-0">
+    <div class="container-fluid" id="logged-in">
+        <div class="row">
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 pt-2">
+                        <ol class="breadcrumb-2 mt-0 mb-0 pb-1 pt-1 display-inline">
+                            <li class="breadcrumb-2-item">
+                                <a asp-area="" asp-controller="Home" asp-action="Index" asp-route-id="">Inicio</a>
+                            </li>
+                            <li class="breadcrumb-2-item">
+                                <a asp-area="Identity" asp-page="/Recopilacion/General/Index" asp-route-id="">Recopilación</a>
+                            </li>
+                            <li class="breadcrumb-2-item active display-flex" aria-current="page">Por región</li>
+                        </ol>
+                    </div>
+                    <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 pt-2"></div>
+                    <div class="col-12">
+                        <hr class="hr-thick mb-1 mt-1" />
+                        <h5>Recopilación</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="row">
+
+                    @foreach (var region in Model.Regiones)
+                    {
+                        <div class="col-12 col-xs-6 col-sm-6 col-md-6 col-lg-4 col-xl-4 pt-2">
+                            <div class="card">
+                                <div class="card-header text-center pt-2 pb-2">
+                                    <h5 class="m-0 p-0">@region.Region</h5>
+                                </div>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item pt-1 pb-1">
+                                        <h4 class="d-inline-block m-0 p-0"><span class="badge badge-light border">@region.Areas</span></h4><span> Áreas</span>
+                                    </li>
+                                    <li class="list-group-item pt-1 pb-1">
+                                        <h4 class="d-inline-block m-0 p-0"><span class="badge badge-light border">@region.Usuarios</span></h4><span> Usuarios</span>
+                                    </li>
+                                    <li class="list-group-item pt-1 pb-1">
+                                        <h4 class="d-inline-block m-0 p-0"><span class="badge badge-light border">@region.DocumentosEnviados</span></h4><span> Documentos enviados</span>
+                                    </li>
+                                    <li class="list-group-item pt-1 pb-1">
+                                        <h4 class="d-inline-block m-0 p-0"><span class="badge badge-light border">@region.DocumentosRecibidos</span></h4><span> Documentos recibidos</span>
+                                    </li>
+                                </ul>
+                                <div class="card-footer text-center bg-white pt-0 pb-0">
+                                    <a asp-area="Identity" asp-page="/Recopilacion/General/Area" asp-route-id="@region.RegionId" class="font-regular-11 btn btn-link">Ver recopilación por área</a>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,90 @@
+﻿@page "/Historico/Correspondencia/Revision/{id:int}/{tipo:int}/{bandeja:int}/{pagina:int?}"
+@model RevisionModel
+
+@section Styles
+    {
+    <link type="text/css" rel="stylesheet" href="~/css/linear-activity.min.css" />
+    <link type="text/css" rel="stylesheet" href="~/css/Areas/Identity/Pages/Historico/Revision.min.css" asp-append-version="true" />
+}
+
+@section ScriptsPrioritarios
+    {
+    <script type="text/javascript" src="~/lib/moment/min/moment-with-locales.min.js"></script>
+    <script type="text/javascript" src="~/lib/twbs-pagination/jquery.twbsPagination.min.js"></script>
+}
+
+<div class="content-wrapper pt-0">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 pt-2">
+                        <ol class="breadcrumb-2 mt-0 mb-0 pb-1 pt-1 display-inline">
+                            <li class="breadcrumb-2-item">
+                                <a asp-area="" asp-controller="Home" asp-action="Index" asp-route-id="">Inicio</a>
+                            </li>
+
+                            <li class="breadcrumb-2-item">
+                                <a asp-area="Identity" asp-page="/Bandejas/Historico" asp-route-id="">Histórico</a>
+                            </li>
+                            @if (ConstHistorico.ConstTipoN1 == Model.TipoHistorico)
+                            {
+                                <li class="breadcrumb-2-item">
+                                    <a asp-area="Identity" asp-page="/Historico/Persona" asp-route-id="">Histórico por persona</a>
+                                </li>
+                            }
+                            else if (ConstHistorico.ConstTipoN2 == Model.TipoHistorico)
+                            {
+                                <li class="breadcrumb-2-item">
+                                    <a asp-area="Identity" asp-page="/Historico/Area" asp-route-id="">Histórico por área</a>
+                                </li>
+                            }
+                            <li class="breadcrumb-2-item active">
+                                <a asp-area="Identity" asp-page="/Historico/Bandejas" asp-route-infousuarioid="@Model.InfoUsuarioId" asp-route-tipohistorico="@Model.TipoHistorico">Bandejas</a>
+                            </li>
+                            <li class="breadcrumb-2-item active">
+                                Correspondencia
+                            </li>
+                        </ol>
+                    </div>
+                    <div class="col-12">
+                        <hr class="hr-thick mb-1 mt-1" />
+                        <h5>Revisión</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <input asp-for="InfoUsuarioId" class="sin-indicador" />
+                <div id="contiene-cargador">
+                    <div class="linear-activity loader d-none">
+                        <div class="indeterminate"></div>
+                    </div>
+                </div>
+                <div class="table-responsive  alto-minimo-bandejas">
+                    <table class="table table-hover table-sm border border-light border-bottom" id="historico-revision">
+                        <thead class="bg-light">
+                            <tr>
+                                <th scope="col">Folio</th>
+                                <th scope="col">Destinatario</th>
+                                <th scope="col">Asunto</th>
+                                <th scope="col">Fecha</th>
+                                <th scope="col"></th><!--Importancia-->
+                                <th scope="col"></th><!--Adjuntos-->
+                                <th scope="col"></th><!--Reenviado-->
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+                <div class="float-right" id="contenedor-paginacion">
+                    <ul id="paginacion-revision" class="pagination-sm"></ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts
+    {
+    <script type="text/javascript" src="~/js/Areas/Identity/Pages/Historico/Revision.min.js" asp-append-version="true"></script>
+}

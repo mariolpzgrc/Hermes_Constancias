@@ -1,0 +1,29 @@
+﻿#contiene-cargador {
+    display: block;
+}
+
+.sin-leer {
+    font-weight: bold;
+}
+#btn-x-search {
+    margin-left: -25px;
+    z-index: 100;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    padding-left: 2px;
+}
+/*---------------*/
+.form-control:disabled, .form-control[readonly] {
+    background-color: #ffffff;
+    opacity: 1;
+}
+
+input.form-control-sm,
+input.form-control-sm::-webkit-input-placeholder {
+    font-size: 0.875rem !important;
+    -webkit-user-select: text;
+    height: 25px;
+}
+.sin-margen {
+    margin: 0;
+}

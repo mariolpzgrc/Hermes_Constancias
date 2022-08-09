@@ -1,0 +1,90 @@
+body{
+    font-family: 'Gill Sans MT', 'Gill Sans', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 12pt;
+}
+table tr td{
+    outline-style: solid;
+    outline-width: 1px;
+}
+#docContenido {
+    max-width: 100%;
+}
+#docEncabezado {
+    text-align: right;
+}
+#docEncabezado > div {
+    margin-right: 2cm;
+}
+#docInfo {
+    margin-left: 4.7cm;
+}
+#docTurnado {
+    display: none;
+}
+/*#docRecibido {
+    display: none;
+}*/
+#docQr{
+    float: right;
+    clear: both;
+    margin-right: 2cm;
+}
+#imagenQr{
+    height: 5cm;
+    width: auto;
+}
+#ccpContainer{
+    float:left;
+    clear: both;
+}
+/*1*/
+#docParaNombre, #docParaInstitucion, #docParaConocimiento, #docDeNombre, #docDeArea, #docDeInstitucion {
+    font-size: 12pt
+}
+/*2*/
+#docAsunto, #docNumOficio, #docFecha, #docFirma, #docParaPuesto, #docDePuesto, #ccpContainer{
+    font-size: 8pt;
+    font-family: 'Gill Sans MT', 'Gill Sans', Calibri, 'Trebuchet MS', sans-serif;
+}
+/*3*/
+#docAreaSuperior {
+    font-size: 9pt;
+    font-weight: bold;
+}
+/*4*/
+#docArea {
+    font-size: 8pt;
+}
+/*Also 4*/
+#docLado {
+    float: left;
+    width: 4cm;
+    font-size: 8pt;
+    text-align: right;
+}
+/*5*/
+#docRegion {
+    font-size: 9pt;
+    font-weight: bold;
+}
+/*6*/
+#docCuerpo {
+    float: left;
+    width: 16.5cm;
+    margin-left: .7cm;
+    margin-right: 2cm;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 12pt;
+    text-align: justify;
+}
+
+#docFirma {
+    float: left;
+    clear: both;
+    width: 7.2cm;
+}
+
+/*#logoInstitucion {
+    height: 3.4cm;
+    width:auto;
+}*/

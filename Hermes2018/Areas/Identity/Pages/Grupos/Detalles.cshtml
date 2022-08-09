@@ -1,0 +1,82 @@
+﻿@page "/Grupos/Detalles/{id}"
+@model DetallesModel
+
+<div class="content-wrapper  pt-0">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 pt-0">
+                <vc:menu-delegar user="@User" leyenda="Grupos de:"></vc:menu-delegar>
+            </div>
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 pt-2">
+                        <ol class="breadcrumb-2 mt-0 mb-0 pb-1 pt-1 display-inline">
+                            <li class="breadcrumb-2-item">
+                                <a asp-area="" asp-controller="Home" asp-action="Index" asp-route-id="">Inicio</a>
+                            </li>
+                            <li class="breadcrumb-2-item">
+                                <a asp-area="Identity" asp-page="/Grupos/Index">Grupos</a>
+                            </li>
+                            <li class="breadcrumb-2-item active display-flex" aria-current="page">Detalle grupo</li>
+                        </ol>
+                    </div>
+                    <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 pt-2">
+                        <div class="float-right">
+                            @if (!Model.ActivaDelegacion || (Model.ActivaDelegacion && Model.BandejaPermiso == ConstDelegar.TipoN1))
+                            {
+                                <a asp-area="Identity" asp-page="/Grupos/Integrantes/Agregar" asp-route-grupoid="@Model.Detalle.GrupoId" class="btn btn-sm md-btn-raised md-btn-ripple bg-primary">Agregar integrante</a>
+
+                            }
+                            </div>
+                    </div>
+                    <div class="col-12">
+                        <hr class="hr-thick mb-1 mt-1" />
+                        <h5>Detalle grupo</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <dl>
+                    <dt>@Html.DisplayNameFor(model => model.Detalle.Nombre)</dt>
+                    <dd>@Html.DisplayFor(model => model.Detalle.Nombre)</dd>
+                </dl>
+                <div class="table-responsive responsive">
+                    <table class="table table-hover table-sm border-bottom">
+                        <thead class="bg-light">
+                            <tr>
+                                <th>#</th>
+                                <th scope="col">Usuario</th>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Correo</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody id="add-content-users">
+                            @for (int i = 0; i < Model.Detalle.Integrantes.Count; i++)
+                            {
+                                <tr>
+                                    <td>
+                                        <span>@(i + 1)</span>
+                                    </td>
+                                    <td>
+                                        <span>@Model.Detalle.Integrantes[i].Usuario</span>
+                                    </td>
+                                    <td>
+                                        <span>@Model.Detalle.Integrantes[i].Nombre</span>
+                                    </td>
+                                    <td>
+                                        <span>@Model.Detalle.Integrantes[i].Correo</span>
+                                    </td>
+                                    <td class="font-regular-12 text-center">
+                                        <a asp-area="Identity" asp-page="/Grupos/Integrantes/Borrar" asp-route-username="@Model.Detalle.Integrantes[i].Usuario" asp-route-grupoid="@Model.Detalle.GrupoId" class="pl-2 pr-2" title="Borrar"><i class="far fa-trash-alt font-gray"></i></a>
+                                    </td>
+                                </tr>
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

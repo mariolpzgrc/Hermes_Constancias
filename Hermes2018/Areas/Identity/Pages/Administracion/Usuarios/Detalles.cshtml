@@ -1,0 +1,203 @@
+﻿@page "/Administracion/Usuarios/Detalles/{id}/{tipo:int}"
+@model Hermes2018.Areas.Identity.Pages.Administracion.Usuarios.DetallesModel
+
+<div class="content-wrapper pt-1">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-6 col-sm-8 col-md-8 col-lg-8 col-xl-8 pt-2">
+
+                        <ol class="breadcrumb-2 mt-0 mb-0 pb-1 pt-1 display-inline">
+                            <li class="breadcrumb-2-item">
+                                <a asp-area="" asp-controller="Home" asp-action="Index" asp-route-id="">Inicio</a>
+                            </li>
+
+                            <li class="breadcrumb-2-item"><a asp-area="Identity" asp-page="/Administracion/Usuarios/Index" asp-route-id="">Usuarios</a></li>
+                            
+                            @if (Model.Tipo == ConstTipoArea.TipoN1)
+                            {
+                                <li class="breadcrumb-2-item"><a asp-area="Identity" asp-page="/Administracion/Usuarios/Area" asp-route-id="@Model.ViewModel.Detalles.AreaId" asp-route-tipo="@Model.Tipo">Área</a></li>
+                            }
+                            else
+                            {
+                                <li class="breadcrumb-2-item"><a asp-area="Identity" asp-page="/Administracion/Usuarios/Area" asp-route-id="@Model.ViewModel.Detalles.AreaId" asp-route-tipo="@Model.Tipo" asp-route-areapadre="@Model.Padre">Área</a></li>
+                            }
+
+                            <li class="breadcrumb-2-item active" aria-current="page">Detalle usuario</li>
+                        </ol>
+                        
+                    </div>
+                    <div class="col-6 col-sm-4 col-md-4 col-lg-4 col-xl-4 pt-2">
+                        @if (Model.ViewModel.Detalles.Activo && !Model.ViewModel.Detalles.EstaEnReasignacion && Model.ViewModel.InfoUsuarioClaims.UserName != Model.ViewModel.Detalles.NombreUsuario)
+                        {
+                        <div class="float-right">
+                            @if (Model.Tipo == ConstTipoArea.TipoN1)
+                            {
+                            <a class="btn btn-sm md-btn-raised md-btn-ripple bg-secondary" asp-area="Identity" asp-page="/Administracion/Usuarios/Area" asp-route-id="@Model.ViewModel.Detalles.AreaId" asp-route-tipo="@Model.Tipo">Regresar</a>
+                            }
+                            else
+                            {
+                                <a class="btn btn-sm md-btn-raised md-btn-ripple bg-secondary" asp-area="Identity" asp-page="/Administracion/Usuarios/Area" asp-route-id="@Model.ViewModel.Detalles.AreaId" asp-route-tipo="@Model.Tipo" asp-route-areapadre="@Model.Padre">Regresar</a>
+                            }
+                            <a asp-area="Identity" asp-page="/Administracion/Usuarios/Permiso" asp-route-id="@Model.ViewModel.Detalles.NombreUsuario" asp-route-tipo="@Model.Tipo" class="btn btn-sm md-btn-raised md-btn-ripple bg-secondary" title="Asignar permiso como Administrador del área">Permiso</a>
+                            <a asp-area="Identity" asp-page="/Administracion/Usuarios/Baja" asp-route-id="@Model.ViewModel.Detalles.NombreUsuario" asp-route-tipo="@Model.Tipo" class="btn btn-sm md-btn-raised md-btn-ripple bg-secondary">Dar de baja</a>
+                        </div>
+                        }
+                    </div>
+                    <div class="col-12">
+                        <hr class="hr-thick mb-1 mt-1" />
+                        <h5>Detalle del usuario </h5>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 ">
+                        <div class="form-group">
+                            <label class="col-form-label pb-0 font-weight-bold">@Html.DisplayNameFor(model => model.ViewModel.Detalles.Nombre)</label>
+                            <div class="">
+                                @Html.DisplayFor(model => model.ViewModel.Detalles.Nombre)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 ">
+                        <div class="form-group">
+                            <label class=" col-form-label pb-0 font-weight-bold">@Html.DisplayNameFor(model => model.ViewModel.Detalles.NombreUsuario)</label>
+                            <div class="">
+                                @Html.DisplayFor(model => model.ViewModel.Detalles.NombreUsuario)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 ">
+                        <div class="form-group">
+                            <label class=" col-form-label pb-0 font-weight-bold">@Html.DisplayNameFor(model => model.ViewModel.Detalles.Correo)</label>
+                            <div class="">
+                                @Html.DisplayFor(model => model.ViewModel.Detalles.Correo)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 ">
+                        <div class="form-group">
+                            <label class="col-form-label pb-0 font-weight-bold">@Html.DisplayNameFor(model => model.ViewModel.Detalles.RolNombre)</label>
+                            <div class="">
+                                @Html.DisplayFor(model => model.ViewModel.Detalles.RolNombre)
+                            </div>
+                        </div>
+                    </div>
+
+                    @if (Model.ViewModel.Detalles.Tipo == 2)
+                    {
+
+                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 ">
+                            <div class="form-group">
+                                <label class="col-form-label pb-0 font-weight-bold">@Html.DisplayNameFor(model => model.ViewModel.Detalles.PuestoNombre)</label>
+                                <div class="">
+                                    @Html.DisplayFor(model => model.ViewModel.Detalles.PuestoNombre)
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 ">
+                            <div class="form-group">
+                                <label class="col-form-label pb-0 font-weight-bold">@Html.DisplayNameFor(model => model.ViewModel.Detalles.EsUnico)</label>
+                                <div class="">
+                                    @Html.DisplayFor(model => model.ViewModel.Detalles.EsUnico)
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 ">
+                            <div class="form-group">
+                                <label class="col-form-label pb-0 font-weight-bold">@Html.DisplayNameFor(model => model.ViewModel.Detalles.AreaNombre)</label>
+                                <div class="">
+                                    @Html.DisplayFor(model => model.ViewModel.Detalles.AreaNombre)
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 ">
+                            <div class="form-group">
+                                <label class="col-form-label pb-0 font-weight-bold">@Html.DisplayNameFor(model => model.ViewModel.Detalles.Permiso)</label>
+                                <div class="">
+                                    @Html.DisplayFor(model => model.ViewModel.Detalles.Permiso)
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 ">
+                            <div class="form-group">
+                                <label class="col-form-label pb-0 font-weight-bold">@Html.DisplayNameFor(model => model.ViewModel.Detalles.EstaAprobado)</label>
+                                <div class="">
+                                    @Html.DisplayFor(model => model.ViewModel.Detalles.EstaAprobado)
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 ">
+                            <div class="form-group">
+                                <label class="col-form-label pb-0 font-weight-bold">@Html.DisplayNameFor(model => model.ViewModel.Detalles.FechaAprobado)</label>
+                                <div class="">
+                                    @Html.DisplayFor(model => model.ViewModel.Detalles.FechaAprobado)
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 ">
+                            <div class="form-group">
+                                <label class="col-form-label pb-0 font-weight-bold">@Html.DisplayNameFor(model => model.ViewModel.Detalles.Titular)</label>
+                                <div class="">
+                                    @Html.DisplayFor(model => model.ViewModel.Detalles.Titular)
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 ">
+                            <div class="form-group">
+                                <label class="col-form-label pb-0 font-weight-bold">@Html.DisplayNameFor(model => model.ViewModel.Detalles.Estado)</label>
+                                <div class="">
+                                    @Html.DisplayFor(model => model.ViewModel.Detalles.Estado)
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 ">
+                        <div class="form-group ">
+                            <label class=" col-form-label pb-0 font-weight-bold">@Html.DisplayNameFor(model => model.ViewModel.Detalles.AceptoTerminos)</label>
+                            <div class="">
+                                @Html.DisplayFor(model => model.ViewModel.Detalles.AceptoTerminos)
+                            </div>
+                        </div>
+                    </div>
+
+                    @if (Model.ViewModel.Detalles.AceptoTerminos == ConstTerminos.TerminosSi)
+                    {
+                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 ">
+                            <div class="form-group">
+                                <label class="col-form-label pb-0 font-weight-bold">@Html.DisplayNameFor(model => model.ViewModel.Detalles.FechaTerminos)</label>
+                                <div class="">
+                                    @Html.DisplayFor(model => model.ViewModel.Detalles.FechaTerminos)
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 ">
+                        <div class="form-group">
+                            <label class="col-form-label pb-0 font-weight-bold">@Html.DisplayNameFor(model => model.ViewModel.Detalles.FechaRegistro)</label>
+                            <div class="">
+                                @Html.DisplayFor(model => model.ViewModel.Detalles.FechaRegistro)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 ">
+                        <div class="form-group">
+                            <label class="col-form-label pb-0 font-weight-bold">@Html.DisplayNameFor(model => model.ViewModel.Detalles.FechaActualizacionRegistro)</label>
+                            <div class="">
+                                @Html.DisplayFor(model => model.ViewModel.Detalles.FechaActualizacionRegistro)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

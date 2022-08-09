@@ -1,0 +1,92 @@
+﻿@page "/Constancias/Solicitud/SolicitudConstancia/"
+@model Hermes2018.Areas.Identity.Pages.Constancias.SolicitudConstanciaModel
+@section Styles{
+    <link type="text/css" rel="stylesheet" href="~/lib/bootstrap-daterangepicker/daterangepicker.min.css" />
+    <link type="text/css" rel="stylesheet" href="~/css/linear-activity.min.css" />
+}
+
+@section ScriptsPrioritarios{
+    <script type="text/javascript" src="~/lib/moment/min/moment-with-locales.min.js"></script>
+    <script type="text/javascript" src="~/lib/bootstrap-daterangepicker/daterangepicker.min.js"></script>
+    <script type="text/javascript" src="~/lib/twbs-pagination/jquery.twbsPagination.min.js"></script>
+}
+
+<div class="content-wrapper pt-0">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 mb-1">
+                <vc:menu-delegar user="@User" leyenda="Solicitud de constancias de:"></vc:menu-delegar>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                        <select id="select-tipos-personal" class="form-control form-control-sm">
+                            <option value="">Seleccione el tipo de personal.</option>
+                        </select>
+                    </div>
+                    <dv class="col-xs-12 col-sm-6 col-lg-4 col-md-6 col-lg-6 col-xl-6">
+                        <div class="float-right">
+                            <button class="btn btn-primary md-btn md-btn-raised md-btn-ripple mr-1" onclick="validarConstancia()">Solicitar constancia</button>
+                            <a asp-area="Identity" asp-page="/Constancias/Solicitud/SolicitudMasiva" asp-route-id="" class="md-btn md-btn-raised md-btn-ripple bg-secondary mr-1">Solicitud masiva</a>
+                        </div>
+                    </dv>
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-xs-6 col-sm-6 col-lg-6 col-xl-6">
+                        <form method="post">
+                            <div class="list-group border-0" id="lista-tipo-Constancia">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-12">
+                <div class="card-body">
+                    <h5>Seguimiento de constancias</h5>
+                </div>
+                <div id="contiene-cargador">
+                    <div class="linear-activity loader d-none">
+                        <div class="indeterminate"></div>
+                    </div>
+                </div>
+                <div class="table-responsive alto-minimo-constancias" id="contiene-tabla">
+                    <table class="table table-hover table-sm mb-0" id="Constacias-historico">
+                        <thead class="bg-light">
+                            <tr>
+                                <th scope="col" id="folio">Folio</th>
+                                <th scope="col" id="tipoConstancia">Constancia</th>
+                                <th scope="col" id="estado">Estado</th>
+                                <th scope="col" id="fechaSolicitud">Fecha de solicitud</th>
+                                <!--<th scope="col" id="mensaje">Mensaje</th>-->
+                                <th scope="col" id="compromiso">Disponible a partir de</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="float-right" id="contenedor-paginacion">
+                    <ul id="paginacion-costancias" class="pagination-sm"></ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts
+    {
+    <script type="text/javascript" src="~/js/Areas/Identity/Pages/Constancias/Solicitud/SolicitudConstancia.js" asp-append-version="true"></script>
+}

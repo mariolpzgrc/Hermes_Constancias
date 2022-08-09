@@ -1,0 +1,6 @@
+#ctndr-encab label.lbl-de{width:57px}#ctndr-encab label.lbl-para{width:63px}#ctndr-encab label.lbl-cc{width:63px}#ctndr-encab label.lbl-asunto{width:60px}.contenido-alto{min-height:calc(90vh)}
+/*Froala Font Family*/
+.fr-view {
+    font-family: "Gill Sans MT", "Tahoma", "Verdana" !important;
+    /*font-size: 16px !important;*/
+}

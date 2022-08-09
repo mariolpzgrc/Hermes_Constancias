@@ -1,0 +1,75 @@
+﻿@{
+    ViewData["Title"] = "Hermes";
+}
+
+<!DOCTYPE html>
+
+<html lang="es-MX">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <meta name="keywords" content="universidad veracruzana, uv, hermes, oficio, institucional, correspondencia, seguimiento, sistema">
+    <meta name="description" content="Sistema de Administración y Seguimiento de Correspondencia (HERMES)">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <meta name="author" content="Universidad Veracruzana">
+    <meta name="application-name" content="Hermes">
+    <title>@ViewData["Title"]</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="~/favicon.ico">
+    <!-- Google Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto" />
+    <!-- Font Awesome Icons-->
+    <link type="text/css" rel="stylesheet" href="~/lib/font-awesome/css/all.min.css" />
+    <!-- Bootstrap core CSS -->
+    <link type="text/css" rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <!-- Custom styles for this template -->
+    <link type="text/css" rel="stylesheet" href="~/lib/bootstrap/dist/css/navbar.min.css" />
+    <!--  Sidebar -->
+    <link type="text/css" rel="stylesheet" href="~/lib/bootstrap/dist/css/template.sb-admin.min.css" />
+    <!--  Bootstrap Theme (?)-->
+    <link type="text/css" rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap-theme.min.css" />
+    <!--  CSS site -->
+    <link type="text/css" rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+
+    <!-- Bootstrap core JavaScript-->
+    <script type="text/javascript" src="~/lib/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="~/lib/jqueryui/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="~/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
+    <!-- Core plugin JavaScript-->
+    <script type="text/javascript" src="~/lib/bootstrap/dist/js/jquery.easing.min.js"></script>
+    <!-- Page level plugin JavaScript-->
+    <script type="text/javascript" src="~/lib/bootstrap/dist/js/chart.min.js"></script>
+</head>
+<body class="fixed-nav sticky-footer" id="page-top">
+    <div class="container-fluid">
+        <div class="row bg-primary">
+            <div class="col-12 p-0">
+                <div class="contiene-titulo-institucion">
+                    <span class="titulo-institucion">
+                        <cache enabled="true" expires-after="@TimeSpan.FromSeconds(5)">
+                            Universidad Veracruzana
+                        </cache>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top pleca" id="TopNav">
+        <!--
+        <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
+            <i class="fas fa-bars"></i>
+        </button>
+        -->
+        <a class="navbar-brand-new font-white" asp-area="" asp-controller="Home" asp-action="Index" asp-route-id="">
+            @*<b>HERMES</b>*@
+            <img src="~/images/HERMES_int.svg" class="img-fluid anchura-logo-interior" alt="Logo Hermes">
+            @*<small class="titulo-abajo-img">Sistema de Administración y Seguimiento de Correspondencia</small>*@
+        </a>
+    </nav>
+    <div>
+        @RenderBody()
+    </div>
+</body>
+</html>

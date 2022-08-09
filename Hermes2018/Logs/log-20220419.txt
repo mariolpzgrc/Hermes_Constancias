@@ -1,0 +1,1 @@
+2022-04-19T09:14:59.4670745-05:00 0HMH21M62E31S:00000006 [ERR] Timeout de solicitud de conexión (1675f794)

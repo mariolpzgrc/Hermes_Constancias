@@ -1,0 +1,162 @@
+﻿@model EstadoBandejasViewComponentModel
+
+@using Microsoft.AspNetCore.Http
+@using Hermes2018.Services
+
+@inject IHttpContextAccessor  _httpContextAccessor
+@inject IHerramientaService _herramientaService
+@inject IUsuarioClaimService _usuarioClaimService
+
+<ul class="sidebar navbar-nav navbar-sidenav" id="exampleAccordion">
+    <!--shadow-sidenav-->
+    <li class="nav-item @(_httpContextAccessor.HttpContext.Request.Cookies[".AspNet.Menu"] == "yes" ? "contenedor-btn-nuevo-contraido": "contenedor-btn-nuevo-sin-contraer")" data-toggle="tooltip" data-placement="right" title="Nuevo" id="nuevoDocLink">
+        <!--Nuevo documento-->
+        @if ((!Model.ActivaDelegacion || (Model.ActivaDelegacion && Model.BandejaPermiso == ConstDelegar.TipoN1)) && !Model.EstaEnReasignacion)
+        {
+            <a asp-area="Identity" asp-page="/Correspondencia/Crear" class="nav-link centered @(_httpContextAccessor.HttpContext.Request.Cookies[".AspNet.Menu"] == "yes" ? "btn-nuevo-contraido": "btn-nuevo-sin-contraer")" id="big-nav-link">
+                <i class="fas fa-plus"></i>
+                <span class="nav-link-text">&nbsp;NUEVO</span>
+            </a>
+        }
+        else
+        {
+            <div class="md-btn-ripple centered @(_httpContextAccessor.HttpContext.Request.Cookies[".AspNet.Menu"] == "yes" ? "btn-nuevo-contraido": "btn-nuevo-sin-contraer")" id="big-nav-link">
+                <i class="fas fa-plus"></i>
+                <span class="nav-link-text">&nbsp;NUEVO</span>
+            </div>
+        }
+    </li>
+    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Recibidos" id="recibidosLink">
+        <!--Recibidos-->
+        <a asp-area="Identity" asp-page="/Bandejas/Recibidos" class="nav-link bandeja-padding-03 @(ViewData["Bandeja"] != null? ViewData["Bandeja"].ToString() == "Recibidos" ? "active bold" : "" : "")">
+            <i class="fas fa-fw fa-inbox"></i>
+            <span class="nav-link-text">
+                Recibidos
+                @if (Model.Recibidos > 0)
+                {
+                    <span class="font-bold-11 pl-2 font-green">@Model.Recibidos</span>
+                }
+            </span>
+
+        </a>
+    </li>
+    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Enviados" id="enviadosLink">
+        <!--Enviados-->
+        <a asp-area="Identity" asp-page="/Bandejas/Enviados" class="nav-link bandeja-padding-03 @(ViewData["Bandeja"] != null? ViewData["Bandeja"].ToString() == "Enviados" ? "active bold" : "" : "")">
+            <i class="fas fa-share-square"></i>
+            <span class="nav-link-text">
+                Enviados
+            </span>
+        </a>
+    </li>
+    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Borradores" id="borradoresLink">
+        <!--Borradores-->
+        <a asp-area="Identity" asp-page="/Bandejas/Borradores" class="nav-link bandeja-padding-03 @(ViewData["Bandeja"] != null? ViewData["Bandeja"].ToString() == "Borradores" ? "active bold" : "" : "")">
+            <i class="fas fa-edit"></i>
+            <span class="nav-link-text">
+                Borradores
+                @if (Model.Borradores > 0)
+                {
+                    <span class="font-bold-11 pl-2 font-green">@Model.Borradores</span>
+                }
+            </span>
+        </a>
+    </li>
+    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Revisión" id="revisionLink">
+        <!--Revisión-->
+        <a asp-area="Identity" asp-page="/Bandejas/Revision" class="nav-link bandeja-padding-03 @(ViewData["Bandeja"] != null? ViewData["Bandeja"].ToString() == "Revision" ? "active bold" : "": "")">
+            <i class="fas fa-fw fa-check"></i>
+            <span class="nav-link-text">
+                Revisión
+                @if (Model.Revision > 0)
+                {
+                    <span class="font-bold-11 pl-2 font-green">@Model.Revision</span>
+                }
+            </span>
+        </a>
+    </li>
+    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Histórico" id="historicoLink">
+        <!--Historico-->
+        <a asp-area="Identity" asp-page="/Bandejas/Historico" class="nav-link bandeja-padding-03 @(ViewData["Bandeja"] != null? ViewData["Bandeja"].ToString() == "Historico" ? "active bold" : "": "")">
+            <i class="fas fa-history"></i>
+            <span class="nav-link-text">
+                Histórico
+                @if (Model.Historico > 0)
+                {
+                    <span class="font-bold-11 pl-2 font-green">@Model.Historico</span>
+                }
+            </span>
+        </a>
+    </li>
+
+
+    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Versión anterior" id="anteriorLink">
+        <!--Anterior-->
+        <form target="_blank" name="frmHermes" id="frmHermes" method="post" action="https://sapp.uv.mx/hermes/default2.aspx">
+            <input type="hidden" name="sLogin" value="@_herramientaService.Encriptar(_usuarioClaimService.ObtenerInfoUsuarioClaims(User).BandejaUsuario)">
+            <a class="nav-link bandeja-padding-03 btn-link" onclick="document.getElementById('frmHermes').submit()">
+                <i class="far fa-clone"></i>
+                <span class="nav-link-text">Versión anterior</span>
+            </a>
+        </form>
+        <!--Anterior-->
+        @*<a asp-area="Identity" asp-page="/Bandejas/Historico" class="a nav-link bandeja-padding-03">
+                <i class="fas fa-clone"></i>
+                <span class="nav-link-text">
+                    Versión anterior
+                </span>
+            </a>*@
+    </li>
+
+
+    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Carpetas" id="carpetasLink">
+        <a id="contenedor-carpeta-base" class="nav-link nav-link-collapse bandeja-padding-03  @(_httpContextAccessor.HttpContext.Request.Cookies[".AspNet.Carpeta"] == "yes" ? "collapsed": "")" data-toggle="collapse" href="#collapseCarpetas" data-parent="#exampleAccordion">
+            <i class="far fa-fw fa-folder-open"></i>
+            <span class="nav-link-text">
+                Carpetas
+            </span>
+        </a>
+
+        <ul class="sidenav-second-level collapse @(_httpContextAccessor.HttpContext.Request.Cookies[".AspNet.Carpeta"] == "yes" ? "": "show")" id="collapseCarpetas">
+            <li class="font-dark-gray pl-3">
+                <div id="contiene-arbol-carpetas" class="scroll-carpetas font-size-1">
+                    Carpetas
+                    <ul></ul>
+                </div>
+            </li>
+        </ul>
+    </li>
+
+    <!--<li class="divider"><hr /></li>
+
+    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Constancias" id="constanciasLink">
+        <a id="contenedor-constancias-base" class="nav-link nav-link-collapse bandeja-padding-03  @(_httpContextAccessor.HttpContext.Request.Cookies[".AspNet.Constancia"] == "yes" ? "collapsed": "")" data-toggle="collapse" href="#collapseConstancias" data-parent="#example">
+            <i class="far fa-file"></i>
+            <span class="nav-link-text">
+                Constancias
+            </span>
+        </a>
+        <ul class="sidenav-second-level collapse  @(_httpContextAccessor.HttpContext.Request.Cookies[".AspNet.Constancia"] == "yes" ? "": "show")" id="collapseConstancias">
+            <li class="font-dark-gray pl-3" title="Administración de constancias">
+                <div class="font-size-1">
+                    <a class="nav-link bandeja-padding-03" asp-area="Identity" asp-page="/Constancias/Administracion/AdministracionConstancia" asp-route-id="">
+                        <i class="fas fa-circle"></i>
+                        <span class="nav-link-text">
+                            Administrar Constancias
+                        </span>
+                    </a>
+                </div>
+            </li>
+            <li class="font-dark-gray pl-3" title="Solicitud de constancias">
+                <div class="font-size-1">
+                    <a class="nav-link bandeja-padding-03" asp-area="Identity" asp-page="/Constancias/Solicitud/SolicitudConstancia" asp-route-id="">
+                        <i class="fas fa-circle"></i>
+                        <span class="nav-link-text">
+                            Solicitud de Constancias
+                        </span>
+                    </a>
+                </div>
+            </li>
+        </ul>
+    </li>-->
+</ul>

@@ -1,0 +1,85 @@
+﻿@page "/Calendarios/Crear"
+@model CrearModel
+
+@section styles
+    {
+    <link type="text/css" rel="stylesheet" href="~/lib/fontawesome/css/font-awesome.min.css" />
+    <link type="text/css" rel="stylesheet" href="~/lib/bootstrap-datepicker-1.6.4-dist/css/bootstrap-datepicker.standalone.min.css" />
+    <link type="text/css" rel="stylesheet" href="~/css/Areas/Identity/Pages/Calendarios/Crear.min.css" asp-append-version="true" />
+}
+@section ScriptsPrioritarios
+    {
+    <script type="text/javascript" src="~/lib/moment/min/moment-with-locales.min.js"></script>
+    <script type="text/javascript" src="~/lib/bootstrap-datepicker-1.6.4-dist/js/bootstrap-datepicker.min.js"></script>
+    <script type="text/javascript" src="~/lib/bootstrap-datepicker-1.6.4-dist/locales/bootstrap-datepicker.es.min.js"></script>
+}
+
+<div class="content-wrapper ml-0 bg-white pt-0">
+    <div class="container-fluid" id="logged-in">
+        <div class="row">
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 pt-2">
+                        <ol class="breadcrumb-2 mt-0 mb-0 pb-1 pt-1 display-inline">
+                            <li class="breadcrumb-2-item">
+                                <a asp-area="" asp-controller="Home" asp-action="Index" asp-route-id="">Inicio</a>
+                            </li>
+
+                            <li class="breadcrumb-2-item">
+                                <a asp-area="Identity" asp-page="/Calendarios/Index">Calendarios</a>
+                            </li>
+                            <li class="breadcrumb-2-item active display-flex" aria-current="page">Nuevo calendario</li>
+                        </ol>
+                    </div>
+                    <div class="col-12">
+                        <hr class="hr-thick mb-1 mt-1" />
+                        <h5>Nuevo calendario</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <form method="post">
+                    <div class="row">
+                        <div class="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                            <div asp-validation-summary="ModelOnly" class="text-danger error-list-clean"></div>
+
+                            <div class="row">
+                                <div class="col-12 col-sm-12 col-md-12 col-lg-10 col-xl-10">
+                                    <div class="form-group">
+                                        <label asp-for="Crear.NombreCalendario" class="col-form-label font-bold-12"></label>
+                                        <div class="">
+                                            <input asp-for="Crear.NombreCalendario" class="form-control form-control-sm" placeholder="Calendario" />
+                                            <small class="form-text text-muted">El nombre del calendario debe ser como máximo de 50 caracteres.</small>
+                                            <span asp-validation-for="Crear.NombreCalendario" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                                    <div class="form-group">
+                                        <label asp-for="Crear.Anio" class="col-form-label font-bold-12"></label>
+                                        <div class="input-group date">
+                                            <input asp-for="Crear.Anio" class="form-control form-control-sm" placeholder="Seleccione el año" readonly="readonly" />
+                                        </div>
+                                        <span asp-validation-for="Crear.Anio" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                            <div class="pt-2">
+                                <a asp-area="Identity" asp-page="/Calendarios/Index" class="btn btn-light">Cancelar</a>
+                                <button type="submit" class="btn btn-primary">Guardar</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts
+    {
+    <partial name="_ValidationScriptsPartial" />
+    <script type="text/javascript" src="~/js/Areas/Identity/Pages/Calendarios/Crear.min.js" asp-append-version="true"></script>
+}

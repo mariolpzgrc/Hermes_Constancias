@@ -1,0 +1,137 @@
+﻿@page "/Usuarios"
+@model Hermes2018.Areas.Identity.Pages.Usuarios.IndexModel
+
+<div class="@string.Format("{0}", (ConstRol.RolUsuario.Contains(Model.Info.InfoUsuarioClaims.Rol))? "content-wrapper pt-1": "content-wrapper ml-0 bg-white pt-0")">
+    <div class="container-fluid" id="@string.Format("{0}", (ConstRol.RolUsuario.Contains(Model.Info.InfoUsuarioClaims.Rol))? string.Empty : "logged-in" )">
+        <div class="row">
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 pt-2">
+                        <ol class="breadcrumb-2 mt-0 mb-0 pb-1 pt-1 display-inline">
+                            <li class="breadcrumb-2-item">
+                                <a asp-area="" asp-controller="Home" asp-action="Index" asp-route-id="">Inicio</a>
+                            </li>
+
+                            <li class="breadcrumb-2-item active display-flex">
+                                Usuarios
+                            </li>
+                        </ol>
+                    </div>
+                    <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 pt-2">
+                        <div class="float-right">
+                            @if (ConstRol.RolAdmin.Contains(Model.Info.InfoUsuarioClaims.Rol))
+                            {
+                                <a asp-area="Identity" asp-page="/Usuarios/Buscar" class="btn btn-sm md-btn-raised md-btn-ripple bg-secondary" title="Buscar">Buscar</a>
+                                <a asp-area="Identity" asp-page="/Usuarios/Reasignar" class="btn btn-sm md-btn-raised md-btn-ripple bg-secondary" title="Reasignar a un usuario">Reasignar</a>
+                            }
+
+                            <a asp-area="Identity" asp-page="/Usuarios/Crear" class="btn btn-sm md-btn-raised md-btn-ripple bg-primary" id="send-new-ofi" title="Crear un nuevo usuario">Nuevo</a>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <hr class="hr-thick mb-1 mt-1" />
+                        @if (ConstRol.RolAdminGral.Contains(Model.Info.InfoUsuarioClaims.Rol))
+                        {
+                            <h5>Usuarios</h5>
+                        }
+                        else if (ConstRol.RolAdminRegional.Contains(Model.Info.InfoUsuarioClaims.Rol))
+                        {
+                            <h5>Desglose por región</h5>
+                        }
+                        else if (ConstRol.RolUsuario.Contains(Model.Info.InfoUsuarioClaims.Rol))
+                        {
+                            <h5>Desglose por áreas</h5>
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="row">
+                    @if (ConstRol.RolAdminGral.Contains(Model.Info.InfoUsuarioClaims.Rol))
+                    {
+                        <div class="col-12">
+                            <div class="table-responsive">
+                                <table class="table table-hover border-bottom responsive table-sm responsive">
+                                    <thead class="bg-light">
+                                        <tr>
+                                            <th scope="col">Módulo</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                Administradores
+                                            </td>
+                                            <td class="font-regular-12 text-center">
+                                                <a asp-area="Identity" asp-page="/Usuarios/Administradores" class="pl-2 pr-2" title="Entrar"><i class="fab fa-wpforms font-gray"></i></a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                Usuarios
+                                            </td>
+                                            <td class="font-regular-12 text-center">
+                                                <a asp-area="Identity" asp-page="/Usuarios/Desglose" class="pl-2 pr-2" title="Entrar"><i class="fab fa-wpforms font-gray"></i></a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    }
+                    else if (ConstRol.RolAdminRegional.Contains(Model.Info.InfoUsuarioClaims.Rol))
+                    {
+                        <div class="col-12">
+                            <div class="table-responsive">
+                                <table class="table table-hover table-sm border-bottom responsive">
+                                    <thead class="bg-light">
+                                        <tr>
+                                            <th scope="col">Región</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                @Model.Info.InfoUsuarioClaims.Region
+                                            </td>
+                                            <td class="font-regular-12 text-center">
+                                                <a asp-area="Identity" asp-page="/Usuarios/Region" asp-route-id="@Model.Info.InfoUsuarioClaims.RegionId" class="pl-2 pr-2" title="Entrar"><i class="fab fa-wpforms font-gray"></i></a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    }
+                    else if (ConstRol.RolUsuario.Contains(Model.Info.InfoUsuarioClaims.Rol))
+                    {
+                        <div class="col-12">
+                            <div class="table-responsive">
+                                <table class="table table-hover table-sm border-bottom responsive">
+                                    <thead class="bg-light">
+                                        <tr>
+                                            <th scope="col">Área</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                @Model.Info.InfoUsuarioClaims.Area
+                                            </td>
+                                            <td class="font-regular-12 text-center">
+                                                <a asp-area="Identity" asp-page="/Usuarios/Area" asp-route-id="@Model.Info.InfoUsuarioClaims.AreaId" class="pl-2 pr-2" title="Entrar"><i class="fab fa-wpforms font-gray"></i></a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

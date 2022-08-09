@@ -1,0 +1,235 @@
+﻿@page "/Account/Login"
+@model LoginModel
+@{
+    ViewData["Title"] = "Hermes";
+    Layout = null;
+}
+@using Hermes2018.Services
+@using Hermes2018.ViewModels
+@inject IConfiguracionService _configuracionService
+
+@{
+    var aviso = await _configuracionService.ObtenerAvisoInhabilAsync();
+}
+
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <meta name="keywords" content="universidad veracruzana, uv, hermes, oficio, institucional, correspondencia, seguimiento, sistema">
+    <meta name="description" content="Sistema de Administración y Seguimiento de Correspondencia (HERMES)">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <meta name="author" content="Universidad Veracruzana">
+    <meta name="application-name" content="Hermes">
+    <title>@ViewData["Title"]</title>
+
+    <!-- Favicon -->
+    <link type="image/x-icon" rel="icon" href="~/favicon.ico">
+    <!-- Google Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+    <!-- Font Awesome Icons-->
+    <link type="text/css" rel="stylesheet" href="~/lib/font-awesome/css/all.min.css" />
+    <!-- Bootstrap core CSS -->
+    <link type="text/css" rel="stylesheet" href="~/lib/twitter-bootstrap/css/bootstrap.min.css">
+    <!--  Material Buttons -->
+    <link type="text/css" rel="stylesheet" href="~/css/material-btns.min.css" />
+    <!--  Material Buttons v2 -->
+    <link type="text/css" rel="stylesheet" href="~/css/material-btns-v2.min.css" />
+    <!-- Site CSS -->
+    <link type="text/css" rel="stylesheet" href="~/css/site-login.min.css" asp-append-version="true" />
+    <!-- Material Design Bootstrap -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.7.7/css/mdb.min.css" rel="stylesheet">
+
+    <script type="text/javascript" src="~/lib/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="~/lib/popper.js/umd/popper.min.js"></script>
+    <script type="text/javascript" src="~/lib/twitter-bootstrap/js/bootstrap.min.js"></script>
+    <!--Control-->
+    <script type="text/javascript" src="~/js/site.js" asp-append-version="true"></script>
+
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="p-0 d-none d-sm-none col-sm-12 d-md-none col-md-12 d-lg-block col-lg-6" id="left">
+                <cache enabled="true" expires-after="@TimeSpan.FromSeconds(5)">
+                    <img class="img-fluid" src="@Url.Action("Portada", "Anexos")" />
+                </cache>
+            </div>
+            <div class="col-sm-12 col-md-12 col-lg-6 pr-0 pl-0" id="right">
+                <div class="uv-title">
+                    <cache enabled="true" expires-after="@TimeSpan.FromSeconds(5)">
+                        @await _configuracionService.ObtenerInstitucionAsync()
+                    </cache>
+                </div>
+                <br />
+                <br />
+                <div class="max-width-22-rem text-center mt-5 pt-5 margin-auto">
+                    <img src="~/images/login_hermes2.svg" class="img-fluid anchura-logo-login" alt="Logo Hermes">
+                    <h2 class="subtitulo-hermes">Sistema de Administración y Seguimiento de Correspondencia</h2>
+                </div>
+
+                <!--Insertar aqui para bloqueo-->
+                <div class="max-width-22-rem col-md-12 col-lg-12 mx-auto pt-2">
+                    <h3 class="card-title text-center mb-3 inicio-sesion">Inicio de sesión</h3>
+
+                    <form method="post" id="login-form" class="needs-validation" novalidate>
+                        <div class="md-form">
+                            <input asp-for="Input.UserName" class="form-control hermesuser sin-indicador" type="text" required>
+                            <label id="user-id-l" for="Input_UserName" class="user-label">Usuario</label>
+                            <span asp-validation-for="Input.UserName" class="text-danger"></span>
+                        </div>
+                        <div class="md-form">
+                            <input asp-for="Input.Password" class="form-control hermespassword sin-indicador" type="password" required>
+                            <label id="pass-id-l" for="Input_Password" class="pass-label">Contraseña</label>
+                            <span toggle="#Input_Password" class="fas fa-eye-slash field-icon toggle-password"></span>
+                            <span asp-validation-for="Input.Password" class="text-danger"></span>
+                        </div>
+
+                        <div asp-validation-summary="ModelOnly" class="form-control datos-incorrectos"></div>
+
+                        @if (ViewData["Estado"].ToString() == ConstEstadoUsuario.Estado3T)
+                        {
+                            <br />
+                            <p class="alert alert-warning mensaje-datos datos-existentes" id="successMessage">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Cerrar"></button>
+                                @ViewData["Warning"]<a asp-area="Identity" asp-page="/Account/Solicitud"> aquí.</a>
+                            </p>
+                        }
+
+                        <div class="form-group">
+                            <button type="submit" class="btn-material teal btn-material-ancho" id="btn-inicio-sesion"><span class="btn-inicio-sesion">Iniciar sesión</span></button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="max-width-22-rem col-md-12 col-lg-12 mx-auto pt-2">
+                    <a class="card text-center btn-inicio-sesion btn-outline-info font-bold-12" href="https://www.uv.mx/dgti/hermes/" target="_blank">Manual y Videotutorial</a>
+                </div>
+
+                @*<div class="col-md-12 col-lg-12 mx-auto pt-2 mx-auto bg-light-plus">
+                    <div class="card-body text-center">
+                        <a class="text-dark hover-bold mb-4 mt-1 subtitulo-hermes" href="https://www.uv.mx/dgti/hermes/" target="_blank">Manual y Videotutoriales</a>
+                    </div>
+                </div>*@
+
+                <!--<div class="max-width-22-rem col-md-12 col-lg-12 mx-auto pt-2">
+        <div class="card border-gray-card-1 mensaje-datos">
+            <div class="card-header p-0 text-center font-bold-11 bg-gray-card-1 mensaje-datos">
+                ATENCIÓN
+            </div>
+            <div class="card-body pt-1 pb-1">
+                <p class="card-text font-regular-11 text-justify">Esta versión de Hermes estará disponible a partir del 07 de mayo del 2022.</p>
+            </div>
+        </div>
+    </div>-->
+
+                <div class="col-md-12 col-lg-12 mt-4">
+                    <div class="max-width-30-rem material-padding text-center mx-auto">
+                        <!--Notificación-->
+                        @if (ViewData["Estado"].ToString() == ConstEstadoUsuario.Estado8T)
+                        {
+                            <br />
+                            <p class="alert alert-warning" id="successMessage">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Cerrar">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                @ViewData["WarningPass"]
+                            </p>
+                        }
+
+                        @if (ViewData["Estado"].ToString() == ConstEstadoUsuario.Estado4T || ViewData["Estado"].ToString() == ConstEstadoUsuario.Estado6T)
+                        {
+                            <br />
+                            <p class="alert alert-warning" id="successMessage">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Cerrar">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                @ViewData["WarningPass"]
+                            </p>
+                        }
+
+                        @if (Model.TempData.ContainsKey("MensajeRespuesta"))
+                        {
+                            <br />
+                            <p class="alert alert-warning">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Cerrar">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                @Model.MensajeRespuesta
+                            </p>
+                        }
+
+                        <div>
+                            <footer class="footer-login row">
+                                © @DateTime.Now.Year Universidad Veracruzana. Todos los derechos reservados.
+                            </footer>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <partial name="_ValidationScriptsPartial" />
+    @*<partial name="_CookieConsentPartial" />*@
+
+    <script type="text/javascript" src="~/js/login.min.js" asp-append-version="true"></script>
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.7.7/js/mdb.min.js"></script>
+
+    @if (Model.Hoy >= aviso.Inicio && Model.Hoy <= aviso.Termino)
+    {
+        <!--Modal-->
+        <div class="modal fade" id="avisoImportante" tabindex="-1" role="dialog" aria-labelledby="avisoImportanteTitulo" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h6 class="modal-title" id="avisoImportanteTitulo">Aviso importante</h6>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>@Html.Raw(aviso.Contenido)</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- -- --->
+        <script type="text/javascript">
+            (function () {              
+                $('#avisoImportante').modal('show');
+            })();    
+        </script>
+    }
+
+    @*<script>
+            $(document).ready(function () {
+                bootstrapRevealPassword();
+            });
+
+
+            // Plugin to integrate in your javascript file
+            function bootstrapRevealPassword() {
+                console.log("ss");
+                $(':password').closest('.input-group').addClass('position-relative').append('<span class="form-password-icon"><i class="fas fa-eye-slash field-icon"></i></span>');
+
+                $('.form-password-icon').on('click', function () {
+                    var clicks = $(this).data('clicks');
+                    if (clicks) {
+                        // odd clicks
+                        $(this).html('<i class="fas fa-eye-slash field-icon"></i>').prevAll(':input').attr('type', 'password');
+                    } else {
+                        // even clicks
+                        $(this).html('<i class="fas fa-eye-slash field-icon"></i>').prevAll(':input').attr('type', 'text');
+                    }
+                    $(this).data("clicks", !clicks);
+                });
+            }
+
+        </script>*@
+</body>
+</html>

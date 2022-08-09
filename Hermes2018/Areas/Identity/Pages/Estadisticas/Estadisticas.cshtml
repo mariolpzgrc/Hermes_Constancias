@@ -1,0 +1,123 @@
+﻿@page "/Estadisticas/Principal"
+@model EstadisticasModel
+
+@section styles
+    {
+    @*<link type="text/css" rel="stylesheet" href="~/lib/font-awesome/css/all.min.css" />*@
+    @*<link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" />*@
+    @*<link type="text/css" rel="stylesheet" href="~/lib/bootstrap-datepicker-1.6.4-dist/css/bootstrap-datepicker.standalone.min.css" />*@
+    <link type="text/css" rel="stylesheet" href="~/lib/Chart.js-2.8.0/dist/Chart.min.css" />
+    <link type="text/css" rel="stylesheet" href="~/lib/bootstrap-notify/animate.min.css" />
+}
+
+@section ScriptsPrioritarios
+    {
+    @*<script type="text/javascript" src="~/lib/bootstrap-datepicker-1.6.4-dist/js/bootstrap-datepicker.min.js"></script>
+    <script type="text/javascript" src="~/lib/bootstrap-datepicker-1.6.4-dist/locales/bootstrap-datepicker.es.min.js"></script>*@
+    <script type="text/javascript" src="~/lib/Chart.js-2.8.0/dist/Chart.min.js"></script>
+    <script type="text/javascript" src="~/lib/Chart.js-2.8.0/Plugins/chartjs-plugin-labels.js"></script>
+    <script type="text/javascript" src="~/lib/bootstrap-notify/bootstrap-notify.js"></script>
+}
+<div class="content-wrapper pt-0">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 pt-0">
+                <vc:menu-delegar user="@User" leyenda="Estadísticas de:"></vc:menu-delegar>
+            </div>
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 pt-0">
+                        <ol class="breadcrumb-2 mt-0 mb-0 pb-1 pt-1 display-inline">
+                            <li class="breadcrumb-2-item">
+                                <a asp-area="" asp-controller="Home" asp-action="Index" asp-route-id="">Inicio</a>
+                            </li>
+
+                            <li class="breadcrumb-2-item active display-flex" aria-current="page">Estadísticas</li>
+                        </ol>
+                    </div>
+                    <div class="col-12">
+                        <hr class="hr-thick mb-1 mt-1" />
+                        <h5>Estadísticas</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-9 col-lg-12 col-xl-10">
+                @*<h3>Estadísticas</h3>*@
+                <!-- Inician filtros-->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-group">
+                            <div class="checkbox">
+                                <label data-toggle="collapse" data-target="#collapseFiltros" aria-expanded="false" aria-controls="collapseFiltros">
+                                    <input type="checkbox" id="checkFiltrar" /> Fitrar información
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div id="collapseFiltros" aria-expanded="false" class="collapse row">
+                            <div class="col-12 col-sm-7 col-md-7 col-lg-7 col-xl-7">
+                                <div class="p-2">
+                                    <div class="form-group">
+                                        <label for="datePickerStart">Fecha inicio</label>
+                                        <div class="input-group">
+                                            <input type="date" class="form-control form-control-sm" id='datePickerStart' />
+                                            @*<div class="input-group-append ">
+                                                <span class="input-group-text bg-white "><i class="fa-lg far fa-calendar-alt font-gray"></i></span>
+                                            </div>*@
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-7 col-md-7 col-lg-7 col-xl-7">
+                                <div class="p-2">
+                                    <div class="form-group">
+                                        <label for="datePickerEnd">Fecha fin</label>
+                                        <div class="input-group">
+                                            <input type="date" class="form-control form-control-sm" id='datePickerEnd' />
+                                            @*<div class="input-group-append">
+                                                <span class="input-group-text bg-white"><i class="fa-lg far fa-calendar-alt  font-gray"></i></span>
+                                            </div>*@
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-7 col-md-7 col-lg-7 col-xl-7">
+                                <div class="p-2 ">
+                                    <div class="form-group">
+                                        <label for="selectCategories">Categorías personales</label>
+                                        <select id="categoriasSelect" data-default-value="all" class="form-control form-control-sm">
+                                            <option selected value="all">Todas las categorías</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-7 col-md-7 col-lg-7 col-xl-7">
+                                <div class="p-2 right-text">
+                                    <button class="md-btn md-btn-raised md-btn-ripple mr-1 d-inline-block" id="aplicarFiltroBoton">Aplicar filtros</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <!--Inician gráficas-->
+                        <div class="container">
+                            <h5>Correspondencia recibida</h5>
+                            <canvas id="graficoRecibidos">Este explorador no soporta Canvas, intenta en otro explorador</canvas>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="container">
+                            <h5>Correspondencia enviada</h5>
+                            <canvas id="graficoEnviados">Este explorador no soporta Canvas, intenta en otro explorador</canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts
+    {
+    <script type="text/javascript" src="~/js/Areas/Identity/Pages/Estadisticas/Estadisticas.js" asp-append-version="true"></script>
+}

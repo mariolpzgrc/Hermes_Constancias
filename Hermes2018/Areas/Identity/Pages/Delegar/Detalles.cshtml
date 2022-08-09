@@ -1,0 +1,83 @@
+﻿@page "/Delegar/Detalles/{id:int}"
+@model Hermes2018.Areas.Identity.Pages.Delegar.DetallesModel
+
+<div class="content-wrapper pt-0">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 pt-2">
+                        <ol class="breadcrumb-2 mt-0 mb-0 pb-1 pt-1 display-inline">
+                            <li class="breadcrumb-2-item">
+                                <a asp-area="" asp-controller="Home" asp-action="Index" asp-route-id="">Inicio</a>
+                            </li>
+
+                            <li class="breadcrumb-2-item">
+                                <a asp-area="Identity" asp-page="/Delegar/Index" asp-route-id="">Delegados</a>
+                            </li>
+                            <li class="breadcrumb-2-item active display-flex" aria-current="page">Detalle del delegado</li>
+                        </ol>
+                    </div>
+                    <div class="col-12">
+                        <hr class="hr-thick mb-1 mt-1" />
+                        <h5>Detalle del delegado</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <input asp-for="@Model.Detalles.DelegarId" class="sin-indicador" />
+                
+                <div class="row">
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
+                        <div class="form-group">
+                            <label class="col-form-label pb-0 font-weight-bold">@Html.DisplayNameFor(model => model.Detalles.Nombre)</label>
+                            <div class="">
+                                @Html.DisplayFor(model => model.Detalles.Nombre)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
+                        <div class="form-group">
+                            <label class="col-form-label pb-0 font-weight-bold">@Html.DisplayNameFor(model => model.Detalles.Usuario)</label>
+                            <div class="">
+                                @Html.DisplayFor(model => model.Detalles.Usuario)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
+                        <div class="form-group">
+                            <label class="col-form-label pb-0 font-weight-bold">@Html.DisplayNameFor(model => model.Detalles.Correo)</label>
+                            <div class="">
+                                @Html.DisplayFor(model => model.Detalles.Correo)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
+                        <div class="form-group">
+                            <label class="col-form-label pb-0 font-weight-bold">@Html.DisplayNameFor(model => model.Detalles.Tipo)</label>
+                            <div class="">
+                                @Html.DisplayFor(model => model.Detalles.Tipo)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
+                        <div class="form-group">
+                            <label class="col-form-label pb-0 font-weight-bold">@Html.DisplayNameFor(model => model.Detalles.Fecha_Registro)</label>
+                            <div class="">
+                                @Html.DisplayFor(model => model.Detalles.Fecha_Registro)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
+                        <div class="form-group">
+                            <label class="col-form-label pb-0 font-weight-bold">@Html.DisplayNameFor(model => model.Detalles.Fecha_Actualizacion)</label>
+                            <div class="">
+                                @Html.DisplayFor(model => model.Detalles.Fecha_Actualizacion)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

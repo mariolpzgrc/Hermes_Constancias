@@ -1,0 +1,109 @@
+﻿@page "/Administracion/Constancias/Usuarios/Editar"
+
+@model Hermes2018.Areas.Identity.Pages.Administracion.Constancias.Usuarios.EditarModel
+@section styles
+{
+    <link type="text/css" rel="stylesheet" href="~/lib/bootstrap4-toggle/css/bootstrap4-toggle.min.css">
+    <link type="text/css" rel="stylesheet" href="~/lib/jquery-bootstrap-touchspin/jquery.bootstrap-touchspin.min.css">
+    <link type="text/css" rel="stylesheet" href="~/lib/max-favilli-tagmanager/tagmanager.css" />
+}
+@section ScriptsPrioritarios
+{
+    <script type="text/javascript" src="~/lib/bootstrap4-toggle/js/bootstrap4-toggle.min.js"></script>
+    <script type="text/javascript" src="~/lib/jquery-bootstrap-touchspin/jquery.bootstrap-touchspin.min.js"></script>
+}
+
+<div class="content-wrapper ml-0 bg-white pt-0">
+    <div class="container-fluid" id="logged-in">
+        <div class="row">
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-10 col-sm-10 col-md-6 col-lg-6 col-xl-6 pt-2">
+                        <ol class="breadcrumb-2 mt-0 mb-0 pb-1 pt-1 display-inline">
+                            <li class="breadcrumb-2-item">
+                                <a asp-area="" asp-controller="Home" asp-action="Index" asp-route-id="">Inicio</a>
+                            </li>
+                            <li class="breadcrumb-2-item">
+                                <a asp-area="Identity" asp-page="/Administracion/Constancias/Index">Constancias</a>
+                            </li>
+                            <li class="breadcrumb-2-item active display-flex" aria-current="page">
+                                <a asp-area="Identity" asp-page="/Administracion/Constancias/CatalogoUsuarios">Usuarios</a>
+                            </li>
+                            <li class="breadcrumb-2-item active display-flex" aria-current="page">Editar</li>
+                        </ol>
+                    </div>
+                    <div class="col-2 col-sm-2 col-md-6 col-lg-6 col-xl-6 pt-2">
+                        <div class="float-right">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <hr class="hr-thick mb-1 mt-1" />
+                <span class="h5">Editar Usuario</span>
+            </div>
+            <div class="col-12">
+                <form method="post">
+                    <div class="text-danger error-list-clean"></div>
+
+                    <div class="row">
+                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
+                            <div class="form-group">
+                                <label class="col-form-label font-bold-12">Nombre del usuario:</label>
+                                <div class="">
+                                    @*<input type="text" class="form-control" placeholder="Buscar" />
+                                    <small class="form-text text-muted">Escriba el nombre de usuario.</small>
+                                    <span class="text-danger"></span>*@
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12">
+                            <div class="form-group">
+                                <label class="col-form-label font-bold-12">Nombre completo:</label>
+                                <div class="">
+                                    @*<input type="text" class="form-control" placeholder="Nombre completo" />
+                                    <span class="text-danger"></span>*@
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
+                            <div class="form-group">
+                                <label class="col-form-label font-bold-12">Correo Institucional:</label>
+                                <div class="">
+                                    @*<input type="text" class="form-control" placeholder="Correo Institucional" />
+                                    <span class="text-danger"></span>*@
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
+                            <div class="form-group">
+                                <label class="col-form-label font-bold-12"></label>
+                                <div class="">
+                                    <select id="select-tipo-rol" class="form-control">
+                                        <option value="">[Seleccione el tipo de Rol]</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
+                            <div class="form-group">
+                                <label class="col-form-label font-bold-12"></label>
+                                <div class="">
+                                    <select id="select-tipo-rol" class="form-control">
+                                        <option value="">[Seleccione la región]</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group mt-2">
+                        <div class="text-center">
+                            <a asp-area="Identity" asp-page="/Administracion/Constancias/CatalogoUsuarios" class="btn btn-light">Cancelar</a>
+                            <input type="submit" value="Guardar" class="btn btn-primary" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

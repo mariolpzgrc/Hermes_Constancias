@@ -1,0 +1,486 @@
+﻿@page "/Historico/Lectura/{infoUsuarioId:int}/{tipoHistorico:int}/{bandeja:int}/{envioId:int}/{tipoEnvio:int}"
+@model LecturaModel
+
+@section Styles
+    {
+    <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/codemirror.min.css">
+    <link type="text/css" rel="stylesheet" href="~/lib/froala-editor/css/froala_editor.pkgd.min.css" />
+    <link type="text/css" rel="stylesheet" href="~/lib/froala-editor/css/froala_style.min.css" />
+    <link type="text/css" rel="stylesheet" href="~/lib/froala-editor/css/plugins/image.min.css" />
+    <link type="text/css" rel="stylesheet" href="~/lib/froala-editor/css/themes/gray.min.css" />
+
+    <link type="text/css" rel="stylesheet" href="~/lib/easy-autocomplete/dist/easy-autocomplete.min.css" />
+    <link type="text/css" rel="stylesheet" href="~/lib/easy-autocomplete/dist/easy-autocomplete.themes.min.css" />
+    <link type="text/css" rel="stylesheet" href="~/lib/max-favilli-tagmanager/tagmanager.min.css" />
+    <link type="text/css" rel="stylesheet" href="~/css/Areas/Identity/Pages/Correspondencia/Lectura.min.css" asp-append-version="true" />
+}
+
+@section ScriptsPrioritarios
+    {
+    <script type="text/javascript" src="~/lib/max-favilli-tagmanager/tagmanager.js"></script>
+    @*<script type="text/javascript" src="~/lib/PDFMake/pdfmake.min.js"></script>*@
+    @*<script type="text/javascript" src="~/lib/PDFMake/vfs_fonts.js"></script>*@
+    <script type="text/javascript" src="~/lib/html2canvas/html2canvas.min.js"></script>
+    <script type="text/javascript" src="~/lib/bootstrap-notify/bootstrap-notify.min.js"></script>
+}
+
+<div class="content-wrapper pt-0">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12 col-md-9 col-lg-12 col-xl-10 pb-3">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="row">
+                            <div class="col-6 col-sm-6 col-md-8 col-lg-8 col-xl-8 pt-2">
+                                <ol class="breadcrumb-2 mt-0 mb-0 pb-1 pt-1 display-inline">
+                                    <li class="breadcrumb-2-item">
+                                        <a asp-area="" asp-controller="Home" asp-action="Index" asp-route-id="">Inicio</a>
+                                    </li>
+
+                                    <li class="breadcrumb-2-item">
+                                        <a asp-area="Identity" asp-page="/Bandejas/Historico" asp-route-id="">Histórico</a>
+                                    </li>
+
+                                    @if (ConstHistorico.ConstTipoN1 == Model.TipoHistorico)
+                                    {
+                                        <li class="breadcrumb-2-item">
+                                            <a asp-area="Identity" asp-page="/Historico/Persona" asp-route-id="">Histórico por persona</a>
+                                        </li>
+                                    }
+                                    else if (ConstHistorico.ConstTipoN2 == Model.TipoHistorico)
+                                    {
+                                        <li class="breadcrumb-2-item">
+                                            <a asp-area="Identity" asp-page="/Historico/Area" asp-route-id="">Histórico por área</a>
+                                        </li>
+                                    }
+
+                                    <li class="breadcrumb-2-item">
+                                        <a asp-area="Identity" asp-page="/Historico/Bandejas" asp-route-infoUsuarioId="@Model.InfoUsuarioId" asp-route-tipohistorico="@Model.TipoHistorico">Bandejas</a>
+                                    </li>
+
+                                    @if (Model.Bandeja == ConstBandejas.ConstTipoN1)
+                                    {
+                                        <li class="breadcrumb-2-item">
+                                            <a asp-area="Identity" asp-page="/Historico/Recibidos" asp-route-infousuarioid="@Model.InfoUsuarioId" asp-route-tipohistorico="@Model.TipoHistorico" asp-route-bandeja="@ConstBandejas.ConstTipoN1">Correspondencia</a>
+                                        </li>
+                                    }
+                                    else if (Model.Bandeja == ConstBandejas.ConstTipoN2)
+                                    {
+                                        <li class="breadcrumb-2-item">
+                                            <a asp-area="Identity" asp-page="/Historico/Enviados" asp-route-infousuarioid="@Model.InfoUsuarioId" asp-route-tipohistorico="@Model.TipoHistorico" asp-route-bandeja="@ConstBandejas.ConstTipoN2">Correspondencia</a>
+                                        </li>
+                                    }
+                                    else if (Model.Bandeja == ConstBandejas.ConstTipoN3)
+                                    {
+                                        <li class="breadcrumb-2-item">
+                                            <a asp-area="Identity" asp-page="/Historico/Enviados" asp-route-infousuarioid="@Model.InfoUsuarioId" asp-route-tipohistorico="@Model.TipoHistorico" asp-route-bandeja="@ConstBandejas.ConstTipoN3">Correspondencia</a>
+                                        </li>
+                                    }
+                                    else if (Model.Bandeja == ConstBandejas.ConstTipoN4)
+                                    {
+                                        <li class="breadcrumb-2-item">
+                                            <a asp-area="Identity" asp-page="/Historico/Enviados" asp-route-infousuarioid="@Model.InfoUsuarioId" asp-route-tipohistorico="@Model.TipoHistorico" asp-route-bandeja="@ConstBandejas.ConstTipoN4">Correspondencia</a>
+                                        </li>
+                                    }
+
+                                    <li class="breadcrumb-2-item active">
+                                        Lectura
+                                    </li>
+                                </ol>
+                            </div>
+                            <div class="col-6 col-sm-6 col-md-4 col-lg-4 col-xl-4 pt-2">
+                                <div class="float-right pt-0">
+                                    @if (Model.Documento.Actual_Visualizacion_Tipo == ConstVisualizacionEnvio.Envio)
+                                    {
+                                        <a asp-area="Identity" asp-page="/Historico/Enviados" asp-route-infousuarioid="@Model.InfoUsuarioId" asp-route-tipohistorico="@Model.TipoHistorico" asp-route-bandeja="@ConstBandejas.ConstTipoN2" class="md-btn md-btn-raised md-btn-ripple bg-secondary" title="Ver el listado de los documentos enviados">Ver listado</a>
+                                    }
+                                    else if (Model.Documento.Actual_Visualizacion_Tipo == ConstVisualizacionEnvio.Recepcion)
+                                    {
+                                        @if (Model.Documento.Actual_TipoEnvioId == ConstTipoEnvio.TipoEnvioN1 || Model.Documento.Actual_TipoEnvioId == ConstTipoEnvio.TipoEnvioN2)
+                                        {
+
+                                        }
+                                        else if (Model.Documento.Actual_TipoEnvioId == ConstTipoEnvio.TipoEnvioN4 && Model.Documento.Actual_UsuarioLee_Tipo == ConstTipoDestinatario.TipoDestinatarioN1)
+                                        {
+                                            <a asp-area="Identity" asp-page="/Historico/Lectura" asp-route-infousuarioid="@Model.InfoUsuarioId" asp-route-tipohistorico="@Model.TipoHistorico" asp-route-bandeja="@ConstBandejas.ConstTipoN2" asp-route-envioId="@Model.Documento.Origen_EnvioId" asp-route-tipoEnvio="@Model.Documento.Origen_TipoEnvioId" class="md-btn md-btn-raised md-btn-ripple bg-secondary mr-1" title="Ver el documento al que se le da respuesta">Ver origen</a>
+                                        }
+
+                                        <a asp-area="Identity" asp-page="/Historico/Recibidos" asp-route-infousuarioid="@Model.InfoUsuarioId" asp-route-tipohistorico="@Model.TipoHistorico" asp-route-bandeja="@ConstBandejas.ConstTipoN1" class="md-btn md-btn-raised md-btn-ripple bg-secondary" title="Ver el listado de los documentos recibidos">Ver listado</a>
+                                    }
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <hr class="hr-thick mb-1 mt-1" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="mt-0 mb-0">
+                            <input asp-for="InfoUsuarioId" class="sin-indicador" />
+                            <input asp-for="TipoHistorico" class="sin-indicador" />
+                            <input asp-for="Bandeja" class="sin-indicador" />
+                            <input asp-for="EnvioId" class="sin-indicador" />
+                            <input asp-for="TipoEnvio" class="sin-indicador" />
+                            <input asp-for="Usuario" class="sin-indicador" />
+
+                            <div class="form-group row font-dark-gray">
+                                <!-- Asunto -->
+                                <div class="col-sm-12">
+                                    <h5><b>@Model.Documento.Actual_AsuntoEnvio </b></h5>
+                                </div>
+                            </div>
+                            <div>
+                                <span class="d-none" id="envio_identifica">@Model.Documento.Actual_EnvioId</span>
+                                <span class="d-none" id="tipo_visualizacion">@Model.Documento.Actual_Visualizacion_Tipo</span>
+                                <span class="d-none" id="tipo_envio">@Model.Documento.Actual_TipoEnvioId</span>
+                                <span class="d-none" id="es_turnado">@Model.Documento.Actual_EsTurnado</span>
+                                <span class="d-none" id="existe_adjuntos">@Model.Documento.Actual_ExisteAdjuntos</span>
+                                <span class="d-none" id="tiene_respuesta">@Model.Documento.Actual_TieneRespuesta</span>
+                                <!-- Origen -->
+                                <span class="d-none" id="origen_envio_identifica">@Model.Documento.Origen_EnvioId</span>
+                                <span class="d-none" id="origen_tipo_envio">@Model.Documento.Origen_TipoEnvioId</span>
+                                <span class="d-none" id="origen_existe_adjuntos">@Model.Documento.Origen_ExisteAdjuntos</span>
+                            </div>
+                            <div class="form-group row font-dark-gray mb-0">
+                                <div class="col-sm-12">
+                                    <!-- Remitente -->
+                                    <label for="inputEmail"><b>De: </b></label>
+                                    <label id="labelfrom" data-toggle="tooltip" data-placement="top" title="@Model.Documento.Actual_UsuarioDe_Correo">
+                                        @Model.Documento.Actual_UsuarioDe_NombreCompleto
+                                    </label>
+                                    <hr class="mt-0 mb-1" />
+                                </div>
+                            </div>
+                            <div class="form-group row font-dark-gray mb-1">
+                                <div class="col-sm-12">
+                                    <!-- Para / Destinatario-->
+                                    <label for="inputEmail"><b>Para: </b></label>
+                                    <label class="display-inline-flex" id="containerMailsFor">@Model.Documento.Actual_UsuariosPara</label>
+                                    <hr class="mt-0 mb-1" />
+                                </div>
+                            </div>
+                            @if (!string.IsNullOrEmpty(Model.Documento.Actual_UsuariosCCP))
+                            {
+                                <div class="form-group row font-dark-gray mb-1">
+                                    <div class="col-sm-12">
+                                        <!-- CC: -->
+                                        <label><b>CC: </b></label>
+                                        <label class="display-inline-flex">@Model.Documento.Actual_UsuariosCCP</label>
+                                        <hr class="mt-0 mb-1" />
+                                    </div>
+                                </div>
+                            }
+                            @if (Model.Documento.Actual_ExisteAdjuntos)
+                            {
+                                <div class="form-group row font-dark-gray mb-1">
+                                    <div class="col-sm-12">
+                                        <!-- Adjunto-->
+                                        <label for="files" id="filesContainer"><b>Anexos: </b></label>
+                                        <hr class="mt-0 mb-0" />
+                                    </div>
+                                </div>
+                                <div class="form-group row font-dark-gray mt-2 mb-0">
+                                    <div id="containerArchivos" class="ml-3"></div>
+                                </div>
+                            }
+
+                            <!-- Solicitado respuesta-->
+                            @if (Model.Documento.Actual_TipoEnvioId == ConstTipoEnvio.TipoEnvioN1 || Model.Documento.Actual_TipoEnvioId == ConstTipoEnvio.TipoEnvioN2)
+                            {
+                                <div class="form-group row font-dark-gray mb-1">
+                                    <div class="col-xs-12 col-sm-7 col-md-7 col-lg-8 col-xl-8">
+
+                                        @if (Model.Documento.Actual_RequiereRespuesta)
+                                        {
+                                            <small><b class="font-blue"><i class="fas fa-reply"></i> Req. Respuesta:</b> El remitente <b>SI</b> ha solicitado una respuesta.</small><br />
+                                        }
+                                        else
+                                        {
+                                            <small><b class="font-blue"><i class="fas fa-reply"></i> Req. Respuesta:</b> El remitente <b>NO</b> ha solicitado una respuesta.</small><br />
+                                        }
+
+                                        @if (!string.IsNullOrEmpty(Model.Documento.Actual_Importancia))
+                                        {
+                                            <small title="Importancia"><b class="font-dark-gray"><i class="fas fa-exclamation-circle"></i> Importancia:</b> @Model.Documento.Actual_Importancia</small><br />
+                                        }
+
+                                        @if (!string.IsNullOrEmpty(Model.Documento.Actual_Visibilidad))
+                                        {
+                                            <small title="Visibilidad"><b class="font-dark-gray"><i class="fas fa-eye"></i> Visibilidad:</b> @Model.Documento.Actual_Visibilidad</small><br />
+                                        }
+
+                                        @if (!string.IsNullOrEmpty(Model.Documento.Actual_NombreCarpeta))
+                                        {
+                                            <small title="Carpeta"><b class="font-dark-gray"><i class="far fa-folder-open"></i> Carpeta: </b>@string.Format("{0}{1}", (string.IsNullOrEmpty(Model.Documento.Actual_NombreCarpetaPadre)) ? "" : Model.Documento.Actual_NombreCarpetaPadre + "/", Model.Documento.Actual_NombreCarpeta)</small>
+                                        }
+                                    </div>
+
+                                    <div class="col-xs-12 col-sm-5 col-md-5 col-lg-4 col-xl-4">
+                                        @if (Model.Documento.Actual_RequiereRespuesta && Model.Documento.Actual_Visualizacion_Tipo == ConstVisualizacionEnvio.Recepcion)
+                                        {
+                                            <small title="Fecha compromiso"><b class="font-green"><i class="fa fa-calendar" aria-hidden="true"></i> Fecha compromiso: </b>@Model.Documento.Actual_FechaCompromiso</small><br />
+                                        }
+                                        else if (Model.Documento.Actual_RequiereRespuesta && Model.Documento.Actual_Visualizacion_Tipo == ConstVisualizacionEnvio.Envio)
+                                        {
+                                            <small title="Fecha propuesta"><b class="font-green"><i class="fa fa-calendar" aria-hidden="true"></i> Fecha propuesta: </b>@Model.Documento.Actual_FechaPropuesta</small><br />
+                                        }
+
+                                        <small title="Estado"><b class="font-dark-gray"><i class="far fa-flag"></i> Estado:</b> @Model.Documento.Actual_Estado</small><br />
+
+                                        @if (!string.IsNullOrEmpty(Model.Documento.Origen_TipoDocumento))
+                                        {
+                                            <small title="Tipo de documento"><b class="font-dark-gray"><i class="fas fa-file"></i> Tipo de documento:</b> @Model.Documento.Origen_TipoDocumento</small><br />
+                                        }
+
+                                        @if (!string.IsNullOrEmpty(Model.Documento.Actual_TipoEnvio))
+                                        {
+                                            <small title="Tipo de envio"><b class="font-dark-gray"><i class="fas fa-share-square"></i> Tipo de envio:</b> @Model.Documento.Actual_TipoEnvio</small>
+                                        }
+                                    </div>
+                                </div>
+                            }
+                            else if (Model.Documento.Actual_TipoEnvioId == ConstTipoEnvio.TipoEnvioN3 || Model.Documento.Actual_TipoEnvioId == ConstTipoEnvio.TipoEnvioN4)
+                            {
+                                <div class="form-group row font-dark-gray mb-1">
+                                    <div class="col-xs-12 col-sm-7 col-md-7 col-lg-8 col-xl-8">
+                                        @if (!string.IsNullOrEmpty(Model.Documento.Actual_Visibilidad))
+                                        {
+                                            <small title="Visibilidad"><b class="font-dark-gray"><i class="fas fa-eye"></i> Visibilidad:</b> @Model.Documento.Actual_Visibilidad</small>
+                                        }
+                                    </div>
+                                    <div class="col-xs-12 col-sm-5 col-md-5 col-lg-4 col-xl-4">
+                                        <small title="Estado"><b class="font-dark-gray"><i class="far fa-flag"></i> Estado:</b> @Model.Documento.Actual_Estado</small>
+
+                                        @if (!string.IsNullOrEmpty(Model.Documento.Origen_TipoDocumento))
+                                        {
+                                            <br />
+                                            <small title="Tipo de documento"><b class="font-dark-gray"><i class="fas fa-file"></i> Tipo de documento:</b> @Model.Documento.Origen_TipoDocumento</small>
+                                        }
+                                        @if (!string.IsNullOrEmpty(Model.Documento.Actual_TipoEnvio))
+                                        {
+                                            <br />
+                                            <small title="Tipo de envio"><b class="font-dark-gray"><i class="fas fa-share-square"></i> Tipo de envio:</b> @Model.Documento.Actual_TipoEnvio</small>
+                                        }
+                                    </div>
+                                </div>
+                            }
+
+                            @if (Model.Documento.Actual_EsTurnado || Model.Documento.Actual_EsReenvio)
+                            {
+                                <div class="form-group row font-dark-gray mb-1">
+                                    <div class="col-12 font-regular-13 text-justify">
+                                        <small title="Indicaciones"><b class="font-dark-gray"> Indicaciones:</b> @Model.Documento.Actual_Indicaciones</small>
+                                    </div>
+                                </div>
+                            }
+
+                            @if (Model.Documento.Actual_Visualizacion_Tipo == ConstVisualizacionEnvio.Envio && (Model.Documento.Actual_TipoEnvioId == ConstTipoEnvio.TipoEnvioN1 || Model.Documento.Actual_TipoEnvioId == ConstTipoEnvio.TipoEnvioN3))
+                            {
+                                if (Model.Documento.Origen_UsuarioCreador != Model.Documento.Origen_UsuarioTitular)
+                                {
+                                    <div class="form-group row font-dark-gray mb-1">
+                                        <div class="col-12">
+                                            <small title="Usuario creador"><b class="font-dark-gray"><i class="fas fa-user-friends"></i></b> Documento enviado por <b>@Model.Documento.Origen_NombreCreador (@Model.Documento.Origen_UsuarioCreador)</b> en nombre de <b>@Model.Documento.Origen_NombreTitular (@Model.Documento.Origen_UsuarioTitular)</b>.</small>
+                                        </div>
+                                    </div>
+                                }
+                            }
+
+                            @if ((Model.Documento.Actual_EsTurnado || (Model.Documento.Actual_EsReenvio && Model.Documento.Actual_TipoEnvioId == ConstTipoEnvio.TipoEnvioN1)) && Model.Documento.Origen_ExisteAdjuntos)
+                            {
+                                <div class="form-group row font-dark-gray mt-2">
+                                    <div class="col-sm-12">
+                                        <!-- Adjunto-->
+                                        <label><b>Anexos originales: </b></label>
+                                        <hr class="mt-0 mb-1" />
+                                    </div>
+                                </div>
+                                <div class="form-group row font-dark-gray mt-0 mb-1">
+                                    <div id="containerArchivosOrigen" class="ml-3"></div>
+                                </div>
+                            }
+
+                            <div class="form-group row font-dark-gray">
+                                <div class="col-sm-12">
+                                    <!-- Folio -->
+                                    <label><b>Folio: <span id="folioInput">@Model.Documento.Origen_Folio</span></b></label>
+                                </div>
+                            </div>
+                            <!--PLANTILLA PARA EL DOCUMENTO-->
+                            <div class="">
+                                @*@if (Model.Documento.Actual_EsTurnado)
+                                    {
+                                        <div class="card-body p-0 pt-1">
+                                            <div class="card">
+                                                <div class="card-header font-dark-gray p-1 text-center">
+                                                    Documento turnado
+                                                </div>
+                                                <div class="card-body p-2">
+                                                    <p class="card-text text-justify font-dark-gray">@Model.Documento.Actual_Indicaciones</p>
+                                                </div>
+                                                @if (Model.Documento.Actual_ExisteAdjuntos)
+                                                {
+                                                    <div class="card-footer text-justify text-muted p-1" id="contenedorArchivosTurnar"></div>
+                                                }
+                                            </div>
+                                        </div>
+                                    }*@
+                                <div class="card-body p-0 pt-1">
+                                    <div class="row pt-0 mb-3">
+                                        <div class="col-sm-12 col-xl-12">
+                                            <div class="col align-text-right">
+                                                @*<img id="logoInstitucion" class="logo-simbolo" src="~/images/LIS_UV_COLOR_3.png" />*@
+                                                <cache enabled="true" expires-after="@TimeSpan.FromSeconds(5)">
+                                                    <img id="logoInstitucion" class="logo-simbolo" src="@Url.Action("Logo", "Anexos", new { id = Model.Documento.Origen_UsuarioDe_AreaId })" />
+                                                </cache>
+                                                <div>
+                                                    <p id="docAreaSuperior" class="m-0 font-bold-11">@Model.Documento.Origen_UsuarioDe_AreaPadreNombre</p>
+                                                    <p id="docArea" class="m-0 font-regular-10 mb-2">@Model.Documento.Origen_UsuarioDe_AreaNombre</p>
+
+                                                    <p id="docRegion" class="m-0 font-bold-10 mb-2">Región @Model.Documento.Origen_UsuarioDe_Region</p>
+
+                                                    <p id="docAsunto" class="m-0 font-regular-10">@Model.Documento.Origen_Asunto</p>
+                                                    @if (!string.IsNullOrEmpty(Model.Documento.Origen_NoInterno))
+                                                    {<p id="docNumOficio" class="m-0 font-regular-10"><span>OF. No. </span>@Model.Documento.Origen_NoInterno</p>}
+                                                    <p id="docFecha" class="m-0 font-regular-10">@Model.Documento.Origen_Fecha</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    @if ((Model.Documento.Actual_TipoEnvioId == ConstTipoEnvio.TipoEnvioN1 && Model.Documento.Actual_Visualizacion_Tipo == ConstVisualizacionEnvio.Recepcion) ||
+                                        (Model.Documento.Actual_TipoEnvioId == ConstTipoEnvio.TipoEnvioN2) ||
+                                        (Model.Documento.Actual_TipoEnvioId == ConstTipoEnvio.TipoEnvioN3) ||
+                                        (Model.Documento.Actual_TipoEnvioId == ConstTipoEnvio.TipoEnvioN4))
+                                    {
+                                        <div class="row pt-1 pb-3">
+                                            <div class="col-sm-3 col-md-3 col-lg-3 col-xl-2"></div>
+                                            <div class="col-sm-9 col-md-9 col-lg-9 col-xl-10">
+                                                <div class="float-left">
+                                                    <p id="docParaNombre" class="m-0 font-bold-11">@Model.Documento.Origen_UsuarioPara_NombreCompleto</p>
+                                                    <p id="docParaPuesto" class="m-0 font-bold-10">@Model.Documento.Origen_UsuarioPara_PuestoNombre</p>
+                                                    <p id="docParaArea" class="m-0 font-bold-10">@Model.Documento.Origen_UsuarioPara_AreaNombre</p>
+                                                    <p id="docParaInstitucion" class="m-0 font-bold-11">UNIVERSIDAD VERACRUZANA</p>
+                                                    @if (Model.Documento.Actual_UsuarioLee_Tipo == ConstTipoDestinatario.TipoDestinatarioN2)
+                                                    {
+                                                        <p id="docParaConocimiento" class="m-0 font-bold-11">"PARA SU CONOCIMIENTO"</p>
+                                                    }
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                    <div class="row pt-0">
+                                        <div class="col-sm-3 col-md-3 col-lg-3 col-xl-2 align-text-right pt-5">
+                                            <div class="mb-4">
+                                                <p class="font-regular-9 mb-0">Dirección</p>
+                                                <p id="docDeDireccion" class="font-regular-9 mb-0">@Model.Documento.Origen_UsuarioDe_Direccion</p>
+                                            </div>
+                                            <div class="mb-4">
+                                                <p class="font-regular-9 mb-0">Teléfono(s)</p>
+                                                <p id="docDeTelefono" class="font-regular-9 mb-0">@Model.Documento.Origen_UsuarioDe_Telefono</p>
+                                            </div>
+                                            <div class="mb-4">
+                                                <p class="font-regular-9 mb-0">Correo electrónico</p>
+                                                <p id="docDeCorreo" class="font-regular-9 mb-0">@Model.Documento.Origen_UsuarioDe_Correo</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-9 col-md-9 col-lg-9 col-xl-10  gray-theme">
+                                            <div id="docCuerpo" class="text-justify font-regular-12 fr-view">@Html.Raw(Model.Documento.Origen_Cuerpo)</div>
+                                            <div class="pt-5">
+                                                <p class="mt-2 mb-0 font-regular-12">A t e n t a m e n t e</p>
+                                                <p id="docFirmaInstitucion" class="font-weight-light font-regular-12">"Lis de Veracruz: Arte, Ciencia, Luz"</p>
+                                                <br />
+                                                <p id="docDeNombre" class="mb-0 font-regular-12">@Model.Documento.Origen_UsuarioDe_NombreCompleto</p>
+                                                <p id="docDePuesto" class="mb-0 font-regular-10">@Model.Documento.Origen_UsuarioDe_PuestoNombre</p>
+                                                <p id="docDeArea" class="mb-0 font-regular-10">@Model.Documento.Origen_UsuarioDe_AreaNombre</p>
+                                                <p id="docDeInstitucion" class="mb-0 font-regular-11">Universidad Veracruzana</p>
+                                            </div>
+                                            <div class="pt-5" id="ccpContainer">
+                                                @foreach (var ccp in Model.Documento.Origen_ListadoCcp)
+                                                {
+                                                    <p class="mb-0 font-regular-8">C.c.p. <span>@ccp</span></p>
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                @if (Model.Documento.Actual_Visualizacion_Tipo == ConstVisualizacionEnvio.Recepcion)
+                                {
+                                    <div class="card-footer p-1 text-center bg-white mt-2 border-bottom leyenda-recibidos">
+                                        <p id="docRecibido" class="m-0">RECIBIDO - @Model.Documento.Actual_Fecha</p>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-3 col-lg-12 col-xl-2 right-sidebar pt-3" id="division-derecha">
+                @if ((Model.Documento.Actual_TipoEnvioId == ConstTipoEnvio.TipoEnvioN1 || Model.Documento.Actual_TipoEnvioId == ConstTipoEnvio.TipoEnvioN2) &&
+                   Model.Documento.Actual_Visualizacion_Tipo == ConstVisualizacionEnvio.Envio)
+                {
+                    <div id="contenedor-destiantarios">
+                        <label class="col-form-label">Destinatarios:</label>
+                        <hr class="mt-0 mb-2" />
+                        <div class="align-text-left">
+                            @foreach (var destinatario in Model.ResumenDestinatarios)
+                            {
+                                if (destinatario.EstaLeido)
+                                {
+                                    <span class="font-dark-gray"><i title="Leído" class="far fa-envelope-open"></i></span>
+                                }
+                                else
+                                {
+                                    <span class="font-dark-gray"><i title="Sin leer" class="far fa-envelope"></i></span>
+                                }
+
+                                if (destinatario.TieneRespuesta)
+                                {
+                                    <vc:estado-envio estado="destinatario.EstadoEnvioId"></vc:estado-envio>
+                                    <a asp-area="Identity" asp-page="/Historico/Visualizacion" asp-route-infousuarioid="@Model.InfoUsuarioId" asp-route-tipoHistorico="@Model.TipoHistorico" asp-route-bandeja="@Model.Bandeja" asp-route-envioId="@destinatario.EnvioRespuestaId" asp-route-tipoEnvio="@destinatario.TipoEnvioRespuesta" asp-route-usuario="@Model.Usuario" class="font-regular-9">@destinatario.NombreCompleto</a>
+                                    <br />
+                                }
+                                else
+                                {
+                                    <vc:estado-envio estado="destinatario.EstadoEnvioId"></vc:estado-envio>
+                                    <span class="font-regular-9">@destinatario.NombreCompleto</span>
+                                    <br />
+                                }
+
+                                <div class="accordion" id="@string.Format("detalleCompromiso{0}", destinatario.RecepcionId)">
+                                    <div class="card border-0">
+                                        <div class="card-header p-0 bg-white border-0" id="@string.Format("encabezadoCompromiso{0}", destinatario.RecepcionId)">
+                                            <button class="btn btn-link collapsed font-regular-8 pl-2 pr-0 pt-0 pb-0" type="button" data-toggle="collapse" data-target="@string.Format("#collapseCompromiso{0}", destinatario.RecepcionId)" aria-expanded="true" aria-controls="@string.Format("collapseCompromiso{0}", destinatario.RecepcionId)">
+                                                <span class="font-dark-gray" title="Detalle de la fecha compromiso">
+                                                    <b class="font-green"><i class="fa fa-calendar"></i> Fecha compromiso: </b>@destinatario.FechaCompromiso
+                                                </span>
+                                            </button>
+                                        </div>
+                                        <div id="@string.Format("collapseCompromiso{0}", destinatario.RecepcionId)" class="collapse" aria-labelledby="@string.Format("encabezadoCompromiso{0}", destinatario.RecepcionId)" data-parent="@string.Format("#detalleCompromiso{0}", destinatario.RecepcionId)">
+                                            <div class="card-body pl-1 pr-0 pt-0 pb-0 border-0">
+                                                <ul class="list-unstyled m-0">
+                                                    @foreach (var compromiso in destinatario.FechasCompromiso)
+                                                    {
+                                                        <li class="pl-1 font-regular-8 @string.Format("{0}", compromiso.Estado == ConstCompromiso.EstadoN1 ? "bold": "")"><span title="Fecha compromiso">@compromiso.Fecha</span><span title="Fecha en la que se cambió la fecha compromiso"> (@compromiso.Registro)</span></li>
+                                                    }
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                }
+            </div>
+            <br />
+        </div>
+        <br />
+    </div>
+</div>
+
+@section scripts
+    {
+    <script type="text/javascript" src="~/js/Areas/Identity/Pages/Historico/Lectura.min.js" asp-append-version="true"></script>
+    @*<script type="text/javascript" src="~/js/descargarDocumento.js" asp-append-version="true"></script>*@
+}

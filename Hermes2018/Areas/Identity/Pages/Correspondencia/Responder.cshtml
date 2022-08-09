@@ -1,0 +1,396 @@
+﻿@page "/Correspondencia/Responder/{id}"
+@model ResponderModel
+
+@section styles
+    {
+    <link type="text/css" rel="stylesheet" href="~/lib/fontawesome/css/font-awesome.min.css" />
+    <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/codemirror.min.css" />
+    <link type="text/css" rel="stylesheet" href="~/lib/froala-editor/css/froala_editor.pkgd.min.css" />
+    <link type="text/css" rel="stylesheet" href="~/lib/froala-editor/css/froala_style.min.css" />
+    <link type="text/css" rel="stylesheet" href="~/lib/froala-editor/css/plugins/image.min.css" />
+    <link type="text/css" rel="stylesheet" href="~/lib/froala-editor/css/themes/gray.min.css" />
+
+    <link type="text/css" rel="stylesheet" href="~/lib/max-favilli-tagmanager/tagmanager.min.css" />
+    <link type="text/css" rel="stylesheet" href="~/lib/dropzone/dist/min/dropzone.min.css" />
+    <link type="text/css" rel="stylesheet" href="~/lib/tagify/css/tagify.css" />
+    <link type="text/css" rel="stylesheet" href="~/lib/bootstrap-notify/animate.min.css" />
+    <link type="text/css" rel="stylesheet" href="~/css/Areas/Identity/Pages/Correspondencia/Responder.css" asp-append-version="true" />
+}
+
+@section ScriptsPrioritarios
+    {
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/codemirror.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/mode/xml/xml.min.js"></script>
+    <script type="text/javascript" src="~/lib/froala-editor/js/froala_editor.pkgd.min.js"></script>
+    <script type="text/javascript" src="~/lib/froala-editor/js/languages/es.js"></script>
+    <script type="text/javascript" src="~/lib/froala-editor/js/plugins/image.min.js"></script>
+    <script type="text/javascript" src="~/lib/froala-editor/js/plugins/colors.min.js"></script>
+
+    <script type="text/javascript" src="~/lib/dropzone/dist/min/dropzone.min.js"></script>
+    <script type="text/javascript" src="~/lib/bootstrap-notify/bootstrap-notify.min.js"></script>
+    <script type="text/javascript" src="~/lib/tagify/js/tagify.min.js"></script>
+    <script type="text/javascript" src="https://svc.webspellchecker.net/spellcheck31/wscbundle/wscbundle.js"></script>
+    <script type="text/javascript" src="~/lib/froala-editor/js/plugins/font_size.min.js"></script>
+}
+
+<div class="content-wrapper pt-3">
+    <div class="container-fluid">
+        <form id="form-new-ofi" method="post">
+            <input asp-for="Responder.Origen_EnvioId" class="sin-indicador" />
+            <input asp-for="Responder.Origen_TipoEnvioId" class="sin-indicador" />
+            <input asp-for="Responder.Actual_EnvioId" class="sin-indicador" />
+            <input asp-for="Responder.Actual_TipoEnvioId" class="sin-indicador" />
+            <input asp-for="Responder.UsuarioParaId" class="sin-indicador" />
+            <input asp-for="Responder.NombreUsuarioPara" class="sin-indicador" />
+            <input asp-for="Responder.FolioSession" class="sin-indicador" />
+            <input asp-for="Responder.Extensiones" class="sin-indicador" />
+
+            <div class="row">
+                <div class="col-sm-12 col-md-9 col-lg-12 col-xl-10">
+                    <ol class="breadcrumb-2 mt-0 mb-0 display-inline">
+                        <li class="breadcrumb-2-item active display-flex font-weight-bold">
+                            RESPONDER
+                        </li>
+                        <li class="flex-right">
+                            @if (Model.Envio.Actual_TipoEnvioId == ConstTipoEnvio.TipoEnvioN3 && Model.Envio.Actual_UsuarioLee_Tipo == ConstTipoDestinatario.TipoDestinatarioN1)
+                            {
+                                <a target="_blank" asp-area="Identity" asp-page="/Correspondencia/Lectura" asp-route-id="@Model.Envio.Origen_EnvioId" asp-route-tipo="@Model.Envio.Origen_TipoEnvioId" class="md-btn md-btn-raised md-btn-ripple bg-secondary mr-1" title="Ver el documento origen">Ver origen</a>
+                            }
+                            <!--Metodo para gurdar un respuesta definitiva o parcial
+                            <button type="submit" class="md-btn md-btn-raised md-btn-ripple bg-secondary mr-1" id="savetest" asp-page-handler="borrador">Guardar</button>-->
+                            <button type="submit" class="md-btn md-btn-raised md-btn-ripple mr-1" id="send-new-ofi">Enviar</button>
+                            <a asp-area="Identity" asp-page="/Correspondencia/Lectura" asp-route-id="@Model.Envio.Actual_EnvioId" asp-route-tipo="@Model.Envio.Actual_TipoEnvioId" class="md-btn md-btn-raised md-btn-ripple bg-secondary">Cancelar</a>
+                        </li>
+                    </ol>
+                    <hr class="hr-thick mt-2 mb-2" />
+                    <div class="mt-2 mb-2" id="ctndr-encab">
+                        <div class="form-group row font-dark-gray">
+                            <div class="col-sm-12">
+                                <!-- De -->
+                                <label class="lbl-de" for="inputEmail"><b>De: </b></label>
+                                <label id="labelfrom" data-toggle="tooltip" data-placement="top" title="@Model.Envio.Actual_UsuarioDe_Correo">
+                                    @Model.Envio.Actual_UsuarioDe_NombreCompleto
+                                </label>
+                                <hr class="mt-0" />
+                            </div>
+                        </div>
+                        <div class="form-group row font-dark-gray mt-0 mb-0">
+                            <div class="col-sm-12">
+                                <!-- Para -->
+                                <label class="lbl-para" for="inputEmail"><b>Para: </b></label>
+                                <label class="labelfor" id="labelfor" data-toggle="tooltip" data-placement="top" title="@Model.Envio.Actual_UsuarioPara_Correo">
+                                    @Html.Raw(Model.Envio.Actual_UsuarioPara_NombreCompleto)
+                                </label>
+                                <input asp-for="Responder.Para" class="form-control sin-indicador" />
+                                <span asp-validation-for="Responder.Para" class="text-danger"></span>
+                                <hr class="mt-0" />
+                            </div>
+                        </div>
+                        <div class="form-group row font-dark-gray mb-0 mt-0">
+                            <span id="containerMailsCCP" class="ml-3"></span>
+                            <span class="span-fill col-sm-12 mt-1" id="tagsEmailCCP">
+                                <!-- CC: -->
+                                @if (string.IsNullOrEmpty(Model.Responder.CCP))
+                                {
+                                    <label class="lbl-cc"><b>CC: </b></label>
+                                    <label class="label-fill">
+                                        <input id="form-autocomplete-ccp" type="text" placeholder="Destinatario" />
+                                        <input asp-for="Responder.CCP" value="@Model.Responder.CCP" class="form-control" />
+                                        <span asp-validation-for="Responder.CCP" class="text-danger"></span>
+                                    </label>
+                                }
+                                else
+                                {
+                                    <label class="lbl-cc"><b>CC: </b></label>
+                                    <label class="label-fill">
+                                        <input id="form-autocomplete-ccp" type="text" placeholder="Destinatario" />
+                                        <input asp-for="Responder.CCP" class="form-control" />
+                                        <span asp-validation-for="Responder.CCP" class="text-danger"></span>
+                                    </label>
+                                }
+                            </span>
+                        </div>
+                        <div class="form-group row font-dark-gray mb-0 mt-2" id="ctndr-asunto">
+                            <div class="span-fill col-sm-12 mt-1">
+                                <!-- Asunto -->
+                                <label class="lbl-asunto"><b>Asunto: </b></label>
+                                <label class="label-fill">
+                                    <input asp-for="Responder.Asunto" class="form-control form-input sin-indicador" />
+                                    <span asp-validation-for="Responder.Asunto" class="text-danger"></span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group row font-dark-gray mt-1 mb-0">
+                            <div class="col-sm-12">
+                                <!-- Archivos adjuntos -->
+                                <label><b>Anexos: </b></label>
+                                <div class="dropzone" id="uploader"></div>
+                                <div><small>El tamaño máximo de los archivos adjuntos es de 25MB</small></div>
+                                <input asp-for="Responder.Anexos" />
+                            </div>
+                        </div>
+
+                        @*@if (Model.Envio.Actual_EsTurnado)
+                            {
+                                <div class="form-group row font-dark-gray mb-0 mt-4">
+                                    <div class="col-sm-12">
+                                        <div class="card text-center">
+                                            <div class="card-header font-dark-gray p-1">
+                                                Indicaciones
+                                            </div>
+                                            <div class="card-body p-2">
+                                                <p class="card-text text-justify font-dark-gray">@Model.Envio.Actual_Indicaciones</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }*@
+
+                        <div class="form-group row font-dark-gray mb-3">
+                            <div class="col-sm-5 col-lg-4">
+                                <!-- Folio -->
+                                <small>Folio: </small>
+                                <input asp-for="Responder.Folio" id="folioInput" class="form-control form-control-sm" readonly>
+                            </div>
+                            <div class="col-sm-2 col-lg-4 right-text"></div>
+                            <div class="col-sm-5 col-lg-4 right-text">
+                                <span>
+                                    <small>Plantilla:</small>
+                                </span>
+                                <select asp-items="Model.Responder.PlantillasSelectList" id="plantillaSelect" class="form-control form-control-sm">
+                                    <option selected value="">Seleccione una plantilla</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div>
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="redactar-tab" data-toggle="tab" href="#redactar" role="tab" aria-controls="redactar" aria-selected="true">Redactar</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="original-tab" data-toggle="tab" href="#original" role="tab" aria-controls="original" aria-selected="false">Original</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane fade show active" id="redactar" role="tabpanel" aria-labelledby="redactar-tab">
+                                <!--PLANTILLA PARA EL DOCUMENTO-->
+                                <div class="card mb-3">
+                                    <div class="card-body">
+                                        <div class="row pt-0">
+                                            <div class="col-12 pr-0">
+                                                <div class="col align-text-right">
+                                                    @*<img class="logo-simbolo" src="~/images/LIS_UV_COLOR_3.png" />*@
+                                                    <cache enabled="true" expires-after="@TimeSpan.FromSeconds(5)">
+                                                        <img class="logo-simbolo" src="@Url.Action("Logo", "Anexos", new { id = Model.Envio.Actual_UsuarioDe_AreaId })" />
+                                                    </cache>
+                                                    <div>
+                                                        <p class="auto-hide-mobile mb-0 font-bold-11">@Model.Envio.Actual_UsuarioDe_AreaPadreNombre</p>
+                                                        <p class="auto-hide-mobile mb-0 font-regular-10 mb-2">@Model.Envio.Actual_UsuarioDe_AreaNombre</p>
+
+                                                        <p id="leyenda-tipo-documento" class="auto-hide-mobile mb-0 font-bold-12"></p>
+                                                        <input asp-for="Responder.NoInterno" class="form-control form-control-sm font-regular-10 no-oficio" id="NoOficio" placeholder="No." />
+                                                        <p class="auto-hide-mobile mb-0 font-regular-10">@Model.Responder.Fecha</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row pt-1 pb-3">
+                                            <div class="col-sm-3 col-md-3 col-lg-3 col-xl-2"></div>
+                                            <div class="col-sm-12 col-md-12 col-lg-9 col-xl-10">
+                                                <div class="float-left">
+                                                    <p class="m-0 font-bold-11">@Model.Envio.Actual_UsuarioPara_NombreCompleto.ToUpper()</p>
+                                                    <p class="m-0 font-bold-10">@Model.Envio.Actual_UsuarioPara_PuestoNombre.ToUpper()</p>
+                                                    <p class="m-0 font-bold-10">@Model.Envio.Actual_UsuarioPara_AreaNombre.ToUpper()</p>
+                                                    <p class="m-0 font-bold-11">UNIVERSIDAD VERACRUZANA</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row pt-0 pb-0">
+                                            <div class="col-sm-3 col-md-3 col-lg-3 col-xl-2 align-text-right auto-hide-mobile pt-5">
+                                                <div class="mb-4">
+                                                    <p class="font-regular-9 mb-0">Dirección</p>
+                                                    <p class="font-regular-9 mb-0">@Model.Envio.Actual_UsuarioDe_Direccion</p>
+                                                </div>
+                                                <div class="mb-4">
+                                                    <p class="font-regular-9 mb-0">Teléfono(s)</p>
+                                                    <p class="font-regular-9 mb-0">@Model.Envio.Actual_UsuarioDe_Telefono</p>
+                                                </div>
+                                                <div class="mb-4">
+                                                    <p class="font-regular-9 mb-0">Correo electrónico</p>
+                                                    <p class="font-regular-9 mb-0">@Model.Envio.Actual_UsuarioDe_Correo</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12 col-md-12 col-lg-9 col-xl-10">
+                                                <div class="">
+                                                    <span asp-validation-for="Responder.Cuerpo" class="text-danger"></span>
+                                                    <textarea asp-for="Responder.Cuerpo" class="font-regular-12 sin-indicador"></textarea>                                                  
+                                                </div>
+                                                <div class="auto-hide-mobile pt-5">
+                                                    <p class="mt-2 mb-0 font-regular-12">A t e n t a m e n t e</p>
+                                                    <p class="font-weight-light font-regular-12">"Lis de Veracruz: Arte, Ciencia, Luz"</p>
+                                                    <br />
+                                                    <p class="mb-0 font-regular-12">@Model.Envio.Actual_UsuarioDe_NombreCompleto</p>
+                                                    <p class="mb-0 font-regular-10">@Model.Envio.Actual_UsuarioDe_PuestoNombre</p>
+                                                    <p class="mb-0 font-regular-10">@Model.Envio.Actual_UsuarioDe_AreaNombre</p>
+                                                    <p class="mb-0 font-regular-11">Universidad Veracruzana</p>
+                                                </div>
+                                                <br />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="original" role="tabpanel" aria-labelledby="original-tab">
+                                <!--PLANTILLA PARA EL DOCUMENTO-->
+                                <div class="card mb-3">
+                                     <span class="d-none" id="existe_adjuntos">@Model.Envio.ExisteAdjuntos</span>
+                                    <span class="d-none" id="folio">@Model.Envio.Origen_Folio</span>
+                                    <span class="d-none" id="envio_identifica">@Model.Envio.EnvioIdOrigenAdjunto</span>
+                                    <span class="d-none" id="tipo_envio_identifica">@Model.Envio.Origen_TipoEnvioId</span>
+                                     @if (Model.Envio.ExisteAdjuntos)
+                                     {
+                                        <div class="card-body border-top-0 border-left-0 border-right-0 border-bottom p-1 border-dotted">
+                                            <div class="form-group row font-dark-gray mt-2">
+                                                <div class="col-sm-12">
+                                                    <!-- Adjunto-->
+                                                    <label><b>Anexos originales: </b></label>
+                                                    <hr class="mt-0 mb-1" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group row font-dark-gray mt-0 mb-1">
+                                                <div id="containerArchivosOrigen" class="ml-3"></div>
+                                            </div>
+                                        </div>
+                                    }
+                                    <div class="card-body p-0 pt-1">
+                                        <div class="row pt-0  mb-3">
+                                            <div class="col-sm-12 col-xl-12">
+                                                <div class="col align-text-right">
+                                                    @*<img class="logo-simbolo" src="~/images/LIS_UV_COLOR_3.png" />*@
+                                                    <cache enabled="true" expires-after="@TimeSpan.FromSeconds(5)">
+                                                        <img class="logo-simbolo" src="@Url.Action("Logo", "Anexos", new { id = Model.Envio.Origen_UsuarioDe_AreaId })" />
+                                                    </cache>
+                                                    <div>
+                                                        <p class="m-0 font-bold-11">@Model.Envio.Origen_UsuarioDe_AreaPadreNombre</p>
+                                                        <p class="m-0 font-regular-10 mb-1">@Model.Envio.Origen_UsuarioDe_AreaNombre</p>
+
+                                                        <p class="m-0 font-bold-10 mb-2">Region @Model.Envio.Origen_UsuarioDe_Region</p>
+
+                                                        @if (Model.Envio.Origen_TipoDocumento == ConstTipoDocumento.TipoDocumentoT2)
+                                                        {
+                                                            <p id="leyenda-tipo-documento" class="auto-hide-mobile mb-0 font-bold-12">@Model.Envio.Origen_TipoDocumento</p>
+                                                        }
+                                                        <p class="m-0 font-regular-10">@Model.Envio.Origen_Asunto</p>
+
+                                                        @if (!string.IsNullOrEmpty(Model.Envio.Origen_NoInterno))
+                                                        {
+                                                            <p class="m-0 font-regular-10"><span>OF. No. </span>@Model.Envio.Origen_NoInterno</p>
+                                                        }
+                                                        <p class="m-0 font-regular-10">@Model.Envio.Origen_Fecha</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row pt-1 pb-3">
+                                            <div class="col-sm-3 col-md-3 col-lg-3 col-xl-2"></div>
+                                            <div class="col-sm-9 col-md-9 col-lg-9 col-xl-10">
+                                                <div class="float-left">
+                                                    <p class="m-0 font-bold-11">@Model.Envio.Origen_UsuarioPara_NombreCompleto.ToUpper()</p>
+                                                    <p class="m-0 font-bold-10">@Model.Envio.Origen_UsuarioPara_PuestoNombre.ToUpper()</p>
+                                                    <p class="m-0 font-bold-10">@Model.Envio.Origen_UsuarioPara_AreaNombre.ToUpper()</p>
+                                                    <p class="m-0 font-bold-11">UNIVERSIDAD VERACRUZANA</p>
+                                                    @if (Model.Envio.Origen_UsuarioPara_Tipo == ConstTipoDestinatario.TipoDestinatarioN2)
+                                                    {
+                                                        <p class="m-0 font-bold-11">"PARA SU CONOCIMIENTO"</p>
+                                                    }
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row pt-0">
+                                            <div class="col-sm-3 col-md-3 col-lg-3 col-xl-2 align-text-right pt-5">
+                                                <div class="mb-4">
+                                                    <p class="font-regular-9 mb-0">Dirección</p>
+                                                    <p class="font-regular-9 mb-0">@Model.Envio.Origen_UsuarioDe_Direccion</p>
+                                                </div>
+                                                <div class="mb-4">
+                                                    <p class="font-regular-9 mb-0">Teléfono(s)</p>
+                                                    <p class="font-regular-9 mb-0">@Model.Envio.Origen_UsuarioDe_Telefono</p>
+                                                </div>
+                                                <div class="mb-4">
+                                                    <p class="font-regular-9 mb-0">Correo electrónico</p>
+                                                    <p class="font-regular-9 mb-0">@Model.Envio.Origen_UsuarioDe_Correo</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-9 col-md-9 col-lg-9 col-xl-10 gray-theme">
+                                                <div class="text-justify font-regular-12 fr-view">
+                                                    @Html.Raw(Model.Envio.Origen_Cuerpo)
+                                                </div>
+                                                <div class="pt-5">
+                                                    <p class="mt-2 mb-0 font-regular-12">A t e n t a m e n t e</p>
+                                                    <p class="font-weight-light font-regular-12">"Lis de Veracruz: Arte, Ciencia, Luz"</p>
+                                                    <br />
+                                                    <p class="mb-0 font-regular-12">@Model.Envio.Origen_UsuarioDe_NombreCompleto</p>
+                                                    <p class="mb-0 font-regular-10">@Model.Envio.Origen_UsuarioDe_PuestoNombre</p>
+                                                    <p class="mb-0 font-regular-10">@Model.Envio.Origen_UsuarioDe_AreaNombre</p>
+                                                    <p class="mb-0 font-regular-11">Universidad Veracruzana</p>
+                                                </div>
+                                                <div class="pt-5" id="ccpContainer">
+                                                    @foreach (var ccp in Model.Envio.Origen_ListadoCcp)
+                                                    {
+                                                        <p class="mb-0 font-regular-8">C.c.p. <span>@ccp</span></p>
+                                                    }
+                                                </div>
+                                                <br />
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-3 col-lg-12 col-xl-2 right-sidebar">
+                    <div class="mt-2" id="ButtonsOficio">
+                        <button type="button" class="md-btn md-btn-raised md-btn-ripple bg-secondary" id="SaveAsTemplate">Guardar como plantilla</button>
+                        <hr class="mt-2 mb-0" />
+                    </div>
+                    <div>
+                        <span id="msg-validate-textarea" class="text-danger"></span>
+                    </div>
+                    <div>
+                        <!-- Tags / Categorías -->
+                        <label for="asunto" class="col-form-label">Categorías:</label>
+                        <div class="align-text-left mt-0 pl-4" id="tagsSaver"></div>
+                        <button type="button" class="md-btn md-btn-raised md-btn-ripple bg-secondary mt-2" id="buttonTag">Agregar categoría</button>
+                        <input asp-for="Responder.Categorias" class="form-control tm-input-tags" />
+                        <hr class="mb-0">
+                    </div>
+                    <br />
+                    <div class="">
+                        <small>Tipo de documento</small>
+                        <select asp-for="Responder.TipoId" asp-items="Model.Responder.TiposSelectList" class="form-control form-control-sm sin-indicador"></select>
+                    </div>
+                    <br />
+                    <div class="">
+                        <small>Visibilidad</small>
+                        <select asp-for="Responder.VisibilidadId" asp-items="Model.Responder.VisibilidadSelectList" class="form-control form-control-sm sin-indicador"></select>
+                    </div>
+                    <br />
+                    <div class="">
+                        <small>Tipo de respuesta</small>
+                        <select asp-for="Responder.TipoRespuestaId" asp-items="Model.Responder.TiposRespuestaSelectList" class="form-control form-control-sm sin-indicador"></select>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section scripts
+    {
+    <partial name="_ValidationScriptsPartial" />
+    <script type="text/javascript" src="~/js/Areas/Identity/Pages/Correspondencia/Responder.min.js" asp-append-version="true"></script>
+    <script type="text/javascript" src="~/js/Areas/Identity/Pages/Areas/WSC.js" asp-append-version="true"></script>
+}

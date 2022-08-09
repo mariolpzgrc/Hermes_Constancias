@@ -1,0 +1,26 @@
+﻿@using Microsoft.AspNetCore.Http.Features
+
+@{
+    var consentFeature = Context.Features.Get<ITrackingConsentFeature>();
+    var showBanner = !consentFeature?.CanTrack ?? false;
+    var cookieString = consentFeature?.CreateConsentCookie();
+}
+
+@if (showBanner)
+{
+    <div id="cookieConsent" class="hidden">
+        <p class="p-0 m-0" data-cookie-string="@cookieString"></p>
+    </div>
+    <script>
+        (function () {
+            document.cookie = document.querySelector("#cookieConsent p[data-cookie-string]").dataset.cookieString;
+        })();
+    </script>
+}
+
+<script>
+    (function () {
+        if (LeerMenuCookie(".AspNet.Menu") == null) { AgregarMenuCookie(".AspNet.Menu"); }
+        if (LeerMenuCookie(".AspNet.Carpeta") == null) { AgregarMenuCookie(".AspNet.Carpeta"); }
+    })();
+</script>

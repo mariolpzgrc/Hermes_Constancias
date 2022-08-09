@@ -1,0 +1,160 @@
+﻿@page "/Usuarios/Permiso/{id}"
+@model Hermes2018.Areas.Identity.Pages.Usuarios.PermisoModel
+
+@section styles
+    {
+    <link type="text/css" rel="stylesheet" href="~/lib/bootstrap4-toggle/css/bootstrap4-toggle.min.css">
+    <link type="text/css" rel="stylesheet" href="~/lib/jquery-bootstrap-touchspin/jquery.bootstrap-touchspin.min.css">
+}
+@section ScriptsPrioritarios
+    {
+    <script type="text/javascript" src="~/lib/bootstrap4-toggle/js/bootstrap4-toggle.min.js"></script>
+    <script type="text/javascript" src="~/lib/jquery-bootstrap-touchspin/jquery.bootstrap-touchspin.min.js"></script>
+}
+
+<div class="content-wrapper ml-0 bg-white pt-0">
+    <div class="container-fluid" id="logged-in">
+        <div class="row">
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 pt-2">
+                        @if (ConstRol.RolAdminGral.Contains(Model.Permiso.InfoUsuarioClaims.Rol))
+                        {
+                            <ol class="breadcrumb-2 mt-0 mb-0 pb-1 pt-1 display-inline">
+                                <li class="breadcrumb-item">
+                                    <a asp-area="" asp-controller="Home" asp-action="Index" asp-route-id="">Inicio</a>
+                                </li>
+
+                                <li class="breadcrumb-item"><a asp-area="Identity" asp-page="/Usuarios/Index" >Usuarios</a></li>
+                                <li class="breadcrumb-item"><a asp-area="Identity" asp-page="/Usuarios/Desglose" >Desglose</a></li>
+                                <li class="breadcrumb-item"><a asp-area="Identity" asp-page="/Usuarios/Region" asp-route-id="@Model.Permiso.RegionId">Región</a></li>
+                                <li class="breadcrumb-item"><a asp-area="Identity" asp-page="/Usuarios/Area" asp-route-id="@Model.Permiso.AreaId">Área</a></li>
+                                <li class="breadcrumb-item"><a asp-area="Identity" asp-page="/Usuarios/Detalles" asp-route-id="@Model.Permiso.NombreUsuario">Detalle usuario</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Asignar permiso</li>
+                            </ol>
+                        }
+                        else if (ConstRol.RolAdminRegional.Contains(Model.Permiso.InfoUsuarioClaims.Rol))
+                        {
+                            <ol class="breadcrumb-2 mt-0 mb-0 pb-1 pt-1 display-inline">
+                                <li class="breadcrumb-item">
+                                    <a asp-area="" asp-controller="Home" asp-action="Index" asp-route-id="">Inicio</a>
+                                </li>
+
+                                <li class="breadcrumb-item"><a asp-area="Identity" asp-page="/Usuarios/Index">Usuarios</a></li>
+                                <li class="breadcrumb-item"><a asp-area="Identity" asp-page="/Usuarios/Region" asp-route-id="@Model.Permiso.RegionId">Región</a></li>
+                                <li class="breadcrumb-item"><a asp-area="Identity" asp-page="/Usuarios/Area" asp-route-id="@Model.Permiso.AreaId">Área</a></li>
+                                <li class="breadcrumb-item"><a asp-area="Identity" asp-page="/Usuarios/Detalles" asp-route-id="@Model.Permiso.NombreUsuario">Detalle usuario</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Asignar permiso</li>
+                            </ol>
+                        }
+                    </div>
+                    <div class="col-12">
+                        <hr class="hr-thick mb-1 mt-1" />
+                        <h5>Asignar permiso como Administrador de Área</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <form method="post" class="ml-0 mw-100">
+                    <div asp-validation-summary="ModelOnly" class="text-danger error-list-clean"></div>
+
+                    <div class="row">
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 ">
+                            <div class="form-group">
+                                <label class="col-form-label pb-0 font-weight-bold">@Html.DisplayNameFor(model => model.Permiso.Nombre)</label>
+                                <div class="">
+                                    @Html.DisplayFor(model => model.Permiso.Nombre)
+                                    @Html.HiddenFor(modelItem => modelItem.Permiso.Nombre, new { @class = "sin-indicador" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 ">
+                            <div class="form-group">
+                                <label class="col-form-label pb-0 font-weight-bold">@Html.DisplayNameFor(model => model.Permiso.NombreUsuario)</label>
+                                <div class="">
+                                    @Html.DisplayFor(model => model.Permiso.NombreUsuario)
+                                    @Html.HiddenFor(modelItem => modelItem.Permiso.NombreUsuario, new { @class = "sin-indicador" })
+                                    @Html.HiddenFor(modelItem => modelItem.Permiso.InfoUsuarioId, new { @class = "sin-indicador" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 ">
+                            <div class="form-group">
+                                <label class="col-form-label pb-0 font-weight-bold">@Html.DisplayNameFor(model => model.Permiso.Correo)</label>
+                                <div class="">
+                                    @Html.DisplayFor(model => model.Permiso.Correo)
+                                    @Html.HiddenFor(modelItem => modelItem.Permiso.Correo, new { @class = "sin-indicador" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 ">
+                            <div class="form-group">
+                                <label class="col-form-label pb-0 font-weight-bold">@Html.DisplayNameFor(model => model.Permiso.RegionNombre)</label>
+                                <div class="">
+                                    @Html.DisplayFor(model => model.Permiso.RegionNombre)
+                                    @Html.HiddenFor(modelItem => modelItem.Permiso.RegionNombre, new { @class = "sin-indicador" })
+                                    @Html.HiddenFor(modelItem => modelItem.Permiso.RegionId, new { @class = "sin-indicador" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 ">
+                            <div class="form-group">
+                                <label class="col-form-label pb-0 font-weight-bold">@Html.DisplayNameFor(model => model.Permiso.AreaNombre)</label>
+                                <div class="">
+                                    @Html.DisplayFor(model => model.Permiso.AreaNombre)
+                                    @Html.HiddenFor(modelItem => modelItem.Permiso.AreaNombre, new { @class = "sin-indicador" })
+                                    @Html.HiddenFor(modelItem => modelItem.Permiso.AreaId, new { @class = "sin-indicador" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 ">
+                            <div class="form-group">
+                                <label class="col-form-label pb-0 font-weight-bold">@Html.DisplayNameFor(model => model.Permiso.PuestoNombre)</label>
+                                <div class="">
+                                    @Html.DisplayFor(model => model.Permiso.PuestoNombre)
+                                    @Html.HiddenFor(modelItem => modelItem.Permiso.PuestoNombre, new { @class = "sin-indicador" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 ">
+                            <div class="form-group">
+                                <label class="col-form-label pb-0 font-weight-bold">@Html.DisplayNameFor(model => model.Permiso.RolNombre)</label>
+                                <div class="">
+                                    @Html.DisplayFor(model => model.Permiso.RolNombre)
+                                    @Html.HiddenFor(modelItem => modelItem.Permiso.RolNombre, new { @class = "sin-indicador" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 ">
+                            <div class="form-group">
+                                <label asp-for="Permiso.Permiso" class="col-form-label pb-0 font-weight-bold"></label>
+                                <div class="input-group date">
+                                    <input asp-for="Permiso.Permiso" type="checkbox" data-toggle="toggle" data-size="sm" data-on="Si" data-off="No" data-width="50" data-onstyle="secondary" data-offstyle="light" data-style="border" />
+                                </div>
+                                <span asp-validation-for="Permiso.Permiso" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 ">
+                            <div class="form-group pt-2">
+                                <a asp-area="Identity" asp-page="/Usuarios/Detalles" asp-route-id="@Model.Permiso.NombreUsuario" class="btn btn-light">Cancelar</a>
+                                <input type="submit" value="Enviar" class="btn btn-primary" />
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,0 +1,39 @@
+﻿@page "/Historico/Correspondencia/{id:int}/{tipo:int}/{bandeja:int}/{carpeta:int?}"
+@model CorrespondenciaModel
+
+<div class="content-wrapper">
+    <div class="container-fluid" id="logged-in">
+        <div class="row">
+            <div class="col-12">
+                <ol class="breadcrumb-2 mt-0 mb-0 display-inline">
+                    <li class="breadcrumb-2-item">
+                        <a asp-area="Identity" asp-page="/Bandejas/Historico" asp-route-id="">Historico</a>
+                    </li>
+                    @if (ConstHistorico.ConstTipoN1 == Model.TipoHistorico)
+                    {
+                        <li class="breadcrumb-2-item">
+                            <a asp-area="Identity" asp-page="/Historico/Persona" asp-route-id="">Historico por persona</a>
+                        </li>
+                    }
+                    else if (ConstHistorico.ConstTipoN2 == Model.TipoHistorico)
+                    {
+                        <li class="breadcrumb-2-item">
+                            <a asp-area="Identity" asp-page="/Historico/Area" asp-route-id="">Historico por área</a>
+                        </li>
+                    }
+                    <li class="breadcrumb-2-item active">
+                        <a asp-area="Identity" asp-page="/Historico/Bandejas" asp-route-id="@Model.InfoUsuarioId" asp-route-tipo="@Model.TipoHistorico">Bandejas</a>
+                    </li>
+                    <li class="breadcrumb-2-item active">
+                        Correspondencia
+                    </li>
+                </ol>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+
+            </div>
+        </div>
+    </div>
+</div>

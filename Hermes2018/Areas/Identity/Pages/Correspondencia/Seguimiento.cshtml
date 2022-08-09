@@ -1,0 +1,183 @@
+﻿@page "/Correspondencia/Seguimiento/{id:int}/{tipo:int}"
+@model SeguimientoModel
+
+@section Styles
+    {
+    <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/codemirror.min.css" />
+    <link type="text/css" rel="stylesheet" href="~/lib/froala-editor/css/froala_editor.pkgd.min.css" />
+    <link type="text/css" rel="stylesheet" href="~/lib/froala-editor/css/froala_style.min.css" />
+    <link type="text/css" rel="stylesheet" href="~/lib/froala-editor/css/plugins/image.min.css" />
+    <link type="text/css" rel="stylesheet" href="~/lib/froala-editor/css/themes/gray.min.css" />
+    <link type="text/css" rel="stylesheet" href="~/lib/max-favilli-tagmanager/tagmanager.min.css" />
+
+    <link type="text/css" rel="stylesheet" href="~/css/Areas/Identity/Pages/Correspondencia/Seguimiento.css" asp-append-version="true" />
+    <link type="text/css" rel="stylesheet" href="~/css/linear-activity.min.css" />
+}
+
+@section ScriptsPrioritarios
+    {
+    <script type="text/javascript" src="~/lib/max-favilli-tagmanager/tagmanager.js"></script>
+    <script type="text/javascript" src="~/lib/twbs-pagination/jquery.twbsPagination.min.js"></script>
+}
+
+<div class="content-wrapper pt-3">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                <ol class="breadcrumb-2 mt-0 mb-0 display-inline">
+                    <li class="breadcrumb-2-item active display-flex">
+                        Seguimiento
+                    </li>
+                    <li class="flex-right">
+                        @if (Model.TempData.ContainsKey("EnvioId") && Model.TempData.ContainsKey("TipoEnvioId"))
+                        {
+                            <a asp-area="Identity" asp-page="/Correspondencia/Lectura" asp-route-id="@TempData.Peek("EnvioId")" asp-route-tipo="@TempData.Peek("TipoEnvioId")" class="md-btn md-btn-raised md-btn-ripple bg-secondary">Regresar</a>
+                        }
+                        else
+                        {
+                            <a asp-area="Identity" asp-page="/Bandejas/Recibidos" class="md-btn md-btn-raised md-btn-ripple bg-secondary">Regresar</a>
+                        }
+                    </li>
+                </ol>
+                <hr class="hr-thick mt-2 mb-2" />
+                <div class="info-border pb-1">
+                    <div class="p-2 mb-1 border-top border-bottom-0 bg-light">
+                        <strong>Información del documento</strong>
+                        <button type="button" class="btn btn-link float-right btn-sm" id="control-toggle"><i class="fas fa-angle-down"></i></button>
+                    </div>
+                    <div class="pt-0 pb-0 pl-1 pr-0" id="contenido-info">
+                        <input asp-for="Encabezado.EnvioId" class="sin-indicador" />
+                        <input asp-for="Encabezado.DocumentoId" class="sin-indicador" />
+                        <input asp-for="Encabezado.TipoEnvioId" class="sin-indicador" />
+                        <input asp-for="Encabezado.RecepcionId" class="sin-indicador" />
+                        <input asp-for="Encabezado.Usuario" class="sin-indicador" />
+                        <input asp-for="Encabezado.TieneAdjuntos" class="sin-indicador" />
+
+                        <div class="pb-1"><label class="font-weight-bold font-dark-gray">Asunto:</label> <span>@Model.Encabezado.Asunto</span></div>
+                        <div class="pb-1"><label class="font-weight-bold font-dark-gray">De:</label> <span>@Model.Encabezado.De</span></div>
+                        <div class="pb-1"><label class="font-weight-bold font-dark-gray">Para:</label> <span>@Model.Encabezado.Para</span></div>
+                        @if (!string.IsNullOrEmpty(Model.Encabezado.CCP))
+                        {
+                            <div class="pb-1"><label class="font-weight-bold font-dark-gray">CC:</label> <span>@Model.Encabezado.CCP</span></div>
+                        }
+                        @if (Model.Encabezado.TieneAdjuntos)
+                        {
+                            <div class="pb-1">
+                                <label class="font-weight-bold font-dark-gray">Anexos:</label>
+                                <div id="containerArchivos"></div>
+                            </div>
+                        }
+                        <br />
+                        <div class="pb-1"><label class="font-weight-bold font-dark-gray">Folio:</label> <span id="encabezado-folio">@Model.Encabezado.Folio</span></div>
+                        <div class="pb-1"><label class="font-weight-bold font-dark-gray">Fecha envío:</label> <span>@Model.Encabezado.FechaEnvio</span></div>
+
+                        @if (!string.IsNullOrEmpty(Model.Encabezado.FechaPropuesta))
+                        {
+                            <div class="pb-1"><label class="font-weight-bold font-dark-gray">Fecha propuesta:</label> <span>@Model.Encabezado.FechaPropuesta</span></div>
+                        }
+
+                        @if (!string.IsNullOrEmpty(Model.Encabezado.FechaCompromiso))
+                        {
+                            <div class="pb-1"><label class="font-weight-bold font-dark-gray">Fecha compromiso:</label> <span>@Model.Encabezado.FechaCompromiso</span></div>
+                        }
+
+                        @if (!string.IsNullOrEmpty(Model.Encabezado.Indicaciones))
+                        {
+                            <div class="form-group row font-dark-gray mb-1">
+                                <div class="col-12 font-regular-13 text-justify">
+                                    <div class="card border-gray-card-1">
+                                        <div class="card-header p-0 text-center font-bold-11 bg-gray-card-1 mensaje-datos">
+                                            Mensaje de texto
+                                        </div>
+                                        <div class="card-body pt-1 mb-1">
+                                            <p class="card-text font-regular-11 text-justify">@Html.Raw(Model.Encabezado.Indicaciones)</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                        <br />
+                        <hr class="hr-thick mt-2 mb-2" />
+                        @if (!string.IsNullOrEmpty(Model.Encabezado.NoInterno))
+                        {
+                            <div class="pb-1">
+                                <label class="font-weight-bold font-dark-gray">No.:</label>
+                                <span class="font-regular-11">@Model.Encabezado.NoInterno</span>
+                            </div>
+                        }
+                        <br />
+                        <div class="pb-1 gray-theme">
+                            <label class="font-weight-bold font-dark-gray ">Cuerpo:</label>
+                            <br />
+                            <div class="cuerpo-oficio text-justify font-regular-12 fr-view">@Html.Raw(Model.Encabezado.Cuerpo)</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="contiene-base-alto">
+                    <div class="d-none" id="plantilla">
+                        <div class="inicio col-12">
+                            <div class="base pl-0 ">
+                                <div class="border-plus p-0 titulo-envio ">
+                                    <span class="nombre-de"></span>
+                                    <span class="tipo-envio"></span>
+                                </div>
+                                <div class="contiene-resumen p-0">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="contiene-cargador" class="">
+                        <div class="linear-activity loader d-none">
+                            <div class="indeterminate"></div>
+                        </div>
+                    </div>
+                    <div class="row" id="contiene-seguimiento">
+                        <!-- plantilla seguimiento -->
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="float-right" id="contenedor-paginacion">
+                    <ul id="paginacion-seguimiento" class="pagination-sm"></ul>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="row ml-1 mt-0">
+                    <span class="pr-3">
+                        <i class="fas fa-long-arrow-alt-right font-gray"></i> Envio
+                    </span>
+                    <span class="pr-3">
+                        <i class="fas fa-redo-alt font-gray"></i> Turnado
+                    </span>
+                    <span class="pr-3">
+                        <i class="fab fa-stack-exchange font-gray"></i> Respuesta parcial
+                    </span>
+                    <span class="pr-3">
+                        <i class="fas fa-exchange-alt font-gray"></i> Respuesta
+                    </span>
+                    <span class="pr-3">
+                        <i class="fas fa-circle font-yellow"></i> En proceso
+                    </span>
+                    <span class="pr-3">
+                        <i class="fas fa-circle font-green"></i> Atendido
+                    </span>
+                    <span class="pr-3">
+                        <i class="fas fa-circle font-orange"></i> Extemporáneo
+                    </span>
+                    <span class="pr-3">
+                        <i class="fas fa-circle font-red"></i> Vencido
+                    </span>
+                    <span class="pr-3">
+                        <i class="fas fa-circle font-gray"></i> No requiere respuesta
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts
+    {
+    <script type="text/javascript" src="~/js/Areas/Identity/Pages/Correspondencia/Seguimiento.js" asp-append-version="true"></script>
+}

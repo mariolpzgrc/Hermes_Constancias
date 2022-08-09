@@ -1,0 +1,79 @@
+﻿@model Hermes2018.ViewModels.SolicitudViewModel
+
+<div class="content-wrapper pt-1">
+	<div class="container-fluid">
+        <div class="row">
+            <div class="col-12 pt-0">
+                <vc:menu-delegar user="@User" leyenda="Solicitudes de:"></vc:menu-delegar>
+            </div>
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 pt-0">
+                        <ol class="breadcrumb-2 mt-0 mb-0 pb-1 pt-1 display-inline">
+                            <li class="breadcrumb-2-item">
+                                <a asp-area="" asp-controller="Home" asp-action="Index" asp-route-id="">Inicio</a>
+                            </li>
+
+                            <li class="breadcrumb-2-item active display-flex" aria-current="page">Solicitudes</li>
+                        </ol>
+                    </div>
+                    <div class="col-12">
+                        <hr class="hr-thick mb-1 mt-1" />
+                        <h5>Solicitudes</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="table-responsive">
+                    <table class="table table-hover table-sm border-bottom responsive">
+                        <thead class="bg-light">
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Solicitudes.First().Nombre)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Solicitudes.First().NombreUsuario)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Solicitudes.First().Correo)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Solicitudes.First().Rol)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Solicitudes.First().Puesto)
+                                </th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.Solicitudes)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Nombre)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.NombreUsuario)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Correo)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Rol)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Puesto)
+                                    </td>
+                                    <td class="font-regular-12 text-center">
+                                        <a asp-action="Detalles" asp-route-id="@item.NombreUsuario" class="pl-2 pr-2" title="Detalles"><i class="fab fa-wpforms font-gray"></i></a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+	</div>
+</div>

@@ -1,0 +1,66 @@
+﻿@model IEnumerable<Hermes2018.Models.Categoria.HER_Categoria>
+
+<div class="content-wrapper pt-0">
+	<div class="container-fluid">
+        <div class="row">
+            <div class="col-12 pt-0">
+                <vc:menu-delegar user="@User" leyenda="Categorías de:"></vc:menu-delegar>
+            </div>
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 pt-0">
+                        <ol class="breadcrumb-2 mt-0 mb-0 pb-1 pt-1 display-inline">
+                            <li class="breadcrumb-2-item">
+                                <a asp-area="" asp-controller="Home" asp-action="Index" asp-route-id="">Inicio</a>
+                            </li>
+
+                            <li class="breadcrumb-2-item active display-flex" aria-current="page">Categorías</li>
+                        </ol>
+                    </div>
+                    <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 pt-0">
+                        <div class="float-right">
+                            @if (!(bool)ViewData["ActivaDelegacion"] || ((bool)ViewData["ActivaDelegacion"] && (int)ViewData["BandejaPermiso"] == ConstDelegar.TipoN1))
+                            {
+                                <a asp-area="" asp-action="Crear" asp-controller="Categorias" class="btn btn-sm md-btn-raised md-btn-ripple bg-primary">Nuevo</a>
+                            }
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <hr class="hr-thick mb-1 mt-1" />
+                        <h5>Categorías</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="table-responsive">
+                    <table class="table table-hover table-sm border-bottom responsive">
+                        <thead class="bg-light">
+                            <tr>
+                                <th>Nombre</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var categoria in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @categoria.HER_Nombre
+                                    </td>
+                                    <td class="font-regular-12 text-center">
+                                        <a asp-area="" asp-action="Detalles" asp-controller="Categorias" asp-route-id="@categoria.HER_CategoriaId" class="pl-2 pr-2" title="Detalles"><i class="fab fa-wpforms font-gray"></i></a>
+                                        @if (!(bool)ViewData["ActivaDelegacion"] || ((bool)ViewData["ActivaDelegacion"] && (int)ViewData["BandejaPermiso"] == ConstDelegar.TipoN1))
+                                        {
+                                            <a asp-area="" asp-action="Editar" asp-controller="Categorias" asp-route-id="@categoria.HER_CategoriaId" class="pl-2 pr-2" title="Editar"><i class="far fa-edit font-gray"></i></a>
+                                            <a asp-area="" asp-action="Borrar" asp-controller="Categorias" asp-route-id="@categoria.HER_CategoriaId" class="pl-2 pr-2" title="Borrar"><i class="far fa-trash-alt font-gray"></i></a>
+                                        }
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+	</div>
+</div>

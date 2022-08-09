@@ -1,0 +1,160 @@
+{
+  "version": "1.0",
+  "defaultProvider": "cdnjs",
+  "libraries": [
+    {
+      "library": "blueimp-file-upload@9.25.1",
+      "destination": "wwwroot/lib/blueimp-file-upload/"
+    },
+    {
+      "library": "twbs-pagination@1.4.2",
+      "destination": "wwwroot/lib/twbs-pagination/"
+    },
+    {
+      "provider": "unpkg",
+      "library": "jquery-inputsearch@1.0.0",
+      "destination": "wwwroot/lib/jquery-inputsearch/",
+      "files": [
+        "dist/jquery.inputsearch.js",
+        "img/screenshot.png",
+        "img/ui-icon-clear.png",
+        "img/ui-icon-search.png"
+      ]
+    },
+    {
+      "library": "twitter-bootstrap@4.3.1",
+      "destination": "wwwroot/lib/twitter-bootstrap/",
+      "files": [
+        "css/bootstrap-grid.css",
+        "css/bootstrap-grid.css.map",
+        "css/bootstrap-grid.min.css",
+        "css/bootstrap-grid.min.css.map",
+        "css/bootstrap-reboot.css",
+        "css/bootstrap-reboot.css.map",
+        "css/bootstrap-reboot.min.css",
+        "css/bootstrap-reboot.min.css.map",
+        "css/bootstrap.css",
+        "css/bootstrap.css.map",
+        "css/bootstrap.min.css",
+        "css/bootstrap.min.css.map",
+        "js/bootstrap.bundle.js",
+        "js/bootstrap.bundle.js.map",
+        "js/bootstrap.bundle.min.js",
+        "js/bootstrap.bundle.min.js.map",
+        "js/bootstrap.js",
+        "js/bootstrap.js.map",
+        "js/bootstrap.min.js",
+        "js/bootstrap.min.js.map"
+      ]
+    },
+    {
+      "library": "jquery@3.3.1",
+      "destination": "wwwroot/lib/jquery/",
+      "files": [
+        "core.js",
+        "jquery.js",
+        "jquery.min.js",
+        "jquery.min.map",
+        "jquery.slim.js",
+        "jquery.slim.min.js",
+        "jquery.slim.min.map"
+      ]
+    },
+    {
+      "library": "popper.js@1.14.7",
+      "destination": "wwwroot/lib/popper.js/",
+      "files": [
+        "esm/popper-utils.js",
+        "esm/popper-utils.js.map",
+        "esm/popper-utils.min.js",
+        "esm/popper-utils.min.js.map",
+        "esm/popper.js",
+        "esm/popper.js.map",
+        "esm/popper.min.js",
+        "esm/popper.min.js.map",
+        "umd/popper-utils.js",
+        "umd/popper-utils.js.map",
+        "umd/popper-utils.min.js",
+        "umd/popper-utils.min.js.map",
+        "umd/popper.js",
+        "umd/popper.js.map",
+        "umd/popper.min.js",
+        "umd/popper.min.js.map",
+        "popper-utils.js",
+        "popper-utils.js.map",
+        "popper-utils.min.js",
+        "popper-utils.min.js.map",
+        "popper.js",
+        "popper.js.map",
+        "popper.min.js",
+        "popper.min.js.map"
+      ]
+    },
+    {
+      "library": "jqueryui@1.12.1",
+      "destination": "wwwroot/lib/jqueryui/",
+      "files": [
+        "jquery-ui.min.js",
+        "jquery-ui.css",
+        "jquery-ui.js",
+        "jquery-ui.min.css",
+        "jquery-ui.structure.css",
+        "jquery-ui.structure.min.css",
+        "jquery-ui.theme.css",
+        "jquery-ui.theme.min.css"
+      ]
+    },
+    {
+      "library": "bootstrap-daterangepicker@3.0.5",
+      "destination": "wwwroot/lib/bootstrap-daterangepicker/"
+    },
+    {
+      "library": "jstree@3.3.8",
+      "destination": "wwwroot/lib/jstree/",
+      "files": [
+        "jstree.min.js",
+        "themes/default/32px.png",
+        "themes/default/40px.png",
+        "themes/default/style.min.css",
+        "themes/default/throbber.gif",
+        "themes/default-dark/32px.png",
+        "themes/default-dark/40px.png",
+        "themes/default-dark/style.min.css",
+        "themes/default-dark/throbber.gif"
+      ]
+    },
+    {
+      "library": "font-awesome@5.11.2",
+      "destination": "wwwroot/lib/font-awesome/"
+    },
+    {
+      "library": "flatpickr@4.6.3",
+      "destination": "wwwroot/lib/flatpickr/"
+    },
+    {
+      "library": "jquery-flexdatalist@2.3.0",
+      "destination": "wwwroot/lib/jquery-flexdatalist/"
+    },
+    {
+      "library": "xlsx@0.16.9",
+      "destination": "wwwroot/lib/xlsx/"
+    },
+    {
+      "library": "FileSaver.js@2.0.5",
+      "destination": "wwwroot/lib/file-saver/"
+    },
+    {
+      "provider": "jsdelivr",
+      "library": "xlsx-style@0.8.13",
+      "destination": "wwwroot/lib/xlsx-style/"
+    },
+    {
+      "library": "jspdf@1.5.3",
+      "destination": "wwwroot/lib/jspdf/"
+    },
+    {
+      "library": "jspdf-autotable@3.2.15",
+      "destination": "wwwroot/lib/jspdf-autotable/"
+    }
+  ]
+}

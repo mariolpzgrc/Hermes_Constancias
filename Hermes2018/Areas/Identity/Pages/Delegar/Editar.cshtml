@@ -1,0 +1,93 @@
+﻿@page "/Delegar/Editar/{id:int}"
+@model Hermes2018.Areas.Identity.Pages.Delegar.EditarModel
+
+<div class="content-wrapper pt-0">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 pt-2">
+                        <ol class="breadcrumb-2 mt-0 mb-0 pb-1 pt-1 display-inline">
+                            <li class="breadcrumb-2-item">
+                                <a asp-area="" asp-controller="Home" asp-action="Index" asp-route-id="">Inicio</a>
+                            </li>
+
+                            <li class="breadcrumb-2-item">
+                                <a asp-area="Identity" asp-page="/Delegar/Index" asp-route-id="">Delegados</a>
+                            </li>
+                            <li class="breadcrumb-2-item active display-flex" aria-current="page">Editar Delegado</li>
+                        </ol>
+                    </div>
+                    <div class="col-12">
+                        <hr class="hr-thick mb-1 mt-1" />
+                        <h5>Editar Delegado</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <form method="post">
+                    <div class="row">
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                            <div asp-validation-summary="ModelOnly" class="text-danger error-list-clean"></div>
+                            <input  asp-for="Editar.DelegarId" class="sin-indicador"/> 
+
+                            <div class="row">
+                                <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                    <div class="form-group" id="control-busqueda">
+                                        <label asp-for="Editar.Usuario" class="col-form-label font-bold-12"></label>
+                                        <div class="">
+                                            <input asp-for="Editar.Usuario" class="form-control disabled border-disabled form-control-sm" placeholder="Usuario" />
+                                            @*<small class="form-text text-muted">Escriba el nombre de usuario.</small>*@
+                                            <span asp-validation-for="Editar.Usuario" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                    <div class="form-group">
+                                        <label asp-for="Editar.Nombre"  class="col-form-label font-bold-12"></label>
+                                        <div class="">
+                                            <input asp-for="Editar.Nombre" class="form-control disabled border-disabled form-control-sm" placeholder="Nombre completo" />
+                                            <span asp-validation-for="Editar.Nombre" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                    <div class="form-group">
+                                        <label asp-for="Editar.Correo" class="col-form-label font-bold-12"></label>
+                                        <div class="">
+                                            <input asp-for="Editar.Correo" class="form-control disabled border-disabled form-control-sm" placeholder="Correo institucional" />
+                                            <span asp-validation-for="Editar.Correo" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                    <div class="form-group">
+                                        <label asp-for="Editar.Tipo" class="col-form-label font-bold-12"></label>
+                                        <div class="">
+                                            <select asp-for="Editar.Tipo" class="form-control form-control-sm">
+                                                <option selected value="">[Seleccione un tipo]</option>
+                                                <option value="@ConstDelegar.TipoN1">@ConstDelegar.TipoT1</option>
+                                                <option value="@ConstDelegar.TipoN2">@ConstDelegar.TipoT2</option>
+                                            </select>
+                                            <span asp-validation-for="Editar.Tipo" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                            <div class="pt-2">
+                                <a asp-area="Identity" asp-page="/Delegar/Index" asp-route-id="" class="btn btn-light">Cancelar</a>
+                                <button type="submit" class="btn btn-primary">Actualizar</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,0 +1,274 @@
+2022-05-09T10:54:43.0556537-05:00 0HMHHQEO95VRG:0000000E [ERR] Failed executing DbCommand ("30"ms) [Parameters=["@__userName_0='?' (Size = 4000)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [x].[HER_InfoUsuarioId], [x].[HER_Activo], [x].[HER_AreaId], [x].[HER_BandejaNombre], [x].[HER_BandejaPermiso], [x].[HER_BandejaUsuario], [x].[HER_Correo], [x].[HER_Direccion], [x].[HER_EsUnico], [x].[HER_EstaEnBajaDefinitiva], [x].[HER_EstaEnReasignacion], [x].[HER_FechaActualizacion], [x].[HER_FechaRegistro], [x].[HER_NombreCompleto], [x].[HER_NumeroPersonal], [x].[HER_PermisoAA], [x].[HER_Puesto], [x].[HER_RolNombre], [x].[HER_Telefono], [x].[HER_TipoPersonal], [x].[HER_Titular], [x].[HER_UserName], [x].[HER_UsuarioId], [x.HER_Area].[HER_AreaId], [x.HER_Area].[HER_Area_PadreId], [x.HER_Area].[HER_BajaInactividad], [x.HER_Area].[HER_Clave], [x.HER_Area].[HER_DiasCompromiso], [x.HER_Area].[HER_Direccion], [x.HER_Area].[HER_Estado], [x.HER_Area].[HER_ExisteEnSIIU], [x.HER_Area].[HER_LogoId], [x.HER_Area].[HER_Nombre], [x.HER_Area].[HER_RegionId], [x.HER_Area].[HER_Telefono], [x.HER_Area].[HER_Visible]
+FROM [HER_InfoUsuario] AS [x]
+INNER JOIN [HER_Area] AS [x.HER_Area] ON [x].[HER_AreaId] = [x.HER_Area].[HER_AreaId]
+WHERE ([x].[HER_UserName] = @__userName_0) AND ([x].[HER_Activo] = 1)" (627a98df)
+System.Data.SqlClient.SqlException (0x80131904): Invalid column name 'HER_BajaInactividad'.
+   at System.Data.SqlClient.SqlCommand.<>c.<ExecuteDbDataReaderAsync>b__122_0(Task`1 result)
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot)
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.EntityFrameworkCore.Storage.Internal.RelationalCommand.ExecuteAsync(IRelationalConnection connection, DbCommandMethod executeMethod, IReadOnlyDictionary`2 parameterValues, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.AsyncQueryingEnumerable`1.AsyncEnumerator.BufferlessMoveNext(DbContext _, Boolean buffer, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.AsyncQueryingEnumerable`1.AsyncEnumerator.MoveNext(CancellationToken cancellationToken)
+   at System.Linq.AsyncEnumerable.SelectEnumerableAsyncIterator`2.MoveNextCore(CancellationToken cancellationToken)
+   at System.Linq.AsyncEnumerable.AsyncIterator`1.MoveNext(CancellationToken cancellationToken)
+   at System.Linq.AsyncEnumerable.FirstOrDefault_[TSource](IAsyncEnumerable`1 source, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.AsyncLinqOperatorProvider.TaskResultAsyncEnumerable`1.Enumerator.MoveNext(CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.AsyncLinqOperatorProvider.ExceptionInterceptor`1.EnumeratorExceptionInterceptor.MoveNext(CancellationToken cancellationToken)
+ClientConnectionId:c7a76c07-ea70-4c75-a3e1-90313c2244b6
+Error Number:207,State:1,Class:16
+2022-05-09T10:54:43.2167133-05:00 0HMHHQEO95VRG:0000000E [ERR] An exception occurred in the database while iterating the results of a query for context type '"Hermes2018.Data.ApplicationDbContext"'."
+""System.Data.SqlClient.SqlException (0x80131904): Invalid column name 'HER_BajaInactividad'.
+   at System.Data.SqlClient.SqlCommand.<>c.<ExecuteDbDataReaderAsync>b__122_0(Task`1 result)
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot)
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.EntityFrameworkCore.Storage.Internal.RelationalCommand.ExecuteAsync(IRelationalConnection connection, DbCommandMethod executeMethod, IReadOnlyDictionary`2 parameterValues, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.AsyncQueryingEnumerable`1.AsyncEnumerator.BufferlessMoveNext(DbContext _, Boolean buffer, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.AsyncQueryingEnumerable`1.AsyncEnumerator.MoveNext(CancellationToken cancellationToken)
+   at System.Linq.AsyncEnumerable.SelectEnumerableAsyncIterator`2.MoveNextCore(CancellationToken cancellationToken)
+   at System.Linq.AsyncEnumerable.AsyncIterator`1.MoveNext(CancellationToken cancellationToken)
+   at System.Linq.AsyncEnumerable.FirstOrDefault_[TSource](IAsyncEnumerable`1 source, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.AsyncLinqOperatorProvider.TaskResultAsyncEnumerable`1.Enumerator.MoveNext(CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.AsyncLinqOperatorProvider.ExceptionInterceptor`1.EnumeratorExceptionInterceptor.MoveNext(CancellationToken cancellationToken)
+ClientConnectionId:c7a76c07-ea70-4c75-a3e1-90313c2244b6
+Error Number:207,State:1,Class:16" (64e2593c)
+System.Data.SqlClient.SqlException (0x80131904): Invalid column name 'HER_BajaInactividad'.
+   at System.Data.SqlClient.SqlCommand.<>c.<ExecuteDbDataReaderAsync>b__122_0(Task`1 result)
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot)
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.EntityFrameworkCore.Storage.Internal.RelationalCommand.ExecuteAsync(IRelationalConnection connection, DbCommandMethod executeMethod, IReadOnlyDictionary`2 parameterValues, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.AsyncQueryingEnumerable`1.AsyncEnumerator.BufferlessMoveNext(DbContext _, Boolean buffer, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.AsyncQueryingEnumerable`1.AsyncEnumerator.MoveNext(CancellationToken cancellationToken)
+   at System.Linq.AsyncEnumerable.SelectEnumerableAsyncIterator`2.MoveNextCore(CancellationToken cancellationToken)
+   at System.Linq.AsyncEnumerable.AsyncIterator`1.MoveNext(CancellationToken cancellationToken)
+   at System.Linq.AsyncEnumerable.FirstOrDefault_[TSource](IAsyncEnumerable`1 source, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.AsyncLinqOperatorProvider.TaskResultAsyncEnumerable`1.Enumerator.MoveNext(CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.AsyncLinqOperatorProvider.ExceptionInterceptor`1.EnumeratorExceptionInterceptor.MoveNext(CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryCompiler.ExecuteSingletonAsyncQuery[TResult](QueryContext queryContext, Func`2 compiledQuery, IDiagnosticsLogger`1 logger, Type contextType)
+ClientConnectionId:c7a76c07-ea70-4c75-a3e1-90313c2244b6
+Error Number:207,State:1,Class:16
+2022-05-09T10:54:43.2585931-05:00 0HMHHQEO95VRG:0000000E [ERR] An exception occurred in the database while iterating the results of a query for context type '"Hermes2018.Data.ApplicationDbContext"'."
+""System.Data.SqlClient.SqlException (0x80131904): Invalid column name 'HER_BajaInactividad'.
+   at System.Data.SqlClient.SqlCommand.<>c.<ExecuteDbDataReaderAsync>b__122_0(Task`1 result)
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot)
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.EntityFrameworkCore.Storage.Internal.RelationalCommand.ExecuteAsync(IRelationalConnection connection, DbCommandMethod executeMethod, IReadOnlyDictionary`2 parameterValues, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.AsyncQueryingEnumerable`1.AsyncEnumerator.BufferlessMoveNext(DbContext _, Boolean buffer, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.AsyncQueryingEnumerable`1.AsyncEnumerator.MoveNext(CancellationToken cancellationToken)
+   at System.Linq.AsyncEnumerable.SelectEnumerableAsyncIterator`2.MoveNextCore(CancellationToken cancellationToken)
+   at System.Linq.AsyncEnumerable.AsyncIterator`1.MoveNext(CancellationToken cancellationToken)
+   at System.Linq.AsyncEnumerable.FirstOrDefault_[TSource](IAsyncEnumerable`1 source, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.AsyncLinqOperatorProvider.TaskResultAsyncEnumerable`1.Enumerator.MoveNext(CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.AsyncLinqOperatorProvider.ExceptionInterceptor`1.EnumeratorExceptionInterceptor.MoveNext(CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryCompiler.ExecuteSingletonAsyncQuery[TResult](QueryContext queryContext, Func`2 compiledQuery, IDiagnosticsLogger`1 logger, Type contextType)
+ClientConnectionId:c7a76c07-ea70-4c75-a3e1-90313c2244b6
+Error Number:207,State:1,Class:16" (64e2593c)
+System.Data.SqlClient.SqlException (0x80131904): Invalid column name 'HER_BajaInactividad'.
+   at System.Data.SqlClient.SqlCommand.<>c.<ExecuteDbDataReaderAsync>b__122_0(Task`1 result)
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot)
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.EntityFrameworkCore.Storage.Internal.RelationalCommand.ExecuteAsync(IRelationalConnection connection, DbCommandMethod executeMethod, IReadOnlyDictionary`2 parameterValues, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.AsyncQueryingEnumerable`1.AsyncEnumerator.BufferlessMoveNext(DbContext _, Boolean buffer, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.AsyncQueryingEnumerable`1.AsyncEnumerator.MoveNext(CancellationToken cancellationToken)
+   at System.Linq.AsyncEnumerable.SelectEnumerableAsyncIterator`2.MoveNextCore(CancellationToken cancellationToken)
+   at System.Linq.AsyncEnumerable.AsyncIterator`1.MoveNext(CancellationToken cancellationToken)
+   at System.Linq.AsyncEnumerable.FirstOrDefault_[TSource](IAsyncEnumerable`1 source, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.AsyncLinqOperatorProvider.TaskResultAsyncEnumerable`1.Enumerator.MoveNext(CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.AsyncLinqOperatorProvider.ExceptionInterceptor`1.EnumeratorExceptionInterceptor.MoveNext(CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryCompiler.ExecuteSingletonAsyncQuery[TResult](QueryContext queryContext, Func`2 compiledQuery, IDiagnosticsLogger`1 logger, Type contextType)
+   at Hermes2018.Services.UsuarioService.ObtenerInfoPersonaDocumentoAsync(String userName) in C:\ProyectoHermes2021\Hermes2018\Hermes2018\Hermes2018\Services\UsuarioService.cs:line 52
+   at Hermes2018.Areas.Identity.Pages.Correspondencia.CrearModel.OnGet() in C:\ProyectoHermes2021\Hermes2018\Hermes2018\Hermes2018\Areas\Identity\Pages\Correspondencia\Crear.cshtml.cs:line 105
+   at Microsoft.AspNetCore.Mvc.RazorPages.Internal.ExecutorFactory.GenericTaskHandlerMethod.Convert[T](Object taskAsObject)
+   at Microsoft.AspNetCore.Mvc.RazorPages.Internal.ExecutorFactory.GenericTaskHandlerMethod.Execute(Object receiver, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.RazorPages.Internal.PageActionInvoker.InvokeHandlerMethodAsync()
+ClientConnectionId:c7a76c07-ea70-4c75-a3e1-90313c2244b6
+Error Number:207,State:1,Class:16
+2022-05-09T13:15:46.6381175-05:00 0HMHHSVJ98M5N:00000002 [ERR] Failed executing DbCommand ("7"ms) [Parameters=["@__userName_0='?' (Size = 4000)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [x].[HER_InfoUsuarioId], [x].[HER_Activo], [x].[HER_AreaId], [x].[HER_BandejaNombre], [x].[HER_BandejaPermiso], [x].[HER_BandejaUsuario], [x].[HER_Correo], [x].[HER_Direccion], [x].[HER_EsUnico], [x].[HER_EstaEnBajaDefinitiva], [x].[HER_EstaEnReasignacion], [x].[HER_FechaActualizacion], [x].[HER_FechaRegistro], [x].[HER_NombreCompleto], [x].[HER_NumeroPersonal], [x].[HER_PermisoAA], [x].[HER_Puesto], [x].[HER_RolNombre], [x].[HER_Telefono], [x].[HER_TipoPersonal], [x].[HER_Titular], [x].[HER_UserName], [x].[HER_UsuarioId], [x.HER_Area].[HER_AreaId], [x.HER_Area].[HER_Area_PadreId], [x.HER_Area].[HER_BajaInactividad], [x.HER_Area].[HER_Clave], [x.HER_Area].[HER_DiasCompromiso], [x.HER_Area].[HER_Direccion], [x.HER_Area].[HER_Estado], [x.HER_Area].[HER_ExisteEnSIIU], [x.HER_Area].[HER_LogoId], [x.HER_Area].[HER_Nombre], [x.HER_Area].[HER_RegionId], [x.HER_Area].[HER_Telefono], [x.HER_Area].[HER_Visible]
+FROM [HER_InfoUsuario] AS [x]
+INNER JOIN [HER_Area] AS [x.HER_Area] ON [x].[HER_AreaId] = [x.HER_Area].[HER_AreaId]
+WHERE ([x].[HER_UserName] = @__userName_0) AND ([x].[HER_Activo] = 1)" (627a98df)
+System.Data.SqlClient.SqlException (0x80131904): Invalid column name 'HER_BajaInactividad'.
+   at System.Data.SqlClient.SqlCommand.<>c.<ExecuteDbDataReaderAsync>b__122_0(Task`1 result)
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot)
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.EntityFrameworkCore.Storage.Internal.RelationalCommand.ExecuteAsync(IRelationalConnection connection, DbCommandMethod executeMethod, IReadOnlyDictionary`2 parameterValues, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.AsyncQueryingEnumerable`1.AsyncEnumerator.BufferlessMoveNext(DbContext _, Boolean buffer, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.AsyncQueryingEnumerable`1.AsyncEnumerator.MoveNext(CancellationToken cancellationToken)
+   at System.Linq.AsyncEnumerable.SelectEnumerableAsyncIterator`2.MoveNextCore(CancellationToken cancellationToken)
+   at System.Linq.AsyncEnumerable.AsyncIterator`1.MoveNext(CancellationToken cancellationToken)
+   at System.Linq.AsyncEnumerable.FirstOrDefault_[TSource](IAsyncEnumerable`1 source, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.AsyncLinqOperatorProvider.TaskResultAsyncEnumerable`1.Enumerator.MoveNext(CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.AsyncLinqOperatorProvider.ExceptionInterceptor`1.EnumeratorExceptionInterceptor.MoveNext(CancellationToken cancellationToken)
+ClientConnectionId:243040ef-79af-4d29-9157-3d814fe5f466
+Error Number:207,State:1,Class:16
+2022-05-09T13:15:46.6844956-05:00 0HMHHSVJ98M5N:00000002 [ERR] An exception occurred in the database while iterating the results of a query for context type '"Hermes2018.Data.ApplicationDbContext"'."
+""System.Data.SqlClient.SqlException (0x80131904): Invalid column name 'HER_BajaInactividad'.
+   at System.Data.SqlClient.SqlCommand.<>c.<ExecuteDbDataReaderAsync>b__122_0(Task`1 result)
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot)
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.EntityFrameworkCore.Storage.Internal.RelationalCommand.ExecuteAsync(IRelationalConnection connection, DbCommandMethod executeMethod, IReadOnlyDictionary`2 parameterValues, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.AsyncQueryingEnumerable`1.AsyncEnumerator.BufferlessMoveNext(DbContext _, Boolean buffer, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.AsyncQueryingEnumerable`1.AsyncEnumerator.MoveNext(CancellationToken cancellationToken)
+   at System.Linq.AsyncEnumerable.SelectEnumerableAsyncIterator`2.MoveNextCore(CancellationToken cancellationToken)
+   at System.Linq.AsyncEnumerable.AsyncIterator`1.MoveNext(CancellationToken cancellationToken)
+   at System.Linq.AsyncEnumerable.FirstOrDefault_[TSource](IAsyncEnumerable`1 source, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.AsyncLinqOperatorProvider.TaskResultAsyncEnumerable`1.Enumerator.MoveNext(CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.AsyncLinqOperatorProvider.ExceptionInterceptor`1.EnumeratorExceptionInterceptor.MoveNext(CancellationToken cancellationToken)
+ClientConnectionId:243040ef-79af-4d29-9157-3d814fe5f466
+Error Number:207,State:1,Class:16" (64e2593c)
+System.Data.SqlClient.SqlException (0x80131904): Invalid column name 'HER_BajaInactividad'.
+   at System.Data.SqlClient.SqlCommand.<>c.<ExecuteDbDataReaderAsync>b__122_0(Task`1 result)
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot)
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.EntityFrameworkCore.Storage.Internal.RelationalCommand.ExecuteAsync(IRelationalConnection connection, DbCommandMethod executeMethod, IReadOnlyDictionary`2 parameterValues, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.AsyncQueryingEnumerable`1.AsyncEnumerator.BufferlessMoveNext(DbContext _, Boolean buffer, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.AsyncQueryingEnumerable`1.AsyncEnumerator.MoveNext(CancellationToken cancellationToken)
+   at System.Linq.AsyncEnumerable.SelectEnumerableAsyncIterator`2.MoveNextCore(CancellationToken cancellationToken)
+   at System.Linq.AsyncEnumerable.AsyncIterator`1.MoveNext(CancellationToken cancellationToken)
+   at System.Linq.AsyncEnumerable.FirstOrDefault_[TSource](IAsyncEnumerable`1 source, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.AsyncLinqOperatorProvider.TaskResultAsyncEnumerable`1.Enumerator.MoveNext(CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.AsyncLinqOperatorProvider.ExceptionInterceptor`1.EnumeratorExceptionInterceptor.MoveNext(CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryCompiler.ExecuteSingletonAsyncQuery[TResult](QueryContext queryContext, Func`2 compiledQuery, IDiagnosticsLogger`1 logger, Type contextType)
+ClientConnectionId:243040ef-79af-4d29-9157-3d814fe5f466
+Error Number:207,State:1,Class:16
+2022-05-09T13:15:46.7049579-05:00 0HMHHSVJ98M5N:00000002 [ERR] An exception occurred in the database while iterating the results of a query for context type '"Hermes2018.Data.ApplicationDbContext"'."
+""System.Data.SqlClient.SqlException (0x80131904): Invalid column name 'HER_BajaInactividad'.
+   at System.Data.SqlClient.SqlCommand.<>c.<ExecuteDbDataReaderAsync>b__122_0(Task`1 result)
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot)
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.EntityFrameworkCore.Storage.Internal.RelationalCommand.ExecuteAsync(IRelationalConnection connection, DbCommandMethod executeMethod, IReadOnlyDictionary`2 parameterValues, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.AsyncQueryingEnumerable`1.AsyncEnumerator.BufferlessMoveNext(DbContext _, Boolean buffer, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.AsyncQueryingEnumerable`1.AsyncEnumerator.MoveNext(CancellationToken cancellationToken)
+   at System.Linq.AsyncEnumerable.SelectEnumerableAsyncIterator`2.MoveNextCore(CancellationToken cancellationToken)
+   at System.Linq.AsyncEnumerable.AsyncIterator`1.MoveNext(CancellationToken cancellationToken)
+   at System.Linq.AsyncEnumerable.FirstOrDefault_[TSource](IAsyncEnumerable`1 source, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.AsyncLinqOperatorProvider.TaskResultAsyncEnumerable`1.Enumerator.MoveNext(CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.AsyncLinqOperatorProvider.ExceptionInterceptor`1.EnumeratorExceptionInterceptor.MoveNext(CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryCompiler.ExecuteSingletonAsyncQuery[TResult](QueryContext queryContext, Func`2 compiledQuery, IDiagnosticsLogger`1 logger, Type contextType)
+ClientConnectionId:243040ef-79af-4d29-9157-3d814fe5f466
+Error Number:207,State:1,Class:16" (64e2593c)
+System.Data.SqlClient.SqlException (0x80131904): Invalid column name 'HER_BajaInactividad'.
+   at System.Data.SqlClient.SqlCommand.<>c.<ExecuteDbDataReaderAsync>b__122_0(Task`1 result)
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot)
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.EntityFrameworkCore.Storage.Internal.RelationalCommand.ExecuteAsync(IRelationalConnection connection, DbCommandMethod executeMethod, IReadOnlyDictionary`2 parameterValues, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.AsyncQueryingEnumerable`1.AsyncEnumerator.BufferlessMoveNext(DbContext _, Boolean buffer, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.AsyncQueryingEnumerable`1.AsyncEnumerator.MoveNext(CancellationToken cancellationToken)
+   at System.Linq.AsyncEnumerable.SelectEnumerableAsyncIterator`2.MoveNextCore(CancellationToken cancellationToken)
+   at System.Linq.AsyncEnumerable.AsyncIterator`1.MoveNext(CancellationToken cancellationToken)
+   at System.Linq.AsyncEnumerable.FirstOrDefault_[TSource](IAsyncEnumerable`1 source, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.AsyncLinqOperatorProvider.TaskResultAsyncEnumerable`1.Enumerator.MoveNext(CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.AsyncLinqOperatorProvider.ExceptionInterceptor`1.EnumeratorExceptionInterceptor.MoveNext(CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryCompiler.ExecuteSingletonAsyncQuery[TResult](QueryContext queryContext, Func`2 compiledQuery, IDiagnosticsLogger`1 logger, Type contextType)
+   at Hermes2018.Services.UsuarioService.ObtenerInfoPersonaDocumentoAsync(String userName) in C:\ProyectoHermes2021\Hermes2018\Hermes2018\Hermes2018\Services\UsuarioService.cs:line 52
+   at Hermes2018.Areas.Identity.Pages.Correspondencia.CrearModel.OnGet() in C:\ProyectoHermes2021\Hermes2018\Hermes2018\Hermes2018\Areas\Identity\Pages\Correspondencia\Crear.cshtml.cs:line 105
+ClientConnectionId:243040ef-79af-4d29-9157-3d814fe5f466
+Error Number:207,State:1,Class:16
+2022-05-09T13:39:15.9842021-05:00 0HMHHTCRHLQTC:00000001 [ERR] An unhandled exception has occurred while executing the request. (48a46595)
+System.InvalidOperationException: The constraint entry 'id' - ' int' on the route 'Correspondencia/Borrar/{id: int}' could not be resolved by the constraint resolver of type 'DefaultInlineConstraintResolver'.
+   at Microsoft.AspNetCore.Routing.RouteConstraintBuilder.AddResolvedConstraint(String key, String constraintText)
+   at Microsoft.AspNetCore.Routing.Tree.TreeRouteBuilder.MapOutbound(IRouter handler, RouteTemplate routeTemplate, RouteValueDictionary requiredLinkValues, String routeName, Int32 order)
+   at Microsoft.AspNetCore.Mvc.Internal.AttributeRoute.AddEntries(TreeRouteBuilder builder, ActionDescriptorCollection actions)
+   at Microsoft.AspNetCore.Mvc.Internal.AttributeRoute.GetTreeRouter()
+   at Microsoft.AspNetCore.Mvc.Internal.AttributeRoute.RouteAsync(RouteContext context)
+   at Microsoft.AspNetCore.Routing.RouteCollection.RouteAsync(RouteContext context)
+   at Microsoft.AspNetCore.Builder.RouterMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.MigrationsEndPointMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.DatabaseErrorPageMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.DatabaseErrorPageMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2022-05-09T18:54:33.2742097-05:00 0HMHI2S0F8VCM:0000000F [ERR] DocumentoService:EliminarBorrador: El directorio no está vacío : 'C:\ProyectoHermes2021\Hermes2018\Hermes2018\Hermes2018\wwwroot\uploads\2022\5\mariolopez03\ZEUR9757-22' (90dadb75)
+2022-05-09T18:58:21.2317131-05:00 0HMHI2S0F8VCL:0000000D [ERR] DocumentoService:EliminarBorrador: El directorio no está vacío : 'C:\ProyectoHermes2021\Hermes2018\Hermes2018\Hermes2018\wwwroot\uploads\2022\5\mariolopez03\ZEUR9757-22' (90dadb75)
+2022-05-09T19:07:10.7911352-05:00 0HMHI33P7I5I4:00000005 [ERR] An exception occurred in the database while saving changes for context type '"Hermes2018.Data.ApplicationDbContext"'."
+""System.InvalidOperationException: The association between entity types 'HER_DocumentoBase' and 'HER_CategoriaDocumentoBase' has been severed but the relationship is either marked as 'Required' or is implicitly required because the foreign key is not nullable. If the dependent/child entity should be deleted when a required relationship is severed, then setup the relationship to use cascade deletes.  Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see the key values.
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.InternalEntityEntry.HandleConceptualNulls(Boolean sensitiveLoggingEnabled)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.CascadeDelete(InternalEntityEntry entry)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.GetInternalEntriesToSave()
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChanges(Boolean acceptAllChangesOnSuccess)" (170f029e)
+System.InvalidOperationException: The association between entity types 'HER_DocumentoBase' and 'HER_CategoriaDocumentoBase' has been severed but the relationship is either marked as 'Required' or is implicitly required because the foreign key is not nullable. If the dependent/child entity should be deleted when a required relationship is severed, then setup the relationship to use cascade deletes.  Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see the key values.
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.InternalEntityEntry.HandleConceptualNulls(Boolean sensitiveLoggingEnabled)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.CascadeDelete(InternalEntityEntry entry)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.GetInternalEntriesToSave()
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChanges(Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChanges()
+   at Hermes2018.Services.DocumentoService.BorrarDocumentoBaseAsync(String folio, Int32 documentobaseId) in C:\ProyectoHermes2021\Hermes2018\Hermes2018\Hermes2018\Services\DocumentoService.cs:line 640
+2022-05-09T19:07:10.9265719-05:00 0HMHI33P7I5I4:00000005 [ERR] DocumentoService:EliminarBorrador: The association between entity types 'HER_DocumentoBase' and 'HER_CategoriaDocumentoBase' has been severed but the relationship is either marked as 'Required' or is implicitly required because the foreign key is not nullable. If the dependent/child entity should be deleted when a required relationship is severed, then setup the relationship to use cascade deletes.  Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see the key values. (8bc7f103)
+2022-05-09T19:35:43.1616299-05:00 0HMHI3JMM9U3H:00000006 [ERR] An exception occurred in the database while saving changes for context type '"Hermes2018.Data.ApplicationDbContext"'."
+""System.InvalidOperationException: The association between entity types 'HER_DocumentoBase' and 'HER_CategoriaDocumentoBase' has been severed but the relationship is either marked as 'Required' or is implicitly required because the foreign key is not nullable. If the dependent/child entity should be deleted when a required relationship is severed, then setup the relationship to use cascade deletes.  Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see the key values.
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.InternalEntityEntry.HandleConceptualNulls(Boolean sensitiveLoggingEnabled)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.CascadeDelete(InternalEntityEntry entry)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.GetInternalEntriesToSave()
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChanges(Boolean acceptAllChangesOnSuccess)" (170f029e)
+System.InvalidOperationException: The association between entity types 'HER_DocumentoBase' and 'HER_CategoriaDocumentoBase' has been severed but the relationship is either marked as 'Required' or is implicitly required because the foreign key is not nullable. If the dependent/child entity should be deleted when a required relationship is severed, then setup the relationship to use cascade deletes.  Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see the key values.
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.InternalEntityEntry.HandleConceptualNulls(Boolean sensitiveLoggingEnabled)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.CascadeDelete(InternalEntityEntry entry)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.GetInternalEntriesToSave()
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChanges(Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChanges()
+   at Hermes2018.Services.DocumentoService.BorrarDocumentoBaseAsync(String folio, Int32 documentobaseId) in C:\ProyectoHermes2021\Hermes2018\Hermes2018\Hermes2018\Services\DocumentoService.cs:line 650
+2022-05-09T19:35:43.2656408-05:00 0HMHI3JMM9U3H:00000006 [ERR] DocumentoService:EliminarBorrador: The association between entity types 'HER_DocumentoBase' and 'HER_CategoriaDocumentoBase' has been severed but the relationship is either marked as 'Required' or is implicitly required because the foreign key is not nullable. If the dependent/child entity should be deleted when a required relationship is severed, then setup the relationship to use cascade deletes.  Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see the key values. (8bc7f103)
+2022-05-09T19:42:23.3026960-05:00 0HMHI3LFAN2UQ:00000006 [ERR] An exception occurred in the database while saving changes for context type '"Hermes2018.Data.ApplicationDbContext"'."
+""System.InvalidOperationException: The association between entity types 'HER_DocumentoBase' and 'HER_CategoriaDocumentoBase' has been severed but the relationship is either marked as 'Required' or is implicitly required because the foreign key is not nullable. If the dependent/child entity should be deleted when a required relationship is severed, then setup the relationship to use cascade deletes.  Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see the key values.
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.InternalEntityEntry.HandleConceptualNulls(Boolean sensitiveLoggingEnabled)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.CascadeDelete(InternalEntityEntry entry)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.GetInternalEntriesToSave()
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChanges(Boolean acceptAllChangesOnSuccess)" (170f029e)
+System.InvalidOperationException: The association between entity types 'HER_DocumentoBase' and 'HER_CategoriaDocumentoBase' has been severed but the relationship is either marked as 'Required' or is implicitly required because the foreign key is not nullable. If the dependent/child entity should be deleted when a required relationship is severed, then setup the relationship to use cascade deletes.  Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see the key values.
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.InternalEntityEntry.HandleConceptualNulls(Boolean sensitiveLoggingEnabled)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.CascadeDelete(InternalEntityEntry entry)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.GetInternalEntriesToSave()
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChanges(Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChanges(Boolean acceptAllChangesOnSuccess)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChanges()
+   at Hermes2018.Services.DocumentoService.BorrarDocumentoBaseAsync(String folio, Int32 documentobaseId) in C:\ProyectoHermes2021\Hermes2018\Hermes2018\Hermes2018\Services\DocumentoService.cs:line 645
+2022-05-09T19:42:27.2563245-05:00 0HMHI3LFAN2UQ:00000006 [ERR] DocumentoService:EliminarBorrador: The association between entity types 'HER_DocumentoBase' and 'HER_CategoriaDocumentoBase' has been severed but the relationship is either marked as 'Required' or is implicitly required because the foreign key is not nullable. If the dependent/child entity should be deleted when a required relationship is severed, then setup the relationship to use cascade deletes.  Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see the key values. (8bc7f103)

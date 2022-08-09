@@ -1,0 +1,230 @@
+﻿@page "/Usuarios/Detalles/{id}"
+@model Hermes2018.Areas.Identity.Pages.Usuarios.DetallesModel
+
+<div class="@string.Format("{0}", (ConstRol.RolUsuario.Contains(Model.Info.InfoUsuarioClaims.Rol))? "content-wrapper pt-1": "content-wrapper ml-0 bg-white pt-0")">
+    <div class="container-fluid" id="@string.Format("{0}", (ConstRol.RolUsuario.Contains(Model.Info.InfoUsuarioClaims.Rol))? string.Empty: "logged-in")">
+        <div class="row">
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-6 col-sm-8 col-md-8 col-lg-8 col-xl-8 pt-2">
+                        @if (Model.Info.Detalles.Tipo == 1)
+                        {
+                            <ol class="breadcrumb-2 mt-0 mb-0 pb-1 pt-1 display-inline">
+                                <li class="breadcrumb-2-item">
+                                    <a asp-area="" asp-controller="Home" asp-action="Index" asp-route-id="">Inicio</a>
+                                </li>
+
+                                <li class="breadcrumb-2-item"><a asp-area="Identity" asp-page="/Usuarios/Index">Usuarios</a></li>
+                                <li class="breadcrumb-2-item"><a asp-area="Identity" asp-page="/Usuarios/Administradores">Administradores</a></li>
+                                <li class="breadcrumb-2-item active" aria-current="page">Detalle usuario</li>
+                            </ol>
+                        }
+                        else if (Model.Info.Detalles.Tipo == 2)
+                        {
+                            @if (ConstRol.RolAdminGral.Contains(Model.Info.InfoUsuarioClaims.Rol))
+                            {
+                                <ol class="breadcrumb-2 mt-0 mb-0 pb-1 pt-1 display-inline">
+                                    <li class="breadcrumb-2-item">
+                                        <a asp-area="" asp-controller="Home" asp-action="Index" asp-route-id="">Inicio</a>
+                                    </li>
+
+                                    <li class="breadcrumb-2-item"><a asp-area="Identity" asp-page="/Usuario/Index">Usuarios</a></li>
+                                    <li class="breadcrumb-2-item"><a asp-area="Identity" asp-page="/Usuarios/Desglose">Desglose</a></li>
+                                    <li class="breadcrumb-2-item"><a asp-area="Identity" asp-page="/Usuarios/Region" asp-route-id="@Model.Info.Detalles.RegionId" asp-route-areapadreid="@Model.Info.Detalles.AreaPadreId">Región</a></li>
+                                    <li class="breadcrumb-2-item"><a asp-area="Identity" asp-page="/Usuarios/Area" asp-route-id="@Model.Info.Detalles.AreaId">Área</a></li>
+                                    <li class="breadcrumb-2-item active" aria-current="page">Detalle usuario</li>
+                                </ol>
+                            }
+                            else if (ConstRol.RolAdminRegional.Contains(Model.Info.InfoUsuarioClaims.Rol))
+                            {
+                                <ol class="breadcrumb-2 mt-0 mb-0 pb-1 pt-1 display-inline">
+                                    <li class="breadcrumb-2-item">
+                                        <a asp-area="" asp-controller="Home" asp-action="Index" asp-route-id="">Inicio</a>
+                                    </li>
+
+                                    <li class="breadcrumb-2-item"><a asp-area="Identity" asp-page="/Usuarios/Index">Usuarios</a></li>
+                                    <li class="breadcrumb-2-item"><a asp-area="Identity" asp-page="/Usuarios/Region" asp-route-id="@Model.Info.Detalles.RegionId" asp-route-areapadreid="@Model.Info.Detalles.AreaPadreId">Región</a></li>
+                                    <li class="breadcrumb-2-item"><a asp-area="Identity" asp-page="/Usuarios/Area" asp-route-id="@Model.Info.Detalles.AreaId">Área</a></li>
+                                    <li class="breadcrumb-2-item active" aria-current="page">Detalle usuario</li>
+                                </ol>
+                            }
+                            else if (ConstRol.RolUsuario.Contains(Model.Info.InfoUsuarioClaims.Rol))
+                            {
+                                <ol class="breadcrumb-2 mt-0 mb-0 pb-1 pt-1 display-inline">
+                                    <li class="breadcrumb-2-item">
+                                        <a asp-area="" asp-controller="Home" asp-action="Index" asp-route-id="">Inicio</a>
+                                    </li>
+
+                                    <li class="breadcrumb-2-item"><a asp-area="Identity" asp-page="/Usuarios/Index">Usuarios</a></li>
+                                    <li class="breadcrumb-2-item"><a asp-area="Identity" asp-page="/Usuarios/Area" asp-route-id="@Model.Info.Detalles.AreaId">Área</a></li>
+                                    <li class="breadcrumb-2-item active" aria-current="page">Detalle usuario</li>
+                                </ol>
+                            }
+                        }
+                    </div>
+                    <div class="col-6 col-sm-4 col-md-4 col-lg-4 col-xl-4 pt-2">
+
+                        <div class="float-right">
+                            <a asp-area="Identity" asp-page="/Usuarios/Permiso" asp-route-id="@Model.Info.Detalles.NombreUsuario" class="btn btn-sm md-btn-raised md-btn-ripple bg-secondary" title="Asignar permiso como Administrador del área">Permiso</a>
+                            @if (Model.Info.Detalles.Activo && !Model.Info.Detalles.EstaEnReasignacion && Model.Info.InfoUsuarioClaims.UserName != Model.Info.Detalles.NombreUsuario)
+                            {
+                                <a asp-area="Identity" asp-page="/Usuarios/Baja" asp-route-id="@Model.Info.Detalles.NombreUsuario" class="btn btn-sm md-btn-raised md-btn-ripple bg-secondary">Dar de baja</a>
+                            }
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <hr class="hr-thick mb-1 mt-1" />
+                        <h5>Detalle del usuario</h5>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 ">
+                        <div class="form-group">
+                            <label class="col-form-label pb-0 font-weight-bold">@Html.DisplayNameFor(model => model.Info.Detalles.Nombre)</label>
+                            <div class="">
+                                @Html.DisplayFor(model => model.Info.Detalles.Nombre)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 ">
+                        <div class="form-group">
+                            <label class=" col-form-label pb-0 font-weight-bold">@Html.DisplayNameFor(model => model.Info.Detalles.NombreUsuario)</label>
+                            <div class="">
+                                @Html.DisplayFor(model => model.Info.Detalles.NombreUsuario)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 ">
+                        <div class="form-group">
+                            <label class=" col-form-label pb-0 font-weight-bold">@Html.DisplayNameFor(model => model.Info.Detalles.Correo)</label>
+                            <div class="">
+                                @Html.DisplayFor(model => model.Info.Detalles.Correo)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 ">
+                        <div class="form-group">
+                            <label class="col-form-label pb-0 font-weight-bold">@Html.DisplayNameFor(model => model.Info.Detalles.RolNombre)</label>
+                            <div class="">
+                                @Html.DisplayFor(model => model.Info.Detalles.RolNombre)
+                            </div>
+                        </div>
+                    </div>
+
+                    @if (Model.Info.Detalles.Tipo == 2)
+                    {
+
+                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 ">
+                            <div class="form-group">
+                                <label class="col-form-label pb-0 font-weight-bold">@Html.DisplayNameFor(model => model.Info.Detalles.PuestoNombre)</label>
+                                <div class="">
+                                    @Html.DisplayFor(model => model.Info.Detalles.PuestoNombre)
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 ">
+                            <div class="form-group">
+                                <label class="col-form-label pb-0 font-weight-bold">@Html.DisplayNameFor(model => model.Info.Detalles.EsUnico)</label>
+                                <div class="">
+                                    @Html.DisplayFor(model => model.Info.Detalles.EsUnico)
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 ">
+                            <div class="form-group">
+                                <label class="col-form-label pb-0 font-weight-bold">@Html.DisplayNameFor(model => model.Info.Detalles.AreaNombre)</label>
+                                <div class="">
+                                    @Html.DisplayFor(model => model.Info.Detalles.AreaNombre)
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 ">
+                            <div class="form-group">
+                                <label class="col-form-label pb-0 font-weight-bold">@Html.DisplayNameFor(model => model.Info.Detalles.EstaAprobado)</label>
+                                <div class="">
+                                    @Html.DisplayFor(model => model.Info.Detalles.EstaAprobado)
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 ">
+                            <div class="form-group">
+                                <label class="col-form-label pb-0 font-weight-bold">@Html.DisplayNameFor(model => model.Info.Detalles.FechaAprobado)</label>
+                                <div class="">
+                                    @Html.DisplayFor(model => model.Info.Detalles.FechaAprobado)
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 ">
+                            <div class="form-group">
+                                <label class="col-form-label pb-0 font-weight-bold">@Html.DisplayNameFor(model => model.Info.Detalles.Titular)</label>
+                                <div class="">
+                                    @Html.DisplayFor(model => model.Info.Detalles.Titular)
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 ">
+                            <div class="form-group">
+                                <label class="col-form-label pb-0 font-weight-bold">@Html.DisplayNameFor(model => model.Info.Detalles.Estado)</label>
+                                <div class="">
+                                    @Html.DisplayFor(model => model.Info.Detalles.Estado)
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 ">
+                        <div class="form-group ">
+                            <label class=" col-form-label pb-0 font-weight-bold">@Html.DisplayNameFor(model => model.Info.Detalles.AceptoTerminos)</label>
+                            <div class="">
+                                @Html.DisplayFor(model => model.Info.Detalles.AceptoTerminos)
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 ">
+                        <div class="form-group ">
+                            <label class=" col-form-label pb-0 font-weight-bold">@Html.DisplayNameFor(model => model.Info.Detalles.Permiso)</label>
+                            <div class="">
+                                @Html.DisplayFor(model => model.Info.Detalles.Permiso)
+                            </div>
+                        </div>
+                    </div>
+
+                    @if (Model.Info.Detalles.AceptoTerminos == ConstTerminos.TerminosSi)
+                    {
+                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 ">
+                            <div class="form-group">
+                                <label class="col-form-label pb-0 font-weight-bold">@Html.DisplayNameFor(model => model.Info.Detalles.FechaTerminos)</label>
+                                <div class="">
+                                    @Html.DisplayFor(model => model.Info.Detalles.FechaTerminos)
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 ">
+                        <div class="form-group">
+                            <label class="col-form-label pb-0 font-weight-bold">@Html.DisplayNameFor(model => model.Info.Detalles.FechaRegistro)</label>
+                            <div class="">
+                                @Html.DisplayFor(model => model.Info.Detalles.FechaRegistro)
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 ">
+                        <div class="form-group">
+                            <label class="col-form-label pb-0 font-weight-bold">@Html.DisplayNameFor(model => model.Info.Detalles.FechaActualizacionRegistro)</label>
+                            <div class="">
+                                @Html.DisplayFor(model => model.Info.Detalles.FechaActualizacionRegistro)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

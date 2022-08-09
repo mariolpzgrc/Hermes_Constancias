@@ -1,0 +1,228 @@
+﻿@page "/Areas/Crear/{id:int}"
+@model CrearModel
+
+@section styles
+    {
+    <link type="text/css" rel="stylesheet" href="~/lib/bootstrap4-toggle/css/bootstrap4-toggle.min.css">
+    <link type="text/css" rel="stylesheet" href="~/lib/jquery-bootstrap-touchspin/jquery.bootstrap-touchspin.min.css">
+    <link type="text/css" rel="stylesheet" href="~/css/Areas/Identity/Pages/Areas/Crear.min.css" asp-append-version="true" />
+}
+@section ScriptsPrioritarios
+    {
+    <script type="text/javascript" src="~/lib/bootstrap4-toggle/js/bootstrap4-toggle.min.js"></script>
+    <script type="text/javascript" src="~/lib/jquery-bootstrap-touchspin/jquery.bootstrap-touchspin.min.js"></script>
+}
+
+<div class="content-wrapper ml-0 bg-white pt-0">
+    <div class="container-fluid" id="logged-in">
+        <div class="row">
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 pt-2">
+                        <ol class="breadcrumb-2 mt-0 mb-0 pb-1 pt-1 display-inline">
+                            <li class="breadcrumb-2-item">
+                                <a asp-area="" asp-controller="Home" asp-action="Index" asp-route-id="">Inicio</a>
+                            </li>
+
+                            @if (Model.EsAdminGral)
+                            {
+                                <li class="breadcrumb-2-item">
+                                    <a asp-area="Identity" asp-page="/Areas/Region" asp-route-id="">Regiones</a>
+                                </li>
+                            }
+                            <li class="breadcrumb-2-item">
+                                <a asp-area="Identity" asp-page="/Areas/Index" asp-route-id="@Model.RegionId">Áreas</a>
+                            </li>
+                            <li class="breadcrumb-2-item active display-flex" aria-current="page">Nueva área</li>
+                        </ol>
+                    </div>
+                    <div class="col-12">
+                        <hr class="hr-thick mb-1 mt-1" />
+                        <h5>Nueva área</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <form method="post" enctype="multipart/form-data" id="formConAdjunto">
+                    <div class="row">
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                            <div asp-validation-summary="ModelOnly" class="text-danger error-list-clean"></div>
+                            <input asp-for="RegionId" class="sin-indicador" />
+                            <input asp-for="EsAdminGral" class="sin-indicador" />
+
+                            <div class="row">
+                                <div class="col-12 col-sm-5 col-md-6 col-lg-6 col-xl-6">
+                                    <div class="form-group">
+                                        <label asp-for="Crear.Nombre" class="col-form-label font-bold-12"></label>
+                                        <div class="">
+                                            <input asp-for="Crear.Nombre" type="text" class="form-control form-control-sm" placeholder="Área" />
+                                            <small class="form-text text-muted">El nombre del área debe ser como máximo de 100 caracteres.</small>
+                                            <span asp-validation-for="Crear.Nombre" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                                    <div class="form-group">
+                                        <label asp-for="Crear.Clave" class="col-form-label font-bold-12"></label>
+                                        <div class="">
+                                            <input asp-for="Crear.Clave" type="text" class="form-control form-control-sm" placeholder="Clave" />
+                                            <span asp-validation-for="Crear.Clave" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-4 col-md-3 col-lg-3 col-xl-3">
+                                    <div class="form-group">
+                                        <label asp-for="Crear.Dias_Compromiso" class="col-form-label font-bold-12"></label>
+                                        <div class="">
+                                            <input asp-for="Crear.Dias_Compromiso" type="text" value="" class="form-control form-control-sm text-center disabled" placeholder="" />
+                                            <small class="form-text text-muted">Solo se toman en cuenta los días hábiles.</small>
+                                            <span asp-validation-for="Crear.Dias_Compromiso" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                                    <div class="form-group">
+                                        <label asp-for="Crear.Direccion" class="col-form-label font-bold-12"></label>
+                                        <div class="input-group">
+                                            <textarea asp-for="Crear.Direccion" class="form-control" placeholder="Dirección" rows="4"></textarea>
+                                        </div>
+                                        <small class="form-text text-muted">La dirección debe ser como máximo de 200 caracteres, y solo será utilizada como referencia para el registro de usuarios.</small>
+                                        <span asp-validation-for="Crear.Direccion" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-4 col-md-4 col-lg-4 col-xl-4">
+                                    <div class="form-group">
+                                        <label asp-for="Crear.Telefono" class="col-form-label font-bold-12"></label>
+                                        <div class="input-group date">
+                                            <input asp-for="Crear.Telefono" type="text" class="form-control form-control-sm" placeholder="Teléfono" />
+                                        </div>
+                                        <small class="form-text text-muted">El teléfono solo será utilizado como referencia para el registro de usuarios.</small>
+                                        <span asp-validation-for="Crear.Telefono" class="text-danger"></span>
+                                    </div>
+                                </div>
+
+                                <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                    <div class="row">
+                                        <div class="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                                            <div class="form-group">
+                                                <label asp-for="Crear.AgregarLogo" class="col-form-label font-bold-12"></label>
+                                                <div class="input-group date">
+                                                    <input asp-for="Crear.AgregarLogo" type="checkbox" data-toggle="toggle" data-size="sm" data-on="Si" data-off="No" data-width="50" data-onstyle="secondary" data-offstyle="light" data-style="border" />
+                                                </div>
+                                                <span asp-validation-for="Crear.AgregarLogo" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6 contiene-logo @string.Format("{0}", (Model.Crear !=null)? Model.Crear.AgregarLogo? "" :"d-none" :"d-none")">
+                                            <div class="form-group">
+                                                <label asp-for="Crear.Logo" class="col-form-label font-bold-12"></label>
+                                                <span class="indicador">*</span>
+                                                <div class="input-group">
+                                                    <input asp-for="Crear.Logo" type="file" class="form-control" placeholder="" />
+                                                </div>
+                                                <small class="form-text text-muted">Seleccione una imagen: .jpg, .jpeg, .png</small>
+                                                <span asp-validation-for="Crear.Logo" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-12 col-sm-6 col-md-2 col-lg-2 col-xl-2">
+                                    <div class="form-group">
+                                        <label asp-for="Crear.Visible" class="col-form-label font-bold-12"></label>
+                                        <div class="input-group date">
+                                            <input asp-for="Crear.Visible" type="checkbox" checked data-toggle="toggle" data-size="sm" data-on="Si" data-off="No" data-width="50" data-onstyle="secondary" data-offstyle="light" data-style="border" />
+                                        </div>
+                                        <span asp-validation-for="Crear.Visible" class="text-danger"></span>
+                                    </div>
+                                </div>
+
+                                <div class="col-12 col-sm-6 col-md-2 col-lg-2 col-xl-2">
+                                    <div class="form-group">
+                                        <label asp-for="Crear.AsignarAreaPadre" class="col-form-label font-bold-12"></label>
+                                        <div class="input-group">
+                                            <input asp-for="Crear.AsignarAreaPadre" type="checkbox" data-toggle="toggle" data-size="sm" data-on="Si" data-off="No" data-width="50" data-onstyle="secondary" data-offstyle="light" data-style="border" />
+                                        </div>
+                                        <span asp-validation-for="Crear.AsignarAreaPadre" class="text-danger"></span>
+                                    </div>
+                                </div>
+
+                                @if (Model.EsAdminGral)
+                                {
+                                    <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-4 contiene-area-padre @string.Format("{0}", (Model.Crear !=null)? Model.Crear.AsignarAreaPadre? "" :"d-none" :"d-none")">
+                                        <div class="form-group">
+
+                                            <label asp-for="Crear.RegionId" class="col-form-label font-bold-12"></label>
+                                            <div class="input-group date">
+                                                <select asp-items="Model.Regiones" asp-for="Crear.RegionId" class="form-control">
+                                                    <option value="">[Seleccione una región]</option>
+                                                </select>
+                                            </div>
+                                            <span asp-validation-for="Crear.RegionId" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-4 contiene-area-padre @string.Format("{0}", (Model.Crear !=null)? Model.Crear.AsignarAreaPadre? "" :"d-none" :"d-none")">
+                                        <div class="form-group">
+                                            <label asp-for="Crear.Area_PadreId" class="col-form-label font-bold-12"></label>
+                                            <div class="input-group">
+                                                @if (Model.Crear != null)
+                                                {
+                                                    @if (Model.Crear.AsignarAreaPadre)
+                                                    {
+                                                        <select asp-items="Model.Areas" asp-for="Crear.Area_PadreId" class="form-control">
+                                                            <option selected value="">[Seleccione una región]</option>
+                                                        </select>
+                                                    }
+                                                    else
+                                                    {
+                                                        <select asp-for="Crear.Area_PadreId" class="form-control">
+                                                            <option selected value="">[Seleccione una región]</option>
+                                                        </select>
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    <select asp-for="Crear.Area_PadreId" class="form-control">
+                                                        <option selected value="">[Seleccione una región]</option>
+                                                    </select>
+                                                }
+                                            </div>
+                                            <span asp-validation-for="Crear.Area_PadreId" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-4 contiene-area-padre @string.Format("{0}", (Model.Crear !=null)? Model.Crear.AsignarAreaPadre? "" :"d-none" :"d-none")">
+                                        <div class="form-group">
+                                            <label asp-for="Crear.Area_PadreId" class="col-form-label font-bold-12"></label>
+                                            <div class="input-group">
+                                                <input asp-for="Crear.RegionId" value="@Model.RegionId" hidden />
+                                                <select asp-items="Model.Areas" asp-for="Crear.Area_PadreId" class="form-control">
+                                                    <option selected value="">[Seleccione un área]</option>
+                                                </select>
+                                            </div>
+                                            <span asp-validation-for="Crear.Area_PadreId" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                }
+
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                            <div class="pt-2">
+                                <a asp-area="Identity" asp-page="/Areas/Index" asp-route-id="@Model.RegionId" class="btn btn-light">Cancelar</a>
+                                <button type="submit" class="btn btn-primary">Guardar</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts
+    {
+    <partial name="_ValidationScriptsPartial" />
+    <script type="text/javascript" src="~/js/Areas/Identity/Pages/Areas/Crear.min.js" asp-append-version="true"></script>
+}

@@ -1,0 +1,105 @@
+﻿@page "/Constancias/Solicitud/SolicitudMasiva/"
+@model Hermes2018.Areas.Identity.Pages.Constancias.Solicitud.SolicitudMasivaModel
+
+@section Styles
+    {
+    <link type="text/css" rel="stylesheet" href="~/lib/bootstrap-daterangepicker/daterangepicker.min.css" />
+    <link type="text/css" rel="stylesheet" href="~/css/linear-activity.min.css" />
+    <link type="text/css" rel="stylesheet" href="~/css/Areas/Identity/Pages/Constancias/Solicitud/SolicitudMasiva.css" asp-append-version="true" />
+}
+
+<div class="content-wrapper  pt-0">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 mb-1">
+                <ol class="breadcrumb-2 mt-0 mb-0 display-inline">
+                    <li class="breadcrumb-2-item active display-flex font-weight-bold">
+                        Solicitud masiva de constancias
+                    </li>
+                    <li class="flex-right">
+                        <a asp-area="Identity" asp-page="/Constancias/Solicitud/SolicitudConstancia" asp-route-id="" class="md-btn md-btn-raised md-btn-ripple bg-secondary">Regresar</a>
+                    </li>
+                </ol>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-4 col-lg-4 col-xl-4">
+                        <label for="solicitante">Solicitante:</label>
+                        <div class="input-group">
+                            <input class="form-control form-control-sm pr-4" id="solicitante" type="text" maxlength="100">
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-4 col-lg-4 col-xl-4">
+                        <label for="noOficio">No. Oficio:</label>
+                        <div class="input-group">
+                            <input class="form-control form-control-sm pr-4" id="noOficio" type="text" maxlength="100">
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-4 col-lg-4 col-xl-4">
+                        <label for="fechaOficio">Fecha de Oficio:</label>
+                        <div class="input-group">
+                            <input class="form-control form-control-sm pr-4" id="fechaOficio" type="text" maxlength="100">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-4 col-lg-4 col-xl-4">
+                        <label for="fechaRecepcion">Fecha de Recepción:</label>
+                        <div class="input-group">
+                            <input class="form-control form-control-sm pr-4" id="fechaRecepcion" type="text" maxlength="100">
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-4 col-lg-4 col-xl-4">
+                        <label for="folio">Folio:</label>
+                        <div class="input-group">
+                            <input class="form-control form-control-sm pr-4" id="folio" type="text" maxlength="100">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br />
+        <hr class="mt-0 mb-1" />
+        <br />
+        <div class="row">
+            <div class="col-12">
+                <div id="contiene-cargador">
+                    <div class="linear-activity loader d-none">
+                        <div class="indeterminate"></div>
+                    </div>
+                </div>
+                <div class="table-resposive alto-minimo-bandejas" id="tabla-solicitud-masiva">
+                    <table class="table table-hover table-sm responsive mb-0" id="tablaSolicitudMasiva">
+                        <thead class="bg-light">
+                            <tr>
+                                <th scope="col" id="npers" width="5%">Número de Personal</th>
+                                <th scope="col" id="nombre" width="30%">Nombre</th>
+                                <th scope="col" id="tp" width="5%">Tipo Personal</th>
+                                <th scope="col" id="clave" width="5%">Clave constancia</th>
+                                <th scope="col" id="constancia" width="10%">Constancia</th>
+                                <th scope="col" id="fechabaja" width="10%">Fecha de baja</th>
+                                <th scope="col" id="resposable" width="5%">Responsable administrativo</th>
+                                <th scope="col" id="nombreResponsable" width="30%">Nombre del responsable</th>
+                            </tr>
+                        </thead>
+                        <tbody  class="table-bordered" id="cuerpoTablaSolicitudMasiva">
+                        </tbody>
+                    </table>
+                    <br />
+                    <div class="form-group container-fluid text-center">
+                        <button class="md-btn md-btn-raised md-btn-ripple bg-secondary" type="button" onclick="agregarFila()">Agregar Solicitud</button>
+                        <button class="md-btn md-btn-raised md-btn-ripple bg-secondary" type="button" onclick="eliminarFila()">Eliminar Solicitud</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts
+    {
+    <script type="text/javascript" src="~/js/Areas/Identity/Pages/Constancias/Solicitud/SolicitudMasiva.js" asp-append-version="true"></script>
+}

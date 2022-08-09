@@ -1,0 +1,69 @@
+﻿@page "/Subcarpetas/{id:int}"
+@model IndexModel
+
+<div class="content-wrapper pt-0">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 pt-2">
+                        <ol class="breadcrumb-2 mt-0 mb-0 pb-1 pt-1 display-inline">
+                            <li class="breadcrumb-2-item">
+                                <a asp-area="" asp-controller="Home" asp-action="Index" asp-route-id="">Inicio</a>
+                            </li>
+
+                            <li class="breadcrumb-2-item">
+                                <a asp-area="Identity" asp-page="/Carpetas/Index">Carpetas</a>
+                            </li>
+                            <li class="breadcrumb-2-item active display-flex" aria-current="page">Subcarpetas</li>
+                        </ol>
+                    </div>
+                    <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 pt-2">
+                        <div class="float-right pt-2">
+                            @if (!Model.ActivaDelegacion || (Model.ActivaDelegacion && Model.BandejaPermiso == ConstDelegar.TipoN1))
+                            {
+                                <a asp-area="Identity" asp-page="/Subcarpetas/Crear" asp-route-id="@Model.CarpetaPadreId" class="btn btn-sm md-btn-raised md-btn-ripple bg-primary">Nuevo</a>
+                            }
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <hr class="hr-thick mb-1 mt-1" />
+                        <h5>Subcarpetas</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="table-responsive">
+                    <table class="table table-hover table-sm border-bottom responsive">
+                        <thead class="bg-light">
+                            <tr>
+                                <th>
+                                    Subcarpeta
+                                </th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.Subcarpetas)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Nombre)
+                                    </td>
+                                    <td class="font-regular-12 text-center">
+                                        <a asp-area="Identity" asp-page="/Subcarpetas/Detalles" asp-route-id="@item.SubcarpetaId" asp-route-carpetapadreid="@Model.CarpetaPadreId" class="pl-2 pr-2" title="Detalles"><i class="fab fa-wpforms font-gray"></i></a>
+                                        @if (!Model.ActivaDelegacion || (Model.ActivaDelegacion && Model.BandejaPermiso == ConstDelegar.TipoN1))
+                                        {
+                                            <a asp-area="Identity" asp-page="/Subcarpetas/Editar" asp-route-id="@item.SubcarpetaId" asp-route-carpetapadreid="@Model.CarpetaPadreId" class="pl-2 pr-2" title="Editar"><i class="far fa-edit font-gray"></i></a>
+                                            <a asp-area="Identity" asp-page="/Subcarpetas/Borrar" asp-route-id="@item.SubcarpetaId" asp-route-carpetapadreid="@Model.CarpetaPadreId" class="pl-2 pr-2" title="Borrar"><i class="far fa-trash-alt font-gray"></i></a>
+                                        }
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

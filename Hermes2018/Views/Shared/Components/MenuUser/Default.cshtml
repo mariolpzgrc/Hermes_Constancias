@@ -1,0 +1,219 @@
+﻿@model RolViewComponentModel
+
+<li class="nav-item dropdown">
+	<!--Herramientas-->
+	<a class="nav-link nav-link-white" id="messagesDropdown" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		<i class="fas fa-th"></i>
+		<span class="d-lg-none">
+			Herramientas
+		</span>
+	</a>
+    <div class="pt-0 pb-0 dropdown-menu dropdown-menu-right" aria-labelledby="messagesDropdown">
+        <h6 class="dropdown-header pt-2 pb-1">Lista de Herramientas:</h6>
+        <div class="dropdown-divider mt-1 mb-1"></div>
+
+        @switch (Model.Rol)
+        {
+            case ConstRol.Rol1T:
+                <a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="Index" asp-route-id="">
+                    <strong>Inicio</strong>
+                    <div class="dropdown-message small">Página principal.</div>
+                </a>
+                <div class="dropdown-divider mt-1 mb-1"></div>
+                <a class="dropdown-item" asp-area="Identity" asp-page="/Usuarios/Index" asp-route-id="">
+                    <strong>Usuarios</strong>
+                    <div class="dropdown-message small">Altas y bajas de usuarios.</div>
+                </a>
+                <div class="dropdown-divider mt-1 mb-1"></div>
+                <a class="dropdown-item" asp-area="Identity" asp-page="/Areas/Region" asp-route-id="">
+                    <strong>Áreas de Trabajo</strong>
+                    <div class="dropdown-message small">Altas y bajas de áreas.</div>
+                </a>
+                <div class="dropdown-divider mt-1 mb-1"></div>
+                <a class="dropdown-item" asp-area="Identity" asp-page="/Calendarios/Index" asp-route-id="">
+                    <strong>Calendarios</strong>
+                    <div class="dropdown-message small">Altas y bajas de calendarios.</div>
+                </a>
+                @*<div class="dropdown-divider mt-1 mb-1"></div>
+                <a class="dropdown-item" asp-area="Identity" asp-page="/Puestos/Index" asp-route-id="">
+                    <strong>Puestos</strong>
+                    <div class="dropdown-message small">Altas y bajas de puestos.</div>
+                </a>*@
+                <div class="dropdown-divider mt-1 mb-1"></div>
+                <a class="dropdown-item" asp-area="Identity" asp-page="/Configuracion/General/Index" asp-route-id="">
+                    <strong>Configuración General</strong>
+                    <div class="dropdown-message small">Altas y bajas de la configuración general.</div>
+                </a>
+                <div class="dropdown-divider mt-1 mb-1"></div>
+                <a class="dropdown-item" asp-area="Identity" asp-page="/Recopilacion/General/Index" asp-route-id="">
+                    <strong>Estadísticas (Recopilación)</strong>
+                    <div class="dropdown-message small">De sus documentos enviados y recibidos.</div>
+                </a>
+                @*<div class="dropdown-divider mt-1 mb-1"></div>
+                <a class="dropdown-item" href="#">
+                    <strong>Bitácora</strong>
+                    <div class="dropdown-message small">Bitácora del sistema.</div>
+                </a>*@
+
+                break;
+            case ConstRol.Rol2T:
+            case ConstRol.Rol3T:
+            case ConstRol.Rol4T:
+            case ConstRol.Rol5T:
+            case ConstRol.Rol6T:
+
+                <a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="Index" asp-route-id="">
+                    <strong>Inicio</strong>
+                    <div class="dropdown-message small">Página principal.</div>
+                </a>
+                <div class="dropdown-divider mt-1 mb-1"></div>
+                <a class="dropdown-item" asp-area="Identity" asp-page="/Usuarios/Index" asp-route-id="">
+                    <strong>Usuarios</strong>
+                    <div class="dropdown-message small">Altas y bajas de usuarios.</div>
+                </a>
+                <div class="dropdown-divider mt-1 mb-1"></div>
+                <a class="dropdown-item" asp-area="Identity" asp-page="/Areas/Index" asp-route-id="@ViewData["Region"]">
+                    <strong>Áreas de Trabajo</strong>
+                    <div class="dropdown-message small">Altas y bajas de áreas.</div>
+                </a>
+                <div class="dropdown-divider mt-1 mb-1"></div>
+                <a class="dropdown-item" asp-area="Identity" asp-page="/Servicios/Index" asp-route-id="">
+                    <strong>Servicios</strong>
+                    <div class="dropdown-message small">Altas y bajas de servicios.</div>
+                </a>
+                <div class="dropdown-divider mt-1 mb-1"></div>
+                <a class="dropdown-item" asp-area="Identity" asp-page="/Recopilacion/Region/Index" asp-route-id="">
+                    <strong>Estadísticas (Recopilación)</strong>
+                    <div class="dropdown-message small">De sus documentos enviados y recibidos.</div>
+                </a>
+                <div class="dropdown-divider mt-1 mb-1"></div>
+                <a class="dropdown-item" href="#">
+                    <strong>Bitácora</strong>
+                    <div class="dropdown-message small">Bitácora del sistema.</div>
+                </a>
+
+                break;
+            case ConstRol.Rol7T:
+                <a class="dropdown-item" asp-area="Identity" asp-page="/Bandejas/Recibidos" asp-route-id="">
+                    <strong>Inicio</strong>
+                    <div class="dropdown-message small">Página principal.</div>
+                </a>
+                <div class="dropdown-divider mt-1 mb-1"></div>
+                <a class="dropdown-item" asp-area="Identity" asp-page="/Delegar/Index" asp-route-id="">
+                    <strong>Delegados</strong>
+                    <div class="dropdown-message small">Administración de delegados.</div>
+                </a>
+                <div class="dropdown-divider mt-1 mb-1"></div>
+                <a class="dropdown-item" asp-area="Identity" asp-page="/Grupos/Index" asp-route-id="">
+                    <strong>Grupo de usuarios</strong>
+                    <div class="dropdown-message small">Administre sus grupos.</div>
+                </a>
+                <div class="dropdown-divider mt-1 mb-1"></div>
+                <a class="dropdown-item" asp-area="" asp-action="Index" asp-controller="Categorias" asp-route-id="">
+                    <strong>Categorías</strong>
+                    <div class="dropdown-message small">Administre sus categorías.</div>
+                </a>
+                <div class="dropdown-divider mt-1 mb-1"></div>
+                <a class="dropdown-item" asp-area="Identity" asp-page="/Carpetas/Index">
+                    <strong>Carpetas</strong>
+                    <div class="dropdown-message small">Administre sus carpetas de documentos.</div>
+                </a>
+                <div class="dropdown-divider mt-1 mb-1"></div>
+                <a class="dropdown-item" asp-area="Identity" asp-page="/Plantillas/Index">
+                    <strong>Plantillas</strong>
+                    <div class="dropdown-message small">Administre sus plantillas.</div>
+                </a>
+                <div class="dropdown-divider mt-1 mb-1"></div>
+                <a class="dropdown-item" asp-area="Identity" asp-page="/Estadisticas/Estadisticas" asp-route-id="">
+                    <strong>Estadísticas</strong>
+                    <div class="dropdown-message small">De sus documentos enviados y recibidos.</div>
+                </a>
+
+                if (Model.PermisoAA)
+                {
+                    <div class="dropdown-divider mt-1 mb-1"></div>
+                    <a class="dropdown-item" asp-area="Identity" asp-page="/Administracion/Areas/Index" asp-route-id="">
+                        <strong>Áreas</strong>
+                        <div class="dropdown-message small">Altas y bajas de áreas.</div>
+                    </a>
+                    <div class="dropdown-divider mt-1 mb-1"></div>
+                    <a class="dropdown-item" asp-area="Identity" asp-page="/Administracion/Usuarios/Index" asp-route-id="">
+                        <strong>Usuarios</strong>
+                        <div class="dropdown-message small">Altas y bajas de usuarios.</div>
+                    </a>
+                    <div class="dropdown-divider mt-1 mb-1"></div>
+                    <a class="dropdown-item" asp-area="" asp-controller="Solicitudes" asp-action="Index" asp-route-id="">
+                        <strong>Solicitudes</strong>
+                        <div class="dropdown-message small">Solicitudes de Usuarios.</div>
+                    </a>
+                    <div class="dropdown-divider mt-1 mb-1"></div>
+                    <a class="dropdown-item" asp-area="Identity" asp-page="/Recopilacion/Area/Index" asp-route-id="">
+                        <strong>Estadísticas (Recopilación)</strong>
+                        <div class="dropdown-message small">De sus documentos enviados y recibidos.</div>
+                    </a>
+                }
+                break;
+            case ConstRol.Rol8T:
+                <a class="dropdown-item" asp-area="Identity" asp-page="/Bandejas/Recibidos" asp-route-id="">
+                    <strong>Inicio</strong>
+                    <div class="dropdown-message small">Página principal.</div>
+                </a>
+                <div class="dropdown-divider mt-1 mb-1"></div>
+                <a class="dropdown-item" asp-area="Identity" asp-page="/Delegar/Index" asp-route-id="">
+                    <strong>Delegados</strong>
+                    <div class="dropdown-message small">Administración de delegados.</div>
+                </a>
+                <div class="dropdown-divider mt-1 mb-1"></div>
+                <a class="dropdown-item" asp-area="Identity" asp-page="/Grupos/Index" asp-route-id="">
+                    <strong>Grupo de usuarios</strong>
+                    <div class="dropdown-message small">Administre sus grupos.</div>
+                </a>
+                <div class="dropdown-divider mt-1 mb-1"></div>
+                <a class="dropdown-item" asp-area="" asp-action="Index" asp-controller="Categorias" asp-route-id="">
+                    <strong>Categorías</strong>
+                    <div class="dropdown-message small">Administre sus categorías.</div>
+                </a>
+                <div class="dropdown-divider mt-1 mb-1"></div>
+                <a class="dropdown-item" asp-area="Identity" asp-page="/Carpetas/Index">
+                    <strong>Carpetas</strong>
+                    <div class="dropdown-message small">Administre sus carpetas de documentos.</div>
+                </a>
+                <div class="dropdown-divider mt-1 mb-1"></div>
+                <a class="dropdown-item" asp-area="Identity" asp-page="/Plantillas/Index">
+                    <strong>Plantillas</strong>
+                    <div class="dropdown-message small">Administre sus plantillas.</div>
+                </a>
+                <div class="dropdown-divider mt-1 mb-1"></div>
+                <a class="dropdown-item" asp-area="Identity" asp-page="/Estadisticas/Estadisticas" asp-route-id="">
+                    <strong>Estadísticas</strong>
+                    <div class="dropdown-message small">De sus documentos enviados y recibidos.</div>
+                </a>
+
+                if (Model.PermisoAA)
+                {
+                    <div class="dropdown-divider mt-1 mb-1"></div>
+                    <a class="dropdown-item" asp-area="Identity" asp-page="/Administracion/Areas/Index" asp-route-id="">
+                        <strong>Áreas</strong>
+                        <div class="dropdown-message small">Altas y bajas de áreas.</div>
+                    </a>
+                    <div class="dropdown-divider mt-1 mb-1"></div>
+                    <a class="dropdown-item" asp-area="Identity" asp-page="/Administracion/Usuarios/Index" asp-route-id="">
+                        <strong>Usuarios</strong>
+                        <div class="dropdown-message small">Altas y bajas de usuarios.</div>
+                    </a>
+                    <div class="dropdown-divider mt-1 mb-1"></div>
+                    <a class="dropdown-item" asp-area="" asp-controller="Solicitudes" asp-action="Index" asp-route-id="">
+                        <strong>Solicitudes</strong>
+                        <div class="dropdown-message small">Solicitudes de Usuarios.</div>
+                    </a>
+                    <div class="dropdown-divider mt-1 mb-1"></div>
+                    <a class="dropdown-item" asp-area="Identity" asp-page="/Recopilacion/Area/Index" asp-route-id="">
+                        <strong>Estadísticas (Recopilación)</strong>
+                        <div class="dropdown-message small">De sus documentos enviados y recibidos.</div>
+                    </a>
+                }
+                break;
+        }
+
+    </div>
+</li>

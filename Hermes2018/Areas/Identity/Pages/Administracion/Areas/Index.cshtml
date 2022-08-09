@@ -1,0 +1,80 @@
+﻿@page "/Administracion/Areas"
+@model Hermes2018.Areas.Identity.Pages.Administracion.Areas.IndexModel
+
+    <div class="content-wrapper pt-1">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="row">
+                        <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 pt-2">
+                            <ol class="breadcrumb-2 mt-0 mb-0 pb-1 pt-1 display-inline">
+                                <li class="breadcrumb-2-item">
+                                    <a asp-area="" asp-controller="Home" asp-action="Index" asp-route-id="">Inicio</a>
+                                </li>
+
+                                <li class="breadcrumb-2-item active display-flex">
+                                    Áreas
+                                </li>
+                            </ol>
+                        </div>
+                        <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 pt-2">
+                            <div class="float-right">
+                                @if (Model.ExisteEnSIIU)
+                                { 
+                                    <a asp-area="Identity" asp-page="/Administracion/Areas/Detectar" asp-route-id="" class="btn btn-sm md-btn-raised md-btn-ripple bg-secondary" title="Detectar subáreas">Detectar</a>
+                                }
+                                <a asp-area="Identity" asp-page="/Administracion/Areas/Crear" asp-route-id="" class="btn btn-sm md-btn-raised md-btn-ripple bg-primary" title="Crear un área">Nuevo</a>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <hr class="hr-thick mb-1 mt-1" />
+                            <h5>Áreas</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="table-responsive">
+                        <table class="table table-hover table-sm border-bottom responsive">
+                            <thead class="bg-light">
+                                <tr>
+                                    <th scope="col">Nombre</th>
+                                    <th scope="col" class="text-center">Visible</th>
+                                    <th scope="col" class="text-center">Usuarios</th>
+                                    <th scope="col" class="text-center">Estado</th>
+                                    <th scope="col" class="text-center">Nivel</th>
+                                    <th class="text-center"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var area in Model.Listado)
+                                {
+                                    <tr>
+                                        <td>@area.Nombre</td>
+                                        <td class="text-center">@area.Visible</td>
+                                        <td class="text-center">@area.TotalUsuarios</td>
+                                        <td class="text-center">@area.Estado</td>
+                                        <td class="text-center">@area.Tipo</td>
+
+                                        <td class="font-regular-12 text-center">
+                                            @if (area.TipoId == ConstTipoArea.TipoN1)
+                                            {
+                                                @*<a asp-area="Identity" asp-page="/Administracion/Usuarios/Area" asp-route-id="@area.AreaId" asp-route-tipo="@area.TipoId" class="pl-2 pr-2" title="Entrar"><i class="fab fa-wpforms font-gray"></i></a>*@
+                                            }
+                                            else
+                                            {
+                                                @*<a asp-area="Identity" asp-page="/Administracion/Usuarios/Area" asp-route-id="@area.AreaId" asp-route-tipo="@area.TipoId" asp-route-areapadre="@area.AreaPadreId" class="pl-2 pr-2" title="Entrar"><i class="fab fa-wpforms font-gray"></i></a>*@
+                                            }
+
+                                            <a asp-area="Identity" asp-page="/Administracion/Areas/Detalles" asp-route-id="@area.AreaId" class="pl-2 pr-2" title="Detalles"><i class="fab fa-wpforms font-gray"></i></a>
+                                            <a asp-area="Identity" asp-page="/Administracion/Areas/Editar" asp-route-id="@area.AreaId" class="pl-2 pr-2" title="Editar"><i class="far fa-edit font-gray"></i></a>
+                                            <a asp-area="Identity" asp-page="/Administracion/Areas/Borrar" asp-route-id="@area.AreaId" class="pl-2 pr-2" title="Borrar"><i class="far fa-trash-alt font-gray"></i></a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

@@ -1,0 +1,69 @@
+﻿@page "/Usuarios/Administradores"
+@model Hermes2018.Areas.Identity.Pages.Usuarios.AdministradoresModel
+
+<div class="content-wrapper ml-0 bg-white pt-0">
+    <div class="container-fluid" id="logged-in">
+        <div class="row">
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 pt-2">
+                        <ol class="breadcrumb-2 mt-0 mb-0 pb-1 pt-1 display-inline">
+                            <li class="breadcrumb-2-item">
+                                <a asp-area="" asp-controller="Home" asp-action="Index" asp-route-id="">Inicio</a>
+                            </li>
+
+                            <li class="breadcrumb-2-item"><a asp-area="Identity" asp-page="/Usuarios/Index">Usuarios</a></li>
+                            <li class="breadcrumb-2-item active display-flex">
+                                Administradores
+                            </li>
+                        </ol>
+                    </div>
+                    <div class="col-12">
+                        <hr class="hr-thick mb-1 mt-1" />
+                        <h5>Usuarios administradores</h5>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12">
+                <div class="table-responsive">
+                    <table class="table table-hover border-bottom responsive table-sm responsive">
+                        <thead class="bg-light">
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Listado.First().Nombre)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Listado.First().NombreUsuario)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Listado.First().Rol)
+                                </th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.Listado)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Nombre)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.NombreUsuario)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Rol)
+                                    </td>
+                                    <td class="font-regular-12 text-center">
+                                        <a asp-area="Identity" asp-page="/Usuarios/Detalles" asp-route-id="@item.NombreUsuario" class="pl-2 pr-2" title="Detalles"><i class="fab fa-wpforms font-gray"></i></a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

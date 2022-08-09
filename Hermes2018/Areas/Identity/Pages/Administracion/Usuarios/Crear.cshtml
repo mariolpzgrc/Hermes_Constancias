@@ -1,0 +1,237 @@
+﻿@page "/Administracion/Usuarios/Crear"
+@model Hermes2018.Areas.Identity.Pages.Administracion.Usuarios.CrearModel
+@using Newtonsoft.Json;
+
+@section Styles {
+    <link type="text/css" rel="stylesheet" href="~/lib/jquery-flexdatalist/jquery.flexdatalist.min.css" />
+    <link type="text/css" rel="stylesheet" href="~/lib/bootstrap4-toggle/css/bootstrap4-toggle.min.css">
+    <link type="text/css" rel="stylesheet" href="~/css/Areas/Identity/Pages/Administracion/Usuarios/Crear.min.css" asp-append-version="true" />
+}
+
+@section ScriptsPrioritarios {
+    <script type="text/javascript" src="~/lib/jquery-flexdatalist/jquery.flexdatalist.min.js"></script>
+    <script type="text/javascript" src="~/lib/bootstrap4-toggle/js/bootstrap4-toggle.min.js"></script>
+}
+
+<div class="content-wrapper pt-1">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 pt-2">
+                        <ol class="breadcrumb-2 mt-0 mb-0 pb-1 pt-1 display-inline">
+                            <li class="breadcrumb-2-item">
+                                <a asp-area="" asp-controller="Home" asp-action="Index" asp-route-id="">Inicio</a>
+                            </li>
+
+                            <li class="breadcrumb-2-item"><a asp-area="Identity" asp-page="/Administracion/Usuarios/Index" asp-route-id="">Usuarios</a></li>
+                            <li class="breadcrumb-2-item active" aria-current="page">Crear Usuario</li>
+                        </ol>
+                    </div>
+                    <div class="col-12">
+                        <hr class="hr-thick mb-1 mt-1" />
+                        <h5>Crear un usuario</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+
+                <form method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger error-list-clean"></div>
+
+                    <div class="row">
+                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12">
+                            <div class="form-group" id="control-busqueda">
+                                <label asp-for="Crear.NombreUsuario" class="col-form-label font-bold-12"></label>
+                                <div class="">
+                                    <input type="text" asp-for="Crear.NombreUsuario" class="form-control form-control-sm" placeholder="Buscar" />
+                                    <small class="form-text text-muted">Escriba el nombre de usuario.</small>
+                                    <span asp-validation-for="Crear.NombreUsuario" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <label asp-for="Crear.Nombre" class="col-form-label font-bold-12"></label>
+                                <div>
+                                    <input asp-for="Crear.Nombre" class="form-control form-control-sm disabled border-disabled" placeholder="Nombre completo del usuario" />
+                                    <span asp-validation-for="Crear.Nombre" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <label asp-for="Crear.Correo" class="col-form-label font-bold-12"></label>
+                                <div>
+                                    <input asp-for="Crear.Correo" class="form-control form-control-sm disabled border-disabled" placeholder="Correo institucional" />
+                                    <span asp-validation-for="Crear.Correo" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <label asp-for="Crear.Rol" class="col-form-label font-bold-12"></label>
+                                <div>
+                                    <select asp-items="Model.Crear.Roles" asp-for="Crear.Rol" class="form-control form-control-sm">
+                                        <option selected value="">[Seleccione un rol]</option>
+                                    </select>
+                                    <span asp-validation-for="Crear.Rol" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        @*<div class="col-xl-4 col-lg-4 col-md-6 col-sm-12">
+            <div id="contiene-region" class="form-group">
+                <label asp-for="Crear.RegionId" class="col-form-label font-bold-12"></label>
+                <div>
+                    <select asp-items="Model.Crear.Regiones" asp-for="Crear.RegionId" class="form-control">
+                        <option value="">[Seleccione una región]</option>
+                    </select>
+                    <small class="form-text text-muted">La región es obligatoria.</small>
+                    <span asp-validation-for="Crear.RegionId" class="text-danger"></span>
+                </div>
+            </div>
+        </div>*@
+
+                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12">
+                            <input asp-for="Crear.RegionId" />
+                            <div id="contiene-area" class="form-group">
+                                <label asp-for="Crear.AreaId" class="col-form-label font-bold-12"></label>
+                                <div>
+                                    <span class="d-none" id="usuario_areaId">@Model.AreaId</span>
+                                    <select asp-items="Model.Crear.Areas" asp-for="Crear.AreaId" class="form-control form-control-sm">
+                                        <option value="">[Seleccione un área]</option>
+                                        @*@foreach (var area in Model.ListaAreas)
+                                        {
+                                            <option value="@area.HER_AreaId" data-info="@JsonConvert.SerializeObject(area)">@area.HER_Nombre</option>
+                                        }*@
+                                    </select>
+                                    @*<small class="form-text text-muted">Seleccione primero la región.</small>*@
+                                    <span asp-validation-for="Crear.AreaId" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <label asp-for="Crear.Puesto" class="col-form-label font-bold-12"></label>
+                                <div>
+                                    <input asp-for="Crear.Puesto" class="form-control form-control-sm" placeholder="Nombre del puesto" />
+                                    <span asp-validation-for="Crear.Puesto" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <label asp-for="Crear.EsUnico" class="col-form-label font-bold-12"></label>
+                                <div>
+                                    <input asp-for="Crear.EsUnico" type="checkbox" data-toggle="toggle" data-size="sm" data-on="Si" data-off="No" data-width="50" data-onstyle="secondary" data-offstyle="light" data-style="border" class="form-control mh-100 w-25 form-control-sm" />
+                                    <small class="form-text text-muted">Determina si el puesto es único en el área.</small>
+                                    <span asp-validation-for="Crear.EsUnico" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-12 col-lg-12 col-md-6 col-sm-12">
+                            <div class="row">
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                                    <div id="contiene-es-titular" class="form-group pt-3">
+                                        <label asp-for="Crear.EsTitular" class="col-form-label"></label>
+                                        <div>
+                                            <input asp-for="Crear.EsTitular" type="checkbox" data-toggle="toggle" data-size="sm" data-on="Si" data-off="No" data-width="50" data-onstyle="secondary" data-offstyle="light" data-style="border" class="form-control mh-100 w-25 form-control-sm" />
+                                            <small class="form-text text-muted">Cambiar a NO, únicamente cuando la cuenta de usuario no es personal. Cuando se usa por ejemplo: dgti, dgrh, entre otros.</small>
+                                            <span asp-validation-for="Crear.EsTitular" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                @if (Model.Crear.EsTitular)
+                                {
+                                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                                        <div id="contiene-titular" class="form-group d-none">
+                                            <label asp-for="Crear.Titular" class="col-form-label font-bold-12"></label>
+                                            <span class="indicador">*</span>
+                                            <div>
+                                                <input asp-for="Crear.Titular" class="form-control form-control-sm" placeholder="Buscar" value="" />
+                                                <small class="form-text text-muted">Escriba el nombre de usuario.</small>
+                                                <span asp-validation-for="Crear.Titular" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                                        <div id="contiene-titular" class="form-group">
+                                            <label asp-for="Crear.Titular" class="col-form-label font-bold-12"></label>
+                                            <span class="indicador">*</span>
+                                            <div>
+                                                <input asp-for="Crear.Titular" class="form-control form-control-sm" placeholder="Buscar" />
+                                                <small class="form-text text-muted">Escriba el nombre de usuario.</small>
+                                                <span asp-validation-for="Crear.Titular" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                }
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <div class="row">
+                                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label asp-for="Crear.Permiso" class="col-form-label"></label>
+                                        <div class="input-group date">
+                                            <input asp-for="Crear.Permiso" type="checkbox" data-toggle="toggle" data-size="sm" data-on="Si" data-off="No" data-width="50" data-onstyle="secondary" data-offstyle="light" data-style="border" class="form-control-sm" />
+                                        </div>
+                                        <small class="form-text text-muted">Puede administrar usuarios.</small>
+                                        <span asp-validation-for="Crear.Permiso" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <div class="alert-light m-0 pt-3 pb-0 pl-0 pr-0 border-0" role="alert">
+                                <small>Revise los datos que abajo se indican, ya que formarán parte del membrete del documento.</small>
+                            </div>
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+                            <div class="form-group">
+                                <label asp-for="Crear.Direccion" class="col-form-label font-bold-12"></label>
+                                <div>
+                                    <textarea asp-for="Crear.Direccion" class="form-control" placeholder="Dirección" rows="4"></textarea>
+                                    <small class="form-text text-muted">La dirección debe ser como máximo de 200 caracteres.</small>
+                                    <span asp-validation-for="Crear.Direccion" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+                            <div class="form-group">
+                                <label asp-for="Crear.Telefono" class="col-form-label font-bold-12"></label>
+                                <div>
+                                    <input asp-for="Crear.Telefono" class="form-control form-control-sm" placeholder="Teléfono y/o extensión" />
+                                    <span asp-validation-for="Crear.Telefono" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group mt-2">
+                        <div>
+                            <a asp-area="Identity" asp-page="/Administracion/Usuarios/Index" asp-route-id="" class="btn btn-light">Cancelar</a>
+                            <input type="submit" value="Guardar" class="btn btn-primary" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script type="text/javascript" src="~/js/Areas/Identity/Pages/Administracion/Usuarios/Crear.min.js" asp-append-version="true"></script>
+}

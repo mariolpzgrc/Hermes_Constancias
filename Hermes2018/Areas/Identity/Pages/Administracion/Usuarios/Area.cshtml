@@ -1,0 +1,94 @@
+﻿@page "/Administracion/Usuarios/Area/{id:int}/{tipo:int}/{areapadre:int?}"
+@model Hermes2018.Areas.Identity.Pages.Administracion.Usuarios.AreaModel
+
+<div class="content-wrapper pt-1">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-6 col-sm-8 col-md-8 col-lg-8 col-xl-8  pt-2">
+                        <ol class="breadcrumb-2 mt-0 mb-0 pb-1 pt-1 display-inline">
+                            <li class="breadcrumb-2-item">
+                                <a asp-area="" asp-controller="Home" asp-action="Index" asp-route-id="">Inicio</a>
+                            </li>
+
+                            <li class="breadcrumb-2-item display-flex">
+                                <a asp-area="Identity" asp-page="/Administracion/Usuarios/Index" asp-route-id="">
+                                    Usuarios 
+                                </a>
+                            </li>
+                            <li class="breadcrumb-2-item active display-flex">
+                                Área
+                            </li>
+                        </ol>
+                    </div>
+                    <div class="col-6 col-sm-4 col-md-4 col-lg-4 col-xl-4 pt-2">
+                        <div class="flex-right float-right">
+                            <a class="btn btn-sm md-btn-raised md-btn-ripple bg-secondary flex-right" asp-area="Identity" asp-page="/Administracion/Usuarios/Index" asp-route-id="">
+                                Regresar
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <hr class="hr-thick mb-1 mt-1" />
+                        <h5>Usuarios</h5>
+                        <h6><b>Región:</b> @Model.ViewModel.Region</h6>
+                        <h6><b>Área:</b> @Model.ViewModel.Area</h6>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="table-responsive">
+                    <table class="table table-hover table-sm border-bottom responsive">
+                        <thead class="bg-light">
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.ViewModel.Usuarios.First().Nombre)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.ViewModel.Usuarios.First().NombreUsuario)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.ViewModel.Usuarios.First().Rol)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.ViewModel.Usuarios.First().Puesto)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.ViewModel.Usuarios.First().Estado)
+                                </th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.ViewModel.Usuarios)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Nombre)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.NombreUsuario)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Rol)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Puesto)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Estado)
+                                    </td>
+                                    <td class="font-regular-12 text-center">
+                                        <a asp-area="Identity" asp-page="/Administracion/Usuarios/Detalles" asp-route-id="@item.NombreUsuario" asp-route-tipo="@Model.Tipo" class="pl-2 pr-2" title="Detalles"><i class="fab fa-wpforms font-gray"></i></a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

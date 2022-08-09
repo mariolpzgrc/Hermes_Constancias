@@ -1,0 +1,151 @@
+﻿@page "/Administracion/Usuarios/Permiso/{id}/{tipo:int}"
+@model Hermes2018.Areas.Identity.Pages.Administracion.Usuarios.PermisoModel
+
+@section styles
+    {
+    <link type="text/css" rel="stylesheet" href="~/lib/bootstrap4-toggle/css/bootstrap4-toggle.min.css">
+    <link type="text/css" rel="stylesheet" href="~/lib/jquery-bootstrap-touchspin/jquery.bootstrap-touchspin.min.css">
+}
+@section ScriptsPrioritarios
+    {
+    <script type="text/javascript" src="~/lib/bootstrap4-toggle/js/bootstrap4-toggle.min.js"></script>
+    <script type="text/javascript" src="~/lib/jquery-bootstrap-touchspin/jquery.bootstrap-touchspin.min.js"></script>
+}
+
+<div class="content-wrapper pt-1">
+    <div class="container-fluid" id="logged-in">
+        <div class="row">
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 pt-2">
+                        <ol class="breadcrumb-2 mt-0 mb-0 pb-1 pt-1 display-inline">
+                            <li class="breadcrumb-2-item">
+                                <a asp-area="" asp-controller="Home" asp-action="Index" asp-route-id="">Inicio</a>
+                            </li>
+
+                            <li class="breadcrumb-2-item"><a asp-area="Identity" asp-page="/Administracion/Usuarios/Index" asp-route-id="">Usuarios</a></li>
+
+                            @if (Model.Tipo == ConstTipoArea.TipoN1)
+                            {
+                                <li class="breadcrumb-2-item"><a asp-area="Identity" asp-page="/Administracion/Usuarios/Area" asp-route-id="@Model.ViewModel.AreaId" asp-route-tipo="@Model.Tipo">Área</a></li>
+                            }
+                            else
+                            {
+                                <li class="breadcrumb-2-item"><a asp-area="Identity" asp-page="/Administracion/Usuarios/Area" asp-route-id="@Model.ViewModel.AreaId" asp-route-tipo="@Model.Tipo" asp-route-areapadre="@Model.Padre">Área</a></li>
+                            }
+
+                            <li class="breadcrumb-2-item"><a asp-area="Identity" asp-page="/Administracion/Usuarios/Detalles" asp-route-id="" asp-route-tipo="" >Usuarios</a></li>
+
+                            <li class="breadcrumb-2-item active" aria-current="page">Permiso usuario</li>
+                        </ol>
+                    </div>
+                    <div class="col-12">
+                        <hr class="hr-thick mb-1 mt-1" />
+                        <h5>Asignar permiso como Administrador de Área</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <form method="post" class="ml-0 mw-100">
+                    <div asp-validation-summary="ModelOnly" class="text-danger error-list-clean"></div>
+
+                    <div class="row">
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 ">
+                            <div class="form-group">
+                                <label class="col-form-label pb-0 font-weight-bold">@Html.DisplayNameFor(model => model.ViewModel.Nombre)</label>
+                                <div class="">
+                                    @Html.DisplayFor(model => model.ViewModel.Nombre)
+                                    @Html.HiddenFor(modelItem => modelItem.ViewModel.Nombre, new { @class = "sin-indicador" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 ">
+                            <div class="form-group">
+                                <label class="col-form-label pb-0 font-weight-bold">@Html.DisplayNameFor(model => model.ViewModel.NombreUsuario)</label>
+                                <div class="">
+                                    @Html.DisplayFor(model => model.ViewModel.NombreUsuario)
+                                    @Html.HiddenFor(modelItem => modelItem.ViewModel.NombreUsuario, new { @class = "sin-indicador" })
+                                    @Html.HiddenFor(modelItem => modelItem.ViewModel.InfoUsuarioId, new { @class = "sin-indicador" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 ">
+                            <div class="form-group">
+                                <label class="col-form-label pb-0 font-weight-bold">@Html.DisplayNameFor(model => model.ViewModel.Correo)</label>
+                                <div class="">
+                                    @Html.DisplayFor(model => model.ViewModel.Correo)
+                                    @Html.HiddenFor(modelItem => modelItem.ViewModel.Correo, new { @class = "sin-indicador" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 ">
+                            <div class="form-group">
+                                <label class="col-form-label pb-0 font-weight-bold">@Html.DisplayNameFor(model => model.ViewModel.RegionNombre)</label>
+                                <div class="">
+                                    @Html.DisplayFor(model => model.ViewModel.RegionNombre)
+                                    @Html.HiddenFor(modelItem => modelItem.ViewModel.RegionNombre, new { @class = "sin-indicador" })
+                                    @Html.HiddenFor(modelItem => modelItem.ViewModel.RegionId, new { @class = "sin-indicador" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 ">
+                            <div class="form-group">
+                                <label class="col-form-label pb-0 font-weight-bold">@Html.DisplayNameFor(model => model.ViewModel.AreaNombre)</label>
+                                <div class="">
+                                    @Html.DisplayFor(model => model.ViewModel.AreaNombre)
+                                    @Html.HiddenFor(modelItem => modelItem.ViewModel.AreaNombre, new { @class = "sin-indicador" })
+                                    @Html.HiddenFor(modelItem => modelItem.ViewModel.AreaId, new { @class = "sin-indicador" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 ">
+                            <div class="form-group">
+                                <label class="col-form-label pb-0 font-weight-bold">@Html.DisplayNameFor(model => model.ViewModel.PuestoNombre)</label>
+                                <div class="">
+                                    @Html.DisplayFor(model => model.ViewModel.PuestoNombre)
+                                    @Html.HiddenFor(modelItem => modelItem.ViewModel.PuestoNombre, new { @class = "sin-indicador" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 ">
+                            <div class="form-group">
+                                <label class="col-form-label pb-0 font-weight-bold">@Html.DisplayNameFor(model => model.ViewModel.RolNombre)</label>
+                                <div class="">
+                                    @Html.DisplayFor(model => model.ViewModel.RolNombre)
+                                    @Html.HiddenFor(modelItem => modelItem.ViewModel.RolNombre, new { @class = "sin-indicador" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 ">
+                            <div class="form-group">
+                                <label asp-for="ViewModel.Permiso" class="col-form-label pb-0 font-weight-bold"></label>
+                                <div class="input-group date">
+                                    <input asp-for="ViewModel.Permiso" type="checkbox" data-toggle="toggle" data-size="sm" data-on="Si" data-off="No" data-width="50" data-onstyle="secondary" data-offstyle="light" data-style="border" />
+                                </div>
+                                <span asp-validation-for="ViewModel.Permiso" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 ">
+                            <div class="form-group pt-2">
+                                <a asp-area="Identity" asp-page="/Administracion/Usuarios/Detalles" asp-route-id="@Model.ViewModel.NombreUsuario" asp-route-tipo="@Model.Tipo" class="btn btn-light">Cancelar</a>
+                                <input type="submit" value="Enviar" class="btn btn-primary" />
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

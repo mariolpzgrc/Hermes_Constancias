@@ -1,0 +1,21 @@
+﻿@model ErrorViewModel
+@{
+    Layout = "_LayoutError";
+    ViewData["Title"] = "Hermes";
+}
+
+<div class="centered pt-3">
+    <h3 class="text-secondary">Aviso</h3>
+    <h5 class="text-black-50">Recurso no encontrado</h5>
+
+    <p>
+        El <strong>recurso</strong> que intenta obtener ha cambiado o ya no se encuentra disponible.
+    </p>
+</div>
+
+@*@if (Model.ShowRequestId)
+{
+    <p>
+        <strong>Request ID:</strong> <code>@Model.RequestId</code>
+    </p>
+}*@

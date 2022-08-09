@@ -1,0 +1,97 @@
+﻿@page "/Historico/Bandejas/{infoUsuarioId:int}/{tipoHistorico:int}"
+@model BandejasModel
+
+<div class="content-wrapper pt-0">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 pt-2">
+                        <ol class="breadcrumb-2 mt-0 mb-0 pb-1 pt-1 display-inline">
+                            <li class="breadcrumb-2-item">
+                                <a asp-area="" asp-controller="Home" asp-action="Index" asp-route-id="">Inicio</a>
+                            </li>
+
+                            <li class="breadcrumb-2-item">
+                                <a asp-area="Identity" asp-page="/Bandejas/Historico" asp-route-id="">Historico</a>
+                            </li>
+                            @if (ConstHistorico.ConstTipoN1 == Model.TipoHistorico)
+                            {
+                                <li class="breadcrumb-2-item">
+                                    <a asp-area="Identity" asp-page="/Historico/Persona" asp-route-id="">Histórico por persona</a>
+                                </li>
+                            }
+                            else if (ConstHistorico.ConstTipoN2 == Model.TipoHistorico)
+                            {
+                                <li class="breadcrumb-2-item">
+                                    <a asp-area="Identity" asp-page="/Historico/Area" asp-route-id="">Histórico por área</a>
+                                </li>
+                            }
+                            <li class="breadcrumb-2-item active">
+                                Bandejas
+                            </li>
+                        </ol>
+                    </div>
+                    <div class="col-12">
+                        <hr class="hr-thick mb-1 mt-1" />
+                        <h5>Bandejas</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="table-responsive mt-0">
+                    <table class="table table-hover table-sm border border-light border-bottom">
+                        <thead class="bg-light">
+                            <tr>
+                                <th>Bandeja</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    Recibidos
+                                    @if (Model.Bandejas.Recibidos > 0)
+                                    {
+                                        <span class="font-bold-11 pl-2 font-green">@Model.Bandejas.Recibidos</span>
+                                    }
+                                </td>
+                                <td>
+                                    <a asp-area="Identity" asp-page="/Historico/Recibidos" asp-route-infousuarioid="@Model.InfoUsuarioId" asp-route-tipohistorico="@Model.TipoHistorico" asp-route-bandeja="@ConstBandejas.ConstTipoN1" class="pl-2 pr-2" title="Entrar"><i class="fab fa-wpforms font-gray"></i></a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Enviados
+                                </td>
+                                <td>
+                                    <a asp-area="Identity" asp-page="/Historico/Enviados" asp-route-infousuarioid="@Model.InfoUsuarioId" asp-route-tipohistorico="@Model.TipoHistorico" asp-route-bandeja="@ConstBandejas.ConstTipoN2" class="pl-2 pr-2" title="Entrar"><i class="fab fa-wpforms font-gray"></i></a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Borradores
+                                </td>
+                                <td>
+                                    <a asp-area="Identity" asp-page="/Historico/Borradores" asp-route-id="@Model.InfoUsuarioId" asp-route-tipo="@Model.TipoHistorico" asp-route-bandeja="@ConstBandejas.ConstTipoN3" class="pl-2 pr-2" title="Entrar"><i class="fab fa-wpforms font-gray"></i></a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Revisión
+                                    @if (Model.Bandejas.Revision > 0)
+                                    {
+                                        <span class="font-bold-11 pl-2 font-green">@Model.Bandejas.Revision</span>
+                                    }
+                                </td>
+                                <td>
+                                    <a asp-area="Identity" asp-page="/Historico/Revision" asp-route-id="@Model.InfoUsuarioId" asp-route-tipo="@Model.TipoHistorico" asp-route-bandeja="@ConstBandejas.ConstTipoN4" class="pl-2 pr-2" title="Entrar"><i class="fab fa-wpforms font-gray"></i></a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

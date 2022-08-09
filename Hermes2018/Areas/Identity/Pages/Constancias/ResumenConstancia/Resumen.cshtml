@@ -1,0 +1,325 @@
+﻿@page "/Constancias/Solicitud/Resumen/{tipo:int}/{tipoPersonal:int}/"
+@model Hermes2018.Areas.Identity.Pages.Constancias.ResumenConstancia.ResumenModel
+
+@section Styles{
+    <link type="text/css" rel="stylesheet" href="~/lib/bootstrap-daterangepicker/daterangepicker.min.css" />
+    <link type="text/css" rel="stylesheet" href="~/css/linear-activity.min.css" />
+}
+
+@section ScriptsPrioritarios{
+
+}
+
+<div class="content-wrapper pt-0">
+    <div class="container-fluid">
+        <form id="form-seguimiento-solictud" method="post">
+            <div class="row">
+                <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                    <ol class="breadcrumb-2 mt-0 mb-0 display-inline">
+                        <li class="breadcrumb-2-item active-display-flex">
+                            Resumen de Constancia
+                        </li>
+                        <li class="flex-right">
+                            <a asp-area="Identity" asp-page="/Constancias/Solicitud/SolicitudConstancia" class="md-btn md-btn-raised md-btn-ripple bg-secondary mr-1">Regresar</a>
+                            <button id="btn-solicitud" type="button" onclick="GuardarSolicitudConstancia()" class="md-btn md-btn-raised md-btn-ripple bg-secondary">Enviar solicitud</button>
+
+                            <!--Modal-->
+                            <div class="modal fade" id="solicitudModal" tabindex="-1" role="dialog" aria-labelledby="solicitudModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h3 class="text-center" id="solicitudModalLabel"></h3>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <h3 class="text-center">Solicitud exitosa</h3>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <a asp-area="Identity" asp-page="/Constancias/Solicitud/SolicitudConstancia" class="btn btn-primary btn-sm">Aceptar</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ol>
+                    <hr class="hr-thick mt-2 mb-2" />
+                    <div class="info-border pb-1">
+                        <div class="p-2 mb-1 border-top border-bottom-0 bg-light">
+                            <strong>Información  general de la constancia</strong>
+                            <button type="button" class="btn btn-link float-right btn-sm" id="control-toggle"><i class="fas fa-angle-down"></i></button>
+                        </div>
+                    </div>
+                    <div class="pt-0 pb-0 pl-1 pr-0" id="contenido-info">
+                        @if (Model.Tipo != 7 && Model.Tipo != 8)
+                        {
+                        <div class="pb-1"><label class="font-weight-bold font-dark-gray">Número de personal:</label> <span id="numeroPersonal"></span></div>
+                        }
+                        <div class="pb-1"><label class="font-weight-bold font-dark-gray">Nombre completo:</label> <span id="nombrePersonal"></span></div>
+                        @if (Model.Tipo != 7 && Model.Tipo != 8) { 
+                            <div class="pb-1"><label class="font-weight-bold font-dark-gray">Fecha de ingreso:</label> <span id="fechaIngreso"></span></div>
+                        }
+                        <div class="pb-1"><label class="font-weight-bold font-dark-gray">Dependencia de adscripción:</label> <span id="dependencia"></span></div>
+                        <div class="pb-1"><label class="font-weight-bold font-dark-gray">Región:</label> <span id="region"></span></div>
+                        @if (Model.Tipo != 7 && Model.Tipo != 8) { 
+                            <div class="pb-1"><label class="font-weight-bold font-dark-gray">Tipo de personal:</label> <span id="tipoPersonal"></span></div>
+                            <div class="pb-1"><label class="font-weight-bold font-dark-gray">Tipo de contratación:</label> <span id="tipoContratacion"></span></div>
+                            <div class="pb-1"><label class="font-weight-bold font-dark-gray">Puesto actual:</label> <span id="puesto"></span></div>
+                         }
+                        <div class="pb-1"><label class="font-weight-bold font-dark-gray">Categoría actual:</label> <span id="categoriasueldo"></span></div>
+                    </div>
+                    <br />
+                    @if (Model.Tipo == 1 &&  Model.TipoPersonal == Convert.ToInt32(Personal.Academico))
+                    {
+                        <div class="info-border pb-1">
+                            <div class="p-2 mb-1 border-top border-bottom-0 bg-light">
+                                <strong>Información de constancia de Servicio médico</strong>
+                                <button type="button" class="btn btn-link float-right btn-sm" id="control-toggle-constancia"><i class="fas fa-angle-down"></i></button>
+                            </div>
+                        </div>
+                        <div class="pt-0 pb-0 pl-1 pr-0" id="contenido-info-constancia">
+                            @if (Model.TipoPersonal == Convert.ToInt32(Personal.Academico))
+                            {
+                                <div class="pb-1"><label class="font-weight-bold font-dark-gray">Sueldo:</label> <span id="sueldo"></span></div>
+                                <div class="pb-1"><label class="font-weight-bold font-dark-gray">Periodo:</label> <span id="periodo"></span></div>
+                                <div class="pb-1"><label class="font-weight-bold font-dark-gray">Horas:</label> <span id="horas"></span></div>
+                            }
+
+                        </div>
+                    }
+                    else if (Model.Tipo == 2 && (Model.TipoPersonal == Convert.ToInt32(Personal.Academico) || Model.TipoPersonal == Convert.ToInt32(Personal.Confianza) || Model.TipoPersonal == Convert.ToInt32(Personal.Funcionario)))
+                    {
+                        <div class="info-border pb-1">
+                            <div class="p-2 mb-1 border-top border-bottom-0 bg-light">
+                                <strong>Información de constancia de Servicio médico con dependientes económicos</strong>
+                                <button type="button" class="btn btn-link float-right btn-sm" id="control-toggle-constancia"><i class="fas fa-angle-down"></i></button>
+                            </div>
+                        </div>
+                        <div class="pt-0 pb-0 pl-1 pr-0" id="contenido-info-constancia">
+                            <div class="pb-1 col-xs-4 col-sm-4 col-lg-4 col-xl-4">
+                                <select id="select-" class="form-control form-control-sm">
+                                    <option value="">[Dependiente econcómico]</option>
+                                    <option value="1">Ejemplo</option>
+                                </select>
+                                @if (Model.TipoPersonal == Convert.ToInt32(Personal.Academico))
+                                {
+                                    <div class="pb-1"><label class="font-weight-bold font-dark-gray">Sueldo:</label> <span id="sueldo"></span></div>
+                                    <div class="pb-1"><label class="font-weight-bold font-dark-gray">Periodo:</label> <span id="periodo"></span></div>
+                                    <div class="pb-1"><label class="font-weight-bold font-dark-gray">Horas:</label> <span id="horas"></span></div>
+                                }
+                            </div>
+                        </div>
+                        <br />
+                    }
+                    else if (Model.Tipo == 3)
+                    {
+                        <div class="info-border pb-1">
+                            <div class="p-2 mb-1 border-top border-bottom-0 bg-light">
+                                <strong>Información de constancia de Trabajo y percepciones</strong>
+                                <button type="button" class="btn btn-link float-right btn-sm" id="control-toggle-constancia"><i class="fas fa-angle-down"></i></button>
+                            </div>
+                        </div>
+                        <div class="pt-0 pb-0 pl-1 pr-0" id="contenido-info-constancia">
+                            <div class="pb-1"><label class="font-weight-bold font-dark-gray">Sueldo:</label> <span id="sueldo"></span></div>
+                            @if (Model.TipoPersonal == Convert.ToInt32(Personal.Academico))
+                            {
+                                <div class="pb-1"><label class="font-weight-bold font-dark-gray">Periodo:</label> <span id="periodo"></span></div>
+                                <div class="pb-1"><label class="font-weight-bold font-dark-gray">Horas:</label> <span id="horas"></span></div>
+                            }
+                        </div>
+                        <br />
+                    }
+                    else if (Model.Tipo == 4 && Model.TipoPersonal != Convert.ToInt32(Personal.Eventual))
+                    {
+                        <div class="info-border pb-1">
+                            <div class="p-2 mb-1 border-top border-bottom-0 bg-light">
+                                <strong>Información de constancia de Horario laboral</strong>
+                                <button type="button" class="btn btn-link float-right btn-sm" id="control-toggle-constancia"><i class="fas fa-angle-down"></i></button>
+                            </div>
+                        </div>
+                        <div class="pt-0 pb-0 pl-1 pr-0" id="contenido-info-constancia">
+                            <div class="pb-1"><label class="font-weight-bold font-dark-gray">Horario:</label> <span></span></div>
+                        </div>
+                        <br />
+                    }
+                    else if (Model.Tipo == 5 && Model.TipoPersonal != Convert.ToInt32(Personal.Eventual))
+                    {
+                        <div class="info-border pb-1">
+                            <div class="p-2 mb-1 border-top border-bottom-0 bg-light">
+                                <strong>Información de constancia de Afiliación a IPE</strong>
+                                <button type="button" class="btn btn-link float-right btn-sm" id="control-toggle-constancia"><i class="fas fa-angle-down"></i></button>
+                            </div>
+                        </div>
+                        <div class="pt-0 pb-0 pl-1 pr-0" id="contenido-info-constancia">
+                            <div class="pb-1"><label class="font-weight-bold font-dark-gray">Sueldo:</label> <span id="sueldo"></span></div>
+                            @if (Model.TipoPersonal == Convert.ToInt32(Personal.Academico))
+                            {
+                                <div class="pb-1"><label class="font-weight-bold font-dark-gray">Periodo:</label> <span id="periodo"></span></div>
+                                <div class="pb-1"><label class="font-weight-bold font-dark-gray">Horas:</label> <span id="horas"></span></div>
+                            }
+                        </div>
+                        <br />
+                    }
+                    else if (Model.Tipo == 6 && Model.TipoPersonal != Convert.ToInt32(Personal.Eventual))
+                    {
+                        <div class="info-border pb-1">
+                            <div class="p-2 mb-1 border-top border-bottom-0 bg-light">
+                                <strong>Información de constancia de Afiliación al Magisterio</strong>
+                                <button type="button" class="btn btn-link float-right btn-sm" id="control-toggle-constancia"><i class="fas fa-angle-down"></i></button>
+                            </div>
+                        </div>
+                        <div class="pt-0 pb-0 pl-1 pr-0" id="contenido-info-constancia">
+                            <div class="pb-1"><label class="font-weight-bold font-dark-gray">Sueldo:</label> <span id="sueldo"></span></div>
+                        </div>
+                        <br />
+                    }
+                    else if (Model.Tipo == 7 && Model.TipoPersonal != Convert.ToInt32(Personal.Eventual))
+                    {
+                        <div class="info-border pb-1">
+                            <div class="p-2 mb-1 border-top border-bottom-0 bg-light">
+                                <strong>Información del Oficio baja del IPE</strong>
+                                <button type="button" class="btn btn-link float-right btn-sm" id="control-toggle-constancia"><i class="fas fa-angle-down"></i></button>
+                            </div>
+                        </div>
+                        <div class="pt-0 pb-0 pl-1 pr-0" id="contenido-info-constancia">
+                            <div class="form-group col-sm-12 col-md-4 col-lg-4 col-xl-4">
+                                <label for="fechaBaja">Selecciona la fecha  para la baja</label>
+                                <input  id="fechaBaja" type="date" placeholder="Seleccione la fecha" class="form-control" />
+                            </div>
+                        </div>
+                        <br />
+                    }
+                    else if (Model.Tipo == 8 && Model.TipoPersonal != Convert.ToInt32(Personal.Eventual))
+                    {
+                        <div class="info-border pb-1">
+                            <div class="p-2 mb-1 border-top border-bottom-0 bg-light">
+                                <strong>Información del Oficio baja del Magisterio</strong>
+                                <button type="button" class="btn btn-link float-right btn-sm" id="control-toggle-constancia"><i class="fas fa-angle-down"></i></button>
+                            </div>
+                        </div>
+                        <div class="pt-0 pb-0 pl-1 pr-0" id="contenido-info-constancia">
+                            <div class="form-group col-sm-12 col-md-4 col-lg-4 col-xl-4">
+                                <label for="fechaBaja">Selecciona la fecha  para la baja</label>
+                                <input id="fechaBaja" type="date" placeholder="Seleccione la fecha" class="form-control" />
+                            </div>
+                        </div>
+                        <br />
+                    }
+                    else if (Model.Tipo == 9 && Model.TipoPersonal != Convert.ToInt32(Personal.Eventual))
+                    {
+                        <div class="info-border pb-1">
+                            <div class="p-2 mb-1 border-top border-bottom-0 bg-light">
+                                <strong>Información de constancia de VISA</strong>
+                                <button type="button" class="btn btn-link float-right btn-sm" id="control-toggle-constancia"><i class="fas fa-angle-down"></i></button>
+                            </div>
+                        </div>
+                        <div class="pt-0 pb-0 pl-1 pr-0" id="contenido-info-constancia">
+                            <!--<div class="pb-1"><label class="font-weight-bold font-dark-gray">Sueldo:</label> <span></span></div>-->
+                            <div class="pb-1"><label class="font-weight-bold font-dark-gray">Sueldo + prestaciones:</label> <span id="sueldo"></span></div>
+                            @if (Model.TipoPersonal == Convert.ToInt32(Personal.Academico))
+                            {
+                                <div class="pb-1"><label class="font-weight-bold font-dark-gray">Periodo:</label> <span id="periodo"></span></div>
+                                <div class="pb-1"><label class="font-weight-bold font-dark-gray">Horas:</label> <span id="horas"></span></div>
+                            }
+                        </div>
+                        <br />
+                    }
+                    else if (Model.Tipo == 10 && Model.TipoPersonal != Convert.ToInt32(Personal.Eventual))
+                    {
+                        <div class="info-border pb-1">
+                            <div class="p-2 mb-1 border-top border-bottom-0 bg-light">
+                                <strong>Información de constancia de VISA con dependientes económicos</strong>
+                                <button type="button" class="btn btn-link float-right btn-sm" id="control-toggle-constancia"><i class="fas fa-angle-down"></i></button>
+                            </div>
+                        </div>
+                        <div class="pt-0 pb-0 pl-1 pr-0" id="contenido-info-constancia">
+                            <div class="pb-1"><label class="font-weight-bold font-dark-gray">Sueldo + prestaciones:</label> <span id="sueldo"></span></div>
+                            <div class="pb-1 col-xs-4 col-sm-4 col-lg-4 col-xl-4">
+                                <select id="select-" class="form-control form-control-sm">
+                                    <option value="">[Dependiente econcómico]</option>
+                                    <option value="1">Ejemplo</option>
+                                </select>
+                                @if (Model.TipoPersonal == Convert.ToInt32(Personal.Academico))
+                                {
+                                    <div class="pb-1"><label class="font-weight-bold font-dark-gray">Periodo:</label> <span id="periodo"></span></div>
+                                    <div class="pb-1"><label class="font-weight-bold font-dark-gray">Horas:</label> <span id="horas"></span></div>
+                                }
+                            </div>
+                        </div>
+                        <br />
+                    }
+                    else if (Model.Tipo == 11 && Model.TipoPersonal != Convert.ToInt32(Personal.Eventual))
+                    {
+                        <div class="info-border pb-1">
+                            <div class="p-2 mb-1 border-top border-bottom-0 bg-light">
+                                <strong>Información de constancia de PRODEP</strong>
+                                <button type="button" class="btn btn-link float-right btn-sm" id="control-toggle-constancia"><i class="fas fa-angle-down"></i></button>
+                            </div>
+                        </div>
+                        <div class="pt-0 pb-0 pl-1 pr-0" id="contenido-info-constancia">
+                            <div class="pb-1"><label class="font-weight-bold font-dark-gray">Sueldo + prestaciones:</label> <span></span></div>
+                            <div class="pb-1"><label class="font-weight-bold font-dark-gray">Fecha de la última recategorización:</label> <span></span></div>
+                            <div class="pb-1"><label class="font-weight-bold font-dark-gray">Categoría/Nivel de sueldo:</label> <span></span></div>
+                            <div class="pb-1"><label class="font-weight-bold font-dark-gray">Fecha de alta en plaza activa:</label> <span></span></div>
+                            <div class="pb-1"><label class="font-weight-bold font-dark-gray">Fecha de basificación en plaza activa:</label> <span></span></div>
+                            <div class="pb-1"><label class="font-weight-bold font-dark-gray">Fecha de última recategorización:</label> <span></span></div>
+                            <div class="pb-1"><label class="font-weight-bold font-dark-gray">Área Académica de Adscripción:</label> <span></span></div>
+                        </div>
+                        <br />
+                    }
+                    else if (Model.Tipo == 12)
+                    {
+                        <div class="info-border pb-1">
+                            <div class="p-2 mb-1 border-top border-bottom-0 bg-light">
+                                <strong>Información de Constancia Curricular</strong>
+                                <button type="button" class="btn btn-link float-right btn-sm" id="control-toggle-constancia"><i class="fas fa-angle-down"></i></button>
+                            </div>
+                        </div>
+                        <div class="pt-0 pb-0 pl-1 pr-0" id="contenido-info">
+                            <div class="pb-1"><label class="font-weight-bold font-dark-gray">Sueldo:</label> <span></span></div>
+                            <div class="pb-1"><label class="font-weight-bold font-dark-gray">Periodos efectivos laborados:</label> <span></span></div>
+                        </div>
+                        <br />
+                    }
+                    else if (Model.Tipo == 13 && (Model.TipoPersonal == Convert.ToInt32(Personal.Academico) || Model.TipoPersonal == Convert.ToInt32(Personal.Confianza) || Model.TipoPersonal == Convert.ToInt32(Personal.Academico)))
+                    {
+                        <div class="info-border pb-1">
+                            <div class="p-2 mb-1 border-top border-bottom-0 bg-light">
+                                <strong>Información de Hoja de servicios</strong>
+                                <button type="button" class="btn btn-link float-right btn-sm" id="control-toggle-constancia"><i class="fas fa-angle-down"></i></button>
+                            </div>
+                        </div>
+                        <div class="pt-0 pb-0 pl-1 pr-0" id="contenido-info-constancia">
+                            <div class="pb-1"><label class="font-weight-bold font-dark-gray">Sueldo:</label> <span></span></div>
+                            <div class="pb-1"><label class="font-weight-bold font-dark-gray">Periodos efectivos laborados:</label> <span></span></div>
+                            <div class="pb-1"><label class="font-weight-bold font-dark-gray">Fecha de basificación en el puesto actual:</label> <span></span></div>
+                            <div class="pb-1"><label class="font-weight-bold font-dark-gray">Fecha de la última recategorización:</label> <span></span></div>
+                        </div>
+                        <br />
+                    }
+                    else if (Model.Tipo == 14 && Model.TipoPersonal != Convert.ToInt32(Personal.Academico))
+                    {
+                        <div class="info-border pb-1">
+                            <div class="p-2 mb-1 border-top border-bottom-0 bg-light">
+                                <strong>Información de constancia de Jubilación</strong>
+                                <button type="button" class="btn btn-link float-right btn-sm" id="control-toggle-constancia"><i class="fas fa-angle-down"></i></button>
+                            </div>
+                        </div>
+                        <div class="pt-0 pb-0 pl-1 pr-0" id="contenido-info-constancia">
+                            <div class="pb-1"><label class="font-weight-bold font-dark-gray">Sueldo:</label> <span></span></div>
+                            <div class="pb-1"><label class="font-weight-bold font-dark-gray">Sueldo + reconocimiento de antigüedad:</label> <span></span></div>
+                            <div class="pb-1"><label class="font-weight-bold font-dark-gray">Horario:</label> <span></span></div>
+                        </div>
+                        <br />
+                    }
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts
+    {
+    <script type="text/javascript" src="~/js/Areas/Identity/Pages/Constancias/ResumenConstancia/Resumen.js" asp-append-version="true"></script>
+}

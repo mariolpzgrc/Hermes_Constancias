@@ -1,0 +1,118 @@
+﻿@page "/Areas/{id:int}/{areaPadreId:int?}"
+@model IndexModel
+
+<div class="content-wrapper ml-0 bg-white pt-0">
+    <div class="container-fluid" id="logged-in">
+        <div class="row">
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 pt-2">
+                        <ol class="breadcrumb-2 mt-0 mb-0 pb-1 pt-1 display-inline">
+                            <li class="breadcrumb-2-item">
+                                <a asp-area="" asp-controller="Home" asp-action="Index" asp-route-id="">Inicio</a>
+                            </li>
+
+                            @if (Model.EsAdminGral)
+                            {
+                                <li class="breadcrumb-2-item">
+                                    <a asp-area="Identity" asp-page="/Areas/Region">Regiones</a>
+                                </li>
+                            }
+                            <li class="breadcrumb-2-item active display-flex" aria-current="page">Áreas</li>
+                        </ol>
+                    </div>
+                    <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 pt-2">
+                        <div class="float-right">
+                            <a asp-area="Identity" asp-page="/Areas/Buscar" asp-route-id="@Model.RegionId" asp-route-areapadreid="@Model.AreaPadreId" class="btn btn-sm md-btn-raised md-btn-ripple bg-secondary">Buscar</a>
+                            <a asp-area="Identity" asp-page="/Areas/Crear" asp-route-id="@Model.RegionId" class="btn btn-sm md-btn-raised md-btn-ripple bg-primary">Nuevo</a>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <hr class="hr-thick mb-1 mt-1" />
+                        <span class="h5">Áreas</span>
+                        @if (Model.AreaPadreId != null)
+                        {
+                            <span> de @Model.AreaPadre.HER_Nombre</span>
+                        }
+                        <br />
+                        @if (Model.TipoAreaId == ConstTipoAreaEnRegion.TipoN1)
+                        {
+                            if (Model.AreaPadreId != null)
+                            {
+                                <a asp-area="Identity" asp-page="/Areas/Index" asp-route-id="@Model.RegionId" asp-route-areapadreid="" class="" title="Ver el área padre"><i class="far fa-arrow-alt-circle-up font-gray"></i> Subir de área</a>
+                            }
+                        }
+                        else
+                        {
+                            <a asp-area="Identity" asp-page="/Areas/Index" asp-route-id="@Model.RegionId" asp-route-areapadreid="@Model.AreaPadre.HER_Area_PadreId" class="" title="Ver el área padre"><i class="far fa-arrow-alt-circle-up font-gray"></i> Subir de área</a>
+                        }
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="table-responsive">
+                    <table class="table table-hover table-sm border-bottom responsive">
+                        <thead class="bg-light">
+                            <tr>
+                                <th>
+                                    Nombre
+                                </th>
+                                <th class="text-center">
+                                    Área padre
+                                </th>
+                                <th class="text-center">
+                                    Visible
+                                </th>
+                                <th class="text-center">
+                                    Usuarios
+                                </th>
+                                <th class="text-center">
+                                    Estado
+                                </th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.Areas)
+                            {
+                            <tr>
+                                <td>
+                                    @Html.HiddenFor(modelItem => item.AreaId, new { @class="sin-indicador"})
+                                    @Html.DisplayFor(modelItem => item.Nombre)
+                                </td>
+                                <td class="text-center">
+                                    @Html.DisplayFor(modelItem => item.TienePadre)
+                                </td>
+                                <td class="text-center">
+                                    @Html.DisplayFor(modelItem => item.Visible)
+                                </td>
+                                <td class="text-center">
+                                    @Html.DisplayFor(modelItem => item.TotalUsuarios)
+                                </td>
+                                <td class="text-center">
+                                    @Html.DisplayFor(modelItem => item.Estado)
+                                </td>
+                                <td class="font-regular-12 text-center">
+                                    <a asp-area="Identity" asp-page="/Areas/Index" asp-route-id="@Model.RegionId" asp-route-areapadreid="@item.AreaId" class="pl-2 pr-2" title="Ver subáreas"><i class="fas fa-code-branch font-gray"></i></a>
+                                    
+                                    <a asp-area="Identity" asp-page="/Areas/Detalles" asp-route-id="@item.AreaId" asp-route-regionid="@Model.RegionId" asp-route-areapadreid="@Model.AreaPadreId" class="pl-2 pr-2" title="Detalles"><i class="fab fa-wpforms font-gray"></i></a>
+                                    <a asp-area="Identity" asp-page="/Areas/Editar" asp-route-id="@item.AreaId" asp-route-regionid="@Model.RegionId" asp-route-areapadreid="@Model.AreaPadreId" class="pl-2 pr-2" title="Editar"><i class="far fa-edit font-gray"></i></a>
+                                    <a asp-area="Identity" asp-page="/Areas/Borrar" asp-route-id="@item.AreaId" asp-route-regionid="@Model.RegionId" asp-route-areapadreid="@Model.AreaPadreId" class="pl-2 pr-2" title="Borrar"><i class="far fa-trash-alt font-gray"></i></a>
+                                </td>
+                                <td class="font-regular-12 text-center">
+                                    @if (item.ExisteEnSIIU)
+                                    {
+                                        <a asp-area="Identity" asp-page="/Areas/Detectar" asp-route-id="@item.AreaId" asp-route-regionid="@Model.RegionId" asp-route-areapadreid="@Model.AreaPadreId" class="pl-2 pr-2" title="Detectar"><i class="fas fa-search font-gray"></i></a>
+                                    }
+                                </td>
+                            </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

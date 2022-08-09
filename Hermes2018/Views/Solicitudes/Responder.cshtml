@@ -1,0 +1,206 @@
+﻿@model Hermes2018.ViewModels.SolicitudResponderViewModel
+
+@section styles
+    {
+    <link type="text/css" rel="stylesheet" href="~/lib/bootstrap-select/dist/css/bootstrap-select.min.css">
+    <link type="text/css" rel="stylesheet" href="~/lib/bootstrap4-toggle/css/bootstrap4-toggle.min.css">
+    <link type="text/css" rel="stylesheet" href="~/css/Views/Solicitudes/Responder.min.css" asp-append-version="true">
+}
+@section ScriptsPrioritarios
+    {
+    <script type="text/javascript" src="~/lib/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
+    <script type="text/javascript" src="~/lib/bootstrap-select/dist/js/i18n/defaults-es_ES.min.js"></script>
+    <script type="text/javascript" src="~/lib/bootstrap4-toggle/js/bootstrap4-toggle.min.js"></script>
+}
+<div class="content-wrapper pt-1">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 pt-2">
+                        <ol class="breadcrumb-2 mt-0 mb-0 pb-1 pt-1 display-inline">
+                            <li class="breadcrumb-2-item">
+                                <a asp-area="" asp-controller="Home" asp-action="Index" asp-route-id="">Inicio</a>
+                            </li>
+
+                            <li class="breadcrumb-2-item"><a asp-area="" asp-controller="Solicitudes" asp-action="Index">Solicitudes</a></li>
+                            <li class="breadcrumb-2-item"><a asp-area="" asp-controller="Solicitudes" asp-action="Detalles" asp-route-id="@Model.Usuario">Detalle solicitud</a></li>
+                            <li class="breadcrumb-2-item active" aria-current="page">Responder</li>
+                        </ol>
+                    </div>
+                    <div class="col-12">
+                        <hr class="hr-thick mb-1 mt-1" />
+                        <h5>Responder</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <form method="post">
+                    <div class="row">
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                            <div asp-validation-summary="ModelOnly" class="text-danger error-list-clean"></div>
+                            <input asp-for="AreaId" class="sin-indicador" />
+
+                            <div class="row">
+                                <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                                    <div class="form-group">
+                                        <label asp-for="Usuario" class="col-form-label font-bold-12"></label>
+                                        <div class="">
+                                            @Html.DisplayFor(modelItem => modelItem.Usuario)
+                                            @Html.HiddenFor(modelItem => modelItem.Usuario, new { @class = "sin-indicador" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                                    <div class="form-group">
+                                        <label asp-for="Nombre" class="col-form-label font-bold-12"></label>
+                                        <div class="">
+                                            @Html.DisplayFor(modelItem => modelItem.Nombre)
+                                            @Html.HiddenFor(modelItem => modelItem.Nombre, new { @class = "sin-indicador" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                                    <div class="form-group">
+                                        <label asp-for="Correo" class="col-form-label font-bold-12"></label>
+                                        <div class="">
+                                            @Html.DisplayFor(modelItem => modelItem.Correo)
+                                            @Html.HiddenFor(modelItem => modelItem.Correo, new { @class = "sin-indicador" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                    <div class="row">
+                                        <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                            <div class="form-group">
+                                                <label asp-for="Puesto" class="col-form-label font-bold-12"></label>
+                                                <div class="input-group date">
+                                                    <input asp-for="Puesto" type="text" class="form-control form-control-sm" placeholder="Puesto" />
+                                                </div>
+                                                <small class="form-text text-muted">Puesto del usuario.</small>
+                                                <span asp-validation-for="Puesto" class="text-danger font-regular-11"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                            <div class="form-group">
+                                                <label asp-for="EsUnico" class="col-form-label font-bold-12"></label>
+                                                <div class="input-group date">
+                                                    <input asp-for="EsUnico"  type="checkbox" class="form-control form-control-sm mh-100 w-25" data-toggle="toggle" data-size="sm" data-on="Si" data-off="No" data-width="50" data-onstyle="secondary" data-offstyle="light" data-style="border" />
+                                                </div>
+                                                <small class="form-text text-muted">Determina si el puesto es único en el área.</small>
+                                                <span asp-validation-for="EsUnico" class="text-danger font-regular-11"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                    <div class="row">
+                                        <div class="col-12 col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                                            <div class="form-group">
+                                                <label asp-for="Direccion" class="col-form-label font-bold-12"></label>
+                                                <div class="input-group">
+                                                    <textarea asp-for="Direccion" class="form-control" placeholder="Dirección" rows="4"></textarea>
+                                                </div>
+                                                <small class="form-text text-muted">La dirección debe ser como máximo de 200 caracteres, y solo será utilizada como referencia para el registro de usuarios.</small>
+                                                <span asp-validation-for="Direccion" class="text-danger font-regular-11"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-sm-4 col-md-4 col-lg-4 col-xl-4">
+                                            <div class="form-group">
+                                                <label asp-for="Telefono" class="col-form-label font-bold-12"></label>
+                                                <div class="input-group date">
+                                                    <input asp-for="Telefono" type="text" class="form-control form-control-sm" placeholder="Teléfono" />
+                                                </div>
+                                                <small class="form-text text-muted">El teléfono solo será utilizado como referencia para el registro de usuarios.</small>
+                                                <span asp-validation-for="Telefono" class="text-danger font-regular-11"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                    <div class="row">
+                                        <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                            <div class="form-group">
+                                                <label asp-for="Aprobar" class="col-form-label font-bold-12"></label>
+                                                <div class="">
+                                                    <select asp-for="Aprobar" class="form-control form-control-sm">
+                                                        <option selected value="">[Seleccione una opción]</option>
+                                                        <option value="@ConstAprobado.AprobadoSiN">@ConstAprobado.AprobadoSi</option>
+                                                        <option value="@ConstAprobado.AprobadoNoN">@ConstAprobado.AprobadoNo</option>
+                                                    </select>
+                                                    <span asp-validation-for="Aprobar" class="text-danger font-regular-11"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                            <div class="row">
+                                                @if (!string.IsNullOrEmpty(Model.Aprobar))
+                                                {
+                                                    if (int.Parse(Model.Aprobar) == ConstAprobado.AprobadoNoN)
+                                                    {
+                                                        <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                                            <div class="form-group" id="ContenedorComentario">
+                                                                <label asp-for="Comentario" class="col-form-label font-bold-12"></label>
+                                                                <span class="indicador">*</span>
+                                                                <div class="">
+                                                                    <textarea asp-for="Comentario" class="form-control" placeholder="Comentario"></textarea>
+                                                                    <small class="form-text text-muted">El comentario debe ser como máximo de 500 caracteres.</small>
+                                                                    <span asp-validation-for="Comentario" class="text-danger font-regular-11"></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    }
+                                                    else
+                                                    {
+                                                        <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                                            <div class="form-group d-none" id="ContenedorComentario">
+                                                                <label asp-for="Comentario" class="col-form-label font-bold-12"></label>
+                                                                <span class="indicador">*</span>
+                                                                <div class="">
+                                                                    <textarea asp-for="Comentario" class="form-control" placeholder="Comentario"></textarea>
+                                                                    <small class="form-text text-muted">El comentario debe ser como máximo de 500 caracteres.</small>
+                                                                    <span asp-validation-for="Comentario" class="text-danger font-regular-11"></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                                        <div class="form-group d-none" id="ContenedorComentario">
+                                                            <label asp-for="Comentario" class="col-form-label font-bold-12"></label>
+                                                            <span class="indicador">*</span>
+                                                            <div class="">
+                                                                <textarea asp-for="Comentario" class="form-control" placeholder="Comentario"></textarea>
+                                                                <small class="form-text text-muted">El comentario debe ser como máximo de 500 caracteres.</small>
+                                                                <span asp-validation-for="Comentario" class="text-danger font-regular-11"></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                            <div class="pt-2">
+                                <a asp-area="" asp-controller="Solicitudes" asp-action="Detalles" asp-route-id="@Model.Usuario" class="btn btn-light">Cancelar</a>
+                                <input type="submit" value="Enviar" class="btn btn-primary" />
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script type="text/javascript" src="~/js/Views/Solicitudes/Responder.min.js" asp-append-version="true"></script>
+}

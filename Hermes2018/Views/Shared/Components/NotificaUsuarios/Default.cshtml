@@ -1,0 +1,33 @@
+﻿@model List<NotificacionUsuariosViewModel>
+
+@if ((bool)ViewData["Mostrar"])
+{
+    <li class="nav-item dropdown">
+        <!--Solicitudes-->
+        <a class="nav-link nav-link-white" id="messagesDropdown" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-user-plus"></i>
+            <span class="d-lg-none">
+                Solicitudes
+                <span class="badge badge-pill badge-danger totSolictudUsuarios">@Model.Count</span>
+            </span>
+            <span class="d-none d-lg-inline badge badge-pill badge-danger totSolictudUsuarios">@Model.Count</span>
+        </a>
+        <!-- Dropdown-->
+        <div class="pt-0 pb-0 dropdown-menu dropdown-menu-right" aria-labelledby="messagesDropdown">
+            <h6 class="dropdown-header pt-2 pb-1">Solicitudes nuevas:</h6>
+            <div class="dropdown-divider mt-1 mb-1"></div>
+            <div class="contenedorSolicitudes">
+                @foreach (var usuario in Model)
+                {
+                    <a class="dropdown-item" asp-area="" asp-action="Detalles" asp-controller="Solicitudes" asp-route-id="@usuario.UserName">
+                        <strong>@usuario.FullName</strong>
+                        <span class="small float-right text-muted">@usuario.FechaRegistro.ToString("d/MM/yyyy hh:mm tt")</span>
+                        <div class="dropdown-message small">@usuario.Email</div>
+                    </a>
+                    <div class="dropdown-divider"></div>
+                }
+            </div>
+            <a class="dropdown-item small" asp-area="" asp-action="Index" asp-controller="Solicitudes">Ver todas las solicitudes</a>
+        </div>
+    </li>
+}

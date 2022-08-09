@@ -1,0 +1,116 @@
+﻿@page "/Administracion/Constancias/Mantenimiento"
+@model Hermes2018.Areas.Identity.Pages.Administracion.Constancias.MantenimientoModel
+@{
+}
+<div class="content-wrapper ml-0 bg-white pt-0">
+    <div class="container-fluid" id="logged-in">
+        <div class="row">
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-12 pt-2">
+                        <ol class="breadcrumb-2 mt-0 mb-0 pb-1 pt-1 display-inline">
+                            <li class="breadcrumb-2-item">
+                                <a asp-area="" asp-controller="Home" asp-action="Index" asp-route-id="">Inicio</a>
+                            </li>
+                            <li class="breadcrumb-2-item">
+                                <a asp-area="Identity" asp-page="/Administracion/Constancias/Index">Constancias</a>
+                            </li>
+                            <li class="breadcrumb-2-item active display-flex" aria-current="page">Mantenimiento de Catálogo de Personal</li>
+                        </ol>
+                    </div>
+                    <div class="col-12">
+                        <hr class="hr-thick mb-1 mt-1" />
+                        <span class="h5">Mantenimiento de Catálogo de Personal que Entregará Constancia</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <form method="post" enctype="multipart/form-data" id="formMantenimiento">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                        <div class="text-danger error-list-clean"></div>
+                        <div>
+                            <input class="sin-indicador" />
+                            <input class="sin-indicador" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-sm-12 col-md-5 col-lg-4 col-xl-2">
+                            <div class="form-group">
+                                <label class="col-form-label font-bold-12"></label>
+                                <div class="">
+                                    <input class="form-control form-control-sm pr-4" id="searchbox" type="search" name="busqueda" placeholder="Buscar..." maxlength="100">
+                                    <span id="btn-x-search" class="btn bg-transparent d-none">
+                                        <i class="fa fa-times"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-7 col-lg-8 col-xl-4">
+                            <div class="form-group">
+                                <label class="col-form-label font-bold-12"></label>
+                                <div class="">
+                                    <input type="text" readonly class="form-control form-control-sm" placeholder="Nombre del usuario" />
+                                    <small class="form-text text-muted"></small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-3">
+                            <div class="form-group">
+                                <label class="col-form-label font-bold-12"></label>
+                                <div class="">
+                                    <select id="select-tipo-constancia" class="form-control form-control-sm">
+                                        <option value="0">[Seleccione el tipo de personal]</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-3">
+                            <div class="form-group">
+                                <label class="col-form-label font-bold-12"></label>
+                                <div class="">
+                                    <select id="select-tipo-constancia" class="form-control form-control-sm">
+                                        <option value="0">[Seleccione el tipo de constancias]</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="float-right pt-3">
+                                <button class="btn btn-primary md-btn md-btn-raised md-btn-ripple">Aceptar</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-12">
+                <br />
+            </div>
+            <div class="col-12">
+                <div class="table-responsive alto-minimo-bandejas">
+                    <table class="table table-hover table-sm sm-0">
+                        <thead class="bg-light">
+                            <tr>
+                                <th scope="col">Número de personal</th>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Tipo Personal</th>
+                                <th scope="col">Fecha Actualización</th>
+                                <th scope="col">Usuario</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

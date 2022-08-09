@@ -1,0 +1,119 @@
+﻿@page "/Administracion/Consulta/{id}"
+@model Hermes2018.Areas.Identity.Pages.Administracion.ConsultaModel
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+    <div>
+        <h2>DATOS DE LA TABLA "DATPERS" DE: @Model.Usuario</h2>
+        <table >
+            <thead>
+                <tr>
+                    @foreach (var element in Model.Listado.Encabezado)
+                    {
+                        <th style="border: 1px solid #000000">@Html.DisplayFor(m => element)</th>
+                    }
+                </tr>
+                <tr>
+                    @foreach (var element in Model.Listado.Tipos)
+                    {
+                        <th style="border: 1px solid #000000">@Html.DisplayFor(m => element)</th>
+                    }
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var val in Model.Listado.Contenido)
+                {
+                    <tr>
+                        <td style="border: 1px solid #000000">@val.NOPER</td>
+                        <td style="border: 1px solid #000000">@val.NOMBRE</td>
+                        <td style="border: 1px solid #000000">@val.SEXO</td>
+                        <td style="border: 1px solid #000000">@val.RFC</td>
+                        <td style="border: 1px solid #000000">@val.CURP</td>
+                        <td style="border: 1px solid #000000">@val.PIDM </td>
+                        <td style="border: 1px solid #000000">@val.IPE </td>
+                        <td style="border: 1px solid #000000">@val.EDO_CIV </td>
+                        <td style="border: 1px solid #000000">@val.NACIONALIDAD </td>
+                        <td style="border: 1px solid #000000">@val.NIVEL </td>
+                        <td style="border: 1px solid #000000">@val.CALLE </td>
+                        <td style="border: 1px solid #000000">@val.NUMEXT </td>
+                        <td style="border: 1px solid #000000">@val.NUMINT </td>
+                        <td style="border: 1px solid #000000">@val.COLONIA </td>
+                        <td style="border: 1px solid #000000">@val.CP </td>
+                        <td style="border: 1px solid #000000">@val.CIUDAD </td>
+                        <td style="border: 1px solid #000000">@val.MUNICIPIO </td>
+                        <td style="border: 1px solid #000000">@val.ESTADO </td>
+                        <td style="border: 1px solid #000000">@val.TEL </td>
+                        <td style="border: 1px solid #000000">@val.NTPE </td>
+                        <td style="border: 1px solid #000000">@val.TIPO_PER </td>
+                        <td style="border: 1px solid #000000">@val.NPUE </td>
+                        <td style="border: 1px solid #000000">@val.DPUE </td>
+                        <td style="border: 1px solid #000000">@val.NCAT </td>
+                        <td style="border: 1px solid #000000">@val.CATEGORIA </td>
+                        <td style="border: 1px solid #000000">@val.NCON </td>
+                        <td style="border: 1px solid #000000">@val.TIPO_CONT </td>
+                        <td style="border: 1px solid #000000">@val.INGRESO </td>
+                        <td style="border: 1px solid #000000">@val.ANT </td>
+                        <td style="border: 1px solid #000000">@val.NDEP </td>
+                        <td style="border: 1px solid #000000">@val.DDEP </td>
+                        <td style="border: 1px solid #000000">@val.DCDEP </td>
+                        <td style="border: 1px solid #000000">@val.TDEP </td>
+                        <td style="border: 1px solid #000000">@val.NSUBP </td>
+                        <td style="border: 1px solid #000000">@val.DSUBP </td>
+                        <td style="border: 1px solid #000000">@val.DCSSUBP </td>
+                        <td style="border: 1px solid #000000">@val.NAREA </td>
+                        <td style="border: 1px solid #000000">@val.ISSBP </td>
+                        <td style="border: 1px solid #000000">@val.CORREO </td>
+                        <td style="border: 1px solid #000000">@val.STATUS </td>
+                        <td style="border: 1px solid #000000">@val.SNI </td>
+                        <td style="border: 1px solid #000000">@val.LADA </td>
+                        <td style="border: 1px solid #000000">@val.TELEF_DEP </td>
+                        <td style="border: 1px solid #000000">@val.EXTEN </td>
+                        <td style="border: 1px solid #000000">@val.D_DIREC1 </td>
+                        <td style="border: 1px solid #000000">@val.D_DIR2 </td>
+                        <td style="border: 1px solid #000000">@val.EDIF </td>
+                        <td style="border: 1px solid #000000">@val.PISO </td>
+                        <td style="border: 1px solid #000000">@val.D_CIUDAD </td>
+                        <td style="border: 1px solid #000000">@val.D_CP </td>
+                        <td style="border: 1px solid #000000">@val.NZON </td>
+                        <td style="border: 1px solid #000000">@val.DZON </td>
+                        <td style="border: 1px solid #000000">@val.NSUBZ </td>
+                        <td style="border: 1px solid #000000">@val.SUBREGION </td>
+                        <td style="border: 1px solid #000000">@val.PPROMEP </td>
+                        <td style="border: 1px solid #000000">@val.FNAC </td>
+                        <td style="border: 1px solid #000000">@val.LNAC </td>
+                        <td style="border: 1px solid #000000">@val.TURNO </td>
+                        <td style="border: 1px solid #000000">@val.APAT </td>
+                        <td style="border: 1px solid #000000">@val.AMAT </td>
+                        <td style="border: 1px solid #000000">@val.NOMB </td>
+                        <td style="border: 1px solid #000000">@val.CVELOGIN </td>
+                        <td style="border: 1px solid #000000">@val.NIVC </td>
+                        <td style="border: 1px solid #000000">@val.NPERI </td>
+                        <td style="border: 1px solid #000000">@val.FALT </td>
+                        <td style="border: 1px solid #000000">@val.FBAJ </td>
+                        <td style="border: 1px solid #000000">@val.URL </td>
+                        <td style="border: 1px solid #000000">@val.IURL </td>
+                        <td style="border: 1px solid #000000">@val.NCUR </td>
+                        <td style="border: 1px solid #000000">@val.NMOT </td>
+                        <td style="border: 1px solid #000000">@val.IACTREAL </td>
+                        <td style="border: 1px solid #000000">@val.NNIV </td>
+                        <td style="border: 1px solid #000000">@val.NPROF </td>
+                        <td style="border: 1px solid #000000">@val.NOTORGA </td>
+                        <td style="border: 1px solid #000000">@val.HRS </td>
+                        <td style="border: 1px solid #000000">@val.NDPAG </td>
+                        <td style="border: 1px solid #000000">@val.DDEPAG </td>
+                        <td style="border: 1px solid #000000">@val.NSUBPAG </td>
+                        <td style="border: 1px solid #000000">@val.DSUBPAG </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
+

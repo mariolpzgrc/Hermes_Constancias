@@ -1,0 +1,116 @@
+2022-06-06T12:32:47.6453272-05:00 0HMI7RQPAVPRD:00000001 [ERR] An unhandled exception has occurred while executing the request. (48a46595)
+Microsoft.AspNetCore.Mvc.Razor.Compilation.CompilationFailedException: One or more compilation failures occurred:
+gwkslilk.ing(5611,5628): error CS1031: Type expected
+gwkslilk.ing(5611,5878): error CS1031: Type expected
+gwkslilk.ing(5611,6136): error CS1031: Type expected
+gwkslilk.ing(5611,6394): error CS1031: Type expected
+gwkslilk.ing(5611,6648): error CS1031: Type expected
+gwkslilk.ing(5611,6896): error CS1031: Type expected
+gwkslilk.ing(5611,5697): error CS1061: 'LecturaModel' does not contain a definition for 'CompromisoAceptado' and no extension method 'CompromisoAceptado' accepting a first argument of type 'LecturaModel' could be found (are you missing a using directive or an assembly reference?)
+gwkslilk.ing(5611,5951): error CS1061: 'LecturaModel' does not contain a definition for 'CompromisoAceptado' and no extension method 'CompromisoAceptado' accepting a first argument of type 'LecturaModel' could be found (are you missing a using directive or an assembly reference?)
+gwkslilk.ing(5611,6209): error CS1061: 'LecturaModel' does not contain a definition for 'CompromisoAceptado' and no extension method 'CompromisoAceptado' accepting a first argument of type 'LecturaModel' could be found (are you missing a using directive or an assembly reference?)
+gwkslilk.ing(5611,6465): error CS1061: 'LecturaModel' does not contain a definition for 'CompromisoAceptado' and no extension method 'CompromisoAceptado' accepting a first argument of type 'LecturaModel' could be found (are you missing a using directive or an assembly reference?)
+gwkslilk.ing(5611,6716): error CS1061: 'LecturaModel' does not contain a definition for 'CompromisoAceptado' and no extension method 'CompromisoAceptado' accepting a first argument of type 'LecturaModel' could be found (are you missing a using directive or an assembly reference?)
+gwkslilk.ing(5611,6973): error CS1061: 'LecturaModel' does not contain a definition for 'CompromisoAceptado' and no extension method 'CompromisoAceptado' accepting a first argument of type 'LecturaModel' could be found (are you missing a using directive or an assembly reference?)
+   at Microsoft.AspNetCore.Mvc.Razor.Internal.RazorViewCompiler.CompileAndEmit(RazorCodeDocument codeDocument, String generatedCode)
+   at Microsoft.AspNetCore.Mvc.Razor.Internal.RazorViewCompiler.CompileAndEmit(String relativePath)
+   at Microsoft.AspNetCore.Mvc.Razor.Internal.RazorViewCompiler.OnCacheMiss(String normalizedPath)
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.RazorPages.Internal.DefaultPageLoader.Load(PageActionDescriptor actionDescriptor)
+   at Microsoft.AspNetCore.Mvc.RazorPages.Internal.PageActionInvokerProvider.OnProvidersExecuting(ActionInvokerProviderContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ActionInvokerFactory.CreateInvoker(ActionContext actionContext)
+   at Microsoft.AspNetCore.Mvc.Internal.MvcAttributeRouteHandler.<>c__DisplayClass12_0.<RouteAsync>b__0(HttpContext c)
+   at Microsoft.AspNetCore.Builder.RouterMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.MigrationsEndPointMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.DatabaseErrorPageMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.DatabaseErrorPageMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2022-06-06T12:33:06.8134470-05:00 0HMI7RQPAVPRD:00000002 [ERR] An unhandled exception has occurred while executing the request. (48a46595)
+Microsoft.AspNetCore.Mvc.Razor.Compilation.CompilationFailedException: One or more compilation failures occurred:
+gwkslilk.ing(5611,5628): error CS1031: Type expected
+gwkslilk.ing(5611,5878): error CS1031: Type expected
+gwkslilk.ing(5611,6136): error CS1031: Type expected
+gwkslilk.ing(5611,6394): error CS1031: Type expected
+gwkslilk.ing(5611,6648): error CS1031: Type expected
+gwkslilk.ing(5611,6896): error CS1031: Type expected
+gwkslilk.ing(5611,5697): error CS1061: 'LecturaModel' does not contain a definition for 'CompromisoAceptado' and no extension method 'CompromisoAceptado' accepting a first argument of type 'LecturaModel' could be found (are you missing a using directive or an assembly reference?)
+gwkslilk.ing(5611,5951): error CS1061: 'LecturaModel' does not contain a definition for 'CompromisoAceptado' and no extension method 'CompromisoAceptado' accepting a first argument of type 'LecturaModel' could be found (are you missing a using directive or an assembly reference?)
+gwkslilk.ing(5611,6209): error CS1061: 'LecturaModel' does not contain a definition for 'CompromisoAceptado' and no extension method 'CompromisoAceptado' accepting a first argument of type 'LecturaModel' could be found (are you missing a using directive or an assembly reference?)
+gwkslilk.ing(5611,6465): error CS1061: 'LecturaModel' does not contain a definition for 'CompromisoAceptado' and no extension method 'CompromisoAceptado' accepting a first argument of type 'LecturaModel' could be found (are you missing a using directive or an assembly reference?)
+gwkslilk.ing(5611,6716): error CS1061: 'LecturaModel' does not contain a definition for 'CompromisoAceptado' and no extension method 'CompromisoAceptado' accepting a first argument of type 'LecturaModel' could be found (are you missing a using directive or an assembly reference?)
+gwkslilk.ing(5611,6973): error CS1061: 'LecturaModel' does not contain a definition for 'CompromisoAceptado' and no extension method 'CompromisoAceptado' accepting a first argument of type 'LecturaModel' could be found (are you missing a using directive or an assembly reference?)
+   at Microsoft.AspNetCore.Mvc.Razor.Internal.RazorViewCompiler.CompileAndEmit(RazorCodeDocument codeDocument, String generatedCode)
+   at Microsoft.AspNetCore.Mvc.Razor.Internal.RazorViewCompiler.CompileAndEmit(String relativePath)
+   at Microsoft.AspNetCore.Mvc.Razor.Internal.RazorViewCompiler.OnCacheMiss(String normalizedPath)
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.RazorPages.Internal.DefaultPageLoader.Load(PageActionDescriptor actionDescriptor)
+   at Microsoft.AspNetCore.Mvc.RazorPages.Internal.PageActionInvokerProvider.OnProvidersExecuting(ActionInvokerProviderContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ActionInvokerFactory.CreateInvoker(ActionContext actionContext)
+   at Microsoft.AspNetCore.Mvc.Internal.MvcAttributeRouteHandler.<>c__DisplayClass12_0.<RouteAsync>b__0(HttpContext c)
+   at Microsoft.AspNetCore.Builder.RouterMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.MigrationsEndPointMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.DatabaseErrorPageMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.DatabaseErrorPageMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2022-06-06T12:34:39.7608309-05:00 0HMI7RQPAVPRI:00000002 [ERR] An unhandled exception has occurred while executing the request. (48a46595)
+Microsoft.AspNetCore.Mvc.Razor.Compilation.CompilationFailedException: One or more compilation failures occurred:
+gwkslilk.ing(5611,5628): error CS1031: Type expected
+gwkslilk.ing(5611,5878): error CS1031: Type expected
+gwkslilk.ing(5611,6136): error CS1031: Type expected
+gwkslilk.ing(5611,6394): error CS1031: Type expected
+gwkslilk.ing(5611,6648): error CS1031: Type expected
+gwkslilk.ing(5611,6896): error CS1031: Type expected
+gwkslilk.ing(5611,5697): error CS1061: 'LecturaModel' does not contain a definition for 'CompromisoAceptado' and no extension method 'CompromisoAceptado' accepting a first argument of type 'LecturaModel' could be found (are you missing a using directive or an assembly reference?)
+gwkslilk.ing(5611,5951): error CS1061: 'LecturaModel' does not contain a definition for 'CompromisoAceptado' and no extension method 'CompromisoAceptado' accepting a first argument of type 'LecturaModel' could be found (are you missing a using directive or an assembly reference?)
+gwkslilk.ing(5611,6209): error CS1061: 'LecturaModel' does not contain a definition for 'CompromisoAceptado' and no extension method 'CompromisoAceptado' accepting a first argument of type 'LecturaModel' could be found (are you missing a using directive or an assembly reference?)
+gwkslilk.ing(5611,6465): error CS1061: 'LecturaModel' does not contain a definition for 'CompromisoAceptado' and no extension method 'CompromisoAceptado' accepting a first argument of type 'LecturaModel' could be found (are you missing a using directive or an assembly reference?)
+gwkslilk.ing(5611,6716): error CS1061: 'LecturaModel' does not contain a definition for 'CompromisoAceptado' and no extension method 'CompromisoAceptado' accepting a first argument of type 'LecturaModel' could be found (are you missing a using directive or an assembly reference?)
+gwkslilk.ing(5611,6973): error CS1061: 'LecturaModel' does not contain a definition for 'CompromisoAceptado' and no extension method 'CompromisoAceptado' accepting a first argument of type 'LecturaModel' could be found (are you missing a using directive or an assembly reference?)
+   at Microsoft.AspNetCore.Mvc.Razor.Internal.RazorViewCompiler.CompileAndEmit(RazorCodeDocument codeDocument, String generatedCode)
+   at Microsoft.AspNetCore.Mvc.Razor.Internal.RazorViewCompiler.CompileAndEmit(String relativePath)
+   at Microsoft.AspNetCore.Mvc.Razor.Internal.RazorViewCompiler.OnCacheMiss(String normalizedPath)
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.RazorPages.Internal.DefaultPageLoader.Load(PageActionDescriptor actionDescriptor)
+   at Microsoft.AspNetCore.Mvc.RazorPages.Internal.PageActionInvokerProvider.OnProvidersExecuting(ActionInvokerProviderContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ActionInvokerFactory.CreateInvoker(ActionContext actionContext)
+   at Microsoft.AspNetCore.Mvc.Internal.MvcAttributeRouteHandler.<>c__DisplayClass12_0.<RouteAsync>b__0(HttpContext c)
+   at Microsoft.AspNetCore.Builder.RouterMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.MigrationsEndPointMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.DatabaseErrorPageMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.DatabaseErrorPageMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2022-06-06T13:12:55.2908925-05:00 0HMI7SS1VHV66:00000003 [ERR] An unhandled exception has occurred while executing the request. (48a46595)
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at Hermes2018.Areas.Identity.Pages.Correspondencia.LecturaModel.OnGetAsync(Int32 id, Int32 tipo) in C:\ProyectoHermes2021\Hermes2018\Hermes2018\Hermes2018\Areas\Identity\Pages\Correspondencia\Lectura.cshtml.cs:line 171
+   at Microsoft.AspNetCore.Mvc.RazorPages.Internal.ExecutorFactory.NonGenericTaskHandlerMethod.Execute(Object receiver, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.RazorPages.Internal.PageActionInvoker.InvokeHandlerMethodAsync()
+   at Microsoft.AspNetCore.Mvc.RazorPages.Internal.PageActionInvoker.InvokeNextPageFilterAsync()
+   at Microsoft.AspNetCore.Mvc.RazorPages.Internal.PageActionInvoker.Rethrow(PageHandlerExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.RazorPages.Internal.PageActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.RazorPages.Internal.PageActionInvoker.InvokeInnerFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextResourceFilter()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResourceExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeFilterPipelineAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeAsync()
+   at Microsoft.AspNetCore.Builder.RouterMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.MigrationsEndPointMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.DatabaseErrorPageMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.DatabaseErrorPageMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)

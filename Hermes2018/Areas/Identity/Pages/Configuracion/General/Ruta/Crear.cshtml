@@ -1,0 +1,59 @@
+﻿@page "/Configuracion/General/Ruta"
+@model Hermes2018.Areas.Identity.Pages.Configuracion.General.Ruta.CrearModel
+
+<div class="content-wrapper ml-0 bg-white pt-0">
+    <div class="container-fluid" id="logged-in">
+        <div class="row">
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 pt-2">
+                        <ol class="breadcrumb-2 mt-0 mb-0 pb-1 pt-1 display-inline">
+                            <li class="breadcrumb-2-item">
+                                <a asp-area="" asp-controller="Home" asp-action="Index" asp-route-id="">Inicio</a>
+                            </li>
+
+                            <li class="breadcrumb-2-item">
+                                <a asp-area="Identity" asp-page="/Configuracion/General/Index">Configuracion general</a>
+                            </li>
+                            <li class="breadcrumb-2-item active display-flex">Crear ruta base</li>
+                        </ol>
+                    </div>
+                    <div class="col-12">
+                        <hr class="hr-thick mb-1 mt-1" />
+                        <h5>Ruta base</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <form method="post" enctype="multipart/form-data">
+                    <div class="row">
+                        <div asp-validation-summary="ModelOnly" class="text-danger error-list-clean"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                            <div class="form-group">
+                                <label asp-for="Crear.Ruta" class="col-form-label font-bold-12"></label>
+                                <div class="">
+                                    <input asp-for="Crear.Ruta" class="form-control form-control-sm" placeholder="" />
+                                    <small class="form-text text-muted">Escriba la ruta base, por ejemplo: "D:\recurso" o "\\148.226.26.171\recurso"</small>
+                                    <span asp-validation-for="Crear.Ruta" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <div class="pt-3">
+                                <a asp-area="Identity" asp-page="/Configuracion/General/Index" class="btn btn-light">Cancelar</a>
+                                <button type="submit" class="btn btn-primary">Crear</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <partial name="_ValidationScriptsPartial" />
+}

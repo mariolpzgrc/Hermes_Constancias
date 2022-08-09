@@ -1,0 +1,327 @@
+﻿@page "/Correspondencia/Reenviar/{id:int}/{tipo:int}"
+@model Hermes2018.Areas.Identity.Pages.Correspondencia.ReenviarModel
+
+@section styles
+    {
+    <link type="text/css" rel="stylesheet" href="~/lib/fontawesome/css/font-awesome.min.css" />
+    <link type="text/css" rel="stylesheet" href="~/lib/froala-editor/css/froala_editor.pkgd.min.css" />
+    <link type="text/css" rel="stylesheet" href="~/lib/froala-editor/css/froala_style.min.css" />
+    <link type="text/css" rel="stylesheet" href="~/lib/froala-editor/css/plugins/image.min.css" />
+    <link type="text/css" rel="stylesheet" href="~/lib/froala-editor/css/themes/gray.min.css" />
+    <link type="text/css" rel="stylesheet" href="~/lib/tagify/css/tagify.css" />
+    @*<link href="~/lib/bootstrap-select/dist/css/bootstrap-select.min.css" rel="stylesheet" />*@
+    <link href="~/lib/bootstrap-select-1.13.14/dist/css/bootstrap-select.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/lib/flatpickr/flatpickr.min.css">
+
+    <link type="text/css" rel="stylesheet" href="~/lib/dropzone/dist/min/dropzone.min.css" />
+    <link type="text/css" rel="stylesheet" href="~/lib/max-favilli-tagmanager/tagmanager.min.css" />
+    <link type="text/css" rel="stylesheet" href="~/lib/tagify/css/tagify.css" />
+    <link type="text/css" rel="stylesheet" href="~/lib/bootstrap-notify/animate.min.css" />
+    <link type="text/css" rel="stylesheet" href="~/css/Areas/Identity/Pages/Correspondencia/Reenviar.css" asp-append-version="true" />
+}
+
+@section ScriptsPrioritarios
+    {
+    <script type="text/javascript" src="~/lib/dropzone/dist/min/dropzone.min.js"></script>
+    <script type="text/javascript" src="~/lib/bootstrap-notify/bootstrap-notify.min.js"></script>
+    <script type="text/javascript" src="~/lib/tagify/js/tagify.min.js"></script>
+
+    <script type="text/javascript" src="~/lib/froala-editor/js/froala_editor.pkgd.min.js"></script>
+    <script type="text/javascript" src="~/lib/froala-editor/js/languages/es.js"></script>
+    <script type="text/javascript" src="~/lib/froala-editor/js/plugins/image.min.js"></script>
+    <script type="text/javascript" src="~/lib/froala-editor/js/plugins/colors.min.js"></script>
+    <script type="text/javascript" src="~/lib/froala-editor/js/plugins/font_size.min.js"></script>
+
+    <script src="~/lib/flatpickr/flatpickr.min.js"></script>
+    <script src="~/lib/flatpickr/l10n/es.js"></script>
+}
+
+<div class="content-wrapper pt-3">
+    <div class="container-fluid">
+        <form id="form-new-ofi" method="post">
+            <div>
+                <input asp-for="Reenviar.FolioSession" class="sin-indicador" />
+                <input asp-for="Reenviar.Extensiones" class="sin-indicador" />
+                <input asp-for="Reenviar.ExisteAdjuntos" class="sin-indicador" />
+
+                <input asp-for="Inhabiles.Dias" class="sin-indicador" />
+                <input asp-for="Inhabiles.Inicio" class="sin-indicador" />
+                <input asp-for="Inhabiles.Limite" class="sin-indicador" />
+            </div>
+            <div class="row contenido-alto">
+                <div class="col-sm-12 col-md-9 col-lg-9 col-xl-10">
+                    <ol class="breadcrumb-2 mt-0 mb-0 display-inline">
+                        @if (Model.Envio.TipoEnvioId == ConstTipoEnvio.TipoEnvioN4 && Model.Tipo == ConstVisualizacionEnvio.Recepcion)
+                        {
+                            <li class="breadcrumb-2-item active display-flex font-weight-bold">
+                                TURNAR
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="breadcrumb-2-item active display-flex font-weight-bold">
+                                REENVIAR
+                            </li>
+                        }
+
+                        <li class="flex-right">
+                            <input type="submit" class="md-btn md-btn-raised md-btn-ripple mr-1" id="send-new-ofi" value="Enviar" />
+                            @if (Model.Envio.TipoEnvioId == ConstTipoEnvio.TipoEnvioN4 && Model.Tipo == ConstVisualizacionEnvio.Recepcion)
+                            {
+                                <a asp-area="Identity" asp-page="/Correspondencia/Lectura" asp-route-id="@Model.Reenviar.EnvioId" asp-route-tipo="@Model.Envio.TipoEnvioId" class="md-btn md-btn-raised md-btn-ripple bg-secondary">Cancelar</a>
+                            }
+                            else
+                            {
+                                <a asp-area="Identity" asp-page="/Correspondencia/Lectura" asp-route-id="@Model.Reenviar.EnvioId" asp-route-tipo="@Model.Reenviar.TipoEnvioId" class="md-btn md-btn-raised md-btn-ripple bg-secondary">Cancelar</a>
+                            }
+                            <input asp-for="Reenviar.EnvioId" class="sin-indicador" />
+                            <input asp-for="Reenviar.TipoEnvioId" class="sin-indicador" />
+                            <input asp-for="Reenviar.EsRespuestaDefinitiva" class="sin-indicador" />
+                        </li>
+                    </ol>
+                    <hr class="hr-thick mt-2 mb-2" />
+                    <div class="mt-0 mb-2" id="ctndr-encab">
+                        <div class="form-group row font-dark-gray ml-0 pt-0 mb-0">
+                            <div class="col-sm-7 pl-0">
+                                <!-- De: -->
+                                <label class="lbl-de"><b>De: </b></label>
+                                <label id="labelfrom">@Model.Reenviar.UsuarioDe</label>
+                            </div>
+                        </div>
+                        <div class="form-group row font-dark-gray mb-0 mt-0">
+                            <span id="containerMailsFor" class="ml-3"></span>
+                            <span class="span-fill col-sm-12 mt-1" id="tagsEmailPara">
+                                <!-- Para: -->
+                                <label class="lbl-para" id="labelPara"><b>Para: </b></label>
+                                <label class="label-fill">
+                                    <input id="form-autocomplete-para" type="text" placeholder="Destinatario" />
+                                    <input asp-for="Reenviar.Para" class="form-control sin-indicador" />
+                                    <span asp-validation-for="Reenviar.Para" class="text-danger"></span>
+                                </label>
+                            </span>
+                        </div>
+                        <div class="form-group row font-dark-gray mb-0 mt-0">
+                            <span id="containerMailsCCP" class="ml-3"></span>
+                            <span class="span-fill col-sm-12 mt-1" id="tagsEmailCCP">
+                                <!-- CC: -->
+                                <label class="lbl-cc"><b>CC: </b></label>
+                                <label class="label-fill">
+                                    <input id="form-autocomplete-ccp" type="text" aria-describedby="emailHelp" placeholder="Destinatario">
+                                    <input asp-for="Reenviar.CCP" type="hidden" class="form-control" />
+                                </label>
+                            </span>
+                        </div>
+                        <div class="form-group row font-dark-gray mt-1 mb-0">
+                            <div class="span-fill col-sm-12  mt-1">
+                                <!-- Asunto -->
+                                <label class="lbl-asunto"><b>Asunto:  </b></label>
+                                <label class="label-fill">
+                                    <input asp-for="Reenviar.Asunto" class="form-control form-input sin-indicador" readonly type="text" placeholder="">
+                                    <span asp-validation-for="Reenviar.Asunto" class="text-danger"></span>
+                                </label>
+                                <hr class="mt-0" />
+                            </div>
+                        </div>
+                        <div class="form-group row font-dark-gray mt-1 mb-0">
+                            <div class="col-sm-12">
+                                <!-- Archivos adjuntos -->
+                                <label><b>Anexos: </b></label>
+                                <div class="dropzone" id="uploader"></div>
+                                <div><small>El tamaño máximo de los archivos adjuntos es de 25MB</small></div>
+                                <input asp-for="Reenviar.Anexos" class="sin-indicador" />
+                            </div>
+                        </div>
+                        <span class="d-none" id="envio_identifica">@Model.Envio.EnvioId</span>
+                        <span class="d-none" id="tipo_envio">@Model.Envio.TipoEnvioId</span>
+                        @if (Model.Envio.ExisteAdjuntos && Model.Envio.TipoEnvioId != ConstTipoEnvio.TipoEnvioN4)
+                        {
+                            <div class="form-group row font-dark-gray mt-2 mb-0">
+                                <div id="containerArchivos" class="ml-3"><p></p></div>
+                            </div>
+                        }
+
+                        <!--Comboboxes pequeños-->
+                        <div class="form-group row font-dark-gray mt-1 mb-2 mt-2">
+                            <div class="col-sm-4 col-lg-4">
+                                <span>
+                                    <small>Folio:</small>
+                                    <input asp-for="Reenviar.Folio" id="folioInput" class="form-control form-control-sm sin-indicador disabled" type="text" readonly>
+                                </span>
+                            </div>
+
+                            <div class="col-sm-4 col-lg-4">
+
+                                <span id="contieneFechapc">
+                                    <small>Fecha propuesta:</small>
+                                    <input asp-for="Reenviar.FechaPropuesta" id="fechaCompromiso" placeholder="Seleccione una fecha" class="form-control bg-white form-control-sm sin-indicador">
+                                    <span asp-validation-for="Reenviar.FechaPropuesta" class="text-danger"></span>
+                                </span>
+
+
+                            </div>
+                            <div class="col-sm-4 col-lg-4"></div>
+                        </div>
+                        <div>
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="redactar-tab" data-toggle="tab" href="#redactar" role="tab" aria-controls="redactar" aria-selected="true">Redactar</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="original-tab" data-toggle="tab" href="#original" role="tab" aria-controls="original" aria-selected="false">Original</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane fade show active" id="redactar" role="tabpanel" aria-labelledby="redactar-tab">
+                                <!--PLANTILLA PARA EL DOCUMENTO-->
+                                <div class="card mb-3 border-top-0">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <label asp-for="Reenviar.Indicaciones" class="col-form-label font-dark-gray">Mensaje de texto</label>
+                                                    <div>
+                                                        <span asp-validation-for="Reenviar.Indicaciones" class="text-danger"></span>
+                                                        <textarea asp-for="Reenviar.Indicaciones" class="form-control font-regular-12"></textarea>                                                       
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="original" role="tabpanel" aria-labelledby="original-tab">
+                                <!--PLANTILLA PARA EL DOCUMENTO-->
+                                <div class="card mb-3 border-top-0">
+                                    @if (Model.Envio.ExisteAdjuntos && Model.Envio.TipoEnvioId == ConstTipoEnvio.TipoEnvioN4 && Model.Tipo == ConstVisualizacionEnvio.Recepcion)
+                                    {
+                                        <div class="card-body border-top-0 border-left-0 border-right-0 border-bottom p-1 border-dotted">
+                                            <div class="form-group row font-dark-gray mt-2">
+                                                <div class="col-sm-12">
+                                                    <!-- Adjunto-->
+                                                    <label><b>Anexos originales: </b></label>
+                                                    <hr class="mt-0 mb-1" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group row font-dark-gray mt-0 mb-1">
+                                                <div id="containerArchivos" class="ml-3"></div>
+                                            </div>
+                                        </div>
+                                    }
+                                    <div class="card-body">
+                                        <div class="row pt-0">
+                                            <div class="col-12 pr-0">
+                                                <div class="col align-text-right">
+                                                    @*<img class="logo-simbolo" src="~/images/LIS_UV_COLOR_3.png" />*@
+                                                    <cache enabled="true" expires-after="@TimeSpan.FromSeconds(5)">
+                                                        <img class="logo-simbolo" src="@Url.Action("Logo", "Anexos", new { id = Model.Envio.AreaId })" />
+                                                    </cache>
+                                                    <div>
+                                                        <p class="m-0 font-bold-11">@Model.Envio.AreaPadreNombre</p>
+                                                        <p class="m-0 font-regular-10 mb-1">@Model.Envio.AreaNombre</p>
+
+                                                        <p class="m-0 font-bold-10 mb-2">Region @Model.Envio.RegionNombre</p>
+
+                                                        @if (Model.Envio.TipoDocumento == ConstTipoDocumento.TipoDocumentoT2)
+                                                        {
+                                                            <p id="leyenda-tipo-documento" class="auto-hide-mobile mb-0 font-bold-12">@Model.Envio.TipoDocumento</p>
+                                                        }
+                                                        <p class="m-0 font-regular-10">@Model.Envio.Asunto</p>
+                                                        <p class="m-0 font-regular-10">@Model.Envio.NoInterno</p>
+                                                        <p class="m-0 font-regular-10">@Model.Envio.Fecha</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row pt-1 pb-3">
+                                            <div class="col-sm-3 col-md-3 col-lg-3 col-xl-2"></div>
+                                            <div class="col-sm-9 col-md-9 col-lg-9 col-xl-10">
+                                                @if (Model.Envio.TipoEnvioId == ConstTipoEnvio.TipoEnvioN4 && Model.Reenviar.TipoEnvioId == ConstTipoEnvio.TipoEnvioN1)
+                                                {
+                                                    <div class="float-left">
+                                                        <p class="m-0 font-bold-11">@Model.Envio.UsuarioPara_NombreCompleto</p>
+                                                        <p class="m-0 font-bold-10">@Model.Envio.UsuarioPara_PuestoNombre</p>
+                                                        <p class="m-0 font-bold-10">@Model.Envio.UsuarioPara_AreaNombre</p>
+                                                        <p class="m-0 font-bold-11">UNIVERSIDAD VERACRUZANA</p>
+                                                    </div>
+                                                }
+                                            </div>
+                                        </div>
+                                        <div class="row pt-0">
+                                            <div class="col-sm-3 col-md-3 col-lg-3 col-xl-2 align-text-right pt-5">
+                                                <div class="mb-4">
+                                                    <p class="font-regular-9 mb-0">Dirección</p>
+                                                    <p class="font-regular-9 mb-0">@Model.Envio.UsuarioDireccion</p>
+                                                </div>
+                                                <div class="mb-4">
+                                                    <p class="font-regular-9 mb-0">Teléfono(s)</p>
+                                                    <p class="font-regular-9 mb-0">@Model.Envio.UsuarioTelefono</p>
+                                                </div>
+                                                <div class="mb-4">
+                                                    <p class="font-regular-9 mb-0">Correo electrónico</p>
+                                                    <p class="font-regular-9 mb-0">@Model.Envio.UsuarioCorreo</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-9 col-md-9 col-lg-9 col-xl-10 gray-theme">
+                                                <div class="text-justify font-regular-12  fr-view">@Html.Raw(Model.Envio.Cuerpo)</div>
+                                                <div class="pt-5">
+                                                    <p class="mt-2 mb-0 font-regular-12">A t e n t a m e n t e</p>
+                                                    <p class="font-weight-light font-regular-12">"Lis de Veracruz: Arte, Ciencia, Luz"</p>
+                                                    <br />
+                                                    <p class="mb-0 font-regular-12">@Model.Envio.UsuarioNombreCompleto</p>
+                                                    <p class="mb-0 font-regular-10">@Model.Envio.PuestoNombre</p>
+                                                    <p class="mb-0 font-regular-10">@Model.Envio.AreaNombre</p>
+                                                    <p class="mb-0 font-regular-11">Universidad Veracruzana</p>
+                                                </div>
+                                                <div class="pt-5" id="ccpContainer">
+                                                    @foreach (var ccp in Model.Envio.ListadoCcp)
+                                                    {
+                                                        <p class="mb-0 font-regular-8">C.c.p. <span>@ccp</span></p>
+                                                    }
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-3 col-lg-3 col-xl-2 right-sidebar">
+                    <div class="row">
+                        <div class="col-sm-6 col-md-12 col-lg-12 col-xl-12">
+                            @if (Model.Envio.TipoEnvioId == ConstTipoEnvio.TipoEnvioN1 || Model.Envio.TipoEnvioId == ConstTipoEnvio.TipoEnvioN4)
+                            {
+                                <div class="">
+                                    <small>Req. respuesta</small>
+                                    <select asp-for="Reenviar.RequiereRespuesta" class="form-control form-control-sm sin-indicador">
+                                        <option value="false">No</option>
+                                        <option value="true" selected>Si</option>
+                                    </select>
+                                </div>
+                            }
+                        </div>
+                        <div class="col-sm-6 col-md-12 col-lg-12 col-xl-12">
+                            <div class="pt-3">
+                                <small>Importancia</small>
+                                <select asp-for="Reenviar.ImportanciaId" asp-items="Model.Reenviar.ImportanciaSelectList" class="form-control form-control-sm sin-indicador"></select>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-12 col-lg-12 col-xl-12">
+                            <div class="pt-3">
+                                <small>Visibilidad</small>
+                                <select asp-for="Reenviar.VisibilidadId" asp-items="Model.Reenviar.VisibilidadSelectList" class="form-control form-control-sm sin-indicador"></select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section scripts
+    {
+    <partial name="_ValidationScriptsPartial" />
+    <script type="text/javascript" src="~/js/Areas/Identity/Pages/Correspondencia/Reenviar.min.js" asp-append-version="true"></script>
+}

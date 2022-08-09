@@ -1,0 +1,240 @@
+2022-07-08T18:26:17.5225699-05:00 0HMJ174U63HIR:00000002 [ERR] An unhandled exception has occurred while executing the request. (48a46595)
+System.ArgumentOutOfRangeException: The added or subtracted value results in an un-representable DateTime.
+Parameter name: value
+   at System.DateTime.AddTicks(Int64 value)
+   at Hermes2018.Services.UsuarioService.ObtenerFechaCompromisoAsync(DateTime fechaRecepcion, Int32 usuarioId) in C:\ProyectoHermes2021\Hermes2018\Hermes2018\Hermes2018\Services\UsuarioService.cs:line 331
+   at Hermes2018.Areas.Identity.Pages.Correspondencia.CrearModel.OnGet() in C:\ProyectoHermes2021\Hermes2018\Hermes2018\Hermes2018\Areas\Identity\Pages\Correspondencia\Crear.cshtml.cs:line 96
+   at Microsoft.AspNetCore.Mvc.RazorPages.Internal.ExecutorFactory.GenericTaskHandlerMethod.Convert[T](Object taskAsObject)
+   at Microsoft.AspNetCore.Mvc.RazorPages.Internal.ExecutorFactory.GenericTaskHandlerMethod.Execute(Object receiver, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.RazorPages.Internal.PageActionInvoker.InvokeHandlerMethodAsync()
+   at Microsoft.AspNetCore.Mvc.RazorPages.Internal.PageActionInvoker.InvokeNextPageFilterAsync()
+   at Microsoft.AspNetCore.Mvc.RazorPages.Internal.PageActionInvoker.Rethrow(PageHandlerExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.RazorPages.Internal.PageActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.RazorPages.Internal.PageActionInvoker.InvokeInnerFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextResourceFilter()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResourceExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeFilterPipelineAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeAsync()
+   at Microsoft.AspNetCore.Builder.RouterMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.MigrationsEndPointMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.DatabaseErrorPageMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.DatabaseErrorPageMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2022-07-08T13:19:32.6621785-05:00 0HMJ11P9CKBTM:00000004 [ERR] Failed executing DbCommand ("18,943"ms) [Parameters=["@__tieneCuentaDependencia_1='?' (DbType = Boolean), @__infoCuentaDependencia_HER_RegionId_2='?' (Size = 4000), @__tieneCuentaDependencia_3='?' (DbType = Boolean), @__infoCuentaDependencia_HER_AreaId_4='?' (Size = 4000), @__tieneCuentaDependencia_5='?' (DbType = Boolean), @__infoCuentaDependencia_HER_Puesto_6='?' (Size = 4000), @__tieneCuentaDependencia_7='?' (DbType = Boolean), @__infoCuentaDependencia_HER_Puesto_EsUnico_8='?' (Size = 4000), @__fecha_Year_9='?' (DbType = Int32), @__fecha_Month_10='?' (DbType = Int32), @__fecha_Day_11='?' (DbType = Int32), @__username_12='?' (Size = 4000), @__fecha_Year_13='?' (DbType = Int32), @__fecha_Month_14='?' (DbType = Int32), @__fecha_Day_15='?' (DbType = Int32), @__userId_0='?' (Size = 450)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) CONVERT(VARCHAR(11), [x].[HER_InfoUsuarioId]) AS [InfoUsuarioId], [x].[HER_UserName] AS [Username], [x.HER_Area.HER_Region].[HER_Nombre] AS [RegionNombre], CONVERT(VARCHAR(11), [x.HER_Area].[HER_RegionId]) AS [RegionId], [x.HER_Area].[HER_Clave] AS [AreaClave], [x.HER_Area].[HER_Nombre] AS [AreaNombre], CONVERT(VARCHAR(11), [x].[HER_AreaId]) AS [AreaId], [x].[HER_Puesto] AS [PuestoNombre], CASE
+    WHEN [x].[HER_EsUnico] = 1
+    THEN N'1' ELSE N'0'
+END AS [PuestoEsUnico], [x].[HER_BandejaUsuario] AS [BandejaUsuario], CONVERT(VARCHAR(11), [x].[HER_BandejaPermiso]) AS [BandejaPermiso], [x].[HER_BandejaNombre] AS [BandejaNombre], CASE
+    WHEN @__tieneCuentaDependencia_1 = 0
+    THEN CASE
+        WHEN (([x].[HER_BandejaUsuario] = [x].[HER_UserName]) AND ([x].[HER_BandejaUsuario] IS NOT NULL AND [x].[HER_UserName] IS NOT NULL)) OR ([x].[HER_BandejaUsuario] IS NULL AND [x].[HER_UserName] IS NULL)
+        THEN CONVERT(VARCHAR(11), [x.HER_Area].[HER_RegionId]) ELSE (
+            SELECT TOP(1) CONVERT(VARCHAR(11), [a.HER_Titular.HER_Area].[HER_RegionId])
+            FROM [HER_Delegar] AS [a]
+            INNER JOIN [HER_InfoUsuario] AS [a.HER_Titular] ON [a].[HER_TitularId] = [a.HER_Titular].[HER_InfoUsuarioId]
+            INNER JOIN [HER_Area] AS [a.HER_Titular.HER_Area] ON [a.HER_Titular].[HER_AreaId] = [a.HER_Titular.HER_Area].[HER_AreaId]
+            WHERE (([a.HER_Titular].[HER_Activo] = 1) AND (([a.HER_Titular].[HER_UserName] = [x].[HER_BandejaUsuario]) OR ([a.HER_Titular].[HER_UserName] IS NULL AND [x].[HER_BandejaUsuario] IS NULL))) AND ([x].[HER_InfoUsuarioId] = [a].[HER_DelegadoId])
+        )
+    END ELSE @__infoCuentaDependencia_HER_RegionId_2
+END AS [BandejaRegionId], CASE
+    WHEN @__tieneCuentaDependencia_3 = 0
+    THEN CASE
+        WHEN (([x].[HER_BandejaUsuario] = [x].[HER_UserName]) AND ([x].[HER_BandejaUsuario] IS NOT NULL AND [x].[HER_UserName] IS NOT NULL)) OR ([x].[HER_BandejaUsuario] IS NULL AND [x].[HER_UserName] IS NULL)
+        THEN CONVERT(VARCHAR(11), [x].[HER_AreaId]) ELSE (
+            SELECT TOP(1) CONVERT(VARCHAR(11), [a.HER_Titular0].[HER_AreaId])
+            FROM [HER_Delegar] AS [a0]
+            INNER JOIN [HER_InfoUsuario] AS [a.HER_Titular0] ON [a0].[HER_TitularId] = [a.HER_Titular0].[HER_InfoUsuarioId]
+            WHERE (([a.HER_Titular0].[HER_Activo] = 1) AND (([a.HER_Titular0].[HER_UserName] = [x].[HER_BandejaUsuario]) OR ([a.HER_Titular0].[HER_UserName] IS NULL AND [x].[HER_BandejaUsuario] IS NULL))) AND ([x].[HER_InfoUsuarioId] = [a0].[HER_DelegadoId])
+        )
+    END ELSE @__infoCuentaDependencia_HER_AreaId_4
+END AS [BandejaAreaId], CASE
+    WHEN @__tieneCuentaDependencia_5 = 0
+    THEN CASE
+        WHEN (([x].[HER_BandejaUsuario] = [x].[HER_UserName]) AND ([x].[HER_BandejaUsuario] IS NOT NULL AND [x].[HER_UserName] IS NOT NULL)) OR ([x].[HER_BandejaUsuario] IS NULL AND [x].[HER_UserName] IS NULL)
+        THEN [x].[HER_Puesto] ELSE (
+            SELECT TOP(1) [a.HER_Titular1].[HER_Puesto]
+            FROM [HER_Delegar] AS [a1]
+            INNER JOIN [HER_InfoUsuario] AS [a.HER_Titular1] ON [a1].[HER_TitularId] = [a.HER_Titular1].[HER_InfoUsuarioId]
+            WHERE (([a.HER_Titular1].[HER_Activo] = 1) AND (([a.HER_Titular1].[HER_UserName] = [x].[HER_BandejaUsuario]) OR ([a.HER_Titular1].[HER_UserName] IS NULL AND [x].[HER_BandejaUsuario] IS NULL))) AND ([x].[HER_InfoUsuarioId] = [a1].[HER_DelegadoId])
+        )
+    END ELSE @__infoCuentaDependencia_HER_Puesto_6
+END AS [BandejaPuesto], CASE
+    WHEN @__tieneCuentaDependencia_7 = 0
+    THEN CASE
+        WHEN (([x].[HER_BandejaUsuario] = [x].[HER_UserName]) AND ([x].[HER_BandejaUsuario] IS NOT NULL AND [x].[HER_UserName] IS NOT NULL)) OR ([x].[HER_BandejaUsuario] IS NULL AND [x].[HER_UserName] IS NULL)
+        THEN CASE
+            WHEN [x].[HER_EsUnico] = 1
+            THEN N'1' ELSE N'0'
+        END ELSE CASE
+            WHEN COALESCE((
+                SELECT TOP(1) [a.HER_Titular2].[HER_EsUnico]
+                FROM [HER_Delegar] AS [a2]
+                INNER JOIN [HER_InfoUsuario] AS [a.HER_Titular2] ON [a2].[HER_TitularId] = [a.HER_Titular2].[HER_InfoUsuarioId]
+                WHERE (([a.HER_Titular2].[HER_Activo] = 1) AND (([a.HER_Titular2].[HER_UserName] = [x].[HER_BandejaUsuario]) OR ([a.HER_Titular2].[HER_UserName] IS NULL AND [x].[HER_BandejaUsuario] IS NULL))) AND ([x].[HER_InfoUsuarioId] = [a2].[HER_DelegadoId])
+            ), 0) = 1
+            THEN N'1' ELSE N'0'
+        END
+    END ELSE @__infoCuentaDependencia_HER_Puesto_EsUnico_8
+END AS [BandejaPuestoEsUnico], CASE
+    WHEN ([x].[HER_BandejaUsuario] = [x].[HER_UserName]) OR ([x].[HER_BandejaUsuario] IS NULL AND [x].[HER_UserName] IS NULL)
+    THEN CAST(1 AS BIT) ELSE CAST(0 AS BIT)
+END, @__fecha_Year_9, @__fecha_Month_10, @__fecha_Day_11, @__username_12, @__fecha_Year_13, @__fecha_Month_14, @__fecha_Day_15, CASE
+    WHEN ([x].[HER_BandejaUsuario] = [x].[HER_UserName]) OR ([x].[HER_BandejaUsuario] IS NULL AND [x].[HER_UserName] IS NULL)
+    THEN N'0' ELSE N'1'
+END AS [ActivaDelegacion], [x].[HER_RolNombre] AS [Rol], [x].[HER_Titular] AS [Titular], CASE
+    WHEN [x].[HER_PermisoAA] = 1
+    THEN N'1' ELSE N'0'
+END AS [PermisoAA]
+FROM [HER_InfoUsuario] AS [x]
+INNER JOIN [HER_Area] AS [x.HER_Area] ON [x].[HER_AreaId] = [x.HER_Area].[HER_AreaId]
+INNER JOIN [HER_Region] AS [x.HER_Area.HER_Region] ON [x.HER_Area].[HER_RegionId] = [x.HER_Area.HER_Region].[HER_RegionId]
+WHERE ([x].[HER_UsuarioId] = @__userId_0) AND ([x].[HER_Activo] = 1)" (627a98df)
+System.Data.SqlClient.SqlException (0x80131904): A transport-level error has occurred when receiving results from the server. (provider: Session Provider, error: 19 - Physical connection is not usable)
+   at System.Data.SqlClient.SqlCommand.<>c.<ExecuteDbDataReaderAsync>b__122_0(Task`1 result)
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot)
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.EntityFrameworkCore.Storage.Internal.RelationalCommand.ExecuteAsync(IRelationalConnection connection, DbCommandMethod executeMethod, IReadOnlyDictionary`2 parameterValues, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.AsyncQueryingEnumerable`1.AsyncEnumerator.BufferlessMoveNext(DbContext _, Boolean buffer, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.AsyncQueryingEnumerable`1.AsyncEnumerator.MoveNext(CancellationToken cancellationToken)
+   at System.Linq.AsyncEnumerable.FirstOrDefault_[TSource](IAsyncEnumerable`1 source, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.AsyncLinqOperatorProvider.TaskResultAsyncEnumerable`1.Enumerator.MoveNext(CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.AsyncLinqOperatorProvider.ExceptionInterceptor`1.EnumeratorExceptionInterceptor.MoveNext(CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryCompiler.ExecuteSingletonAsyncQuery[TResult](QueryContext queryContext, Func`2 compiledQuery, IDiagnosticsLogger`1 logger, Type contextType)
+ClientConnectionId:fead2bef-a3e5-47f4-9748-03d87b81bbc8
+Error Number:-1,State:0,Class:20
+2022-07-08T13:19:32.7978054-05:00 0HMJ11P9CKBTM:00000004 [ERR] An exception occurred in the database while iterating the results of a query for context type '"Hermes2018.Data.ApplicationDbContext"'."
+""System.Data.SqlClient.SqlException (0x80131904): A transport-level error has occurred when receiving results from the server. (provider: Session Provider, error: 19 - Physical connection is not usable)
+   at System.Data.SqlClient.SqlCommand.<>c.<ExecuteDbDataReaderAsync>b__122_0(Task`1 result)
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot)
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.EntityFrameworkCore.Storage.Internal.RelationalCommand.ExecuteAsync(IRelationalConnection connection, DbCommandMethod executeMethod, IReadOnlyDictionary`2 parameterValues, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.AsyncQueryingEnumerable`1.AsyncEnumerator.BufferlessMoveNext(DbContext _, Boolean buffer, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.AsyncQueryingEnumerable`1.AsyncEnumerator.MoveNext(CancellationToken cancellationToken)
+   at System.Linq.AsyncEnumerable.FirstOrDefault_[TSource](IAsyncEnumerable`1 source, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.AsyncLinqOperatorProvider.TaskResultAsyncEnumerable`1.Enumerator.MoveNext(CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.AsyncLinqOperatorProvider.ExceptionInterceptor`1.EnumeratorExceptionInterceptor.MoveNext(CancellationToken cancellationToken)
+ClientConnectionId:fead2bef-a3e5-47f4-9748-03d87b81bbc8
+Error Number:-1,State:0,Class:20" (64e2593c)
+System.Data.SqlClient.SqlException (0x80131904): A transport-level error has occurred when receiving results from the server. (provider: Session Provider, error: 19 - Physical connection is not usable)
+   at System.Data.SqlClient.SqlCommand.<>c.<ExecuteDbDataReaderAsync>b__122_0(Task`1 result)
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot)
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.EntityFrameworkCore.Storage.Internal.RelationalCommand.ExecuteAsync(IRelationalConnection connection, DbCommandMethod executeMethod, IReadOnlyDictionary`2 parameterValues, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.AsyncQueryingEnumerable`1.AsyncEnumerator.BufferlessMoveNext(DbContext _, Boolean buffer, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.AsyncQueryingEnumerable`1.AsyncEnumerator.MoveNext(CancellationToken cancellationToken)
+   at System.Linq.AsyncEnumerable.FirstOrDefault_[TSource](IAsyncEnumerable`1 source, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.AsyncLinqOperatorProvider.TaskResultAsyncEnumerable`1.Enumerator.MoveNext(CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.AsyncLinqOperatorProvider.ExceptionInterceptor`1.EnumeratorExceptionInterceptor.MoveNext(CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryCompiler.ExecuteSingletonAsyncQuery[TResult](QueryContext queryContext, Func`2 compiledQuery, IDiagnosticsLogger`1 logger, Type contextType)
+ClientConnectionId:fead2bef-a3e5-47f4-9748-03d87b81bbc8
+Error Number:-1,State:0,Class:20
+2022-07-08T13:19:32.8606702-05:00 0HMJ11P9CKBTM:00000004 [ERR] An exception occurred in the database while iterating the results of a query for context type '"Hermes2018.Data.ApplicationDbContext"'."
+""System.Data.SqlClient.SqlException (0x80131904): A transport-level error has occurred when receiving results from the server. (provider: Session Provider, error: 19 - Physical connection is not usable)
+   at System.Data.SqlClient.SqlCommand.<>c.<ExecuteDbDataReaderAsync>b__122_0(Task`1 result)
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot)
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.EntityFrameworkCore.Storage.Internal.RelationalCommand.ExecuteAsync(IRelationalConnection connection, DbCommandMethod executeMethod, IReadOnlyDictionary`2 parameterValues, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.AsyncQueryingEnumerable`1.AsyncEnumerator.BufferlessMoveNext(DbContext _, Boolean buffer, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.AsyncQueryingEnumerable`1.AsyncEnumerator.MoveNext(CancellationToken cancellationToken)
+   at System.Linq.AsyncEnumerable.FirstOrDefault_[TSource](IAsyncEnumerable`1 source, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.AsyncLinqOperatorProvider.TaskResultAsyncEnumerable`1.Enumerator.MoveNext(CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.AsyncLinqOperatorProvider.ExceptionInterceptor`1.EnumeratorExceptionInterceptor.MoveNext(CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryCompiler.ExecuteSingletonAsyncQuery[TResult](QueryContext queryContext, Func`2 compiledQuery, IDiagnosticsLogger`1 logger, Type contextType)
+ClientConnectionId:fead2bef-a3e5-47f4-9748-03d87b81bbc8
+Error Number:-1,State:0,Class:20" (64e2593c)
+System.Data.SqlClient.SqlException (0x80131904): A transport-level error has occurred when receiving results from the server. (provider: Session Provider, error: 19 - Physical connection is not usable)
+   at System.Data.SqlClient.SqlCommand.<>c.<ExecuteDbDataReaderAsync>b__122_0(Task`1 result)
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot)
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.EntityFrameworkCore.Storage.Internal.RelationalCommand.ExecuteAsync(IRelationalConnection connection, DbCommandMethod executeMethod, IReadOnlyDictionary`2 parameterValues, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.AsyncQueryingEnumerable`1.AsyncEnumerator.BufferlessMoveNext(DbContext _, Boolean buffer, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.AsyncQueryingEnumerable`1.AsyncEnumerator.MoveNext(CancellationToken cancellationToken)
+   at System.Linq.AsyncEnumerable.FirstOrDefault_[TSource](IAsyncEnumerable`1 source, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.AsyncLinqOperatorProvider.TaskResultAsyncEnumerable`1.Enumerator.MoveNext(CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.AsyncLinqOperatorProvider.ExceptionInterceptor`1.EnumeratorExceptionInterceptor.MoveNext(CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryCompiler.ExecuteSingletonAsyncQuery[TResult](QueryContext queryContext, Func`2 compiledQuery, IDiagnosticsLogger`1 logger, Type contextType)
+   at Hermes2018.Services.UsuarioService.ObtieneInfoUsuarioNormalParaClaims(String userId, String username, String cuentaDependencia) in C:\ProyectoHermes2021\Hermes2018\Hermes2018\Hermes2018\Services\UsuarioService.cs:line 1765
+   at Hermes2018.Features.AppClaimsPrincipalFactory.CreateAsync(HER_Usuario user) in C:\ProyectoHermes2021\Hermes2018\Hermes2018\Hermes2018\Features\AppClaimsPrincipalFactory.cs:line 70
+   at Microsoft.AspNetCore.Identity.SignInManager`1.CreateUserPrincipalAsync(TUser user)
+   at Microsoft.AspNetCore.Identity.SignInManager`1.SignInAsync(TUser user, AuthenticationProperties authenticationProperties, String authenticationMethod)
+   at Microsoft.AspNetCore.Identity.SignInManager`1.SignInOrTwoFactorAsync(TUser user, Boolean isPersistent, String loginProvider, Boolean bypassTwoFactor)
+   at Microsoft.AspNetCore.Identity.SignInManager`1.PasswordSignInAsync(TUser user, String password, Boolean isPersistent, Boolean lockoutOnFailure)
+   at Microsoft.AspNetCore.Identity.SignInManager`1.PasswordSignInAsync(String userName, String password, Boolean isPersistent, Boolean lockoutOnFailure)
+   at Hermes2018.Areas.Identity.Pages.Account.LoginModel.OnPost(String returnUrl) in C:\ProyectoHermes2021\Hermes2018\Hermes2018\Hermes2018\Areas\Identity\Pages\Account\Login.cshtml.cs:line 147
+   at Microsoft.AspNetCore.Mvc.RazorPages.Internal.ExecutorFactory.GenericTaskHandlerMethod.Convert[T](Object taskAsObject)
+   at Microsoft.AspNetCore.Mvc.RazorPages.Internal.ExecutorFactory.GenericTaskHandlerMethod.Execute(Object receiver, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.RazorPages.Internal.PageActionInvoker.InvokeHandlerMethodAsync()
+ClientConnectionId:fead2bef-a3e5-47f4-9748-03d87b81bbc8
+Error Number:-1,State:0,Class:20
+2022-07-08T13:19:33.5505278-05:00 0HMJ11P9CKBTM:00000004 [ERR] An unhandled exception has occurred while executing the request. (48a46595)
+System.Data.SqlClient.SqlException (0x80131904): A transport-level error has occurred when receiving results from the server. (provider: Session Provider, error: 19 - Physical connection is not usable)
+   at System.Data.SqlClient.SqlCommand.<>c.<ExecuteDbDataReaderAsync>b__122_0(Task`1 result)
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot)
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.EntityFrameworkCore.Storage.Internal.RelationalCommand.ExecuteAsync(IRelationalConnection connection, DbCommandMethod executeMethod, IReadOnlyDictionary`2 parameterValues, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.AsyncQueryingEnumerable`1.AsyncEnumerator.BufferlessMoveNext(DbContext _, Boolean buffer, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.AsyncQueryingEnumerable`1.AsyncEnumerator.MoveNext(CancellationToken cancellationToken)
+   at System.Linq.AsyncEnumerable.FirstOrDefault_[TSource](IAsyncEnumerable`1 source, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.AsyncLinqOperatorProvider.TaskResultAsyncEnumerable`1.Enumerator.MoveNext(CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.AsyncLinqOperatorProvider.ExceptionInterceptor`1.EnumeratorExceptionInterceptor.MoveNext(CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryCompiler.ExecuteSingletonAsyncQuery[TResult](QueryContext queryContext, Func`2 compiledQuery, IDiagnosticsLogger`1 logger, Type contextType)
+   at Hermes2018.Services.UsuarioService.ObtieneInfoUsuarioNormalParaClaims(String userId, String username, String cuentaDependencia) in C:\ProyectoHermes2021\Hermes2018\Hermes2018\Hermes2018\Services\UsuarioService.cs:line 1765
+   at Hermes2018.Features.AppClaimsPrincipalFactory.CreateAsync(HER_Usuario user) in C:\ProyectoHermes2021\Hermes2018\Hermes2018\Hermes2018\Features\AppClaimsPrincipalFactory.cs:line 70
+   at Microsoft.AspNetCore.Identity.SignInManager`1.CreateUserPrincipalAsync(TUser user)
+   at Microsoft.AspNetCore.Identity.SignInManager`1.SignInAsync(TUser user, AuthenticationProperties authenticationProperties, String authenticationMethod)
+   at Microsoft.AspNetCore.Identity.SignInManager`1.SignInOrTwoFactorAsync(TUser user, Boolean isPersistent, String loginProvider, Boolean bypassTwoFactor)
+   at Microsoft.AspNetCore.Identity.SignInManager`1.PasswordSignInAsync(TUser user, String password, Boolean isPersistent, Boolean lockoutOnFailure)
+   at Microsoft.AspNetCore.Identity.SignInManager`1.PasswordSignInAsync(String userName, String password, Boolean isPersistent, Boolean lockoutOnFailure)
+   at Hermes2018.Areas.Identity.Pages.Account.LoginModel.OnPost(String returnUrl) in C:\ProyectoHermes2021\Hermes2018\Hermes2018\Hermes2018\Areas\Identity\Pages\Account\Login.cshtml.cs:line 147
+   at Microsoft.AspNetCore.Mvc.RazorPages.Internal.ExecutorFactory.GenericTaskHandlerMethod.Convert[T](Object taskAsObject)
+   at Microsoft.AspNetCore.Mvc.RazorPages.Internal.ExecutorFactory.GenericTaskHandlerMethod.Execute(Object receiver, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.RazorPages.Internal.PageActionInvoker.InvokeHandlerMethodAsync()
+   at Microsoft.AspNetCore.Mvc.RazorPages.Internal.PageActionInvoker.InvokeNextPageFilterAsync()
+   at Microsoft.AspNetCore.Mvc.RazorPages.Internal.PageActionInvoker.Rethrow(PageHandlerExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.RazorPages.Internal.PageActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.RazorPages.Internal.PageActionInvoker.InvokeInnerFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextResourceFilter()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResourceExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeFilterPipelineAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeAsync()
+   at Microsoft.AspNetCore.Builder.RouterMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.MigrationsEndPointMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.DatabaseErrorPageMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.DatabaseErrorPageMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+ClientConnectionId:fead2bef-a3e5-47f4-9748-03d87b81bbc8
+Error Number:-1,State:0,Class:20

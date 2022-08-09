@@ -1,0 +1,127 @@
+﻿@page "/Acceso/Terminos"
+@model TerminosCondicionesModel
+@{
+    ViewData["Title"] = "Hermes";
+    Layout = null;
+}
+@using Hermes2018.Services
+@inject IConfiguracionService _configuracionService
+
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <meta name="keywords" content="universidad veracruzana, uv, hermes, oficio, institucional, correspondencia, seguimiento, sistema">
+    <meta name="description" content="Sistema de Administración y Seguimiento de Correspondencia (HERMES)">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <meta name="author" content="Universidad Veracruzana">
+    <meta name="application-name" content="Hermes">
+    <title>@ViewData["Title"]</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="~/favicon.ico">
+    <!-- Material Icons for the arrow_dropdow_icon for dropdown menus -->
+    <link rel="stylesheet" href="http://fonts.googleapis.com/icon?family=Material+Icons" />
+    <!-- Google Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto" />
+    <!-- Bootstrap core CSS -->
+    <link type="text/css" rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <!-- Font Awesome Icons-->
+    <link type="text/css" rel="stylesheet" href="~/lib/font-awesome/css/all.min.css" />
+    <!-- Custom styles for this template -->
+    <link type="text/css" rel="stylesheet" href="~/lib/bootstrap/dist/css/navbar.min.css" />
+    <!--  Froala Editor -->
+    <link type="text/css" rel="stylesheet" href="~/lib/froala-editor/css/froala_editor.pkgd.min.css" />
+    <!--  CSS details -->
+    <link type="text/css" rel="stylesheet" href="~/css/detail.min.css" asp-append-version="true" />
+    <!--  CSS site -->
+    <link type="text/css" rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+    <!--  Material Buttons -->
+    <link type="text/css" rel="stylesheet" href="~/css/material-btns.min.css" />
+    <!--  Sidebar -->
+    <link type="text/css" rel="stylesheet" href="~/lib/bootstrap/dist/css/template.sb-admin.min.css" />
+    <!--  Bootstrap Theme (?)-->
+    <link type="text/css" rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap-theme.min.css" />
+    <!--  Material Input fields -->
+    <link type="text/css" rel="stylesheet" href="~/css/material-input.min.css" />
+</head>
+<body class="fixed-nav sticky-footer" id="page-top" onreset="changeColors()">
+    <div class="container-fluid">
+        <div class="row bg-primary">
+            <div class="col-12 p-0">
+                <div class="contiene-titulo-institucion">
+                    <span class="titulo-institucion">
+                        <cache enabled="true" expires-after="@TimeSpan.FromSeconds(5)">
+                            @await _configuracionService.ObtenerInstitucionAsync()
+                        </cache>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Navigation Bar-->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top pleca" id="TopNav">
+        <a class="navbar-brand-new font-white" href="#">
+            @*<b>HERMES UV</b>*@
+            <img src="~/images/HERMES_int.svg" class="img-fluid anchura-logo-interior" alt="Logo Hermes">
+        </a>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <!-- Contenido de la barra de navegación superior-->
+        </div>
+        <ul class="navbar-nav ml-auto"></ul>
+    </nav>
+    <!-- Body -->
+    <div class="content-wrapper-2">
+        <div class="container" id="logged-in">
+            <div class="row">
+                <!-- Breadcrumbs-->
+                <div class="col-12 pt-2">
+                    <form method="post">
+                        <div class="card shadow bg-white rounded">
+                            <div class="card-header text-center">
+                                <h4>Aviso de Privacidad</h4>
+                            </div>
+                            <div class="card-body">
+                                <div>
+                                    <h6>@Html.Raw(Model.Aviso.HER_Aviso)</h6>
+                                </div>
+                            </div>
+                            <div class="card-footer text-center">
+                                <div class="form-group pb-3">
+                                    <div class="checkbox">
+                                        <input asp-for="Terminos.Aceptar" />
+                                        <label asp-for="Terminos.Aceptar" class="control-label">He leído y aceptado el aviso de privacidad</label>
+                                        <br />
+                                        <span asp-validation-for="Terminos.Aceptar" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary pl-xl-5 pl-lg-5 pl-md-5 pl-sm-5 pl-1 pl-xr-5 pr-lg-5 pr-md-5 pr-sm-5 pr-1">Entrar</button>
+                                    <input type="submit" class="btn btn-secondary pl-xl-5 pl-lg-5 pl-md-5 pl-sm-5 pl-1 pl-xr-5 pr-lg-5 pr-md-5 pr-sm-5 pr-1" value="Cancelar" asp-page-handler="Cancelar" />
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer -->
+    <footer class="sticky-footer bg-primary" id="Footer1">
+        <div class="container">
+            <div class="text-center">
+                <small>Contacto</small>
+                <small>© @DateTime.Now.Year Universidad Veracruzana. Todos los derechos reservados.</small>
+            </div>
+        </div>
+    </footer>
+    <!-- Bootstrap core JavaScript-->
+    <script type="text/javascript" src="~/lib/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="~/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
+    <!-- Core plugin JavaScript-->
+    <script type="text/javascript" src="~/lib/bootstrap/dist/js/jquery.easing.min.js"></script>
+    <partial name="_ValidationScriptsPartial" />
+</body>
+</html>

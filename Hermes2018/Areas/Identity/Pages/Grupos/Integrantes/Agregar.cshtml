@@ -1,0 +1,86 @@
+﻿@page "/Grupos/Integrantes/Agregar/{grupoId:int}"
+@model Hermes2018.Areas.Identity.Pages.Grupos.AgregarModel
+
+@section Styles {
+    <link type="text/css" rel="stylesheet" href="~/lib/jquery-flexdatalist/jquery.flexdatalist.min.css" />
+    <link type="text/css" rel="stylesheet" href="~/css/Areas/Identity/Pages/Grupos/Crear.min.css" asp-append-version="true" />
+}
+
+<div class="content-wrapper pt-0">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 pt-2">
+                        <ol class="breadcrumb-2 mt-0 mb-0 pb-1 pt-1 display-inline">
+                            <li class="breadcrumb-2-item">
+                                <a asp-area="" asp-controller="Home" asp-action="Index" asp-route-id="">Inicio</a>
+                            </li>
+                            <li class="breadcrumb-2-item">
+                                <a asp-area="Identity" asp-page="/Grupos/Index" asp-route-id="">Integrantes</a>
+                            </li>
+                            <li class="breadcrumb-2-item active display-flex" aria-current="page">Agregar Integrante</li>
+                        </ol>
+                    </div>
+                    <div class="col-12">
+                        <hr class="hr-thick mb-1 mt-1" />
+                        <h5>Agregar Integrante</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <form method="post">
+                    <div class="row">
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                            <div asp-validation-summary="ModelOnly" class="text-danger error-list-clean"></div>
+                            <input asp-for="Agregar.GrupoId" class="sin-indicador" />
+
+
+                            <div class="row">
+                                <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                    <div class="form-group" id="control-busqueda">
+                                        <label asp-for="Agregar.Usuario" class="col-form-label font-bold-12"></label>
+                                        <div class="">
+                                            <input asp-for="Agregar.Usuario" class="form-control form-control-sm" placeholder="Buscar" value="" />
+                                            <span asp-validation-for="Agregar.Usuario" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                    <div class="form-group">
+                                        <label asp-for="Agregar.Nombre" class="col-form-label font-bold-12"></label>
+                                        <div class="">
+                                            <input asp-for="Agregar.Nombre" class="form-control disabled border-disabled form-control-sm" placeholder="Nombre completo" value="" />
+                                            <span asp-validation-for="Agregar.Nombre" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                    <div class="form-group">
+                                        <label asp-for="Agregar.Correo" class="col-form-label font-bold-12"></label>
+                                        <div class="">
+                                            <input asp-for="Agregar.Correo" class="form-control disabled border-disabled form-control-sm" placeholder="Correo institucional" value="" />
+                                            <span asp-validation-for="Agregar.Correo" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                            <div class="pt-2">
+                                <a asp-area="Identity" asp-page="/Grupos/Detalles" asp-route-id="@Model.ID" class="btn btn-light">Cancelar</a>
+                                <button type="submit" class="btn btn-primary">Guardar</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script type="text/javascript" src="~/lib/jquery-flexdatalist/jquery.flexdatalist.min.js"></script>
+    <script type="text/javascript" src="~/js/Areas/Identity/Pages/Grupos/Agregar.min.js" asp-append-version="true"></script>
+}

@@ -1,0 +1,71 @@
+﻿@page "/Calendarios/Contenido/Borrar/{id:int}"
+@model BorrarModel
+
+<div class="content-wrapper ml-0 bg-white pt-0">
+    <div class="container-fluid" id="logged-in">
+        <div class="row">
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 pt-2">
+                        <ol class="breadcrumb-2 mt-0 mb-0 pb-1 pt-1 display-inline">
+                            <li class="breadcrumb-2-item">
+                                <a asp-area="" asp-controller="Home" asp-action="Index" asp-route-id="">Inicio</a>
+                            </li>
+
+                            <li class="breadcrumb-2-item">
+                                <a asp-area="Identity" asp-page="/Calendarios/Index">Calendarios</a>
+                            </li>
+                            <li class="breadcrumb-2-item">
+                                <a asp-area="Identity" asp-page="/Calendarios/Detalles" asp-route-id="@Model.Resumen.CalendarioId">Detalle calendario</a>
+                            </li>
+                            <li class="breadcrumb-2-item active display-flex" aria-current="page">Borrar fecha</li>
+                        </ol>
+                    </div>
+                    <div class="col-12">
+                        <hr class="hr-thick mb-1 mt-1" />
+                        <h5>Borrar fecha</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-12">
+                        <form method="post">
+                            <div asp-validation-summary="ModelOnly" class="text-danger error-list-clean"></div>
+
+                            <dl class="">
+                                <dt class="">@Html.DisplayNameFor(x => x.Resumen.Calendario_Anio)</dt>
+                                <dd class="">
+                                    @Html.DisplayFor(x => x.Resumen.Calendario_Anio)
+                                    <input asp-for="Resumen.Calendario_Anio" class="sin-indicador" />
+                                </dd>
+
+                                <dt class="">@Html.DisplayNameFor(x => x.Resumen.Calendario_Titulo)</dt>
+                                <dd class="">
+                                    @Html.DisplayFor(x => x.Resumen.Calendario_Titulo)
+                                    <input asp-for="Resumen.Calendario_Titulo" class="sin-indicador" />
+                                </dd>
+
+                                <dt class="">@Html.DisplayNameFor(x => x.Resumen.Contenido_Fecha)</dt>
+                                <dd class="">
+                                    @Html.DisplayFor(x => x.Resumen.Contenido_Fecha)
+                                    <input asp-for="Resumen.Contenido_Fecha" class="sin-indicador" />
+                                </dd>
+                            </dl>
+                            <input asp-for="Resumen.CalendarioId" class="sin-indicador" />
+                            <input asp-for="Resumen.ContenidoId" class="sin-indicador" />
+
+                            <div>
+                                <p>¿Desea borrar esta fecha?</p>
+                            </div>
+                            <div class="btn-group" role="group" aria-label="...">
+                                <a asp-area="Identity" asp-page="/Calendarios/Detalles" asp-route-id="@Model.Resumen.CalendarioId" class="btn btn-light" title="Regresar al detalle">Cancelar</a>
+                                <button type="submit" class="btn btn-danger" title="Borrar la fecha definitivamente">Borrar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

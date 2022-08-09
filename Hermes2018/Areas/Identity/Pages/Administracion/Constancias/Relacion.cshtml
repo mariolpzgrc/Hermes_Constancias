@@ -1,0 +1,59 @@
+﻿@page "/Administracion/Constancias/Relacion"
+@model Hermes2018.Areas.Identity.Pages.Administracion.Constancias.RelacionModel
+@{
+}
+<div class="content-wrapper ml-0 bg-white pt-0">
+    <div class="container-fluid" id="logged-in">
+        <div class="row">
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-10 col-sm-6 col-md-6 col-lg-6 col-xl-6 pt-2">
+                        <ol class="breadcrumb-2 mt-0 mb-0 pb-1 pt-1 display-inline">
+                            <li class="breadcrumb-2-item">
+                                <a asp-area="" asp-controller="Home" asp-action="Index" asp-route-id="">Inicio</a>
+                            </li>
+                            <li class="breadcrumb-2-item">
+                                <a asp-area="Identity" asp-page="/Administracion/Constancias/Index">Constancias</a>
+                            </li>
+                            <li class="breadcrumb-2-item active display-flex" aria-current="page">Relación de Constancias</li>
+                        </ol>
+                    </div>
+                    <div class="col-2 col-sm-6 col-md-6 col-lg-6 col-xl-6 pt-2">
+                        <div class="float-right">
+                            <a asp-area="Identity" asp-page="/Administracion/Constancias/AgregarRelacion"  class="btn btn-sm md-btn-raised md-btn-ripple bg-primary">Nuevo</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <hr class="hr-thick mb-1 mt-1" />
+                <span class="h5">Relación de Constancias con Tipo de Personal y Objeto	</span>
+            </div>
+            <div class="col-12">
+                <div class="table-responsive">
+                    <table class="table table-hover table-sm border-bottom responsive">
+                        <thead class="bg-light text-center">
+                            <tr>
+                                <th rowspan="2">ID</th>
+                                <th rowspan="2">Nombre</th>
+                                <th colspan="5">Tipo de personal</th>
+                                <th rowspan="2">Objeto</th>
+                                <th rowspan="2">Dias de atención</th>
+                                <th rowspan="2">Visibles</th>
+                                <th rowspan="2">Fecha de actualización</th>
+                                <th rowspan="2">Usuario</th>
+                            </tr>
+                            <tr>
+                                <th>1</th>
+                                <th>2</th>
+                                <th>3</th>
+                                <th>4</th>
+                                <th>5</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

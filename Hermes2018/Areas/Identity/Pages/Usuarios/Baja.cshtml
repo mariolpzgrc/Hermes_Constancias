@@ -1,0 +1,176 @@
+﻿@page "/Usuarios/Baja/{id}"
+@model Hermes2018.Areas.Identity.Pages.Usuarios.BajaModel
+
+<div class="@string.Format("{0}", (ConstRol.RolUsuario.Contains(Model.Baja.InfoUsuarioClaims.Rol)) ? "content-wrapper pt-1" : "content-wrapper ml-0 bg-white pt-0")">
+    <div class="container-fluid" id="@string.Format("{0}", (ConstRol.RolUsuario.Contains(Model.Baja.InfoUsuarioClaims.Rol)) ? string.Empty : "logged-in")">
+        <div class="row">
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 pt-2">
+                        @if (ConstRol.RolAdminGral.Contains(Model.Baja.InfoUsuarioClaims.Rol))
+                        {
+                            <ol class="breadcrumb-2 mt-0 mb-0 pb-1 pt-1 display-inline">
+                                <li class="breadcrumb-item">
+                                    <a asp-area="" asp-controller="Home" asp-action="Index" asp-route-id="">Inicio</a>
+                                </li>
+
+                                <li class="breadcrumb-item"><a asp-area="Identity" asp-page="/Usuarios/Index">Usuarios</a></li>
+                                <li class="breadcrumb-item"><a asp-area="Identity" asp-page="/Usuarios/Desglose">Desglose</a></li>
+                                <li class="breadcrumb-item"><a asp-area="Identity" asp-page="/Usuarios/Region" asp-route-id="@Model.Baja.RegionId">Región</a></li>
+                                <li class="breadcrumb-item"><a asp-area="Identity" asp-page="/Usuarios/Area" asp-route-id="@Model.Baja.AreaId">Área</a></li>
+                                <li class="breadcrumb-item"><a asp-area="Identity" asp-page="/Usuarios/Detalles" asp-route-id="@Model.Baja.NombreUsuario">Detalle usuario</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Dar de baja</li>
+                            </ol>
+                        }
+                        else if (ConstRol.RolAdminRegional.Contains(Model.Baja.InfoUsuarioClaims.Rol))
+                        {
+                            <ol class="breadcrumb-2 mt-0 mb-0 pb-1 pt-1 display-inline">
+                                <li class="breadcrumb-item">
+                                    <a asp-area="" asp-controller="Home" asp-action="Index" asp-route-id="">Inicio</a>
+                                </li>
+
+                                <li class="breadcrumb-item"><a asp-area="Identity" asp-page="/Usuarios/Index">Usuarios</a></li>
+                                <li class="breadcrumb-item"><a asp-area="Identity" asp-page="/Usuarios/Region" asp-route-id="@Model.Baja.RegionId">Región</a></li>
+                                <li class="breadcrumb-item"><a asp-area="Identity" asp-page="/Usuarios/Area" asp-route-id="@Model.Baja.AreaId">Área</a></li>
+                                <li class="breadcrumb-item"><a asp-area="Identity" asp-page="/Usuarios/Detalles" asp-route-id="@Model.Baja.NombreUsuario">Detalle usuario</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Dar de baja</li>
+                            </ol>
+                        }
+                        else if (ConstRol.RolUsuario.Contains(Model.Baja.InfoUsuarioClaims.Rol))
+                        {
+                            <ol class="breadcrumb-2 mt-0 mb-0 pb-1 pt-1 display-inline">
+                                <li class="breadcrumb-item">
+                                    <a asp-area="" asp-controller="Home" asp-action="Index" asp-route-id="">Inicio</a>
+                                </li>
+
+                                <li class="breadcrumb-item"><a asp-area="Identity" asp-page="/Usuarios/Index">Usuarios</a></li>
+                                <li class="breadcrumb-item"><a asp-area="Identity" asp-page="/Usuarios/Area" asp-route-id="@Model.Baja.AreaId">Área</a></li>
+                                <li class="breadcrumb-item"><a asp-area="Identity" asp-page="/Usuarios/Detalles" asp-route-id="@Model.Baja.NombreUsuario">Detalle usuario</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Dar de baja</li>
+                            </ol>
+                        }
+                    </div>
+                    <div class="col-12">
+                        <hr class="hr-thick mb-1 mt-1" />
+                        <h5>Dar de baja un usuario</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <form method="post" class="ml-2 mw-100">
+                    <div asp-validation-summary="ModelOnly" class="text-danger error-list-clean"></div>
+
+                    <div class="row">
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 ">
+                            <div class="form-group">
+                                <label class="col-form-label pb-0 font-weight-bold">@Html.DisplayNameFor(model => model.Baja.Nombre)</label>
+                                <div class="">
+                                    @Html.DisplayFor(model => model.Baja.Nombre)
+                                    @Html.HiddenFor(modelItem => modelItem.Baja.Nombre)
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 ">
+                            <div class="form-group">
+                                <label class="col-form-label pb-0 font-weight-bold">@Html.DisplayNameFor(model => model.Baja.NombreUsuario)</label>
+                                <div class="">
+                                    @Html.DisplayFor(model => model.Baja.NombreUsuario)
+                                    @Html.HiddenFor(modelItem => modelItem.Baja.NombreUsuario)
+                                    @Html.HiddenFor(modelItem => modelItem.Baja.InfoUsuarioId)
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 ">
+                            <div class="form-group">
+                                <label class="col-form-label pb-0 font-weight-bold">@Html.DisplayNameFor(model => model.Baja.Correo)</label>
+                                <div class="">
+                                    @Html.DisplayFor(model => model.Baja.Correo)
+                                    @Html.HiddenFor(modelItem => modelItem.Baja.Correo)
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 ">
+                            <div class="form-group">
+                                <label class="col-form-label pb-0 font-weight-bold">@Html.DisplayNameFor(model => model.Baja.RegionNombre)</label>
+                                <div class="">
+                                    @Html.DisplayFor(model => model.Baja.RegionNombre)
+                                    @Html.HiddenFor(modelItem => modelItem.Baja.RegionNombre)
+                                    @Html.HiddenFor(modelItem => modelItem.Baja.RegionId)
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 ">
+                            <div class="form-group">
+                                <label class="col-form-label pb-0 font-weight-bold">@Html.DisplayNameFor(model => model.Baja.AreaNombre)</label>
+                                <div class="">
+                                    @Html.DisplayFor(model => model.Baja.AreaNombre)
+                                    @Html.HiddenFor(modelItem => modelItem.Baja.AreaNombre)
+                                    @Html.HiddenFor(modelItem => modelItem.Baja.AreaId)
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 ">
+                            <div class="form-group">
+                                <label class="col-form-label pb-0 font-weight-bold">@Html.DisplayNameFor(model => model.Baja.PuestoNombre)</label>
+                                <div class="">
+                                    @Html.DisplayFor(model => model.Baja.PuestoNombre)
+                                    @Html.HiddenFor(modelItem => modelItem.Baja.PuestoNombre)
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 ">
+                            <div class="form-group">
+                                <label class="col-form-label pb-0 font-weight-bold">@Html.DisplayNameFor(model => model.Baja.EsUnico)</label>
+                                <div class="">
+                                    @Html.DisplayFor(model => model.Baja.EsUnico)
+                                    @Html.HiddenFor(modelItem => modelItem.Baja.EsUnico)
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 ">
+                            <div class="form-group">
+                                <label class="col-form-label pb-0 font-weight-bold">@Html.DisplayNameFor(model => model.Baja.RolNombre)</label>
+                                <div class="">
+                                    @Html.DisplayFor(model => model.Baja.RolNombre)
+                                    @Html.HiddenFor(modelItem => modelItem.Baja.RolNombre)
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 ">
+                            <div class="form-group">
+                                <label asp-for="Baja.TipoBaja" class="col-form-label pb-0 font-weight-bold"></label>
+                                <div class="">
+                                    <select asp-for="Baja.TipoBaja" class="form-control">
+                                        <option selected value="">[Seleccione una opción]</option>
+                                        <option value="@ConstTipoDeBaja.TipoDeBajaN1">@ConstTipoDeBaja.TipoDeBajaT1</option>
+                                        <option value="@ConstTipoDeBaja.TipoDeBajaN2">@ConstTipoDeBaja.TipoDeBajaT2</option>
+                                    </select>
+                                    <span asp-validation-for="Baja.TipoBaja" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 ">
+                            <div class="form-group pt-2">
+                                <a asp-area="Identity" asp-page="/Usuarios/Detalles" asp-route-id="@Model.Baja.NombreUsuario" class="btn btn-light">Cancelar</a>
+                                <input type="submit" value="Enviar" class="btn btn-primary" />
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

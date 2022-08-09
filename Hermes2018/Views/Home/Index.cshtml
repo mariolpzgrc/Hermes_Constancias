@@ -1,0 +1,132 @@
+﻿
+<div class="content-wrapper-2">
+    <div class="container-fluid" id="logged-in">
+        <h3 class="card-title text-center mb-4 mt-1">Bienvenido</h3>
+        <div class="row pt-2">
+
+            @if (ConstRol.RolAdminGral.Contains(ViewData["Rol"]))
+            {
+                <div class="col-sm-6 col-lg-4 mb-2">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <h5>Usuarios</h5>
+                            <p class="card-text">Altas y bajas de usuarios.</p>
+                            <a asp-area="Identity" asp-page="/Usuarios/Index" class="btn btn-primary btn-sm">Acceder</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-lg-4 mb-2">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <h5>Áreas de Trabajo</h5>
+                            <p class="card-text">Altas y bajas de áreas.</p>
+                            <a asp-area="Identity" asp-page="/Areas/Region" class="btn btn-primary btn-sm">Acceder</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-lg-4 mb-2">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <h5>Calendarios</h5>
+                            <p class="card-text">Altas y bajas de calendarios.</p>
+                            <a asp-area="Identity" asp-page="/Calendarios/Index" class="btn btn-primary btn-sm">Acceder</a>
+                        </div>
+                    </div>
+                </div>
+                @*<div class="col-sm-6 col-lg-4 mb-2">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <h5>Puestos</h5>
+                            <p class="card-text">Altas y bajas de puestos.</p>
+                            <a asp-area="Identity" asp-page="/Puestos/Index" class="btn btn-primary btn-sm">Acceder</a>
+                        </div>
+                    </div>
+                </div>*@
+                <div class="col-sm-6 col-lg-4 mb-2">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <h5>Configuración General</h5>
+                            <p class="card-text">Configuración general del sistema.</p>
+                            <a asp-area="Identity" asp-page="/Configuracion/General/Index" class="btn btn-primary btn-sm">Acceder</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-lg-4 mb-2">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <h5>Estadísticas (Recopilación)</h5>
+                            <p class="card-text">Estadísticas generales.</p>
+                            <a asp-area="Identity" asp-page="/Recopilacion/General/Index" class="btn btn-primary btn-sm">Acceder</a>
+                        </div>
+                    </div>
+                </div>
+                @*<div class="col-sm-6 col-lg-4 mb-2">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <h5>Bitácora</h5>
+                        <p class="card-text">Bitácora del sistema.</p>
+                        <a href="#" class="btn btn-primary btn-sm">Acceder</a>
+                    </div>
+                </div>
+            </div>*@
+                <div class="col-sm-6 col-lg-4 mb-2">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <h5>Constancias</h5>
+                            <p class="card-text">Administración de constancias</p>
+                            <a asp-area="Identity" asp-page="/Administracion/Constancias/Index" class="btn btn-primary btn-sm">Acceder</a>
+                        </div>
+                    </div>
+                </div>
+            }
+            else if (ConstRol.RolAdminRegional.Contains(ViewData["Rol"]))
+            {
+                <div class="col-sm-6 col-lg-4 mb-2">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <h5>Usuarios</h5>
+                            <p class="card-text">Altas y bajas de usuarios.</p>
+                            <a asp-area="Identity" asp-page="/Usuarios/Index" class="btn btn-primary btn-sm">Acceder</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-lg-4 mb-2">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <h5>Áreas de Trabajo</h5>
+                            <p class="card-text">Altas y bajas de áreas.</p>
+                            <a asp-area="Identity" asp-page="/Areas/Index" asp-route-id="@ViewData["Region"]" class="btn btn-primary btn-sm">Acceder</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-lg-4 mb-2">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <h5>Servicios</h5>
+                            <p class="card-text">Altas y bajas de servicios.</p>
+                            <a asp-area="Identity" asp-page="/Servicios/Index" class="btn btn-primary btn-sm">Acceder</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-lg-4 mb-2">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <h5>Estadísticas (Recopilación)</h5>
+                            <p class="card-text">Estadísticas generales.</p>
+                            <a asp-area="Identity" asp-page="/Recopilacion/Region/Index" class="btn btn-primary btn-sm">Acceder</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-lg-4 mb-2">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <h5>Bitácora</h5>
+                            <p class="card-text">Bitácora del sistema.</p>
+                            <a href="#" class="btn btn-primary btn-sm">Acceder</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

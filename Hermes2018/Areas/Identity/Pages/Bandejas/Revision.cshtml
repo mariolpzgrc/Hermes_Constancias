@@ -1,0 +1,131 @@
+﻿@page "/Bandejas/Revision"
+@model RevisionModel
+
+@section Styles
+    {
+    <link type="text/css" rel="stylesheet" href="~/lib/bootstrap-daterangepicker/daterangepicker.min.css" />
+    <link type="text/css" rel="stylesheet" href="~/css/linear-activity.min.css" />
+    <link type="text/css" rel="stylesheet" href="~/css/Areas/Identity/Pages/Bandejas/Revision.min.css" asp-append-version="true" />
+}
+
+@section ScriptsPrioritarios
+    {
+    <script type="text/javascript" src="~/lib/jspdf/jspdf.min.js"></script>
+    <script type="text/javascript" src="~/lib/jspdf-autotable/jspdf.plugin.autotable.min.js"></script>
+
+    <script type="text/javascript" src="~/lib/xlsx/xlsx.core.min.js"></script>
+    <script type="text/javascript" src="~/lib/file-saver/FileSaver.min.js"></script>
+    <script type="text/javascript" src="~/lib/jhxlsx/jhxlsx.js"></script>
+
+    <script type="text/javascript" src="~/lib/moment/min/moment-with-locales.min.js"></script>
+    <script type="text/javascript" src="~/lib/bootstrap-daterangepicker/daterangepicker.min.js"></script>
+    <script type="text/javascript" src="~/lib/twbs-pagination/jquery.twbsPagination.min.js"></script>
+}
+
+<div class="content-wrapper pt-0">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 mb-1">
+                <vc:menu-delegar user="@User" leyenda="Documentos de:"></vc:menu-delegar>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-8 col-lg-8 col-xl-8">
+                        <div class="dropdown pt-0 pb-0 pl-1 d-inline-block">
+                            <a id="filtrarDropdown" href="#" data-toggle="collapse" data-target=".multi-collapse" aria-expanded="false" aria-controls="categoriaCollapse,fechaCollapse1">
+                                Filtrar <i class="fas fa-caret-down"></i>
+                            </a>
+                        </div>
+                        <div class="pt-0 pb-0 pl-xl-0 pl-sm-2 pl-md-2 pl-lg-2 d-inline-block">
+                            <a class="pl-2" id="exportarDropdown" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Exportar <i class="fas fa-caret-down"></i>
+                            </a>
+                            <!-- Dropdown Exportar -->
+                            <div class="dropdown-menu dropdown-menu-left m-0 p-0" aria-labelledby="exportarDropdown">
+                                <h6 class="dropdown-header">¿A qué desea exportar?</h6>
+                                <div class="dropdown-divider sin-margen"></div>
+                                <button type="button" class="dropdown-item hover-bold btn btn-link" id="exportar-pdf">
+                                    <div>PDF</div>
+                                    <span class="small float-right text-muted"></span>
+                                    <div class="dropdown-message small"></div>
+                                </button>
+                                <div class="dropdown-divider sin-margen"></div>
+                                <button type="button" class="dropdown-item hover-bold btn btn-link" href="#" id="exportar-excel">
+                                    <div>Excel</div>
+                                    <span class="small float-right text-muted"></span>
+                                    <div class="dropdown-message small"></div>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-4 col-lg-4 col-xl-4">
+                        <div class="input-group">
+                            <input class="form-control form-control-sm" id="searchbox" type="search" name="busqueda" placeholder="Buscar..." maxlength="100">
+                            <span id="btn-x-search" class="btn bg-transparent d-none">
+                                <i class="fa fa-times"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <div class="col-xs-12 col-sm-4 col-lg-4 col-xl-4">
+                        <div class="collapse multi-collapse" id="categoriaCollapse">
+                            <div class="form-group">
+                                <select id="select-categorias" class="form-control form-control-sm"></select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-4 col-lg-4 col-xl-4">
+                        <div class="collapse multi-collapse" id="fechaCollapse1">
+                            <div class="form-group">
+                                <input type="text" class="form-control form-control-sm" name="datepicker1" value="" placeholder="[Rango de fechas]" readonly="readonly" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <div id="contiene-cargador" class="">
+                    <div class="linear-activity loader d-none">
+                        <div class="indeterminate"></div>
+                    </div>
+                </div>
+                <div class="table-responsive mt-0 alto-minimo-bandejas">
+                    <table class="table table-hover table-sm mb-0" id="Revision">
+                        <thead class="bg-light">
+                            <tr>
+                                <th scope="col">Folio</th>
+                                <th scope="col">Destinatario</th>
+                                <th scope="col">Asunto</th>
+                                <th scope="col" id="noDocum" width="110px">No. Interno</th>
+                                <th scope="col">Fecha</th>
+                                <th scope="col"></th><!--Importancia-->
+                                <th scope="col"></th><!--Adjuntos-->
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <div class="float-right" id="contenedor-paginacion">
+                    <ul id="paginacion-revision" class="pagination-sm"></ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+@section scripts
+    {
+    <script type="text/javascript" src="~/js/Areas/Identity/Pages/Bandejas/Revision.min.js" asp-append-version="true"></script>
+}

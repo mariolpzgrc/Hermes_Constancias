@@ -1,0 +1,296 @@
+﻿@page "/Configuracion/General"
+@model IndexModel
+
+<div class="content-wrapper ml-0 bg-white pt-0">
+    <div class="container-fluid" id="logged-in">
+        <div class="row">
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 pt-2">
+                        <ol class="breadcrumb-2 mt-0 mb-0 pb-1 pt-1 display-inline">
+                            <li class="breadcrumb-2-item">
+                                <a asp-area="" asp-controller="Home" asp-action="Index" asp-route-id="">Inicio</a>
+                            </li>
+
+                            <li class="breadcrumb-2-item active" aria-current="page">Configuración general</li>
+                        </ol>
+                    </div>
+                    <div class="col-12">
+                        <hr class="hr-thick mb-1 mt-1" />
+                        <h5>Configuración general</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                        <div class="card mb-3">
+                            <div class="card-header bg-light text-dark p-1" id="headingIdentidad">
+                                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseIdentidad" aria-expanded="true" aria-controls="collapseIdentidad">
+                                    Identidad institucional
+                                </button>
+                            </div>
+                            <div class="card-body text-dark p-0 collapse show" id="collapseIdentidad" aria-labelledby="headingIdentidad">
+                                <div class="container-fluid">
+                                    <div class="row">
+
+                                        @foreach (var identidad in Model.Detalle.Identidad)
+                                        {
+                                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 border-bottom pb-1">
+                                                <div class="row">
+                                                    <div class="col-12 col-sm-11 col-md-11 col-lg-11 col-xl-11">
+                                                        <div class="form-group">
+                                                            <label class="col-form-label pb-0 font-weight-bold text-secondary">@identidad.Propiedad</label>
+                                                            <div class="">
+                                                                @if (ConstConfiguracionGeneral.Propiedad4 == identidad.Propiedad)
+                                                                {
+                                                                    @Html.Raw(@identidad.Valor)
+                                                                }
+                                                                else
+                                                                {
+                                                                    @identidad.Valor
+                                                                }
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 col-sm-1 col-md-1 col-lg-1 col-xl-1">
+                                                        <div class="text-left text-sm-right text-md-right text-lg-right text-xl-right pt-2">
+                                                            <a asp-area="Identity" asp-page="/Configuracion/General/Editar/Editar" asp-route-id="@identidad.ConfiguracionId" title="Editar"><i class="far fa-edit font-gray"></i></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+
+                                        <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 border-bottom pb-1">
+                                            <div class="row">
+                                                <div class="col-12 col-sm-11 col-md-11 col-lg-11 col-xl-11">
+                                                    <div class="form-group">
+                                                        <label class="col-form-label pb-0 font-weight-bold text-secondary">Logo</label>
+                                                        <div class="">
+                                                            <span class="tm-tag cm-tag">
+                                                                <img class="logo-simbolo" src="@Url.Action("LogoPorDefecto", "Anexos")">
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-sm-1 col-md-1 col-lg-1 col-xl-1">
+                                                    <div class="text-left text-sm-right text-md-right text-lg-right text-xl-right pt-2">
+                                                        <a asp-area="Identity" asp-page="/Configuracion/General/Editar/Imagen" asp-route-tipo="@ConstConfiguracionGeneral.TipoImagenN1" title="Editar"><i class="far fa-edit font-gray"></i></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 border-bottom pb-1">
+                                            <div class="row">
+                                                <div class="col-12 col-sm-11 col-md-11 col-lg-11 col-xl-11">
+                                                    <div class="form-group">
+                                                        <label class="col-form-label pb-0 font-weight-bold text-secondary">Portada</label>
+                                                        <div class="">
+                                                            <span class="tm-tag cm-tag">
+                                                                <img class="logo-simbolo" src="@Url.Action("Portada", "Anexos")">
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-sm-1 col-md-1 col-lg-1 col-xl-1">
+                                                    <div class="text-left text-sm-right text-md-right text-lg-right text-xl-right pt-2">
+                                                        <a asp-area="Identity" asp-page="/Configuracion/General/Editar/Imagen" asp-route-tipo="@ConstConfiguracionGeneral.TipoImagenN2" title="Editar"><i class="far fa-edit font-gray"></i></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @*<div class="card-footer pt-1 pb-0 bg-transparent">
+                            </div>*@
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                        <div class="card mb-3">
+                            <div class="card-header bg-light text-dark p-1">
+                                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseAcceso" aria-expanded="true" aria-controls="collapseAcceso">
+                                    Acceso
+                                </button>
+                            </div>
+                            <div class="card-body text-dark p-0 collapse show" id="collapseAcceso">
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        @foreach (var acceso in Model.Detalle.Acceso)
+                                        {
+                                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 border-bottom">
+                                                <div class="row">
+                                                    <div class="col-12 col-sm-11 col-md-11 col-lg-11 col-xl-11">
+                                                        <div class="form-group">
+                                                            <label class="col-form-label pb-0 font-weight-bold text-secondary">@acceso.Propiedad</label>
+                                                            <div class="">
+                                                                @acceso.Valor
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 col-sm-1 col-md-1 col-lg-1 col-xl-1">
+                                                        <div class="text-left text-sm-right text-md-right text-lg-right text-xl-right pt-2">
+                                                            <a asp-area="Identity" asp-page="/Configuracion/General/Editar/Editar" asp-route-id="@acceso.ConfiguracionId" title="Editar"><i class="far fa-edit font-gray"></i></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                            @*<div class="card-footer pt-1 pb-0 bg-transparent">
+                            </div>*@
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                        <div class="card mb-3">
+                            <div class="card-header bg-light text-dark p-1">
+                                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseGeneral" aria-expanded="true" aria-controls="collapseGeneral">
+                                    General
+                                </button>
+                            </div>
+                            <div class="card-body p-0 text-dark collapse show" id="collapseGeneral">
+                                <div class="container-fluid">
+                                    <div class="row">
+
+                                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 border-bottom">
+                                            <div class="row">
+                                                <div class="col-12 col-sm-11 col-md-11 col-lg-11 col-xl-11">
+                                                    <div class="form-group">
+                                                        <label class="col-form-label pb-0 font-weight-bold text-secondary">URL_SISTEMA</label>
+                                                        <div class="">
+                                                            @string.Format("{0}://{1}{2}", Request.Scheme, HttpContext.Request.Host, Url.Content("~/"))
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-sm-1 col-md-1 col-lg-1 col-xl-1">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 border-bottom">
+                                            <div class="row">
+                                                <div class="col-12 col-sm-11 col-md-11 col-lg-11 col-xl-11">
+                                                    <div class="form-group">
+                                                        <label class="col-form-label pb-0 font-weight-bold text-secondary">EXTENSIONES</label>
+                                                        <div class="">
+                                                            @Model.Detalle.Extensiones
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-sm-1 col-md-1 col-lg-1 col-xl-1">
+                                                    <div class="text-left text-sm-right text-md-right text-lg-right text-xl-right pt-2">
+                                                        <a asp-area="Identity" asp-page="/Configuracion/General/Editar/Coleccion" asp-route-tipo="@ConstConfiguracionGeneral.TipoColeccionN2" title="Editar"><i class="far fa-edit font-gray"></i></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        @foreach (var general in Model.Detalle.General)
+                                        {
+                                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 border-bottom">
+                                                <div class="row">
+                                                    <div class="col-12 col-sm-11 col-md-11 col-lg-11 col-xl-11">
+                                                        <div class="form-group">
+                                                            <label class="col-form-label pb-0 font-weight-bold text-secondary">@general.Propiedad</label>
+                                                            <div class="">
+                                                                @if (ConstConfiguracionGeneral.Propiedad13 == general.Propiedad)
+                                                                {
+                                                                    @Html.Raw(@general.Valor)
+                                                                }
+                                                                else
+                                                                {
+                                                                    @general.Valor
+                                                                }
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 col-sm-1 col-md-1 col-lg-1 col-xl-1">
+                                                        <div class="text-left text-sm-right text-md-right text-lg-right text-xl-right pt-2">
+                                                            <a asp-area="Identity" asp-page="/Configuracion/General/Editar/Editar" asp-route-id="@general.ConfiguracionId" title="Editar"><i class="far fa-edit font-gray"></i></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                            @*<div class="card-footer pt-1 pb-0 bg-transparent">
+                            </div>*@
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                        <div class="card mb-3">
+                            <div class="card-header bg-light text-dark p-1">
+                                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseRutas" aria-expanded="true" aria-controls="collapseRutas">
+                                    Gestión de rutas
+                                </button>
+                            </div>
+                            <div class="card-body pt-1 pb-0 bg-transparent">
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col-12 text-right mb-1 mt-1 pr-0">
+                                            <a asp-area="Identity" asp-page="/Configuracion/General/Ruta/Crear" class="btn btn-sm bg-transparent border" title="Crear ruta">Nuevo</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body p-0 text-dark collapse show" id="collapseRutas">
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <table class="table table-sm  mb-1 mt-1">
+
+                                                @if (Model.Detalle.RutasBase.Count > 0)
+                                                {
+                                                    <thead>
+                                                        <tr>
+                                                            <th scope="col">Ruta</th>
+                                                            <th scope="col">Estado</th>
+                                                            <th scope="col">Registro</th>
+                                                            <th scope="col">Actualización</th>
+                                                            <th scope="col"></th>
+                                                        </tr>
+                                                    </thead>
+                                                }
+
+                                                <tbody>
+                                                    @if (Model.Detalle.RutasBase.Count > 0)
+                                                    {
+                                                        @foreach (var ruta in Model.Detalle.RutasBase)
+                                                        {
+                                                    <tr>
+                                                        <td scope="row">@ruta.RutaBase</td>
+                                                        <td>@ruta.Estado</td>
+                                                        <td>@ruta.FechaRegistro</td>
+                                                        <td>@ruta.FechaActualizacion</td>
+                                                        <td>
+                                                            <a asp-area="Identity" asp-page="/Configuracion/General/Ruta/Editar" asp-route-id="@ruta.RutaBaseId" title="Editar"><i class="far fa-edit font-gray"></i></a>
+                                                        </td>
+                                                    </tr>
+                                                        }
+                                                    }
+                                                    else
+                                                    {
+                                                        <tr>
+                                                            <td colspan="5">Sin rutas base registradas</td>
+                                                        </tr>
+                                                    }
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

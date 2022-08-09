@@ -1,0 +1,183 @@
+﻿@page "/Areas/Detalles/{id:int}/{regionId:int}/{areaPadreId:int?}"
+@model DetallesModel
+
+<div class="content-wrapper ml-0 bg-white pt-0">
+    <div class="container-fluid" id="logged-in">
+        <div class="row">
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-6 col-sm-8 col-md-8 col-lg-8 col-xl-8 pt-2">
+                        <ol class="breadcrumb-2 mt-0 mb-0 pb-1 pt-1 display-inline">
+                            <li class="breadcrumb-2-item">
+                                <a asp-area="" asp-controller="Home" asp-action="Index" asp-route-id="">Inicio</a>
+                            </li>
+
+                            @if (Model.EsAdminGral)
+                            {
+                                <li class="breadcrumb-2-item">
+                                    <a asp-area="Identity" asp-page="/Areas/Region" asp-route-id="">Regiones</a>
+                                </li>
+                            }
+                            <li class="breadcrumb-2-item">
+                                <a asp-area="Identity" asp-page="/Areas/Index" asp-route-id="@Model.RegionId" asp-route-areapadreid="@Model.AreaPadreId">Áreas</a>
+                            </li>
+                            <li class="breadcrumb-2-item active display-flex" aria-current="page">Detalle del área</li>
+                        </ol>
+                    </div>
+                    @if (Model.Detalle.EstadoId == ConstEstadoArea.EstadoN1) 
+                    {
+                        @*<div class="col-6 col-sm-4 col-md-4 col-lg-4 col-xl-4 pt-2">
+                            <div class="float-right">
+                                <a asp-area="Identity" asp-page="/Areas/Baja" asp-route-id="@Model.Detalle.AreaId" class="btn btn-sm md-btn-raised md-btn-ripple bg-secondary">Dar de baja</a>
+                            </div>
+                        </div>*@
+                    }
+                    <div class="col-12">
+                        <hr class="hr-thick mb-1 mt-1" />
+                        <h5>Detalle del área</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
+                        <div class="form-group">
+                            <input asp-for="RegionId" class="sin-indicador" />
+                            <input asp-for="EsAdminGral" class="sin-indicador" />
+                            <input asp-for="Detalle.AreaId" class="sin-indicador" />
+                            <input asp-for="Detalle.HayLogoActual" class="sin-indicador" />
+
+                            <label class="col-form-label pb-0 font-weight-bold">@Html.DisplayNameFor(model => model.Detalle.Nombre)</label>
+                            <div class="">
+                                @Html.DisplayFor(model => model.Detalle.Nombre)
+                            </div>
+                        </div>
+                    </div>
+                    @if (!string.IsNullOrEmpty(Model.Detalle.Clave))
+                    {
+                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
+                            <div class="form-group">
+                                <label class="col-form-label pb-0 font-weight-bold">@Html.DisplayNameFor(model => model.Detalle.Clave)</label>
+                                <div class="">
+                                    @Html.DisplayFor(model => model.Detalle.Clave)
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
+                        <div class="form-group">
+                            <label class="col-form-label pb-0 font-weight-bold">@Html.DisplayNameFor(model => model.Detalle.Dias_Compromiso)</label>
+                            <div class="">
+                                @Html.DisplayFor(model => model.Detalle.Dias_Compromiso)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
+                        <div class="form-group">
+                            <label class="col-form-label pb-0 font-weight-bold">@Html.DisplayNameFor(model => model.Detalle.Direccion)</label>
+                            <div class="">
+                                @Html.DisplayFor(model => model.Detalle.Direccion)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
+                        <div class="form-group">
+                            <label class="col-form-label pb-0 font-weight-bold">@Html.DisplayNameFor(model => model.Detalle.Telefono)</label>
+                            <div class="">
+                                @Html.DisplayFor(model => model.Detalle.Telefono)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
+                        <div class="form-group">
+                            <label class="col-form-label pb-0 font-weight-bold">@Html.DisplayNameFor(model => model.Detalle.Region)</label>
+                            <div class="">
+                                @Html.DisplayFor(model => model.Detalle.Region)
+                            </div>
+                        </div>
+                    </div>
+                    @if (!string.IsNullOrEmpty(Model.Detalle.Area_Padre))
+                    {
+                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
+                            <div class="form-group">
+                                <label class="col-form-label pb-0 font-weight-bold">@Html.DisplayNameFor(model => model.Detalle.Area_Padre)</label>
+                                <div class="">
+                                    @Html.DisplayFor(model => model.Detalle.Area_Padre)
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
+                        <div class="form-group">
+                            <label class="col-form-label pb-0 font-weight-bold">@Html.DisplayNameFor(model => model.Detalle.Visible)</label>
+                            <div class="">
+                                @Html.DisplayFor(model => model.Detalle.Visible)
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
+                        <div class="form-group">
+                            <label class="col-form-label pb-0 font-weight-bold">@Html.DisplayNameFor(model => model.Detalle.Estado)</label>
+                            <div class="">
+                                @Html.DisplayFor(model => model.Detalle.Estado)
+                            </div>
+                        </div>
+                    </div>
+
+                    @if (Model.Detalle.HayLogoActual)
+                    {
+                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
+                            <div class="form-group">
+                                <label class="col-form-label pb-0 font-weight-bold">Logo</label>
+                                <div>
+                                    <span class="tm-tag cm-tag">
+                                        <img class="logo-simbolo-2" src="@Url.Action("Logo", "Anexos", new { id = Model.Detalle.AreaId })">
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+            @if (Model.Usuarios.Count > 0) 
+            {
+                <div class="col-12">
+                    <div class="row">
+                        <div class="col-12 pt-3 pb-2">
+                            <h5>Usuarios del área</h5>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                            <div class="table-responsive">
+                                <table class="table table-sm table-bordered table-hover">
+                                    <thead class="border-info">
+                                        <tr>
+                                            <th scope="col">Usuario</th>
+                                            <th scope="col">Nombre</th>
+                                            <th scope="col">Rol</th>
+                                            <th scope="col">Puesto</th>
+                                            <th scope="col">Estado</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var usuario in Model.Usuarios)
+                                        {
+                                            <tr>
+                                                <td>@usuario.NombreUsuario</td>
+                                                <td>@usuario.Nombre</td>
+                                                <td>@usuario.Rol</td>
+                                                <td>@usuario.Puesto</td>
+                                                <td>@usuario.Estado</td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

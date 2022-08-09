@@ -1,0 +1,16 @@
+﻿@model InfoConfigUsuarioViewModel
+
+<h6 class="d-none" id="user">@Model.BandejaUsuario</h6>
+<h6 class="d-none" id="user-permiso">@Model.BandejaPermiso</h6>
+<h6 class="d-none" id="user-nombre">@Model.BandejaNombre</h6>
+
+<h6 class="dropdown-header-user mb-1">@Model.FullName (<small class="h6 font-weight-bold" id="userLogueado">@Model.UserName</small>)</h6>
+
+@if (ConstRol.RolUsuario.Contains(Model.Rol))
+{
+    <p class="small text-muted font-italic mb-0 ">@Model.Puesto</p>
+    <p class="small text-muted font-italic mb-0">@Model.Area (@Model.Region)</p>
+    <p class="d-none" id="user-area-id">@Model.BandejaAreaId</p>
+}
+
+<p class="small text-muted  text-uppercase mb-0 mt-1">@Model.Rol</p>

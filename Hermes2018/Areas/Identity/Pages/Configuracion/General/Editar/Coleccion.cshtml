@@ -1,0 +1,116 @@
+﻿@page "/Configuracion/General/Editar/Coleccion/{tipo:int}"
+@model ColeccionModel
+
+@section styles
+    {
+    <link type="text/css" rel="stylesheet" href="~/lib/bootstrap4-toggle/css/bootstrap4-toggle.min.css" >
+}
+@section ScriptsPrioritarios
+    {
+    <script type="text/javascript" src="~/lib/bootstrap4-toggle/js/bootstrap4-toggle.min.js" ></script>
+}
+
+<div class="content-wrapper ml-0 bg-white pt-0">
+    <div class="container-fluid" id="logged-in">
+        <div class="row">
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 pt-2">
+                        <ol class="breadcrumb-2 mt-0 mb-0 pb-1 pt-1 display-inline">
+                            <li class="breadcrumb-2-item">
+                                <a asp-area="" asp-controller="Home" asp-action="Index" asp-route-id="">Inicio</a>
+                            </li>
+
+                            <li class="breadcrumb-2-item">
+                                <a asp-area="Identity" asp-page="/Configuracion/General/Index">Configuracion general</a>
+                            </li>
+                            <li class="breadcrumb-2-item active display-flex">Editar propiedad</li>
+                        </ol>
+                    </div>
+                    <div class="col-12">
+                        <hr class="hr-thick mb-1 mt-1" />
+                        <h5>Editar propiedad</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <form method="post">
+                    <div class="row">
+                        <div class="col-12 col-sm-12 col-md-9 col-lg-9 col-xl-9 pb-3">
+
+                            <div>
+                                <input id="TipoColeccionN1" value="@ConstConfiguracionGeneral.TipoColeccionN1" hidden />
+                                <input id="TipoColeccionN2" value="@ConstConfiguracionGeneral.TipoColeccionN2" hidden />
+                                <input id="Tipo" value="@Model.Tipo" hidden />
+                                <span>Nuevo elemento</span>
+                            </div>
+                            <div>
+                                <div class="form-row align-items-center">
+                                    <div class="col-auto">
+                                        <input id="text-valor" class="form-control form-control-sm" placeholder="ejemplo: .pdf, .doc, .png, ...">
+                                    </div>
+                                    <div class="col-auto my-1">
+                                        <a class="btn btn-sm md-btn-raised md-btn-ripple bg-secondary" id="btn-agregar">Agregar</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div>
+                                <span>Listado</span>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-3 pt-1 pb-1">
+                            <div class="text-center bg-light p-1 border">
+                                <span>Actuales</span>
+                            </div>
+                            <div id="contiene-listado-actual" class="pl-2 pt-2 pb-2 border">
+                                @for (int i = 0; i < Model.Editar.Count; i++)
+                                {
+                                    <div class="form-check">
+                                        <input asp-for="Editar[i].Estado" type="checkbox" class="form-check-input sin-indicador" data-toggle="toggle" data-size="sm" data-on="Mantener" data-off="Quitar" data-width="89" data-onstyle="secondary" data-offstyle="light" data-style="border" >
+                                        <input asp-for="Editar[i].Id" class="sin-indicador" />
+                                        <input asp-for="Editar[i].Valor" class="valor-actual sin-indicador" />
+                                        <label class="form-check-label">@Model.Editar[i].Valor</label>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-3 pt-1">
+                            <div class="text-center bg-light p-1 border">
+                                <span>Nuevos</span>
+                            </div>
+                            <div id="contiene-listado" class="pl-2 pt-2 pb-2">
+                                @if (Model.Nuevo != null)
+                                {
+                                    @for (int i = 0; i < Model.Nuevo.Count; i++)
+                                    {
+                                        <div class="form-check">
+                                            <button type="button" class="btn btn-link text-primary btn-borrar" data-index="@i" title="Eliminar"><i class="far fa-trash-alt"></i></button>
+                                            <input type="hidden" asp-for="Nuevo[i].Estado" class="sin-indicar" />
+                                            <input type="hidden" asp-for="Nuevo[i].Id" />
+                                            <input type="hidden" asp-for="Nuevo[i].Valor" class="valor-nuevo" />
+                                            <label class="form-check-label">@Model.Nuevo[i].Valor</label>
+                                        </div>
+                                    }
+                                }
+
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="pt-3">
+                                <a asp-area="Identity" asp-page="/Configuracion/General/Index" class="btn btn-light">Cancelar</a>
+                                <button type="submit" class="btn btn-primary">Actualizar</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <partial name="_ValidationScriptsPartial" />
+    <script type="text/javascript" src="~/js/Areas/Identity/Pages/Configuracion/General/Coleccion.min.js" asp-append-version="true"></script>
+}

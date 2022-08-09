@@ -1,0 +1,70 @@
+﻿@page "/Subcarpetas/Borrar/{id:int}/{carpetaPadreId:int}"
+@model Hermes2018.Areas.Identity.Pages.Subcarpetas.BorrarModel
+
+<div class="content-wrapper pt-0">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 pt-2">
+                        <ol class="breadcrumb-2 mt-0 mb-0 pb-1 pt-1 display-inline">
+                            <li class="breadcrumb-2-item">
+                                <a asp-area="" asp-controller="Home" asp-action="Index" asp-route-id="">Inicio</a>
+                            </li>
+
+                            <li class="breadcrumb-2-item">
+                                <a asp-area="Identity" asp-page="/Carpetas/Index">Carpetas</a>
+                            </li>
+                            <li class="breadcrumb-2-item">
+                                <a asp-area="Identity" asp-page="/Subcarpetas/Index" asp-route-id="@Model.Borrar.CarpetaPadreId">Subcarpetas</a>
+                            </li>
+                            <li class="breadcrumb-2-item active display-flex" aria-current="page">Borrar subcarpeta</li>
+                        </ol>
+                    </div>
+                    <div class="col-12">
+                        <hr class="hr-thick mb-1 mt-1" />
+                        <h5>Borrar subcarpeta</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <form id="form-add-User-group" method="post">
+                    <div class="row">
+                        <div class="col-12">
+                            <div asp-validation-summary="ModelOnly" class="text-danger error-list-clean"></div>
+
+                            <input asp-for="InfoUsuarioId" class="sin-indicador" />
+                            <input asp-for="Borrar.SubcarpetaId" class="sin-indicador" />
+                            <input asp-for="Borrar.CarpetaPadreId" class="sin-indicador" />
+                            <input asp-for="Borrar.NombreSubcarpeta" class="sin-indicador" />
+
+                            <dl class="">
+                                <dt class="">
+                                    @Html.DisplayNameFor(x => x.Borrar.NombreSubcarpeta)
+                                </dt>
+                                <dd class="">
+                                    @Html.DisplayFor(x => x.Borrar.NombreSubcarpeta)
+                                </dd>
+                            </dl>
+
+                            <div>
+                                <p>¿Desea borrar esta subcarpeta?</p>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="pt-1">
+                                <a asp-area="Identity" asp-page="/Subcarpetas/Index" asp-route-id="@Model.Borrar.CarpetaPadreId" class="btn btn-light">Cancelar</a>
+                                <button type="submit" class="btn btn-danger" title="Borrar la subcarpeta definitivamente">Borrar</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts
+    {
+    <partial name="_ValidationScriptsPartial" />
+}

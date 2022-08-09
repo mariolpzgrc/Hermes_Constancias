@@ -1,0 +1,85 @@
+﻿@page "/Configuracion/General/Editar/Imagen/{tipo:int}"
+@model ImagenModel
+
+<div class="content-wrapper ml-0 bg-white pt-0">
+    <div class="container-fluid" id="logged-in">
+        <div class="row">
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 pt-2">
+                        <ol class="breadcrumb-2 mt-0 mb-0 pb-1 pt-1 display-inline">
+                            <li class="breadcrumb-2-item">
+                                <a asp-area="" asp-controller="Home" asp-action="Index" asp-route-id="">Inicio</a>
+                            </li>
+
+                            <li class="breadcrumb-2-item">
+                                <a asp-area="Identity" asp-page="/Configuracion/General/Index">Configuracion general</a>
+                            </li>
+                            <li class="breadcrumb-2-item active display-flex">Editar propiedad</li>
+                        </ol>
+                    </div>
+                    <div class="col-12">
+                        <hr class="hr-thick mb-1 mt-1" />
+                        <h5>Editar propiedad</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <form method="post" enctype="multipart/form-data">
+                    <div class="row">
+                        <div class="col-12">
+                            @if (Model.Editar.Tipo == ConstConfiguracionGeneral.TipoImagenN1)
+                            {
+                                <div class="form-group">
+                                    <label class="col-form-label pb-0 font-weight-bold text-secondary">Logo</label>
+                                    <div class="">
+                                        <span class="tm-tag cm-tag">
+                                            <img class="logo-simbolo" src="@Url.Action("LogoPorDefecto", "Anexos")">
+                                        </span>
+                                    </div>
+                                </div>
+                            }
+                            else if (Model.Editar.Tipo == ConstConfiguracionGeneral.TipoImagenN2)
+                            {
+                                <div class="form-group">
+                                    <label class="col-form-label pb-0 font-weight-bold text-secondary">Portada</label>
+                                    <div class="">
+                                        <span class="tm-tag cm-tag">
+                                            <img class="logo-simbolo" src="@Url.Action("Portada", "Anexos")">
+                                        </span>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                            <input asp-for="Editar.Tipo" class="sin-indicador" />
+
+                            <input id="TipoImagen1" value="@ConstConfiguracionGeneral.TipoImagenN1" hidden />
+                            <input id="TipoImagen2" value="@ConstConfiguracionGeneral.TipoImagenN2" hidden />
+
+                            <div class="form-group">
+                                <label asp-for="Editar.Imagen" class="col-form-label font-bold-12"></label>
+                                <div class="">
+                                    <input asp-for="Editar.Imagen" class="form-control form-control-sm" placeholder="" />
+                                    <small class="form-text text-muted">Seleccione una imagen: .jpg, .jpeg, .png</small>
+                                    <span asp-validation-for="Editar.Imagen" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <div class="pt-3">
+                                <a asp-area="Identity" asp-page="/Configuracion/General/Index" class="btn btn-light">Cancelar</a>
+                                <button type="submit" class="btn btn-primary">Actualizar</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <partial name="_ValidationScriptsPartial" />
+}

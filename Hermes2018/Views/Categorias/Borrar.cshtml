@@ -1,0 +1,46 @@
+﻿@model Hermes2018.Models.Categoria.HER_Categoria
+
+<div class="content-wrapper pt-0">
+	<div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 pt-2">
+                        <ol class="breadcrumb-2 mt-0 mb-0 pb-1 pt-1 display-inline">
+                            <li class="breadcrumb-2-item">
+                                <a asp-area="" asp-controller="Home" asp-action="Index" asp-route-id="">Inicio</a>
+                            </li>
+
+                            <li class="breadcrumb-2-item">
+                                <a asp-area="" asp-action="Index" asp-controller="Categorias">Categorías</a>
+                            </li>
+                            <li class="breadcrumb-2-item active display-flex" aria-current="page">Borrar categoría</li>
+                        </ol>
+                    </div>
+                    <div class="col-12">
+                        <hr class="hr-thick mb-1 mt-1" />
+                        <h5>Borrar categoría</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <dl class="p-1">
+                    <dt class="">@Html.DisplayNameFor(x => x.HER_Nombre)</dt>
+                    <dd class="">@Html.DisplayFor(x => x.HER_Nombre)</dd>
+                </dl>
+                <div>
+                    <p>¿Desea Borrar esta categoría?</p>
+
+                    <form method="post">
+                        <div asp-validation-summary="ModelOnly" class="text-danger error-list-clean"></div>
+
+                        <div>
+                            <a asp-area="" asp-action="Index" asp-controller="Categorias" class="btn btn-light">Cancelar</a>
+                            <input type="submit" value="Borrar" class="btn btn-danger" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+	</div>
+</div>

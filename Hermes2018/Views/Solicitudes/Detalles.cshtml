@@ -1,0 +1,104 @@
+﻿@model Hermes2018.ViewModels.SolicitudDetalleViewModel
+
+<div class="content-wrapper pt-1">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 pt-2">
+                        <ol class="breadcrumb-2 mt-0 mb-0 pb-1 pt-1 display-inline">
+                            <li class="breadcrumb-2-item">
+                                <a asp-area="" asp-controller="Home" asp-action="Index" asp-route-id="">Inicio</a>
+                            </li>
+
+                            <li class="breadcrumb-2-item"><a asp-area="" asp-controller="Solicitudes" asp-action="Index">Solicitudes</a></li>
+                            <li class="breadcrumb-2-item active" aria-current="page">Detalle solicitud</li>
+                        </ol>
+                    </div>
+                    <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 pt-2">
+                        <div class="float-right">
+                            <a asp-area="" asp-action="Responder" asp-route-id="@Model.NombreUsuario" class="btn btn-primary btn-sm mb-2">Atender</a>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <hr class="hr-thick mb-1 mt-1" />
+                        <h5>Detalle de la solicitud</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12">
+                        <dl>
+                            <dt>@Html.DisplayNameFor(model => model.Nombre)</dt>
+                            <dd>@Html.DisplayFor(model => model.Nombre)</dd>
+                        </dl>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12">
+                        <dl>
+                            <dt>@Html.DisplayNameFor(model => model.NombreUsuario)</dt>
+                            <dd>@Html.DisplayFor(model => model.NombreUsuario)</dd>
+                        </dl>
+                    </div>
+
+                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12">
+                        <dl>
+                            <dt>@Html.DisplayNameFor(model => model.Correo)</dt>
+                            <dd>@Html.DisplayFor(model => model.Correo)</dd>
+                        </dl>
+                    </div>
+
+                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12">
+                        <dl>
+                            <dt>@Html.DisplayNameFor(model => model.RolNombre)</dt>
+                            <dd>@Html.DisplayFor(model => model.RolNombre)</dd>
+                        </dl>
+                    </div>
+
+                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12">
+                        <dl>
+                            <dt>@Html.DisplayNameFor(model => model.RegionNombre)</dt>
+                            <dd>@Html.DisplayFor(model => model.RegionNombre)</dd>
+                        </dl>
+                    </div>
+
+                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12">
+                        <dl>
+                            <dt>@Html.DisplayNameFor(model => model.AreaNombre)</dt>
+                            <dd>@Html.DisplayFor(model => model.AreaNombre)</dd>
+                        </dl>
+                    </div>
+
+                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12">
+                        <dl>
+                            <dt>@Html.DisplayNameFor(model => model.PuestoNombre)</dt>
+                            <dd>@Html.DisplayFor(model => model.PuestoNombre)</dd>
+                        </dl>
+                    </div>
+
+                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12">
+                        <dl>
+                            <dt>@Html.DisplayNameFor(model => model.EsUnico)</dt>
+                            <dd>@Html.DisplayFor(model => model.EsUnico)</dd>
+                        </dl>
+                    </div>
+
+                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12">
+                        <dl>
+                            <dt>@Html.DisplayNameFor(model => model.EstaAprobado)</dt>
+                            <dd>@Html.DisplayFor(model => model.EstaAprobado)</dd>
+                        </dl>
+                    </div>
+
+                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12">
+                        <dl>
+                            <dt>@Html.DisplayNameFor(model => model.FechaRegistro)</dt>
+                            <dd>@Html.DisplayFor(model => model.FechaRegistro)</dd>
+                        </dl>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>

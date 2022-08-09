@@ -1,0 +1,91 @@
+﻿@page "/Recopilacion/General/Area/{id:int}/{areaPadreId:int?}"
+@model Hermes2018.Areas.Identity.Pages.Recopilacion.General.AreaModel
+
+    <div class="content-wrapper ml-0 bg-white pt-0">
+        <div class="container-fluid" id="logged-in">
+            <div class="row">
+                <div class="col-12">
+                    <div class="row">
+                        <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 pt-2">
+                            <ol class="breadcrumb-2 mt-0 mb-0 pb-1 pt-1 display-inline">
+                                <li class="breadcrumb-2-item">
+                                    <a asp-area="" asp-controller="Home" asp-action="Index" asp-route-id="">Inicio</a>
+                                </li>
+                                <li class="breadcrumb-2-item">
+                                    <a asp-area="Identity" asp-page="/Recopilacion/General/Index" asp-route-id="">Recopilación</a>
+                                </li>
+                                <li class="breadcrumb-2-item">
+                                    <a asp-area="Identity" asp-page="/Recopilacion/General/Region" asp-route-id="">Por región</a>
+                                </li>
+                                <li class="breadcrumb-2-item active display-flex" aria-current="page">Por área</li>
+                            </ol>
+                        </div>
+                        <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 pt-2">
+                        </div>
+                        <div class="col-12">
+                            <hr class="hr-thick mb-1 mt-1" />
+                            <h5>Recopilación</h5>
+                            <div>
+                                @if (Model.TipoAreaId == ConstTipoAreaEnRegion.TipoN1)
+                                {
+                                    if (Model.AreaPadreId != null)
+                                    {
+                                        <a asp-area="Identity" asp-page="/Recopilacion/General/Area" asp-route-id="@Model.RegionId" asp-route-areapadreid="" class="" title="Ver el área padre"><i class="far fa-arrow-alt-circle-up font-gray"></i> Subir de área</a>
+                                    }
+                                }
+                                else
+                                {
+                                    <a asp-area="Identity" asp-page="/Recopilacion/General/Area" asp-route-id="@Model.RegionId" asp-route-areapadreid="@Model.AreaPadre.HER_Area_PadreId" class="" title="Ver el área padre"><i class="far fa-arrow-alt-circle-up font-gray"></i> Subir de área</a>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="table-responsive">
+                        <table class="table table-hover table-sm border-bottom responsive">
+                            <thead class="bg-light">
+                                <tr>
+                                    <th>
+                                        Área
+                                    </th>
+                                    <th class="text-center">
+                                        Usuarios
+                                    </th>
+                                    <th class="text-center">
+                                        Documentos enviados
+                                    </th>
+                                    <th class="text-center">
+                                        Documentos recibidos
+                                    </th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.Areas)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Area)
+                                        </td>
+                                        <td class="text-center">
+                                            @Html.DisplayFor(modelItem => item.Usuarios)
+                                        </td>
+                                        <td class="text-center">
+                                            @Html.DisplayFor(modelItem => item.DocumentosEnviados)
+                                        </td>
+                                        <td class="text-center">
+                                            @Html.DisplayFor(modelItem => item.DocumentosRecibidos)
+                                        </td>
+                                        <td>
+                                            <a asp-area="Identity" asp-page="/Recopilacion/General/Area" asp-route-id="@Model.RegionId" asp-route-areapadreid="@item.AreaId" class="pl-2 pr-2" title="Ver subáreas"><i class="fas fa-code-branch font-gray"></i></a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
