@@ -45,9 +45,9 @@ function ObtenerTipodePersonalByUser(username) {
         },
         success: function (data) {
             if (data) {
-                objUser.numeroPersonal = data.oLoginTP.iNumPer;
+                objUser.numeroPersonal = data.iNumPer;
                 objTipoPersonalByUser.info = Object.keys(new Object());
-                objTipoPersonalByUser.info = data.oLoginTP.TipoPersonal;
+                objTipoPersonalByUser.info = data.TipoPersonal;
             }
         },
         error: function (xhr, estatus, error) {

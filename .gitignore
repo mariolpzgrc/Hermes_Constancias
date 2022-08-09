@@ -31,7 +31,9 @@ ipch/
 [Bb]in 
 [Dd]ebug*/ 
 [Rr]elease*/
-wwwroot/uploads/
+[Hh]ermes2018/wwwroot/uploads/
+[Hh]ermes2018/wwwroot/lib/
+[Hh]ermes2018/Logs/
 TestResults/
 ###################
 # Web publish log #

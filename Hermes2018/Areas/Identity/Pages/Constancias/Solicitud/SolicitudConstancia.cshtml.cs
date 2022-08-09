@@ -21,11 +21,5 @@ namespace Hermes2018.Areas.Identity.Pages.Constancias
         {
             _usuarioClaimService = usuarioClaimService;
         }
-
-        public void OnPostSummit(int tipo)
-        {
-            TipoConstancia = tipo;
-            Console.WriteLine(TipoConstancia);
-        }
     }
 }

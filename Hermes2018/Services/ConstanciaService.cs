@@ -1015,7 +1015,7 @@ namespace Hermes2018.Services
                     {
                         _rows = JsonConvert.DeserializeObject<DesencriptarJson>(salidaDesencriptada);
                         jsonlimpio = _rows.sJson.Replace(Environment.NewLine, "");
-                        jsonlimpio = jsonlimpio.Replace(" ", String.Empty);
+                        jsonlimpio = jsonlimpio.Replace("  ", String.Empty);
                         _loginDataCustom = JsonConvert.DeserializeObject<LoginDataCustom>(jsonlimpio);
                         _data = _loginDataCustom.oLoginTP;
                     }
