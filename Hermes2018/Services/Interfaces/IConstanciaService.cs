@@ -28,7 +28,7 @@ namespace Hermes2018.Services.Interfaces
         List<oLsIpe> ObtieneIpe(int numPer, int tipoPer);
         List<oLsIpe> ObtieneMag(int numPer, int tipoPer);
         List<oLsOfiBajIPE> ObtieneBajaIpe(int numPer, int tipoPer);
-        DesencriptarJson ObtieneBajaMag(int numPer, int tipoPer);
+        List<oLsOfiBajIPE> ObtieneBajaMag(int numPer, int tipoPer);
         List<oLsVisa> ObtieneVISA(int numPer, int tipoPer);
         List<oLsVisa> ObtieneVISADep(int numPer, int tipoPer);
         List<oLsPRODEP> ObtienePRODep(int numPer, int tipoPer); 

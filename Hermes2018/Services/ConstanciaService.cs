@@ -576,8 +576,14 @@ namespace Hermes2018.Services
             return _data;
         }
 
-        public DesencriptarJson ObtieneMag(int numPer, int tipoPer)
+        public List<oLsIpe> ObtieneMag(int numPer, int tipoPer)
         {
+            EncriptarJson _dataReturn = new EncriptarJson();
+            JsonForDesencript _dataEncriptadaReturn = new JsonForDesencript();
+            DesencriptarJson _rows = new DesencriptarJson();
+            MagCustom _dataMagC = new MagCustom();
+            string jsonlimpio = "";
+            List<oLsIpe> _data = new List<oLsIpe>();
             var configuration = new RestApiDSIA().GetConfiguration();
             var dataBearer = configuration.GetSection("ConfigureCustom").GetSection("Bearer").Value;
 
@@ -596,10 +602,6 @@ namespace Hermes2018.Services
             };
 
             var salida = new RequestClientApi().Post(configuration.GetSection("ServicesAPIDSIA").GetSection("Encriptar").Value, JsonConvert.SerializeObject(jsonRaw), dataBearer);
-
-            EncriptarJson _dataReturn = new EncriptarJson();
-            JsonForDesencript _dataEncriptadaReturn = new JsonForDesencript();
-            DesencriptarJson _rows = new DesencriptarJson();
 
             if (salida != "" && salida != null)
             {
@@ -628,14 +630,24 @@ namespace Hermes2018.Services
                     if (salidaDesencriptada != "" && salidaDesencriptada != null)
                     {
                         _rows = JsonConvert.DeserializeObject<DesencriptarJson>(salidaDesencriptada);
+                        jsonlimpio = _rows.sJson.Replace(Environment.NewLine, "");
+                        jsonlimpio = jsonlimpio.Replace("  ", String.Empty);
+                        _dataMagC = JsonConvert.DeserializeObject<MagCustom>(jsonlimpio);
+                        _data = _dataMagC.oLsMag;
                     }
                 }
             }
-            return _rows;
+            return _data;
         }
 
-        public DesencriptarJson ObtieneBajaIpe(int numPer, int tipoPer)
+        public List<oLsOfiBajIPE> ObtieneBajaIpe(int numPer, int tipoPer)
         {
+            EncriptarJson _dataReturn = new EncriptarJson();
+            JsonForDesencript _dataEncriptadaReturn = new JsonForDesencript();
+            DesencriptarJson _rows = new DesencriptarJson();
+            OfiBajIPECustom _dataBIC = new OfiBajIPECustom();
+            List<oLsOfiBajIPE> _data = new List<oLsOfiBajIPE>();
+            string jsonlimpio = "";
             var configuration = new RestApiDSIA().GetConfiguration();
             var dataBearer = configuration.GetSection("ConfigureCustom").GetSection("Bearer").Value;
 
@@ -654,10 +666,6 @@ namespace Hermes2018.Services
             };
 
             var salida = new RequestClientApi().Post(configuration.GetSection("ServicesAPIDSIA").GetSection("Encriptar").Value, JsonConvert.SerializeObject(jsonRaw), dataBearer);
-
-            EncriptarJson _dataReturn = new EncriptarJson();
-            JsonForDesencript _dataEncriptadaReturn = new JsonForDesencript();
-            DesencriptarJson _rows = new DesencriptarJson();
 
             if (salida != "" && salida != null)
             {
@@ -686,14 +694,24 @@ namespace Hermes2018.Services
                     if (salidaDesencriptada != "" && salidaDesencriptada != null)
                     {
                         _rows = JsonConvert.DeserializeObject<DesencriptarJson>(salidaDesencriptada);
+                        jsonlimpio = _rows.sJson.Replace(Environment.NewLine, "");
+                        jsonlimpio = jsonlimpio.Replace("  ", String.Empty);
+                        _dataBIC = JsonConvert.DeserializeObject<OfiBajIPECustom>(jsonlimpio);
+                        _data = _dataBIC.oLsOfiBajIPE;
                     }
                 }
             }
-            return _rows;
+            return _data;
         }
 
-        public DesencriptarJson ObtieneBajaMag(int numPer, int tipoPer)
+        public List<oLsOfiBajIPE> ObtieneBajaMag(int numPer, int tipoPer)
         {
+            EncriptarJson _dataReturn = new EncriptarJson();
+            JsonForDesencript _dataEncriptadaReturn = new JsonForDesencript();
+            DesencriptarJson _rows = new DesencriptarJson();
+            OfiBajIPECustom _dataBMC = new OfiBajIPECustom();
+            List<oLsOfiBajIPE> _data = new List<oLsOfiBajIPE>();
+            string jsonlimpio = "";
             var configuration = new RestApiDSIA().GetConfiguration();
             var dataBearer = configuration.GetSection("ConfigureCustom").GetSection("Bearer").Value;
 
@@ -712,11 +730,7 @@ namespace Hermes2018.Services
             };
 
             var salida = new RequestClientApi().Post(configuration.GetSection("ServicesAPIDSIA").GetSection("Encriptar").Value, JsonConvert.SerializeObject(jsonRaw), dataBearer);
-
-            EncriptarJson _dataReturn = new EncriptarJson();
-            JsonForDesencript _dataEncriptadaReturn = new JsonForDesencript();
-            DesencriptarJson _rows = new DesencriptarJson();
-
+                        
             if (salida != "" && salida != null)
             {
                 _dataReturn = JsonConvert.DeserializeObject<EncriptarJson>(salida);
@@ -744,10 +758,14 @@ namespace Hermes2018.Services
                     if (salidaDesencriptada != "" && salidaDesencriptada != null)
                     {
                         _rows = JsonConvert.DeserializeObject<DesencriptarJson>(salidaDesencriptada);
+                        jsonlimpio = _rows.sJson.Replace(Environment.NewLine, "");
+                        jsonlimpio = jsonlimpio.Replace("  ", String.Empty);
+                        _dataBMC = JsonConvert.DeserializeObject<OfiBajIPECustom>(jsonlimpio);
+                        _data = _dataBMC.oLsOfiBajIPE;
                     }
                 }
             }
-            return _rows;
+            return _data;
         }
 
         public List<oLsVisa> ObtieneVISA(int numPer, int tipoPer)
@@ -816,8 +834,14 @@ namespace Hermes2018.Services
             return _data;
         }
 
-        public DesencriptarJson ObtieneVISADep(int numPer, int tipoPer)
+        public List<oLsVisa> ObtieneVISADep(int numPer, int tipoPer)
         {
+            EncriptarJson _dataReturn = new EncriptarJson();
+            JsonForDesencript _dataEncriptadaReturn = new JsonForDesencript();
+            DesencriptarJson _rows = new DesencriptarJson();
+            VisaDepCustom _dataVDC = new VisaDepCustom();
+            List<oLsVisa> _data = new List<oLsVisa>();
+            string jsonlimpio = "";
             var configuration = new RestApiDSIA().GetConfiguration();
             var dataBearer = configuration.GetSection("ConfigureCustom").GetSection("Bearer").Value;
 
@@ -836,11 +860,7 @@ namespace Hermes2018.Services
             };
 
             var salida = new RequestClientApi().Post(configuration.GetSection("ServicesAPIDSIA").GetSection("Encriptar").Value, JsonConvert.SerializeObject(jsonRaw), dataBearer);
-
-            EncriptarJson _dataReturn = new EncriptarJson();
-            JsonForDesencript _dataEncriptadaReturn = new JsonForDesencript();
-            DesencriptarJson _rows = new DesencriptarJson();
-
+                                    
             if (salida != "" && salida != null)
             {
                 _dataReturn = JsonConvert.DeserializeObject<EncriptarJson>(salida);
@@ -868,14 +888,25 @@ namespace Hermes2018.Services
                     if (salidaDesencriptada != "" && salidaDesencriptada != null)
                     {
                         _rows = JsonConvert.DeserializeObject<DesencriptarJson>(salidaDesencriptada);
+                        jsonlimpio = _rows.sJson.Replace(Environment.NewLine, "");
+                        jsonlimpio = jsonlimpio.Replace("  ", String.Empty);
+                        _dataVDC = JsonConvert.DeserializeObject<VisaDepCustom>(jsonlimpio);
+                        _data = _dataVDC.oLsVisaDep;
+
                     }
                 }
             }
-            return _rows;
+            return _data;
         }
 
-        public DesencriptarJson ObtienePRODep(int numPer, int tipoPer)
+        public List<oLsPRODEP> ObtienePRODep(int numPer, int tipoPer)
         {
+            EncriptarJson _dataReturn = new EncriptarJson();
+            JsonForDesencript _dataEncriptadaReturn = new JsonForDesencript();
+            DesencriptarJson _rows = new DesencriptarJson();
+            ProdepCustom _dataprodep = new ProdepCustom();
+            List<oLsPRODEP> _data = new List<oLsPRODEP>();
+            string jsonlimpio = "";
             var configuration = new RestApiDSIA().GetConfiguration();
             var dataBearer = configuration.GetSection("ConfigureCustom").GetSection("Bearer").Value;
 
@@ -894,10 +925,6 @@ namespace Hermes2018.Services
             };
 
             var salida = new RequestClientApi().Post(configuration.GetSection("ServicesAPIDSIA").GetSection("Encriptar").Value, JsonConvert.SerializeObject(jsonRaw), dataBearer);
-
-            EncriptarJson _dataReturn = new EncriptarJson();
-            JsonForDesencript _dataEncriptadaReturn = new JsonForDesencript();
-            DesencriptarJson _rows = new DesencriptarJson();
 
             if (salida != "" && salida != null)
             {
@@ -926,10 +953,14 @@ namespace Hermes2018.Services
                     if (salidaDesencriptada != "" && salidaDesencriptada != null)
                     {
                         _rows = JsonConvert.DeserializeObject<DesencriptarJson>(salidaDesencriptada);
+                        jsonlimpio = _rows.sJson.Replace(Environment.NewLine, "");
+                        jsonlimpio = jsonlimpio.Replace("  ", String.Empty);
+                        _dataprodep = JsonConvert.DeserializeObject<ProdepCustom>(jsonlimpio);
+                        _data = _dataprodep.oLsPRODEP;
                     }
                 }
             }
-            return _rows;
+            return _data;
         }
 
         public oLoginTP ObtieneCveLogin_TP(string sCveLogin)

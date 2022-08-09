@@ -81,3 +81,4 @@ _[Ss]cripts
 *.nupkg
 *.ncrunchsolution
 *.dot[Cc]over
+.vs/Hermes2018/DesignTimeBuild/.dtbcache.v2
