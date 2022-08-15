@@ -832,5 +832,23 @@
     "inputFiles": [
       "wwwroot/lib/select-picker-master/src/picker.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/Areas/Identity/Pages/Constancias/Solicitud/SolicitudConstancia.min.js",
+    "inputFiles": [
+      "wwwroot/js/Areas/Identity/Pages/Constancias/Solicitud/SolicitudConstancia.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/Areas/Identity/Pages/Constancias/ResumenConstancia/Resumen.min.js",
+    "inputFiles": [
+      "wwwroot/js/Areas/Identity/Pages/Constancias/ResumenConstancia/Resumen.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/Areas/Identity/Pages/Constancias/Administracion/Lectura.min.js",
+    "inputFiles": [
+      "wwwroot/js/Areas/Identity/Pages/Constancias/Administracion/Lectura.js"
+    ]
   }
 ]

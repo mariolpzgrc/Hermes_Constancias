@@ -116,7 +116,7 @@ function ObtenerTipodePersonalByUser(username) {
         success: function (data) {
             objGetInfoUSerConstancia.info = Object.keys(new Object());
             objGetInfoUSerConstancia.info = data;
-            objInfoUserConstancia.tipoPersonal = objGetInfoUSerConstancia.info.oLoginTP.TipoPersonal[0].Id;
+            objInfoUserConstancia.tipoPersonal = objGetInfoUSerConstancia.info.TipoPersonal[0].Id;
             $('#idtpersonal').text(objInfoUserConstancia.tipoPersonal);
             ObtenerConstancia(objInfoUserConstancia.tipoConstancia);
         },
@@ -653,7 +653,6 @@ function ConfirmarConstancia() {
             xhr.setRequestHeader("Authorization", "Bearer " + objWebRoot.token);
         },
         success: function (data) {
-            console.log(data);
             if (data.CodeResponse === 0) {
                 document.getElementById("confirmarConstancia").style.display = 'none';
                 document.getElementById("cancelarConstancia").style.display = 'none';
@@ -665,8 +664,7 @@ function ConfirmarConstancia() {
                 $('#fechaGeneracion').text(new Date(objSegConstancia.Fecha).toLocaleDateString("es-ES", options));
                 console.log(objSegConstancia.director);
                 document.getElementById("seccionDirector").style.display = "";
-
-                $('#modalConstanciaConfirmada').modal('show');
+                alert("Constancia confimada correctamente.")
             } else {
                 alert("Hubo un error al confirmar la constancia.");
             }

@@ -83,7 +83,7 @@ namespace Hermes2018.Controllers.Api.Constancias
 
         [Route("ObtieneCveLogin_TP")]
         [HttpPost]
-        public IActionResult ObtieneCveLogin_TP([FromBody] CustomConstancias data) 
+        public IActionResult ObtieneCveLogin_TP([FromBody] CustomConstancias data)
         {
             return new JsonResult(_constancias.ObtieneCveLogin_TP(data.sCveLogin), _jsonSettings);
         }
@@ -108,7 +108,7 @@ namespace Hermes2018.Controllers.Api.Constancias
         {
             return new JsonResult(_constancias.ObtieneTrab_Perc(data.NumPersonal, data.TipoPersonal), _jsonSettings);
         }
-        
+
         [Route("ObtieneIpe")]
         [HttpPost]
         public IActionResult ObtieneIpe([FromBody] CustomConstancias data)

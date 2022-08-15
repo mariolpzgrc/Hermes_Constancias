@@ -1,11 +1,11 @@
 ﻿var objWebRoot = { route: "", token: "" },
-    objGetInfoConstancia = { Id: 0, info: Object.keys(new Object()), urln: "" },
-    objSegConstancia = { Id: 0, info: Object.keys(new Object()), urln: "", CveDep: 0, NombreDep: "", idRegion:0, Region: ""},
+    objGetInfoConstancia = { Id: 0, info: Object.keys(new Object()), urln: "", urlCons: "", mensajeError: "No se puede llenar el formulario.", mensajeAdvertencia: "Su tipo de personal no puede solicitar esta constancia." },
+    objSegConstancia = { Id: 0, info: Object.keys(new Object()), urln: "", CveDep: 0, NombreDep: "", idRegion: 0, Region: "" },
     objUser = { username: "", usersession: "" },
     objUserInfo = { numPersonal: 0, tipoPersonal: 0, },
     monedaMXN = { plural: "PESOS", singular: "PESO", centPlural: "CENTAVOS", centSingular: "CENTAVO" },
     options = { year: 'numeric', month: 'long', day: 'numeric' },
-    dataSeguimiento = { NoPersonal: 0, ConstanciaId: 0, EstadoId: 0, FechaSolicitud: ""};
+    dataSeguimiento = { NoPersonal: 0, ConstanciaId: 0, EstadoId: 0, FechaSolicitud: "" };
 
 const Funcionario = 1, ATM = 2, Confianza = 3, Academico = 4, Eventual = 5;
 
@@ -30,6 +30,8 @@ function getData() {
         objUserInfo.numPersonal = getInfo.numeroPersonal;
         objUserInfo.tipoPersonal = getInfo.tipoPersonal;
         objGetInfoConstancia.Id = getInfo.tipoContancia;
+        ObtenerConstancia(objGetInfoConstancia.Id)
+
     }
 }
 
@@ -68,104 +70,117 @@ function ControlToggleConstancia() {
  *  Método para la selección de constancias
  **/
 
-function ObtenerConstancia() {
-    var id = objGetInfoConstancia.Id;
-    switch (id) {
-        case "1":
+function ObtenerConstancia(id) {
+    switch (parseInt(id)) {
+        case 1:
             if (objUserInfo.tipoPersonal === Funcionario || objUserInfo.tipoPersonal === Confianza || objUserInfo.tipoPersonal === Academico) {
-                ObtenerConstanciaServcioMedico();
+                objGetInfoConstancia.urlCons = 'api/constancias/ObtieneServMed';
+                ObtenerInfoConstancia();
             } else {
                 window.history.back();
-                alert("Su tipo de personal no puede solicitar esta constancia.");
+                alert(objGetInfoConstancia.mensajeAdvertencia);
             }
             break;
-        case "2":
+        case 2:
             if (objUserInfo.tipoPersonal === Funcionario || objUserInfo.tipoPersonal === Confianza || objUserInfo.tipoPersonal === Academico) {
-                ObtenerConstanciaServcioMedicoDep();
+                objGetInfoConstancia.urlCons = 'api/constancias/ObtieneServMedDep';
+                ObtenerInfoConstancia();
             } else {
                 window.history.back();
-                alert("Su tipo de personal no puede solicitar esta constancia.");
+                alert(objGetInfoConstancia.mensajeAdvertencia);
             }
             break;
-        case "3":
-            ObtenerConstanciaTrabajoPercepciones();
+        case 3:
+            objGetInfoConstancia.urlCons = 'api/constancias/ObtieneTrab_Perc';
+            ObtenerInfoConstancia();
             break;
-        case "4":
-            ObtenerConstaHorarioLaboral();
+        case 4:
+            objGetInfoConstancia.urlCons = '';
+            ObtenerInfoConstancia();
             break;
-        case "5":
+        case 5:
+            if (objUserInfo.tipoPersonal != Eventual) {           
+                objGetInfoConstancia.urlCons = 'api/constancias/ObtieneIpe';
+                ObtenerInfoConstancia();
+            } else {
+                window.history.back();
+                alert(objGetInfoConstancia.mensajeAdvertencia);
+            }
+            break;
+        case 6:
             if (objUserInfo.tipoPersonal != Eventual) {
-                ObtenerConstanciaAltaAfiliacionIPE();
+                objGetInfoConstancia.urlCons = 'api/constancias/ObtieneMag';
+                ObtenerInfoConstancia();
             } else {
                 window.history.back();
-                alert("Su tipo de personal no puede solicitar esta constancia.");
+                alert(objGetInfoConstancia.mensajeAdvertencia);
             }
             break;
-        case "6":
+        case 7:
             if (objUserInfo.tipoPersonal != Eventual) {
-                ObtenerConstanciaAltaAfiliacionMagisterio();
+                objGetInfoConstancia.urlCons = 'api/constancias/ObtieneOfiBajIPE';
+                ObtenerInfoConstancia();
             } else {
                 window.history.back();
-                alert("Su tipo de personal no puede solicitar esta constancia.");
+                alert(objGetInfoConstancia.mensajeAdvertencia);
             }
             break;
-        case "7":
+        case 8:
             if (objUserInfo.tipoPersonal != Eventual) {
-                ObtenerConstanciaBajaAfiliacionIPE();
+                objGetInfoConstancia.urlCons = 'api/constancias/ObtieneOfiBajMAG';
+                ObtenerInfoConstancia();
             } else {
                 window.history.back();
-                alert("Su tipo de personal no puede solicitar esta constancia.");
+                alert(objGetInfoConstancia.mensajeAdvertencia);
             }
             break;
-        case "8":
-            if (objUserInfo.tipoPersonal != Eventual) {
-                ObtenerConstanciaBajaAfiliacionMagisterio();
-            } else {
-                window.history.back();
-                alert("Su tipo de personal no puede solicitar esta constancia.");
-            }
+        case 9:
+            objGetInfoConstancia.urlCons = 'api/constancias/ObtieneVisa';
+            ObtenerInfoConstancia();
             break;
-        case "9":
-                ObtenerConstanciaVisa();          
-            break;
-        case "10":
+        case 10:
             if (objUserInfo.tipoPersonal === Funcionario || objUserInfo.tipoPersonal === Confianza || objUserInfo.tipoPersonal === Academico) {
+                objGetInfoConstancia.urlCons = 'api/constancias/ObtieneVisaDep';
                 ObtenerConstanciaVisaDep();
             } else {
                 window.history.back();
-                alert("Su tipo de personal no puede solicitar esta constancia.");
+                alert(objGetInfoConstancia.mensajeAdvertencia);
             }
             break;
-        case "11":
+        case 11:
             if (objUserInfo.tipoPersonal === Academico) {
-                ObtenerConstanciaPRODEP();
+                objGetInfoConstancia.urlCons = 'api/constancias/ObtienePRODep';
+                ObtenerConstanciaVisaDep();
             } else {
                 window.history.back();
-                alert("Su tipo de personal no puede solicitar esta constancia.");
+                alert(objGetInfoConstancia.mensajeAdvertencia);
             }
             break;
-        case "12":
+        case 12:
             if (objUserInfo.tipoPersonal === Academico) {
-                ObtenerConstanciaCurricular();
+                objGetInfoConstancia.urlCons = '';
+                ObtenerConstanciaVisaDep();
             } else {
                 window.history.back();
-                alert("Su tipo de personal no puede solicitar esta constancia.");
+                alert(objGetInfoConstancia.mensajeAdvertencia);
             }
             break;
-        case "13":
+        case 13:
             if (objUserInfo.tipoPersonal !== Eventual) {
-                ObtenerHojaDeServicios();
+                objGetInfoConstancia.urlCons = '';
+                ObtenerConstanciaVisaDep();
             } else {
                 window.history.back();
-                alert("Su tipo de personal no puede solicitar esta constancia.");
+                alert(objGetInfoConstancia.mensajeAdvertencia);
             }
             break;
-        case "14":
+        case 14:
             if (objUserInfo.tipoPersonal !== Eventual) {
-                ObtenerContanciaJubicacion();
+                objGetInfoConstancia.urlCons = '';
+                ObtenerConstanciaVisaDep();
             } else {
                 window.history.back();
-                alert("Su tipo de personal no puede solicitar esta constancia.");
+                alert(objGetInfoConstancia.mensajeAdvertencia);
             }
             break;
     }
@@ -174,56 +189,11 @@ function ObtenerConstancia() {
 /**
  *  Métodos para obtener infomarción de las constancias 
  * */
+function ObtenerInfoConstancia() {
+    let valor, letras;
+    var sueldo;
 
-function ObtenerConstanciaServcioMedico() {
-
-    objGetInfoConstancia.urln = objWebRoot.route + 'api/constancias/ObtieneServMed/';
-
-    $.ajax({
-        url: objGetInfoConstancia.urln,
-        type: "POST",
-        data: JSON.stringify({ NumPersonal: objUserInfo.numPersonal, TipoPersonal: objUserInfo.tipoPersonal}),
-        datatype: "json",
-        contentType: "application/json; charset=utf-8",
-        beforeSend: function (xhr) {
-            xhr.setRequestHeader("Authorization", "Bearer " + objWebRoot.token)
-        },
-        success: function (data) {
-            console.log(data);
-            objGetInfoConstancia.info = Object.keys(new Object());
-            objGetInfoConstancia.info = data[0];
-            if (objGetInfoConstancia.info) {
-                $('#nombrePersonal').text(objGetInfoConstancia.info.sNombre);
-                $('#numeroPersonal').text(objGetInfoConstancia.info.sNumPer);
-                $('#fechaIngreso').text(Mayuscula(new Date(objGetInfoConstancia.info.dtFIngreso).toLocaleDateString("es-ES", options)));
-                objSegConstancia.CveDep = objGetInfoConstancia.info.sNumDep;
-                $('#dependencia').text(objGetInfoConstancia.info.sDescDep);
-                objSegConstancia.NombreDep = objGetInfoConstancia.info.sDescDep;
-                $('#region').text(objGetInfoConstancia.info.sDesRegion.toUpperCase());
-                objSegConstancia.idRegion = objGetInfoConstancia.info.sRegion;
-                objSegConstancia.Region = objGetInfoConstancia.info.sDesRegion;
-                $('#tipoPersonal').text(objGetInfoConstancia.info.sDesTPE);
-                $('#tipoContratacion').text(objGetInfoConstancia.info.sDesCont);
-                $('#categoriasueldo').text(objGetInfoConstancia.info.sDescCat);
-                $('#puesto').text(objGetInfoConstancia.info.sDesPuesto);
-                let valor = parseFloat(objGetInfoConstancia.info.sSuelPrest).toFixed(2);
-                let letras = numeroALetras(valor, monedaMXN);
-                $('#sueldo').text("$ " + objGetInfoConstancia.info.sSuelPrest + " - " + letras + " 00/100 M.N.");
-                $('#periodo').text(objGetInfoConstancia.info.sNPeri);
-                $('#horas').text(objGetInfoConstancia.info.sHrs);
-            } else {
-                console.log(data);
-            }
-        },
-        error: function () {
-            alert("No se puede llenar el formulario");
-        }        
-    });
-}
-
-function ObtenerConstanciaServcioMedicoDep() {
-    objGetInfoConstancia.urln = objWebRoot.route + 'api/constancias/ObtieneServMedDep';
-
+    objGetInfoConstancia.urln = objWebRoot.route + objGetInfoConstancia.urlCons;
     $.ajax({
         url: objGetInfoConstancia.urln,
         type: "POST",
@@ -234,541 +204,42 @@ function ObtenerConstanciaServcioMedicoDep() {
             xhr.setRequestHeader("Authorization", "Bearer " + objWebRoot.token)
         },
         success: function (data) {
-            objGetInfoConstancia.info = Object.keys(new Object());
-            objGetInfoConstancia.info = data[0];
-            if (objGetInfoConstancia.info) {
-                $('#nombrePersonal').text(objGetInfoConstancia.info.sNombre);
-                $('#numeroPersonal').text(objGetInfoConstancia.info.sNumPer);
-                $('#fechaIngreso').text(Mayuscula(new Date(objGetInfoConstancia.info.dtFIngreso).toLocaleDateString("es-ES", options)));
-                objSegConstancia.CveDep = objGetInfoConstancia.info.sNumDep;
-                $('#dependencia').text(objGetInfoConstancia.info.sDescDep);
-                objSegConstancia.NombreDep = objGetInfoConstancia.info.sDescDep;
-                $('#region').text(objGetInfoConstancia.info.sDesRegion);
-                objSegConstancia.idRegion = objGetInfoConstancia.info.sRegion;
-                objSegConstancia.Region = objGetInfoConstancia.info.sDesRegion;
-                $('#tipoPersonal').text(objGetInfoConstancia.info.sDesTPE);
-                $('#tipoContratacion').text(objGetInfoConstancia.info.sDesCont);
-                $('#categoriasueldo').text(objGetInfoConstancia.info.sDescCat);
-                $('#puesto').text(objGetInfoConstancia.info.sDesPuesto);
-                let valor = parseFloat(objGetInfoConstancia.info.sSuelPrest).toFixed(2);
-                let letras = numeroALetras(valor, monedaMXN);
-                $('#sueldo').text("$ " + objGetInfoConstancia.info.sSuelPrest + " - " + letras + " 00/100 M.N.");
-                $('#periodo').text(objGetInfoConstancia.info.sNPeri);
-                $('#horas').text(objGetInfoConstancia.info.sHrs);
-            } else {
-                console.log(data);
+            if (data) {
+                objGetInfoConstancia.info = Object.keys(new Object());
+                objGetInfoConstancia.info = data[0];
+            }
+            else
+            {
+                alert(objGetInfoConstancia.mensajeError);
             }
         },
         error: function () {
-            alert("No se puede llenar el formulario");
+            alert(objGetInfoConstancia.mensajeError);
+        }, 
+        complete: function (xhr, estatus) {
+            $('#nombrePersonal').text(objGetInfoConstancia.info.sNombre);
+            $('#numeroPersonal').text(objGetInfoConstancia.info.sNumPer);
+            $('#fechaIngreso').text((new Date(objGetInfoConstancia.info.dtFIngreso).toLocaleDateString("es-ES", options).toLocaleUpperCase()));
+            objSegConstancia.CveDep = objGetInfoConstancia.info.sNumDep;
+            $('#dependencia').text(objGetInfoConstancia.info.sDescDep);
+            objSegConstancia.NombreDep = objGetInfoConstancia.info.sDescDep;
+            $('#region').text(objGetInfoConstancia.info.sDesRegion);
+            objSegConstancia.idRegion = objGetInfoConstancia.info.sRegion;
+            objSegConstancia.Region = objGetInfoConstancia.info.sDesRegion;
+            $('#tipoPersonal').text(objGetInfoConstancia.info.sDesTPE);
+            $('#tipoContratacion').text(objGetInfoConstancia.info.sDesCont);
+            $('#categoriasueldo').text(objGetInfoConstancia.info.sDescCat);
+            $('#puesto').text(objGetInfoConstancia.info.sDesPuesto);
+            sueldo = (objGetInfoConstancia.info.sSueldo !== "0") ? objGetInfoConstancia.info.sSueldo : (objGetInfoConstancia.info.sSuelPrest !== "0") ? objGetInfoConstancia.info.sSuelPrest : "0.00";
+            console.log(sueldo);
+            valor = parseFloat(sueldo).toFixed(2);
+            letras = numeroALetras(valor, monedaMXN);
+            $('#sueldo').text("$ " + sueldo + " - " + letras + " 00/100 M.N.");
+            $('#periodo').text(objGetInfoConstancia.info.sNPeri);
+            $('#horas').text(objGetInfoConstancia.info.sHrs);
         }
     });
 }
-
-function ObtenerConstanciaTrabajoPercepciones() {
-    objGetInfoConstancia.urln = objWebRoot.route + 'api/constancias/ObtieneTrab_Perc';
-
-    $.ajax({
-        url: objGetInfoConstancia.urln,
-        type: "POST",
-        data: JSON.stringify({ NumPersonal: objUserInfo.numPersonal, TipoPersonal: objUserInfo.tipoPersonal }),
-        datatype: "application/json",
-        contentType: "application/json",
-        beforeSend: function (xhr) {
-            xhr.setRequestHeader("Authorization", "Bearer " + objWebRoot.token)
-        },
-        success: function (data) {
-             objGetInfoConstancia.info = Object.keys(new Object());
-            if (objGetInfoConstancia.info) {
-                $('#nombrePersonal').text(objGetInfoConstancia.info.sNombre);
-                $('#numeroPersonal').text(objGetInfoConstancia.info.sNumPer);
-                $('#fechaIngreso').text(Mayuscula(new Date(objGetInfoConstancia.info.dtFIngreso).toLocaleDateString("es-ES", options)));
-                objSegConstancia.CveDep = objGetInfoConstancia.info.sNumDep;
-                $('#dependencia').text(objGetInfoConstancia.info.sDescDep);
-                objSegConstancia.NombreDep = objGetInfoConstancia.info.sDescDep;
-                $('#region').text(objGetInfoConstancia.info.sDesRegion);
-                objSegConstancia.idRegion = objGetInfoConstancia.info.sRegion;
-                objSegConstancia.Region = objGetInfoConstancia.info.sDesRegion;
-                $('#tipoPersonal').text(objGetInfoConstancia.info.sDesTPE);
-                $('#tipoContratacion').text(objGetInfoConstancia.info.sDesCont);
-                $('#categoriasueldo').text(objGetInfoConstancia.info.sDescCat);
-                $('#puesto').text(objGetInfoConstancia.info.sDesPuesto);
-                let valor = parseFloat(objGetInfoConstancia.info.sSuelPrest).toFixed(2);
-                let letras = numeroALetras(valor, monedaMXN);
-                $('#sueldo').text("$ " + objGetInfoConstancia.info.sSuelPrest + " - " + letras + " 00/100 M.N.");
-                $('#periodo').text(objGetInfoConstancia.info.sNPeri);
-                $('#horas').text(objGetInfoConstancia.info.sHrs);
-            } else {
-                console.log(data);
-            }
-        },
-        error: function () {
-            alert("No se puede llenar el formulario");
-        }
-    });
-}
-
-function ObtenerConstaHorarioLaboral() {
-    objGetInfoConstancia.urln = objWebRoot.route + 'api/constancias/ObtieneServMedDep';
-
-    $.ajax({
-        url: objGetInfoConstancia.urln,
-        type: "POST",
-        data: JSON.stringify({ NumPersonal: objUserInfo.numPersonal, TipoPersonal: objUserInfo.tipoPersonal }),
-        datatype: "application/json",
-        contentType: "application/json",
-        beforeSend: function (xhr) {
-            xhr.setRequestHeader("Authorization", "Bearer " + objWebRoot.token)
-        },
-        success: function (data) {
-             objGetInfoConstancia.info = Object.keys(new Object());
-            if (objGetInfoConstancia.info) {
-                $('#nombrePersonal').text(objGetInfoConstancia.info.sNombre);
-                $('#numeroPersonal').text(objGetInfoConstancia.info.sNumPer);
-                $('#fechaIngreso').text(Mayuscula(new Date(objGetInfoConstancia.info.dtFIngreso).toLocaleDateString("es-ES", options)));
-                objSegConstancia.CveDep = objGetInfoConstancia.info.sNumDep;
-                $('#dependencia').text(objGetInfoConstancia.info.sDescDep);
-                objSegConstancia.NombreDep = objGetInfoConstancia.info.sDescDep;
-                $('#region').text(objGetInfoConstancia.info.sDesRegion);
-                objSegConstancia.idRegion = objGetInfoConstancia.info.sRegion;
-                objSegConstancia.Region = objGetInfoConstancia.info.sDesRegion;
-                $('#tipoPersonal').text(objGetInfoConstancia.info.sDesTPE);
-                $('#tipoContratacion').text(objGetInfoConstancia.info.sDesCont);
-                $('#categoriasueldo').text(objGetInfoConstancia.info.sDescCat);
-                $('#puesto').text(objGetInfoConstancia.info.sDesPuesto);
-                let valor = parseFloat(objGetInfoConstancia.info.sSuelPrest).toFixed(2);
-                let letras = numeroALetras(valor, monedaMXN);
-                $('#sueldo').text("$ " + objGetInfoConstancia.info.sSuelPrest + " - " + letras + " 00/100 M.N.");
-                $('#periodo').text(objGetInfoConstancia.info.sNPeri);
-                $('#horas').text(objGetInfoConstancia.info.sHrs);
-            } else {
-                console.log(data);
-            }
-        },
-        error: function () {
-            alert("No se puede llenar el formulario");
-        }
-    });
-}
-
-function ObtenerConstanciaAltaAfiliacionIPE() {
-    objGetInfoConstancia.urln = objWebRoot.route + 'api/constancias/ObtieneIpe';
-
-    $.ajax({
-        url: objGetInfoConstancia.urln,
-        type: "POST",
-        data: JSON.stringify({ NumPersonal: objUserInfo.numPersonal, TipoPersonal: objUserInfo.tipoPersonal }),
-        datatype: "application/json",
-        contentType: "application/json",
-        beforeSend: function (xhr) {
-            xhr.setRequestHeader("Authorization", "Bearer " + objWebRoot.token)
-        },
-        success: function (data) {
-             objGetInfoConstancia.info = Object.keys(new Object());
-            if (objGetInfoConstancia.info) {
-                $('#nombrePersonal').text(objGetInfoConstancia.info.sNombre);
-                $('#numeroPersonal').text(objGetInfoConstancia.info.sNumPer);
-                $('#fechaIngreso').text(Mayuscula(new Date(objGetInfoConstancia.info.dtFIngreso).toLocaleDateString("es-ES", options)));
-                objSegConstancia.CveDep = objGetInfoConstancia.info.sNumDep;
-                $('#dependencia').text(objGetInfoConstancia.info.sDescDep);
-                objSegConstancia.NombreDep = objGetInfoConstancia.info.sDescDep;
-                $('#region').text(objGetInfoConstancia.info.sDesRegion);
-                objSegConstancia.idRegion = objGetInfoConstancia.info.sRegion;
-                objSegConstancia.Region = objGetInfoConstancia.info.sDesRegion;
-                $('#tipoPersonal').text(objGetInfoConstancia.info.sDesTPE);
-                $('#tipoContratacion').text(objGetInfoConstancia.info.sDesCont);
-                $('#categoriasueldo').text(objGetInfoConstancia.info.sDescCat);
-                $('#puesto').text(objGetInfoConstancia.info.sDesPuesto);
-                let valor = parseFloat(objGetInfoConstancia.info.sSueldo).toFixed(2);
-                let letras = numeroALetras(valor, monedaMXN);
-                $('#sueldo').text("$ " + objGetInfoConstancia.info.sSueldo + " - " + letras + " 00/100 M.N.");
-                $('#periodo').text(objGetInfoConstancia.info.sNPeri);
-                $('#horas').text(objGetInfoConstancia.info.sHrs);
-            } else {
-                console.log(data);
-            }
-        },
-        error: function () {
-            alert("No se puede llenar el formulario");
-        }
-    });
-}
-
-function ObtenerConstanciaAltaAfiliacionMagisterio() {
-    objGetInfoConstancia.urln = objWebRoot.route + 'api/constancias/ObtieneMag';
-
-    $.ajax({
-        url: objGetInfoConstancia.urln,
-        type: "POST",
-        data: JSON.stringify({ NumPersonal: objUserInfo.numPersonal, TipoPersonal: objUserInfo.tipoPersonal }),
-        datatype: "application/json",
-        contentType: "application/json",
-        beforeSend: function (xhr) {
-            xhr.setRequestHeader("Authorization", "Bearer " + objWebRoot.token)
-        },
-        success: function (data) {
-             objGetInfoConstancia.info = Object.keys(new Object());
-            if (objGetInfoConstancia.info) {
-                $('#nombrePersonal').text(objGetInfoConstancia.info.sNombre);
-                $('#numeroPersonal').text(objGetInfoConstancia.info.sNumPer);
-                $('#fechaIngreso').text(Mayuscula(new Date(objGetInfoConstancia.info.dtFIngreso).toLocaleDateString("es-ES", options)));
-                objSegConstancia.CveDep = objGetInfoConstancia.info.sNumDep;
-                $('#dependencia').text(objGetInfoConstancia.info.sDescDep);
-                objSegConstancia.NombreDep = objGetInfoConstancia.info.sDescDep;
-                $('#region').text(objGetInfoConstancia.info.sDesRegion);
-                objSegConstancia.idRegion = objGetInfoConstancia.info.sRegion;
-                objSegConstancia.Region = objGetInfoConstancia.info.sDesRegion;
-                $('#tipoPersonal').text(objGetInfoConstancia.info.sDesTPE);
-                $('#tipoContratacion').text(objGetInfoConstancia.info.sDesCont);
-                $('#categoriasueldo').text(objGetInfoConstancia.info.sDescCat);
-                $('#puesto').text(objGetInfoConstancia.info.sDesPuesto);
-                let valor = parseFloat(objGetInfoConstancia.info.sSueldo).toFixed(2);
-                let letras = numeroALetras(valor, monedaMXN);
-                $('#sueldo').text("$ " + objGetInfoConstancia.info.sSueldo + " - " + letras + " 00/100 M.N.");
-                $('#periodo').text(objGetInfoConstancia.info.sNPeri);
-                $('#horas').text(objGetInfoConstancia.info.sHrs);
-            } else {
-                console.log(data);
-            }
-        },
-        error: function () {
-            alert("No se puede llenar el formulario");
-        }
-    });
-}
-
-function ObtenerConstanciaBajaAfiliacionIPE() {
-    objGetInfoConstancia.urln = objWebRoot.route + 'api/constancias/ObtieneOfiBajIPE';
-
-    $.ajax({
-        url: objGetInfoConstancia.urln,
-        type: "POST",
-        data: JSON.stringify({ NumPersonal: objUserInfo.numPersonal, TipoPersonal: objUserInfo.tipoPersonal }),
-        datatype: "application/json",
-        contentType: "application/json",
-        beforeSend: function (xhr) {
-            xhr.setRequestHeader("Authorization", "Bearer " + objWebRoot.token)
-        },
-        success: function (data) {
-             objGetInfoConstancia.info = Object.keys(new Object());
-            if (objGetInfoConstancia.info) {
-                $('#nombrePersonal').text(objGetInfoConstancia.info.sNombre);
-                $('#numeroPersonal').text(objGetInfoConstancia.info.sNumPer);
-                $('#fechaIngreso').text(Mayuscula(new Date(objGetInfoConstancia.info.dtFIngreso).toLocaleDateString("es-ES", options)));
-                objSegConstancia.CveDep = objGetInfoConstancia.info.sNumDep;
-                $('#dependencia').text(objGetInfoConstancia.info.sDescDep);
-                objSegConstancia.NombreDep = objGetInfoConstancia.info.sDescDep;
-                $('#region').text(objGetInfoConstancia.info.sDesRegion);
-                objSegConstancia.idRegion = objGetInfoConstancia.info.sRegion;
-                objSegConstancia.Region = objGetInfoConstancia.info.sDesRegion;
-                $('#tipoPersonal').text(objGetInfoConstancia.info.sDesTPE);
-                $('#tipoContratacion').text(objGetInfoConstancia.info.sDesCont);
-                $('#categoriasueldo').text(objGetInfoConstancia.info.sDescCat);
-                let valor = parseFloat(objGetInfoConstancia.info.sSuelPrest).toFixed(2);
-                let letras = numeroALetras(valor, monedaMXN);
-                $('#sueldo').text("$ " + objGetInfoConstancia.info.sSuelPrest + " - " + letras + " 00/100 M.N.");
-                $('#periodo').text(objGetInfoConstancia.info.sNPeri);
-                $('#horas').text(objGetInfoConstancia.info.sHrs);
-            } else {
-                console.log(data);
-            }
-        },
-        error: function () {
-            alert("No se puede llenar el formulario");
-        }
-    });
-}
-
-function ObtenerConstanciaBajaAfiliacionMagisterio() {
-    objGetInfoConstancia.urln = objWebRoot.route + 'api/constancias/ObtieneOfiBajMAG';
-
-    $.ajax({
-        url: objGetInfoConstancia.urln,
-        type: "POST",
-        data: JSON.stringify({ NumPersonal: objUserInfo.numPersonal, TipoPersonal: objUserInfo.tipoPersonal }),
-        datatype: "application/json",
-        contentType: "application/json",
-        beforeSend: function (xhr) {
-            xhr.setRequestHeader("Authorization", "Bearer " + objWebRoot.token)
-        },
-        success: function (data) {
-             objGetInfoConstancia.info = Object.keys(new Object());
-            if (objGetInfoConstancia.info) {
-                $('#nombrePersonal').text(objGetInfoConstancia.info.sNombre);
-                $('#numeroPersonal').text(objGetInfoConstancia.info.sNumPer);
-                $('#fechaIngreso').text(Mayuscula(new Date(objGetInfoConstancia.info.dtFIngreso).toLocaleDateString("es-ES", options)));
-                objSegConstancia.CveDep = objGetInfoConstancia.info.sNumDep;
-                $('#dependencia').text(objGetInfoConstancia.info.sDescDep);
-                objSegConstancia.NombreDep = objGetInfoConstancia.info.sDescDep;
-                $('#region').text(objGetInfoConstancia.info.sDesRegion);
-                objSegConstancia.idRegion = objGetInfoConstancia.info.sRegion;
-                objSegConstancia.Region = objGetInfoConstancia.info.sDesRegion;
-                $('#tipoPersonal').text(objGetInfoConstancia.info.sDesTPE);
-                $('#tipoContratacion').text(objGetInfoConstancia.info.sDesCont);
-                $('#categoriasueldo').text(objGetInfoConstancia.info.sDescCat);
-                $('#puesto').text(objGetInfoConstancia.info.sDesPuesto);
-                let valor = parseFloat(objGetInfoConstancia.info.sSuelPrest).toFixed(2);
-                let letras = numeroALetras(valor, monedaMXN);
-                $('#sueldo').text("$ " + objGetInfoConstancia.info.sSuelPrest + " - " + letras + " 00/100 M.N.");
-                $('#periodo').text(objGetInfoConstancia.info.sNPeri);
-                $('#horas').text(objGetInfoConstancia.info.sHrs);
-            } else {
-                console.log(data);
-            }
-        },
-        error: function () {
-            alert("No se puede llenar el formulario");
-        }
-    });
-}
-
-function ObtenerConstanciaVisa() {
-    objGetInfoConstancia.urln = objWebRoot.route + 'api/constancias/ObtieneVisa';
-
-    $.ajax({
-        url: objGetInfoConstancia.urln,
-        type: "POST",
-        data: JSON.stringify({ NumPersonal: objUserInfo.numPersonal, TipoPersonal: objUserInfo.tipoPersonal }),
-        datatype: "application/json",
-        contentType: "application/json",
-        beforeSend: function (xhr) {
-            xhr.setRequestHeader("Authorization", "Bearer " + objWebRoot.token)
-        },
-        success: function (data) {
-             objGetInfoConstancia.info = Object.keys(new Object());
-            if (objGetInfoConstancia.info) {
-                $('#nombrePersonal').text(objGetInfoConstancia.info.sNombre);
-                $('#numeroPersonal').text(objGetInfoConstancia.info.sNumPer);
-                $('#fechaIngreso').text(Mayuscula(new Date(objGetInfoConstancia.info.dtFIngreso).toLocaleDateString("es-ES", options)));
-                objSegConstancia.CveDep = objGetInfoConstancia.info.sNumDep;
-                $('#dependencia').text(objGetInfoConstancia.info.sDescDep);
-                objSegConstancia.NombreDep = objGetInfoConstancia.info.sDescDep;
-                $('#region').text(objGetInfoConstancia.info.sDesRegion);
-                objSegConstancia.idRegion = objGetInfoConstancia.info.sRegion;
-                objSegConstancia.Region = objGetInfoConstancia.info.sDesRegion;
-                $('#tipoPersonal').text(objGetInfoConstancia.info.sDesTPE);
-                $('#tipoContratacion').text(objGetInfoConstancia.info.sDesCont);
-                $('#categoriasueldo').text(objGetInfoConstancia.info.sDescCat);
-                $('#puesto').text(objGetInfoConstancia.info.sDesPuesto);
-                let valor = parseFloat(objGetInfoConstancia.info.sSuelPrest).toFixed(2);
-                let letras = numeroALetras(valor, monedaMXN);
-                $('#sueldo').text("$ " + objGetInfoConstancia.info.sSuelPrest + " - " + letras + " 00/100 M.N.");
-                $('#periodo').text(objGetInfoConstancia.info.sNPeri);
-                $('#horas').text(objGetInfoConstancia.info.sHrs);
-            } else {
-                console.log(data);
-            }
-        },
-        error: function () {
-            alert("No se puede llenar el formulario");
-        }
-    });
-}
-
-function ObtenerConstanciaVisaDep() {
-    objGetInfoConstancia.urln = objWebRoot.route + 'api/constancias/ObtieneVisaDep';
-
-    $.ajax({
-        url: objGetInfoConstancia.urln,
-        type: "POST",
-        data: JSON.stringify({ NumPersonal: objUserInfo.numPersonal, TipoPersonal: objUserInfo.tipoPersonal }),
-        datatype: "application/json",
-        contentType: "application/json",
-        beforeSend: function (xhr) {
-            xhr.setRequestHeader("Authorization", "Bearer " + objWebRoot.token)
-        },
-        success: function (data) {
-             objGetInfoConstancia.info = Object.keys(new Object());
-            if (objGetInfoConstancia.info) {
-                $('#nombrePersonal').text(objGetInfoConstancia.info.sNombre);
-                $('#numeroPersonal').text(objGetInfoConstancia.info.sNumPer);
-                $('#fechaIngreso').text(Mayuscula(new Date(objGetInfoConstancia.info.dtFIngreso).toLocaleDateString("es-ES", options)));
-                objSegConstancia.CveDep = objGetInfoConstancia.info.sNumDep;
-                $('#dependencia').text(objGetInfoConstancia.info.sDescDep);
-                objSegConstancia.NombreDep = objGetInfoConstancia.info.sDescDep;
-                $('#region').text(objGetInfoConstancia.info.sDesRegion);
-                objSegConstancia.idRegion = objGetInfoConstancia.info.sRegion;
-                objSegConstancia.Region = objGetInfoConstancia.info.sDesRegion;
-                $('#tipoPersonal').text(objGetInfoConstancia.info.sDesTPE);
-                $('#tipoContratacion').text(objGetInfoConstancia.info.sDesCont);
-                $('#categoriasueldo').text(objGetInfoConstancia.info.sDescCat);
-                $('#puesto').text(objGetInfoConstancia.info.sDesPuesto);
-                let valor = parseFloat(objGetInfoConstancia.info.sSuelPrest).toFixed(2);
-                let letras = numeroALetras(valor, monedaMXN);
-                $('#sueldo').text("$ " + objGetInfoConstancia.info.sSuelPrest + " - " + letras + " 00/100 M.N.");
-                $('#periodo').text(objGetInfoConstancia.info.sNPeri);
-                $('#horas').text(objGetInfoConstancia.info.sHrs);
-            } else {
-                console.log(data);
-            }
-        },
-        error: function () {
-            alert("No se puede llenar el formulario");
-        }
-    });
-}
-
-function ObtenerConstanciaPRODEP() {
-    objGetInfoConstancia.urln = objWebRoot.route + 'api/constancias/ObtienePRODep';
-
-    $.ajax({
-        url: objGetInfoConstancia.urln,
-        type: "POST",
-        data: JSON.stringify({ NumPersonal: objUserInfo.numPersonal, TipoPersonal: objUserInfo.tipoPersonal }),
-        datatype: "application/json",
-        contentType: "application/json",
-        beforeSend: function (xhr) {
-            xhr.setRequestHeader("Authorization", "Bearer " + objWebRoot.token)
-        },
-        success: function (data) {
-             objGetInfoConstancia.info = Object.keys(new Object());
-            if (objGetInfoConstancia.info) {
-                $('#nombrePersonal').text(objGetInfoConstancia.info.sNombre);
-                $('#numeroPersonal').text(objGetInfoConstancia.info.sNumPer);
-                $('#fechaIngreso').text(Mayuscula(new Date(objGetInfoConstancia.info.dtFIngreso).toLocaleDateString("es-ES", options)));
-                objSegConstancia.CveDep = objGetInfoConstancia.info.sNumDep;
-                $('#dependencia').text(objGetInfoConstancia.info.sDescDep);
-                objSegConstancia.NombreDep = objGetInfoConstancia.info.sDescDep;
-                $('#region').text(objGetInfoConstancia.info.sDesRegion);
-                objSegConstancia.idRegion = objGetInfoConstancia.info.sRegion;
-                objSegConstancia.Region = objGetInfoConstancia.info.sDesRegion;
-                $('#tipoPersonal').text(objGetInfoConstancia.info.sDesTPE);
-                $('#tipoContratacion').text(objGetInfoConstancia.info.sDesCont);
-                $('#categoriasueldo').text(objGetInfoConstancia.info.sDescCat);
-                $('#puesto').text(objGetInfoConstancia.info.sDesPuesto);
-                let valor = parseFloat(objGetInfoConstancia.info.sSuelPrest).toFixed(2);
-                let letras = numeroALetras(valor, monedaMXN);
-                $('#sueldo').text("$ " + objGetInfoConstancia.info.sSuelPrest + " - " + letras + " 00/100 M.N.");
-                $('#periodo').text(objGetInfoConstancia.info.sNPeri);
-                $('#horas').text(objGetInfoConstancia.info.sHrs);
-            } else {
-                console.log(data);
-            }
-        },
-        error: function () {
-            alert("No se puede llenar el formulario");
-        }
-    });
-}
-
-function ObtenerConstanciaCurricular() {
-    objGetInfoConstancia.urln = objWebRoot.route + 'api/constancias/ObtieneServMedDep';
-
-    $.ajax({
-        url: objGetInfoConstancia.urln,
-        type: "POST",
-        data: JSON.stringify({ NumPersonal: objUserInfo.numPersonal, TipoPersonal: objUserInfo.tipoPersonal }),
-        datatype: "application/json",
-        contentType: "application/json",
-        beforeSend: function (xhr) {
-            xhr.setRequestHeader("Authorization", "Bearer " + objWebRoot.token)
-        },
-        success: function (data) {
-             objGetInfoConstancia.info = Object.keys(new Object());
-            if (objGetInfoConstancia.info) {
-                $('#nombrePersonal').text(objGetInfoConstancia.info.sNombre);
-                $('#numeroPersonal').text(objGetInfoConstancia.info.sNumPer);
-                $('#fechaIngreso').text(Mayuscula(new Date(objGetInfoConstancia.info.dtFIngreso).toLocaleDateString("es-ES", options)));
-                objSegConstancia.CveDep = objGetInfoConstancia.info.sNumDep;
-                $('#dependencia').text(objGetInfoConstancia.info.sDescDep);
-                objSegConstancia.NombreDep = objGetInfoConstancia.info.sDescDep;
-                $('#region').text(objGetInfoConstancia.info.sDesRegion);
-                objSegConstancia.idRegion = objGetInfoConstancia.info.sRegion;
-                objSegConstancia.Region = objGetInfoConstancia.info.sDesRegion;
-                $('#tipoPersonal').text(objGetInfoConstancia.info.sDesTPE);
-                $('#tipoContratacion').text(objGetInfoConstancia.info.sDesCont);
-                $('#categoriasueldo').text(objGetInfoConstancia.info.sDescCat);
-                $('#puesto').text(objGetInfoConstancia.info.sDesPuesto);
-                $('#sueldo').text(objGetInfoConstancia.info.sSuelPrest);
-
-            } else {
-                console.log(data);
-            }
-        },
-        error: function () {
-            alert("No se puede llenar el formulario");
-        }
-    });
-}
-
-function ObtenerHojaDeServicios() {
-    objGetInfoConstancia.urln = objWebRoot.route + 'api/constancias/ObtieneServMedDep';
-
-    $.ajax({
-        url: objGetInfoConstancia.urln,
-        type: "POST",
-        data: JSON.stringify({ NumPersonal: objUserInfo.numPersonal, TipoPersonal: objUserInfo.tipoPersonal }),
-        datatype: "application/json",
-        contentType: "application/json",
-        beforeSend: function (xhr) {
-            xhr.setRequestHeader("Authorization", "Bearer " + objWebRoot.token)
-        },
-        success: function (data) {
-            var infoConstancia = JSON.parse(data);
-            if (objGetInfoConstancia.info) {
-                $('#nombrePersonal').text(objGetInfoConstancia.info.sNombre);
-                $('#numeroPersonal').text(objGetInfoConstancia.info.sNumPer);
-                $('#fechaIngreso').text(Mayuscula(new Date(objGetInfoConstancia.info.dtFIngreso).toLocaleDateString("es-ES", options)));
-                objSegConstancia.CveDep = objGetInfoConstancia.info.sNumDep;
-                $('#dependencia').text(objGetInfoConstancia.info.sDescDep);
-                objSegConstancia.NombreDep = objGetInfoConstancia.info.sDescDep;
-                $('#region').text(objGetInfoConstancia.info.sDesRegion);
-                objSegConstancia.idRegion = objGetInfoConstancia.info.sRegion;
-                objSegConstancia.Region = objGetInfoConstancia.info.sDesRegion;
-                $('#tipoPersonal').text(objGetInfoConstancia.info.sDesTPE);
-                $('#tipoContratacion').text(objGetInfoConstancia.info.sDesCont);
-                $('#categoriasueldo').text(objGetInfoConstancia.info.sDescCat);
-                $('#puesto').text(objGetInfoConstancia.info.sDesPuesto);
-                $('#sueldo').text(objGetInfoConstancia.info.sSuelPrest);
-            } else {
-                console.log(data);
-            }
-        },
-        error: function () {
-            alert("No se puede llenar el formulario");
-        }
-    });
-}
-
-function ObtenerContanciaJubicacion() {
-    objGetInfoConstancia.urln = objWebRoot.route + 'api/constancias/ObtieneServMedDep';
-
-    $.ajax({
-        url: objGetInfoConstancia.urln,
-        type: "POST",
-        data: JSON.stringify({ NumPersonal: objUserInfo.numPersonal, TipoPersonal: objUserInfo.tipoPersonal }),
-        datatype: "application/json",
-        contentType: "application/json",
-        beforeSend: function (xhr) {
-            xhr.setRequestHeader("Authorization", "Bearer " + objWebRoot.token)
-        },
-        success: function (data) {
-            var infoConstancia = JSON.parse(data);
-            if (objGetInfoConstancia.info) {
-                $('#nombrePersonal').text(objGetInfoConstancia.info.sNombre);
-                $('#numeroPersonal').text(objGetInfoConstancia.info.sNumPer);
-                $('#fechaIngreso').text(Mayuscula(new Date(objGetInfoConstancia.info.dtFIngreso).toLocaleDateString("es-ES", options)));
-                objSegConstancia.CveDep = objGetInfoConstancia.info.sNumDep;
-                $('#dependencia').text(objGetInfoConstancia.info.sDescDep);
-                $('#region').text(objGetInfoConstancia.info.sDesRegion);
-                objSegConstancia.idRegion = objGetInfoConstancia.info.sRegion;
-                objSegConstancia.Region = objGetInfoConstancia.info.sDesRegion;
-                $('#tipoPersonal').text(objGetInfoConstancia.info.sDesTPE);
-                $('#tipoContratacion').text(objGetInfoConstancia.info.sDesCont);
-                $('#categoriasueldo').text(objGetInfoConstancia.info.sDescCat);
-                $('#puesto').text(objGetInfoConstancia.info.sDesPuesto);
-
-                $('#sueldo').text(objGetInfoConstancia.info.sSuelPrest);
-            } else {
-                console.log(data);
-            }
-        },
-        error: function () {
-            alert("No se puede llenar el formulario");
-        }
-    });
-}
-
 
 /*** Funcion de guardar solcitud de constancia ***/
 
@@ -788,7 +259,8 @@ function GuardarSolicitudConstancia() {
             console.log(data);
             console.log(data.CodeResponse);
             if (data.CodeResponse === 0) {
-                $('#solicitudModal').modal('show');
+                window.alert("Solicitud completa.")
+                window.location.href = objWebRoot.route + 'Constancias/Solicitud/SolicitudConstancia';
             } else {
                 alert("Hubo un error al solcitar la constancia.");
             }
@@ -802,11 +274,6 @@ function GuardarSolicitudConstancia() {
 /***************************
  * Funciones para utileria *
  **************************/
-
-
-function Mayuscula(string) {
-    return string.toUpperCase();
-}
 
 /** Rutina para convertir numero a letras**/
 var numeroALetras = (function () {

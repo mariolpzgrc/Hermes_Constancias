@@ -6,6 +6,7 @@
     objtr = { elementobase: Object.keys(new Object()) },
     objSeleccion = { elementos: Object.keys(new Object()), indice: 0, total: 0 },
     objElementos = { elementospaginaactual: 0 },
+    objConstanciasSeguimiento = { urln: "", info: Object.keys(new Object()), exportar: new Array(), descarga: Object.keys(new Object()) },
     objPaginacion = {
         opciones: {
             totalPages: 1,
@@ -21,13 +22,15 @@
                 ObtenerSeguimientosConstancia(page);
             }
         }
-    },
-    objConstanciasSeguimiento = { urln: "", info: Object.keys(new Object()), exportar: new Array(), descarga: Object.keys(new Object()) };
+    };
+    
 
 
 $(document).ready(function () {
     objUser.username = $("#user").text();
     objUser.usersession = $('#FolioSession').val();
+    objWebRoot.token = $('#TokenWebApi').val();
+    console.log(objWebRoot.token);
     ObtenerTipodePersonalByUser(objUser.username);
     ObtenerSeguimientosConstancia(1);
 });
@@ -145,9 +148,7 @@ function validarConstancia() {
 }
 
 function ObtenerSeguimientosConstancia(pagina) {
-    console.log("entro aqui,", pagina);
     objConstanciasSeguimiento.urln = objWebRoot.route + 'api/constancias/GET_HER_SolicitudConstancia';
-
     $.ajax({
         url: objConstanciasSeguimiento.urln,
         type: 'POST',
@@ -163,7 +164,6 @@ function ObtenerSeguimientosConstancia(pagina) {
             $('#Constacias-historico tbody').fadeOut(100, "linear");
         },
         success: function (data) {
-            console.log(data);
             objConstanciasSeguimiento.info = Object.keys(new Object());
             objConstanciasSeguimiento.info = data;
         },
@@ -185,9 +185,7 @@ function ObtenerSeguimientosConstancia(pagina) {
                 $('#contenedor-paginacion ul').empty();
                 $('#paginacion-costancias').twbsPagination('destroy');
             }
-
             ProcesaSeguimiento();
-
             $('#contiene-cargador .loader').removeClass('d-none').addClass('d-none');
             $('#Constacias-historico tbody').fadeIn(500, "linear");
         }

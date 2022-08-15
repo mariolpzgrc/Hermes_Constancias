@@ -91,6 +91,10 @@ namespace Hermes2018.Models
             get
             {
                 List<TipoPersonalCustom> tipos = new List<TipoPersonalCustom>();
+                if (sTipPer.Contains("ADMINISTRATIVO, TECNICO"))
+                {
+                    sTipPer = sTipPer.Replace("ADMINISTRATIVO, TECNICO", "ADMINISTRATIVO TECNICO");
+                }
                 string[] tiposP = sTipPer.Split(",");
                 string[] tipoValue = null;
                 TipoPersonalCustom tip = null;
@@ -100,6 +104,10 @@ namespace Hermes2018.Models
                     tip = new TipoPersonalCustom();
                     tip.Id = Convert.ToInt32(tipoValue[0].Trim());
                     tip.TipoPersonal = Convert.ToString(tipoValue[1].Trim());
+                    if (tip.TipoPersonal.Contains("ADMINISTRATIVO TECNICO")) 
+                    {
+                        tip.TipoPersonal = tip.TipoPersonal.Replace("ADMINISTRATIVO TECNICO", "ADMINISTRATIVO, TECNICO");
+                    }
                     tipos.Add(tip);
                 }
                 return tipos;
