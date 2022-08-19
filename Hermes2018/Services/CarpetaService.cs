@@ -51,8 +51,8 @@ namespace Hermes2018.Services
         public async Task<bool> ExisteCarpetaAsync(string nombreCarpeta, int infoUsuarioId)
         {
             var existeQuery = _context.HER_Carpeta
-                .Where(x => x.HER_Nombre == nombreCarpeta 
-                         && x.HER_InfoUsuarioId == infoUsuarioId 
+                .Where(x => x.HER_Nombre == nombreCarpeta
+                         && x.HER_InfoUsuarioId == infoUsuarioId
                          && x.HER_Nivel == ConstNivelCarpeta.NivelN1)
                 .AsNoTracking()
                 .AsQueryable();
@@ -83,7 +83,7 @@ namespace Hermes2018.Services
         public async Task<bool> CarpetaTieneDocumentosAsociados(int carpetaId, int infoUsuarioId)
         {
             var tieneEnvioQuery = _context.HER_Envio
-                .Where(x => x.HER_CarpetaId == carpetaId 
+                .Where(x => x.HER_CarpetaId == carpetaId
                          && x.HER_Carpeta.HER_InfoUsuarioId == infoUsuarioId)
                 .Select(x => x.HER_CarpetaId)
                 .AsQueryable();
@@ -119,9 +119,9 @@ namespace Hermes2018.Services
         public async Task<HER_Carpeta> ObtenerCarpetaAsync(int infoUsuarioId, int carpetaId)
         {
             var carpetaQuery = _context.HER_Carpeta
-                .Where(x => x.HER_InfoUsuarioId == infoUsuarioId 
-                         && x.HER_CarpetaId == carpetaId 
-                         && x.HER_Nivel == ConstNivelCarpeta.NivelN1)
+                .Where(x => x.HER_InfoUsuarioId == infoUsuarioId
+                         && x.HER_CarpetaId == carpetaId
+                         )
                 .AsNoTracking()
                 .AsQueryable();
 
@@ -133,7 +133,7 @@ namespace Hermes2018.Services
 
             //Carpeta
             var carpetaQuery = _context.HER_Carpeta
-                .Where(x => x.HER_CarpetaId == modelo.CarpetaId 
+                .Where(x => x.HER_CarpetaId == modelo.CarpetaId
                          && x.HER_InfoUsuarioId == infoUsuarioId
                          && x.HER_Nivel == ConstNivelCarpeta.NivelN1)
                 .AsQueryable();
@@ -148,7 +148,7 @@ namespace Hermes2018.Services
                 _context.HER_Carpeta.Update(carpeta).State = EntityState.Modified;
                 result = await _context.SaveChangesAsync();
             }
-            
+
             return (result > 0) ? true : false;
         }
         public async Task<bool> BorrarCarpetaAsync(BorrarCarpetaViewModel modelo, int infoUsuarioId)
@@ -183,13 +183,14 @@ namespace Hermes2018.Services
                         .Where(x => x.HER_InfoUsuario.HER_InfoUsuarioId == infoUsuarioId
                                  && x.HER_InfoUsuario.HER_Activo == true
                                  && x.HER_CarpetaPadreId == carpetaId
-                                 && x.HER_Nivel == ConstNivelCarpeta.NivelN2)
+                                )
                          .AsNoTracking()
                          .Select(x => new SubcarpetaViewModel
                          {
                              SubcarpetaId = x.HER_CarpetaId,
                              Nombre = x.HER_Nombre,
                              Fecha = x.HER_FechaRegistro.ToString("dd/MM/yyyy HH:mm 'hrs.'", _cultureEs),
+                             Nivel = x.HER_Nivel
                          })
                          .OrderBy(x => x.Nombre)
                         .AsQueryable();
@@ -199,13 +200,13 @@ namespace Hermes2018.Services
 
             return listadoSubcarpetas;
         }
-        public async Task<bool> ExisteSubcarpetaAsync(string nombreSubcarpeta, int infoUsuarioId, int carpetaId)
+        public async Task<bool> ExisteSubcarpetaAsync(string nombreSubcarpeta, int infoUsuarioId, int carpetaId, int nivel)
         {
             var existeQuery = _context.HER_Carpeta
                 .Where(x => x.HER_Nombre == nombreSubcarpeta
                          && x.HER_InfoUsuarioId == infoUsuarioId
                          && x.HER_CarpetaPadreId == (int)carpetaId
-                         && x.HER_Nivel == ConstNivelCarpeta.NivelN2)
+                         && x.HER_Nivel == nivel)
                 .AsNoTracking()
                 .AsQueryable();
 
@@ -216,20 +217,19 @@ namespace Hermes2018.Services
             var existeQuery = _context.HER_Carpeta
                 .Where(x => x.HER_CarpetaId == subcarpetaId
                          && x.HER_InfoUsuarioId == infoUsuarioId
-                         && x.HER_CarpetaPadreId == (int)carpetaId
-                         && x.HER_Nivel == ConstNivelCarpeta.NivelN2)
+                         && x.HER_CarpetaPadreId == (int)carpetaId)
                 .AsNoTracking()
                 .AsQueryable();
 
             return await existeQuery.AnyAsync();
         }
-        public async Task<bool> SubcarpetaTieneDocumentosAsociados(int subcarpetaId, int infoUsuarioId, int carpetaId)
+        public async Task<bool> SubcarpetaTieneDocumentosAsociados(int subcarpetaId, int infoUsuarioId, int carpetaId, int nivel)
         {
             var tieneEnvioQuery = _context.HER_Envio
                 .Where(x => x.HER_Carpeta.HER_CarpetaId == subcarpetaId
                          && x.HER_Carpeta.HER_InfoUsuarioId == infoUsuarioId
                          && x.HER_Carpeta.HER_CarpetaPadreId == carpetaId
-                         && x.HER_Carpeta.HER_Nivel == ConstNivelCarpeta.NivelN2)
+                         && x.HER_Carpeta.HER_Nivel == nivel)
                 .Select(x => x.HER_CarpetaId)
                 .AsQueryable();
 
@@ -244,32 +244,34 @@ namespace Hermes2018.Services
             var respuesta = await tieneEnvioQuery.AnyAsync() || await tieneEnvioRecepcionQuery.AnyAsync();
             return respuesta;
         }
-        public async Task<bool> GuardarSubcarpetasAsync(CrearSubcarpetaViewModel modelo, int infoUsuarioId, int carpetaId)
+        public async Task<bool> GuardarSubcarpetasAsync(CrearSubcarpetaViewModel modelo, int infoUsuarioId, int carpetaId, int nivel)
         {
             int result = 0;
 
             //SubCarpeta
-            var subcarpeta = new HER_Carpeta()
+            if (nivel <= ConstNivelCarpeta.MaxNivel)
             {
-                HER_Nombre = modelo.NombreSubcarpeta,
-                HER_InfoUsuarioId = infoUsuarioId,
-                HER_FechaRegistro = DateTime.Now,
-                HER_FechaActualizacion = DateTime.Now,
-                HER_Nivel = ConstNivelCarpeta.NivelN2,
-                HER_CarpetaPadreId = (int)carpetaId
-            };
+                var subcarpeta = new HER_Carpeta()
+                {
+                    HER_Nombre = modelo.NombreSubcarpeta,
+                    HER_InfoUsuarioId = infoUsuarioId,
+                    HER_FechaRegistro = DateTime.Now,
+                    HER_FechaActualizacion = DateTime.Now,
+                    HER_Nivel = (int)nivel,
+                    HER_CarpetaPadreId = (int)carpetaId
+                };
 
-            _context.HER_Carpeta.Add(subcarpeta);
-            result = await _context.SaveChangesAsync();
+                _context.HER_Carpeta.Add(subcarpeta);
+                result = await _context.SaveChangesAsync();
+            }
 
             return result > 0 ? true : false;
         }
         public async Task<HER_Carpeta> ObtenerSubcarpetaAsync(int infoUsuarioId, int subcarpetaId)
         {
             var subcarpetaQuery = _context.HER_Carpeta
-                .Where(x => x.HER_InfoUsuarioId == infoUsuarioId 
-                         && x.HER_CarpetaId == subcarpetaId 
-                         && x.HER_Nivel == ConstNivelCarpeta.NivelN2)
+                .Where(x => x.HER_InfoUsuarioId == infoUsuarioId
+                         && x.HER_CarpetaId == subcarpetaId)
                 .Include(x => x.HER_CarpetaPadre)
                 .AsNoTracking()
                 .AsQueryable();
@@ -284,7 +286,7 @@ namespace Hermes2018.Services
             var carpetaQuery = _context.HER_Carpeta
                 .Where(x => x.HER_CarpetaId == modelo.SubcarpetaId
                          && x.HER_InfoUsuarioId == infoUsuarioId
-                         && x.HER_Nivel == ConstNivelCarpeta.NivelN2)
+                         && x.HER_Nivel == modelo.NivelSubcarpeta)
                 .AsQueryable();
 
             var carpeta = await carpetaQuery.FirstOrDefaultAsync();
@@ -309,7 +311,7 @@ namespace Hermes2018.Services
                 .Where(x => x.HER_CarpetaId == modelo.SubcarpetaId
                          && x.HER_CarpetaPadreId == modelo.CarpetaPadreId
                          && x.HER_InfoUsuarioId == infoUsuarioId
-                         && x.HER_Nivel == ConstNivelCarpeta.NivelN2)
+                         && x.HER_Nivel == modelo.NivelSubcarpeta)
                 .AsQueryable();
 
             var subcarpeta = await subcarpetaQuery.FirstOrDefaultAsync();
@@ -325,8 +327,6 @@ namespace Hermes2018.Services
         public async Task<List<CarpetasJsonMdel>> ListadoCarpetasPorUsuarioAsync(string userName)
         {
             List<CarpetasJsonMdel> listadoCarpetas = new List<CarpetasJsonMdel>();
-            List<SubcarpetasJsonModel> listadoSubcarpetas = new List<SubcarpetasJsonModel>();
-
             var carpetasQuery = _context.HER_Carpeta
                         .Where(x => x.HER_InfoUsuario.HER_UserName == userName
                                  && x.HER_InfoUsuario.HER_Activo == true)
@@ -338,27 +338,15 @@ namespace Hermes2018.Services
                 .Where(x => x.HER_Nivel == ConstNivelCarpeta.NivelN1)
                 .ToListAsync();
 
-            List<HER_Carpeta> subcarpetas = await carpetasQuery
-                .Where(x => x.HER_Nivel == ConstNivelCarpeta.NivelN2)
-                .ToListAsync();
-
             foreach (var carpeta in carpetas)
             {
-                listadoSubcarpetas = subcarpetas
-                    .Where(x => x.HER_CarpetaPadreId == carpeta.HER_CarpetaId)
-                    .Select(y => new SubcarpetasJsonModel() {
-                        SubcarpetaId = y.HER_CarpetaId,
-                        Nombre = y.HER_Nombre,
-                    })
-                    .OrderBy(y => y.Nombre)
-                    .ToList();
-
                 listadoCarpetas.Add(new CarpetasJsonMdel()
                 {
                     CarpetaId = carpeta.HER_CarpetaId,
                     Nombre = carpeta.HER_Nombre,
-                    Subcarpetas = listadoSubcarpetas
+                    Subcarpetas = ObtenerSubcarpetasHijas(carpeta.HER_CarpetaId, userName, carpeta.HER_Nivel)
                 });
+
             }
 
             return listadoCarpetas;
@@ -455,21 +443,65 @@ namespace Hermes2018.Services
         {
             var carpetaQuery = _context.HER_Carpeta
                 .Where(x => x.HER_CarpetaId == carpetaId
-                         && x.HER_InfoUsuario.HER_UserName == username 
+                         && x.HER_InfoUsuario.HER_UserName == username
                          && x.HER_InfoUsuario.HER_Activo == true)
                 .AsNoTracking()
-                .Select(x => new DetallesCarpetaViewModel() {
+                .Select(x => new DetallesCarpetaViewModel()
+                {
                     CarpetaId = x.HER_CarpetaId,
                     Nombre = x.HER_Nombre,
                     Fecha_Creacion = x.HER_FechaRegistro.ToString("dd/MM/yyyy HH:mm 'hrs.'", _cultureEs),
                     Fecha_Modificacion = x.HER_FechaActualizacion.ToString("dd/MM/yyyy HH:mm 'hrs.'", _cultureEs),
-                    Nivel = (x.HER_Nivel == ConstNivelCarpeta.NivelN1)? ConstNivelCarpeta.NivelT1 : ConstNivelCarpeta.NivelT2,
-                    CarpetaPadre = (x.HER_CarpetaPadreId != null)? x.HER_CarpetaPadre.HER_Nombre : string.Empty,
+                    Nivel = (x.HER_Nivel == ConstNivelCarpeta.NivelN1) ? ConstNivelCarpeta.NivelT1 : ConstNivelCarpeta.NivelT2,
+                    CarpetaPadre = (x.HER_CarpetaPadreId != null) ? x.HER_CarpetaPadre.HER_Nombre : string.Empty,
                     CarpetaPadreId = x.HER_CarpetaPadreId
                 })
                 .AsQueryable();
 
             return await carpetaQuery.FirstOrDefaultAsync();
+        }
+
+        public async Task<HER_Carpeta> ObtenerNivelSubCarpetaAsync(int infoUsuarioId, int carpetaId)
+        {
+            var subcarpetaQuery = _context.HER_Carpeta
+                .Where(x => x.HER_InfoUsuarioId == infoUsuarioId
+                && x.HER_CarpetaId == carpetaId).AsNoTracking()
+                .AsQueryable();
+
+            return await subcarpetaQuery.FirstOrDefaultAsync();
+        }
+
+        public List<SubcarpetasJsonModel> ObtenerSubcarpetasHijas(int carpetaPadre, string usuario, int nivel)
+        {
+            List<SubcarpetasJsonModel> listadoSubcarpetas = new List<SubcarpetasJsonModel>();
+            var nivelHija = nivel + 1;
+            var carpetasQuery = _context.HER_Carpeta
+                    .Where(x => x.HER_InfoUsuario.HER_UserName == usuario
+                             && x.HER_InfoUsuario.HER_Activo == true)
+                    .OrderBy(x => x.HER_Nombre)
+                    .AsNoTracking()
+                    .AsQueryable();
+
+            List<HER_Carpeta> subcarpetas = carpetasQuery
+                .Where(x => x.HER_Nivel == nivelHija)
+                .ToList();
+            if (nivelHija <= ConstNivelCarpeta.MaxNivel)
+            {
+                foreach (var subcarpeta in subcarpetas)
+                {
+                    listadoSubcarpetas = subcarpetas
+                        .Where(x => x.HER_CarpetaPadreId == carpetaPadre)
+                        .Select(y => new SubcarpetasJsonModel()
+                        {
+                            SubcarpetaId = y.HER_CarpetaId,
+                            Nombre = y.HER_Nombre,
+                            Subcarpetas = ObtenerSubcarpetasHijas(y.HER_CarpetaId, usuario, y.HER_Nivel) 
+                        })
+                        .OrderBy(y => y.Nombre)
+                        .ToList();
+                }
+            }
+            return listadoSubcarpetas;
         }
     }
 }

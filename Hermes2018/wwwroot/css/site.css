@@ -1120,7 +1120,7 @@ input.form-control-sm::-webkit-input-placeholder {
 	height: auto;
 	max-height: 500px;
 	overflow-y: visible;
-	overflow-x: hidden;
+	overflow-x: visible;
 }
 
 #contiene-arbol-carpetas .jstree-anchor {

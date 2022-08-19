@@ -22,10 +22,10 @@ namespace Hermes2018.Services
 
         //Subcarpetas
         Task<List<SubcarpetaViewModel>> ObtenerSubcarpetasAsync(int infoUsuarioId, int carpetaId);
-        Task<bool> ExisteSubcarpetaAsync(string nombreSubcarpeta, int infoUsuarioId, int carpetaId);
+        Task<bool> ExisteSubcarpetaAsync(string nombreSubcarpeta, int infoUsuarioId, int carpetaId, int nivel);
         Task<bool> ExisteSubcarpetaPorIdAsync(int subcarpetaId, int infoUsuarioId, int carpetaId);
-        Task<bool> SubcarpetaTieneDocumentosAsociados(int subcarpetaId, int infoUsuarioId, int carpetaId);
-        Task<bool> GuardarSubcarpetasAsync(CrearSubcarpetaViewModel modelo, int infoUsuarioId, int carpetaId);
+        Task<bool> SubcarpetaTieneDocumentosAsociados(int subcarpetaId, int infoUsuarioId, int carpetaId, int nivel);
+        Task<bool> GuardarSubcarpetasAsync(CrearSubcarpetaViewModel modelo, int infoUsuarioId, int carpetaId, int nivel);
         Task<HER_Carpeta> ObtenerSubcarpetaAsync(int infoUsuarioId, int subcarpetaId);
         Task<bool> ActualizarSubcarpetaAsync(EditarSubcarpetaViewModel modelo, int infoUsuarioId);
         Task<bool> BorrarSubcarpetaAsync(BorrarSubcarpetaViewModel modelo, int infoUsuarioId);
@@ -35,5 +35,6 @@ namespace Hermes2018.Services
         Task<bool> MoverDocumentosEnviadosAsync(MoverDocumentoJsonModel solicitud);
         //--
         Task<DetallesCarpetaViewModel> ObtenerDetallesCarpetaAsync(int carpetaId, string username);
+        Task<HER_Carpeta> ObtenerNivelSubCarpetaAsync(int infoUsuarioId, int carpetaId);
     }
 }

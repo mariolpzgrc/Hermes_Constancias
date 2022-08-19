@@ -55,7 +55,8 @@ namespace Hermes2018.Areas.Identity.Pages.Subcarpetas
                     SubcarpetaId = subcarpeta.HER_CarpetaId,
                     NombreSubcarpeta = subcarpeta.HER_Nombre,
                     CarpetaPadreId = subcarpeta.HER_CarpetaPadreId,
-                    CarpetaPadre_Nombre = subcarpeta.HER_CarpetaPadre.HER_Nombre
+                    CarpetaPadre_Nombre = subcarpeta.HER_CarpetaPadre.HER_Nombre,
+                    NivelSubcarpeta = subcarpeta.HER_Nivel
                 };
             }
 
@@ -66,7 +67,7 @@ namespace Hermes2018.Areas.Identity.Pages.Subcarpetas
         {
             if (ModelState.IsValid)
             {
-                Existe = await _carpetaService.ExisteSubcarpetaAsync(Editar.NombreSubcarpeta, InfoUsuarioId, (int)Editar.CarpetaPadreId);
+                Existe = await _carpetaService.ExisteSubcarpetaAsync(Editar.NombreSubcarpeta, InfoUsuarioId, (int)Editar.CarpetaPadreId, (int)Editar.NivelSubcarpeta);
                 //-
                 var result = false;
                 if (!Existe)

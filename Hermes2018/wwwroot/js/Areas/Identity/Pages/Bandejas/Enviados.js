@@ -1284,6 +1284,21 @@ function ProcesaCarpetas() {
         $.each(value.Subcarpetas, function (i, v) {
             $('#contiene-carpetas').append($('<button type="button" class="carpeta-seleccion dropdown-item hover-bold btn btn-link con-padding-rl-6 con-padding-l-14 font-dark-gray" data-id="' + v.SubcarpetaId + '"><div>' + v.Nombre + '</div></button>'));
             $('#contiene-carpetas').append($('<div class="dropdown-divider sin-margen"></div>'));
+
+            $.each(v.Subcarpetas, function (i3, v3) {
+                $('#contiene-carpetas').append($('<button type="button" class="carpeta-seleccion dropdown-item hover-bold btn btn-link con-padding-rl-6 con-padding-l-22 font-dark-gray" data-id="' + v3.SubcarpetaId + '"><div>' + v3.Nombre + '</div></button>'));
+                $('#contiene-carpetas').append($('<div class="dropdown-divider sin-margen"></div>'));
+
+                $.each(v3.Subcarpetas, function (i4, v4) {
+                    $('#contiene-carpetas').append($('<button type="button" class="carpeta-seleccion dropdown-item hover-bold btn btn-link con-padding-rl-6 con-padding-l-30 font-dark-gray" data-id="' + v4.SubcarpetaId + '"><div>' + v4.Nombre + '</div></button>'));
+                    $('#contiene-carpetas').append($('<div class="dropdown-divider sin-margen"></div>'));
+
+                    $.each(v4.Subcarpetas, function (i5, v5) {
+                        $('#contiene-carpetas').append($('<button type="button" class="carpeta-seleccion dropdown-item hover-bold btn btn-link con-padding-rl-6 con-padding-l-38 font-dark-gray" data-id="' + v5.SubcarpetaId + '"><div>' + v5.Nombre + '</div></button>'));
+                        $('#contiene-carpetas').append($('<div class="dropdown-divider sin-margen"></div>'));
+                    });
+                });
+            });
         });
     });
 }

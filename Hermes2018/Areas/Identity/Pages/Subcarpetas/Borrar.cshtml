@@ -32,12 +32,11 @@
                     <div class="row">
                         <div class="col-12">
                             <div asp-validation-summary="ModelOnly" class="text-danger error-list-clean"></div>
-
                             <input asp-for="InfoUsuarioId" class="sin-indicador" />
                             <input asp-for="Borrar.SubcarpetaId" class="sin-indicador" />
                             <input asp-for="Borrar.CarpetaPadreId" class="sin-indicador" />
                             <input asp-for="Borrar.NombreSubcarpeta" class="sin-indicador" />
-
+                            <input asp-for="Borrar.NivelSubcarpeta" class="sin-indicador" />
                             <dl class="">
                                 <dt class="">
                                     @Html.DisplayNameFor(x => x.Borrar.NombreSubcarpeta)

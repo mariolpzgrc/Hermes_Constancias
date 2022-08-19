@@ -106,7 +106,7 @@ namespace Hermes2018.Helpers
         public const int TipoN2 = 2;
         public const string TipoT2 = "Secundaria";
     }
-    public class ConstEstadoArea 
+    public class ConstEstadoArea
     {
         public const int EstadoN1 = 1;
         public const string EstadoT1 = "Activa";
@@ -192,8 +192,8 @@ namespace Hermes2018.Helpers
         public const string TipoTS1 = "Editor";
         public const string TipoTS2 = "Revisor";
 
-        public const int TipoN1 = 1; 
-        public const int TipoN2 = 2; 
+        public const int TipoN1 = 1;
+        public const int TipoN2 = 2;
     }
     public class ConstTipoDocumento
     {
@@ -317,7 +317,7 @@ namespace Hermes2018.Helpers
     {
         public const string TipoDestinatarioT1 = "Para";
         public const string TipoDestinatarioT2 = "Con Copia Para";
-        
+
         public const int TipoDestinatarioN1 = 1;
         public const int TipoDestinatarioN2 = 2;
     }
@@ -401,7 +401,7 @@ namespace Hermes2018.Helpers
         public const int ConstTipoVistaHttpN1 = 1;
 
         public const string ConstTipoVistaHttpT2 = "POST";
-        public const int ConstTipoVistaHttpN2 = 2; 
+        public const int ConstTipoVistaHttpN2 = 2;
     }
     public class ConstHistorico
     {
@@ -433,8 +433,19 @@ namespace Hermes2018.Helpers
         public const string NivelT1 = "Carpeta";
         public const int NivelN1 = 1;
 
-        public const string NivelT2 = "Subcarpeta";
+        public const string NivelT2 = "Subcarpeta Nivel 2";
         public const int NivelN2 = 2;
+
+        public const string NivelT3 = "Subcarpeta Nivel 3";
+        public const int NivelN3 = 3;
+
+        public const string NivelT4 = "Subcarpeta Nivel 4";
+        public const int NivelN4 = 4;
+
+        public const string NivelT5 = "Subcarpeta Nivel 5";
+        public const int NivelN5 = 5;
+
+        public const int MaxNivel = 5;
     }
     public class ConstColor
     {
@@ -509,7 +520,7 @@ namespace Hermes2018.Helpers
         public static string[] PropiedadesCorreo = new string[] { Propiedad9, Propiedad10, Propiedad11, Propiedad12 };
         public static string[] PropiedadesAviso = new string[] { Propiedad13, Propiedad14, Propiedad15 };
 
-        public static string[] PropiedadesIdentidad= new string[] { Propiedad1, Propiedad4 };
+        public static string[] PropiedadesIdentidad = new string[] { Propiedad1, Propiedad4 };
         public static string[] PropiedadesAcceso = new string[] { Propiedad5, Propiedad6, Propiedad7, Propiedad8, Propiedad9, Propiedad10, Propiedad11, Propiedad12 };
         public static string[] PropiedadesGeneral = new string[] { Propiedad13, Propiedad14, Propiedad15 };
 

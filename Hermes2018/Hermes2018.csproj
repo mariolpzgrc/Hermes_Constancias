@@ -408,6 +408,7 @@
     <Content Remove="Areas\Identity\Pages\Constancias\Solicitud\SolicitudMasiva.cshtml" />
     <Content Remove="compilerconfig.json" />
     <Content Remove="wwwroot\js\Areas\Identity\Pages\Areas\Buscar.min.js" />
+    <Content Remove="wwwroot\js\Areas\Identity\Pages\Constancias\ResumenConstancia\Resumen.min.js" />
     <Content Remove="wwwroot\js\descargaPdf.min.js" />
     <Content Remove="wwwroot\lib\dropzone\dist\dropzone.min.js" />
   </ItemGroup>
@@ -416,6 +417,7 @@
     <_ContentIncludedByDefault Remove="Areas\Identity\Pages\Constancias\Solicitud\SolicitudMasiva.cshtml" />
     <_ContentIncludedByDefault Remove="wwwroot\css\Areas\Identity\Pages\Administracion\Usuarios\Crear.min.css" />
     <_ContentIncludedByDefault Remove="wwwroot\js\Areas\Identity\Pages\Areas\Buscar.min.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\js\Areas\Identity\Pages\Constancias\ResumenConstancia\Resumen.min.js" />
     <_ContentIncludedByDefault Remove="wwwroot\js\descargaPdf.min.js" />
     <_ContentIncludedByDefault Remove="wwwroot\lib\dropzone\dist\dropzone.min.js" />
   </ItemGroup>
@@ -425,6 +427,7 @@
     <None Include="compilerconfig.json" />
     <None Include="wwwroot\js\Areas\Identity\Pages\Areas\Buscar.min.js" />
     <None Include="wwwroot\js\Areas\Identity\Pages\Constancias\Administracion\Seguimiento.js" />
+    <None Include="wwwroot\js\Areas\Identity\Pages\Constancias\ResumenConstancia\Resumen.min.js" />
     <None Include="wwwroot\js\descargaPdf.min.js" />
     <None Include="wwwroot\lib\bootstrap-datepicker-1.6.4-dist\css\bootstrap-datepicker.css.map" />
     <None Include="wwwroot\lib\bootstrap-datepicker-1.6.4-dist\js\bootstrap-datepicker.js" />

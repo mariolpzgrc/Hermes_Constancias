@@ -33,6 +33,15 @@ input.form-control-sm::-webkit-input-placeholder {
 .con-padding-l-14 {
     padding-left: 14px;
 }
+.con-padding-l-22 {
+    padding-left: 22px;
+}
+.con-padding-l-30 {
+    padding-left: 30px;
+}
+.con-padding-l-38 {
+    padding-left: 38px;
+}
 #contiene-carpetas {
     margin: 0 0 0 0 !important;
     padding: 0;

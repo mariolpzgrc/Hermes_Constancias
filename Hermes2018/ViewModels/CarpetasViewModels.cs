@@ -45,6 +45,7 @@ namespace Hermes2018.ViewModels
         public int SubcarpetaId { get; set; }
         public string Nombre { get; set; }
         public string Fecha { get; set; }
+        public int Nivel { get; set; }
     }
     public class CrearSubcarpetaViewModel
     {
@@ -69,6 +70,8 @@ namespace Hermes2018.ViewModels
         [Required(ErrorMessageResourceName = "required", ErrorMessageResourceType = typeof(SharedResource))]
         [StringLength(15, ErrorMessageResourceName = "stringlength", ErrorMessageResourceType = typeof(SharedResource))]
         public string NombreSubcarpeta { get; set; }
+        [HiddenInput]
+        public int NivelSubcarpeta { get; set; }
     }
     public class BorrarSubcarpetaViewModel
     {
@@ -85,6 +88,8 @@ namespace Hermes2018.ViewModels
         [Display(Name = "Nombre de la subcarpeta")]
         [HiddenInput]
         public string NombreSubcarpeta { get; set; }
+        [HiddenInput]
+        public int NivelSubcarpeta { get; set; }
     }
     public class CarpetasJsonMdel
     {
@@ -96,6 +101,8 @@ namespace Hermes2018.ViewModels
     {
         public int SubcarpetaId { get; set; }
         public string Nombre { get; set; }
+        public List<SubcarpetasJsonModel> Subcarpetas { get; set; }
+
     }
     public class MoverDocumentoJsonModel
     {

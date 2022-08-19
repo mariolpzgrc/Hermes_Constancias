@@ -870,6 +870,33 @@ function ProcesaCarpetas() {
                 $('#contiene-carpetas').append($('<button type="button" class="carpeta-seleccion dropdown-item hover-bold btn btn-link con-padding-rl-6 con-padding-l-14 font-dark-gray" data-id="' + v.SubcarpetaId + '"><div>' + v.Nombre + '</div></button>'));
             }
             $('#contiene-carpetas').append($('<div class="dropdown-divider sin-margen"></div>'));
+
+            $.each(v.Subcarpetas, function (i2, v2) {
+                if (parseInt(v2.SubcarpetaId) === objCarpeta.id) {
+                    $('#contiene-carpetas').append($('<div class="dropdown-item con-padding-rl-6 con-padding-l-14 font-dark-gray">' + v2.Nombre + '</div>'));
+                } else {
+                    $('#contiene-carpetas').append($('<button type="button" class="carpeta-seleccion dropdown-item hover-bold btn btn-link con-padding-rl-6 con-padding-l-22 font-dark-gray" data-id="' + v2.SubcarpetaId + '"><div>' + v2.Nombre + '</div></button>'));
+                }
+                $('#contiene-carpetas').append($('<div class="dropdown-divider sin-margen"></div>'));
+
+                $.each(v2.Subcarpetas, function (i3, v3) {
+                    if (parseInt(v3.SubcarpetaId) === objCarpeta.id) {
+                        $('#contiene-carpetas').append($('<div class="dropdown-item con-padding-rl-6 con-padding-l-14 font-dark-gray">' + v3.Nombre + '</div>'));
+                    } else {
+                        $('#contiene-carpetas').append($('<button type="button" class="carpeta-seleccion dropdown-item hover-bold btn btn-link con-padding-rl-6 con-padding-l-30 font-dark-gray" data-id="' + v3.SubcarpetaId + '"><div>' + v3.Nombre + '</div></button>'));
+                    }
+                    $('#contiene-carpetas').append($('<div class="dropdown-divider sin-margen"></div>'));
+
+                    $.each(v3.Subcarpetas, function (i4, v4) {
+                        if (parseInt(v4.SubcarpetaId) === objCarpeta.id) {
+                            $('#contiene-carpetas').append($('<div class="dropdown-item con-padding-rl-6 con-padding-l-14 font-dark-gray">' + v4.Nombre + '</div>'));
+                        } else {
+                            $('#contiene-carpetas').append($('<button type="button" class="carpeta-seleccion dropdown-item hover-bold btn btn-link con-padding-rl-6 con-padding-l-38 font-dark-gray" data-id="' + v4.SubcarpetaId + '"><div>' + v4.Nombre + '</div></button>'));
+                        }
+                        $('#contiene-carpetas').append($('<div class="dropdown-divider sin-margen"></div>'));
+                    });
+                });
+            });
         });
     });
 }

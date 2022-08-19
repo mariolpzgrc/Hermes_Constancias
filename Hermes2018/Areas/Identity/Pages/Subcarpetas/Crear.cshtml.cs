@@ -34,14 +34,13 @@ namespace Hermes2018.Areas.Identity.Pages.Subcarpetas
         [HiddenInput]
         public int CarpetaPadreId { get; set; }
 
-        public IActionResult OnGet(int id)
+        public  IActionResult OnGet(int id)
         {
             var infoUsuarioClaims = _usuarioClaimService.ObtenerInfoUsuarioClaims(User);
             if (infoUsuarioClaims.ActivaDelegacion && infoUsuarioClaims.BandejaPermiso == ConstDelegar.TipoN2)
             {
                 return RedirectToPage("/Subcarpetas/Index", new { area = "Identity", id = "" });
             }
-
             CarpetaPadreId = id;
 
             return Page();
@@ -54,15 +53,17 @@ namespace Hermes2018.Areas.Identity.Pages.Subcarpetas
                 var infoUsuarioClaims = _usuarioClaimService.ObtenerInfoUsuarioClaims(User);
                 //Usuario actual
                 var infoUsuarioId = await _usuarioService.ObtenerIdentificadorUsuarioAsync(infoUsuarioClaims.BandejaUsuario);
+                var subcarpetaNivel = await _carpetaService.ObtenerNivelSubCarpetaAsync(infoUsuarioId, CarpetaPadreId);
+                var nivelActual = subcarpetaNivel.HER_Nivel + 1;
 
                 //Valida que no exista
-                var existe = await _carpetaService.ExisteSubcarpetaAsync(Crear.NombreSubcarpeta, infoUsuarioId, CarpetaPadreId);
+                var existe = await _carpetaService.ExisteSubcarpetaAsync(Crear.NombreSubcarpeta, infoUsuarioId, CarpetaPadreId, nivelActual);
                 //-
                 var result = false;
                 if (!existe)
                 {
                     //No hay un grupo con ese nombre
-                    result = await _carpetaService.GuardarSubcarpetasAsync(Crear, infoUsuarioId, CarpetaPadreId);
+                    result = await _carpetaService.GuardarSubcarpetasAsync(Crear, infoUsuarioId, CarpetaPadreId, nivelActual);
 
                     if (result)
                     {

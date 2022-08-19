@@ -57,6 +57,10 @@
                                             <a asp-area="Identity" asp-page="/Subcarpetas/Editar" asp-route-id="@item.SubcarpetaId" asp-route-carpetapadreid="@Model.CarpetaPadreId" class="pl-2 pr-2" title="Editar"><i class="far fa-edit font-gray"></i></a>
                                             <a asp-area="Identity" asp-page="/Subcarpetas/Borrar" asp-route-id="@item.SubcarpetaId" asp-route-carpetapadreid="@Model.CarpetaPadreId" class="pl-2 pr-2" title="Borrar"><i class="far fa-trash-alt font-gray"></i></a>
                                         }
+                                        @if (@item.Nivel < ConstNivelCarpeta.MaxNivel)
+                                        {
+                                            <a asp-area="Identity" asp-page="/Subcarpetas/Index" asp-route-id="@item.SubcarpetaId" class="pl-2 pr-2" title="Subcarpetas"><i class="far fa-folder font-gray"></i></a>
+                                        }
                                     </td>
                                 </tr>
                             }

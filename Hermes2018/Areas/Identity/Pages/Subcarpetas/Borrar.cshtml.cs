@@ -54,7 +54,8 @@ namespace Hermes2018.Areas.Identity.Pages.Subcarpetas
                     SubcarpetaId = subcarpeta.HER_CarpetaId,
                     NombreSubcarpeta = subcarpeta.HER_Nombre,
                     CarpetaPadreId = subcarpeta.HER_CarpetaPadreId,
-                    CarpetaPadre_Nombre = subcarpeta.HER_CarpetaPadre.HER_Nombre
+                    CarpetaPadre_Nombre = subcarpeta.HER_CarpetaPadre.HER_Nombre,
+                    NivelSubcarpeta = subcarpeta.HER_Nivel
                 };
             }
 
@@ -65,11 +66,11 @@ namespace Hermes2018.Areas.Identity.Pages.Subcarpetas
         {
             if (ModelState.IsValid)
             {
-                var existe = await _carpetaService.ExisteSubcarpetaAsync(Borrar.NombreSubcarpeta, InfoUsuarioId, (int)Borrar.CarpetaPadreId);
+                var existe = await _carpetaService.ExisteSubcarpetaAsync(Borrar.NombreSubcarpeta, InfoUsuarioId, (int)Borrar.CarpetaPadreId, (int)Borrar.NivelSubcarpeta);
 
                 if (existe)
                 {
-                    var tieneDocumentos = await _carpetaService.SubcarpetaTieneDocumentosAsociados(Borrar.SubcarpetaId, InfoUsuarioId, (int)Borrar.CarpetaPadreId);
+                    var tieneDocumentos = await _carpetaService.SubcarpetaTieneDocumentosAsociados(Borrar.SubcarpetaId, InfoUsuarioId, (int)Borrar.CarpetaPadreId, (int)Borrar.NivelSubcarpeta);
                     if (!tieneDocumentos)
                     {
                         var result = await _carpetaService.BorrarSubcarpetaAsync(Borrar, InfoUsuarioId);
