@@ -81,11 +81,11 @@ namespace Hermes2018.Controllers.Api.Constancias
         }
 
 
-        [Route("ObtieneCveLogin_TP")]
+        [Route("ObtieneInfoCveLogin_NPER")]
         [HttpPost]
         public IActionResult ObtieneCveLogin_TP([FromBody] CustomConstancias data)
         {
-            return new JsonResult(_constancias.ObtieneCveLogin_TP(data.sCveLogin), _jsonSettings);
+            return new JsonResult(_constancias.ObtieneInfoCveLogin_NPER(data.sCveLogin, data.NumPersonal), _jsonSettings);
         }
 
         [Route("ObtieneServMed")]

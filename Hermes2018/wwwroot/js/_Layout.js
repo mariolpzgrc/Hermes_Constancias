@@ -9,13 +9,10 @@ $(function () {
     objWebRoot.route = $('#routeWebRoot').val();
     objWebRoot.token = $('#TokenWebApi').val();
     objUser.username = $("#user").text();
-
     objCarpetasMenu.carpetaId = $('#CarpetaId').val();
     objCarpetasMenu.carpetaTipo = $('#TipoBandeja').val();
-
     ObtenerCarpetasMenu();
     ControlCarpetasMenu();
-
     return false;
 });
 
@@ -55,7 +52,6 @@ function ControlCarpetasMenu() {
 function ProcesaCarpetasMenu() {
     objCarpetasMenu.carpetasArray = new Array();
     objCarpetasMenu.subcarpetasArray = new Array();
-    console.log(objCarpetasMenu.info);
     //--
     $.each(objCarpetasMenu.info, function (index, valor) {
         if (valor.Subcarpetas.length > 0) {
@@ -68,9 +64,11 @@ function ProcesaCarpetasMenu() {
                     $.each(val.Subcarpetas, function (ind3, val3) {
                         if (val3.Subcarpetas.length > 0) {
                             objCarpetasMenu.subcarpetasN4Array = new Array();
+                            //Subcarpetas N4
                             $.each(val3.Subcarpetas, function (ind4, val4) {
                                 if (val4.Subcarpetas.length > 0) {
                                     objCarpetasMenu.subcarpetasN5Array = new Array();
+                                    //Subcarpetas N5
                                     $.each(val4.Subcarpetas, function (ind5, val5) {
                                         objCarpetasMenu.subcarpetasN5Array.push({
                                             'text': val5.Nombre,
@@ -100,7 +98,7 @@ function ProcesaCarpetasMenu() {
                                         'text': val4.Nombre,
                                         'state':
                                         {
-                                            'opened': objCarpetasMenu.carpetaId === val4.SubcarpetaId,
+                                            'opened': false,
                                             'selected': objCarpetasMenu.carpetaId === val4.SubcarpetaId
                                         },
                                         'icon': 'far fa-circle',
@@ -125,7 +123,7 @@ function ProcesaCarpetasMenu() {
                                 'text': val3.Nombre,
                                 'state':
                                 {
-                                    'opened': objCarpetasMenu.carpetaId === val3.SubcarpetaId,
+                                    'opened': false,
                                     'selected': objCarpetasMenu.carpetaId === val3.SubcarpetaId
                                 },
                                 'icon': 'far fa-circle',
@@ -147,14 +145,14 @@ function ProcesaCarpetasMenu() {
                 } else {
                     //SubCarpetas de primer nivel
                     objCarpetasMenu.subcarpetasArray.push({
-                        'text': valor.Nombre,
+                        'text': val.Nombre,
                         'state':
                         {
                             'opened': false,
-                            'selected': objCarpetasMenu.carpetaId === valor.CarpetaId
+                            'selected': objCarpetasMenu.carpetaId === val.SubcarpetaId
                         },
                         'icon': 'fas fa-circle',
-                        "a_attr": { "href": objWebRoot.route + 'Bandejas/Personales/' + valor.CarpetaId + "/" + 1 }
+                        "a_attr": { "href": objWebRoot.route + 'Bandejas/Personales/' + val.SubcarpetaId + "/" + 1 }
                     });
                 }
 

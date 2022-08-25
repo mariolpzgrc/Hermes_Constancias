@@ -101,10 +101,10 @@
         </form>
         <!--Anterior-->
         @*<a asp-area="Identity" asp-page="/Bandejas/Historico" class="a nav-link bandeja-padding-03">
-                <i class="fas fa-clone"></i>
-                <span class="nav-link-text">
-                    Versión anterior
-                </span>
+            <i class="fas fa-clone"></i>
+            <span class="nav-link-text">
+            Versión anterior
+            </span>
             </a>*@
     </li>
 
@@ -119,9 +119,10 @@
 
         <ul class="sidenav-second-level collapse @(_httpContextAccessor.HttpContext.Request.Cookies[".AspNet.Carpeta"] == "yes" ? "": "show")" id="collapseCarpetas">
             <li class="font-dark-gray pl-3">
-                <div id="contiene-arbol-carpetas" class="scroll-carpetas font-size-1">
-                    Carpetas
-                    <ul></ul>
+                <div class="scroll-carpetas">
+                    <div id="contiene-arbol-carpetas" class="div-tree-carptas font-size-1">
+                        <ul></ul>
+                    </div>
                 </div>
             </li>
         </ul>

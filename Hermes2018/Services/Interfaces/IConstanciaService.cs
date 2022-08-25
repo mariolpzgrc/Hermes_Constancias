@@ -19,7 +19,10 @@ namespace Hermes2018.Services.Interfaces
 
         /**Servicios de prueba de ls DSIA*/
         /**Servicios del usuario*/
-        oLoginTP ObtieneCveLogin_TP(string sCveLogin);
+
+        //Login del  usuario
+        string ObtieneTokenLogin(string username, string password);
+        List<OLsLoginNP> ObtieneInfoCveLogin_NPER(string sCveLogin, int? numPer);
 
         /**Constancias*/
         List<oLsServMed> ObtieneServMed(int numPer, int tipoPer);

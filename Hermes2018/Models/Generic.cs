@@ -4,7 +4,19 @@ using System.Linq;
 
 namespace Hermes2018.Models
 {
-
+    public class LoginCustom
+    {
+        public UsrToken UsrToken { get; set; }
+    }
+    public class UsrToken
+    {
+        public string sTokenUV { get; set; }
+        public object sTokenMS { get; set; }
+        public DateTime dtExpira { get; set; }
+        public string sUsuario { get; set; }
+        public object sError { get; set; }
+        public object sClave { get; set; }
+    }
     public class ServMedCustom
     {
         public List<oLsServMed> oLsServMed { get; set; }
@@ -113,7 +125,34 @@ namespace Hermes2018.Models
                 return tipos;
             }
         }
+    }
+    public class LoginInfoDatacustom 
+    {
+        public List<OLsLoginNP> oLsLoginNP { get; set; }
+        public OEncrip oEncrip { get; set; }
+    }
 
+    public class OLsLoginNP
+    {
+        public int iNumPer { get; set; }
+        public string sNombre { get; set; }
+        public string sUsuario { get; set; }
+        public string sNumDep { get; set; }
+        public string sDescDep { get; set; }
+        public string sTipo_Per { get; set; }
+        public int iTipo_Per
+        {
+            get
+            {
+                string[] tipoValue = sTipo_Per.Split("-");
+                int NumeroPersonal = Convert.ToInt32(tipoValue[0].Trim());
+                return NumeroPersonal;
+            }
+        }
+    }
+    public class OEncrip
+    {
+        public string sEncript { get; set; }
     }
 
     public class oEncrip

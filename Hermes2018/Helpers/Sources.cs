@@ -625,4 +625,10 @@ namespace Hermes2018.Helpers
         public const string TipoT1 = "General";
         public const int TipoN1 = 1;
     }
+
+    public class ConstLoginConstancias
+    {
+        public const string UsernameGeneral = "ddiaav";
+        public const string PasswordGeneral = "123456";
+    }
 }

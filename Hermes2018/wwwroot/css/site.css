@@ -1117,10 +1117,17 @@ input.form-control-sm::-webkit-input-placeholder {
 }
 
 .scroll-carpetas {
-	height: auto;
-	max-height: 500px;
-	overflow-y: visible;
+	width: 235px;
 	overflow-x: visible;
+	overflow-y: auto;
+}
+
+.div-tree-carptas {
+	min-width: 235px;
+	height: auto;
+	width: auto;
+	max-height: 500px;
+	max-width: 250px;
 }
 
 #contiene-arbol-carpetas .jstree-anchor {

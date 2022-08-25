@@ -19,8 +19,7 @@ namespace Hermes2018.Services
         private readonly ApplicationDbContext _bdContext;
         private readonly ILogger<ConstanciaService> _logger;
 
-        public ConstanciaService(ApplicationDbContext context,
-                                ILogger<ConstanciaService> logger)
+        public ConstanciaService(ApplicationDbContext context, ILogger<ConstanciaService> logger)
         {
             _bdContext = context;
             _logger = logger;
@@ -330,54 +329,56 @@ namespace Hermes2018.Services
             List<oLsServMed> _data = new List<oLsServMed>();
             string jsonlimpio = "";
             var configuration = new RestApiDSIA().GetConfiguration();
-            var dataBearer = configuration.GetSection("COnfigureCustom").GetSection("Bearer").Value;
-
-            var jsonEncrip = new
+            var dataBearer = ObtieneTokenLogin(ConstLoginConstancias.UsernameGeneral, ConstLoginConstancias.PasswordGeneral);
+            if (!string.IsNullOrEmpty(dataBearer))
             {
-                sNumper = numPer.ToString(),
-                sNumTipoPer = tipoPer.ToString(),
-                sClave = configuration.GetSection("ConfigureCustom").GetSection("sClave").Value
-            };
-            var jsonRaw = new
-            {
-                sAesKey = configuration.GetSection("ConfigureCustom").GetSection("sClaveLogin").Value,
-                sClave = configuration.GetSection("ConfigureCustom").GetSection("sClave").Value,
-                sJson = JsonConvert.SerializeObject(jsonEncrip)
-            };
-
-            var salida = new RequestClientApi().Post(configuration.GetSection("ServicesAPIDSIA").GetSection("Encriptar").Value, JsonConvert.SerializeObject(jsonRaw), dataBearer);
-
-            if (salida != "" && salida != null)
-            {
-                _dataReturn = JsonConvert.DeserializeObject<EncriptarJson>(salida);
-
-                var jsonEncriptado = new
+                var jsonEncrip = new
                 {
-                    sEncript = _dataReturn.sEncrip.ToString()
+                    sNumper = numPer.ToString(),
+                    sNumTipoPer = tipoPer.ToString(),
+                    sClave = configuration.GetSection("ConfigureCustom").GetSection("sClave").Value
+                };
+                var jsonRaw = new
+                {
+                    sAesKey = configuration.GetSection("ConfigureCustom").GetSection("sClaveLogin").Value,
+                    sClave = configuration.GetSection("ConfigureCustom").GetSection("sClave").Value,
+                    sJson = JsonConvert.SerializeObject(jsonEncrip)
                 };
 
-                var salidaEncriptada = new RequestClientApi().Post(configuration.GetSection("ServicesAPIDSIA").GetSection("ObtieneServMed").Value, JsonConvert.SerializeObject(jsonEncriptado), dataBearer);
+                var salida = new RequestClientApi().Post(configuration.GetSection("ServicesAPIDSIA").GetSection("Encriptar").Value, JsonConvert.SerializeObject(jsonRaw), dataBearer);
 
-                if (salidaEncriptada != "" && salidaEncriptada != null)
+                if (salida != "" && salida != null)
                 {
-                    _dataEncriptadaReturn = JsonConvert.DeserializeObject<JsonForDesencript>(salidaEncriptada);
+                    _dataReturn = JsonConvert.DeserializeObject<EncriptarJson>(salida);
 
-                    var jsonDesRaw = new
+                    var jsonEncriptado = new
                     {
-                        sAesKey = configuration.GetSection("ConfigureCustom").GetSection("sClaveLogin").Value,
-                        sClave = configuration.GetSection("ConfigureCustom").GetSection("sClave").Value,
-                        sEncrip = _dataEncriptadaReturn.sEncript.ToString()
+                        sEncript = _dataReturn.sEncrip.ToString()
                     };
 
-                    var salidaDesencriptada = new RequestClientApi().Post(configuration.GetSection("ServicesAPIDSIA").GetSection("Desencriptar").Value, JsonConvert.SerializeObject(jsonDesRaw), dataBearer);
+                    var salidaEncriptada = new RequestClientApi().Post(configuration.GetSection("ServicesAPIDSIA").GetSection("ObtieneServMed").Value, JsonConvert.SerializeObject(jsonEncriptado), dataBearer);
 
-                    if (salidaDesencriptada != "" && salidaDesencriptada != null)
+                    if (salidaEncriptada != "" && salidaEncriptada != null)
                     {
-                        _rows = JsonConvert.DeserializeObject<DesencriptarJson>(salidaDesencriptada);
-                        jsonlimpio = _rows.sJson.Replace(Environment.NewLine, "");
-                        jsonlimpio = jsonlimpio.Replace("  ", String.Empty);
-                        _dataSMC = JsonConvert.DeserializeObject<ServMedCustom>(jsonlimpio);
-                        _data = _dataSMC.oLsServMed;
+                        _dataEncriptadaReturn = JsonConvert.DeserializeObject<JsonForDesencript>(salidaEncriptada);
+
+                        var jsonDesRaw = new
+                        {
+                            sAesKey = configuration.GetSection("ConfigureCustom").GetSection("sClaveLogin").Value,
+                            sClave = configuration.GetSection("ConfigureCustom").GetSection("sClave").Value,
+                            sEncrip = _dataEncriptadaReturn.sEncript.ToString()
+                        };
+
+                        var salidaDesencriptada = new RequestClientApi().Post(configuration.GetSection("ServicesAPIDSIA").GetSection("Desencriptar").Value, JsonConvert.SerializeObject(jsonDesRaw), dataBearer);
+
+                        if (salidaDesencriptada != "" && salidaDesencriptada != null)
+                        {
+                            _rows = JsonConvert.DeserializeObject<DesencriptarJson>(salidaDesencriptada);
+                            jsonlimpio = _rows.sJson.Replace(Environment.NewLine, "");
+                            jsonlimpio = jsonlimpio.Replace("  ", String.Empty);
+                            _dataSMC = JsonConvert.DeserializeObject<ServMedCustom>(jsonlimpio);
+                            _data = _dataSMC.oLsServMed;
+                        }
                     }
                 }
             }
@@ -393,53 +394,56 @@ namespace Hermes2018.Services
             List<oLsServMed> _data = new List<oLsServMed>();
             string jsonlimpio = "";
             var configuration = new RestApiDSIA().GetConfiguration();
-            var dataBearer = configuration.GetSection("COnfigureCustom").GetSection("Bearer").Value;
-            var jsonEncrip = new
+            var dataBearer = ObtieneTokenLogin(ConstLoginConstancias.UsernameGeneral, ConstLoginConstancias.PasswordGeneral);
+            if (!string.IsNullOrEmpty(dataBearer))
             {
-                sNumper = numPer.ToString(),
-                sNumTipoPer = tipoPer.ToString(),
-                sClave = configuration.GetSection("ConfigureCustom").GetSection("sClave").Value
-            };
-            var jsonRaw = new
-            {
-                sAesKey = configuration.GetSection("ConfigureCustom").GetSection("sClaveLogin").Value,
-                sClave = configuration.GetSection("ConfigureCustom").GetSection("sClave").Value,
-                sJson = JsonConvert.SerializeObject(jsonEncrip)
-            };
-
-            var salida = new RequestClientApi().Post(configuration.GetSection("ServicesAPIDSIA").GetSection("Encriptar").Value, JsonConvert.SerializeObject(jsonRaw), dataBearer);
-
-            if (salida != "" && salida != null)
-            {
-                _dataReturn = JsonConvert.DeserializeObject<EncriptarJson>(salida);
-
-                var jsonEncriptado = new
+                var jsonEncrip = new
                 {
-                    sEncript = _dataReturn.sEncrip.ToString()
+                    sNumper = numPer.ToString(),
+                    sNumTipoPer = tipoPer.ToString(),
+                    sClave = configuration.GetSection("ConfigureCustom").GetSection("sClave").Value
+                };
+                var jsonRaw = new
+                {
+                    sAesKey = configuration.GetSection("ConfigureCustom").GetSection("sClaveLogin").Value,
+                    sClave = configuration.GetSection("ConfigureCustom").GetSection("sClave").Value,
+                    sJson = JsonConvert.SerializeObject(jsonEncrip)
                 };
 
-                var salidaEncriptada = new RequestClientApi().Post(configuration.GetSection("ServicesAPIDSIA").GetSection("ObtieneServMedDep").Value, JsonConvert.SerializeObject(jsonEncriptado), dataBearer);
+                var salida = new RequestClientApi().Post(configuration.GetSection("ServicesAPIDSIA").GetSection("Encriptar").Value, JsonConvert.SerializeObject(jsonRaw), dataBearer);
 
-                if (salidaEncriptada != "" && salidaEncriptada != null)
+                if (salida != "" && salida != null)
                 {
-                    _dataEncriptadaReturn = JsonConvert.DeserializeObject<JsonForDesencript>(salidaEncriptada);
+                    _dataReturn = JsonConvert.DeserializeObject<EncriptarJson>(salida);
 
-                    var jsonDesRaw = new
+                    var jsonEncriptado = new
                     {
-                        sAesKey = configuration.GetSection("ConfigureCustom").GetSection("sClaveLogin").Value,
-                        sClave = configuration.GetSection("ConfigureCustom").GetSection("sClave").Value,
-                        sEncrip = _dataEncriptadaReturn.sEncript.ToString()
+                        sEncript = _dataReturn.sEncrip.ToString()
                     };
 
-                    var salidaDesencriptada = new RequestClientApi().Post(configuration.GetSection("ServicesAPIDSIA").GetSection("Desencriptar").Value, JsonConvert.SerializeObject(jsonDesRaw), dataBearer);
+                    var salidaEncriptada = new RequestClientApi().Post(configuration.GetSection("ServicesAPIDSIA").GetSection("ObtieneServMedDep").Value, JsonConvert.SerializeObject(jsonEncriptado), dataBearer);
 
-                    if (salidaDesencriptada != "" && salidaDesencriptada != null)
+                    if (salidaEncriptada != "" && salidaEncriptada != null)
                     {
-                        _rows = JsonConvert.DeserializeObject<DesencriptarJson>(salidaDesencriptada);
-                        jsonlimpio = _rows.sJson.Replace(Environment.NewLine, "");
-                        jsonlimpio = jsonlimpio.Replace("  ", String.Empty);
-                        _dataSMDC = JsonConvert.DeserializeObject<ServMedDepCustom>(jsonlimpio);
-                        _data = _dataSMDC.oLsServMedDep;
+                        _dataEncriptadaReturn = JsonConvert.DeserializeObject<JsonForDesencript>(salidaEncriptada);
+
+                        var jsonDesRaw = new
+                        {
+                            sAesKey = configuration.GetSection("ConfigureCustom").GetSection("sClaveLogin").Value,
+                            sClave = configuration.GetSection("ConfigureCustom").GetSection("sClave").Value,
+                            sEncrip = _dataEncriptadaReturn.sEncript.ToString()
+                        };
+
+                        var salidaDesencriptada = new RequestClientApi().Post(configuration.GetSection("ServicesAPIDSIA").GetSection("Desencriptar").Value, JsonConvert.SerializeObject(jsonDesRaw), dataBearer);
+
+                        if (salidaDesencriptada != "" && salidaDesencriptada != null)
+                        {
+                            _rows = JsonConvert.DeserializeObject<DesencriptarJson>(salidaDesencriptada);
+                            jsonlimpio = _rows.sJson.Replace(Environment.NewLine, "");
+                            jsonlimpio = jsonlimpio.Replace("  ", String.Empty);
+                            _dataSMDC = JsonConvert.DeserializeObject<ServMedDepCustom>(jsonlimpio);
+                            _data = _dataSMDC.oLsServMedDep;
+                        }
                     }
                 }
             }
@@ -454,57 +458,58 @@ namespace Hermes2018.Services
             TrabPercCustom _dataTPC = new TrabPercCustom();
             List<oLsIpe> _data = new List<oLsIpe>();
             string jsonlimpio = "";
-
             var configuration = new RestApiDSIA().GetConfiguration();
-            var dataBearer = configuration.GetSection("ConfigureCustom").GetSection("Bearer").Value;
-
-            var jsonEncrip = new
+            var dataBearer = ObtieneTokenLogin(ConstLoginConstancias.UsernameGeneral, ConstLoginConstancias.PasswordGeneral);
+            if (!string.IsNullOrEmpty(dataBearer))
             {
-                sNumper = numPer.ToString(),
-                sNumTipoPer = tipoPer.ToString(),
-                sClave = configuration.GetSection("ConfigureCustom").GetSection("sClave").Value
-            };
-
-            var jsonRaw = new
-            {
-                sAesKey = configuration.GetSection("ConfigureCustom").GetSection("sClaveLogin").Value,
-                sClave = configuration.GetSection("ConfigureCustom").GetSection("sClave").Value,
-                sJson = JsonConvert.SerializeObject(jsonEncrip)
-            };
-
-            var salida = new RequestClientApi().Post(configuration.GetSection("ServicesAPIDSIA").GetSection("Encriptar").Value, JsonConvert.SerializeObject(jsonRaw), dataBearer);
-
-            if (salida != "" && salida != null)
-            {
-                _dataReturn = JsonConvert.DeserializeObject<EncriptarJson>(salida);
-
-                var jsonEncriptado = new
+                var jsonEncrip = new
                 {
-                    sEncript = _dataReturn.sEncrip.ToString()
+                    sNumper = numPer.ToString(),
+                    sNumTipoPer = tipoPer.ToString(),
+                    sClave = configuration.GetSection("ConfigureCustom").GetSection("sClave").Value
                 };
 
-                var salidaEncriptada = new RequestClientApi().Post(configuration.GetSection("ServicesAPIDSIA").GetSection("ObtieneTrab_Perc").Value, JsonConvert.SerializeObject(jsonEncriptado), dataBearer);
-
-                if (salidaEncriptada != "" && salidaEncriptada != null)
+                var jsonRaw = new
                 {
-                    _dataEncriptadaReturn = JsonConvert.DeserializeObject<JsonForDesencript>(salidaEncriptada);
+                    sAesKey = configuration.GetSection("ConfigureCustom").GetSection("sClaveLogin").Value,
+                    sClave = configuration.GetSection("ConfigureCustom").GetSection("sClave").Value,
+                    sJson = JsonConvert.SerializeObject(jsonEncrip)
+                };
 
-                    var jsonDesRaw = new
+                var salida = new RequestClientApi().Post(configuration.GetSection("ServicesAPIDSIA").GetSection("Encriptar").Value, JsonConvert.SerializeObject(jsonRaw), dataBearer);
+
+                if (salida != "" && salida != null)
+                {
+                    _dataReturn = JsonConvert.DeserializeObject<EncriptarJson>(salida);
+
+                    var jsonEncriptado = new
                     {
-                        sAesKey = configuration.GetSection("ConfigureCustom").GetSection("sClaveLogin").Value,
-                        sClave = configuration.GetSection("ConfigureCustom").GetSection("sClave").Value,
-                        sEncrip = _dataEncriptadaReturn.sEncript.ToString()
+                        sEncript = _dataReturn.sEncrip.ToString()
                     };
 
-                    var salidaDesencriptada = new RequestClientApi().Post(configuration.GetSection("ServicesAPIDSIA").GetSection("Desencriptar").Value, JsonConvert.SerializeObject(jsonDesRaw), dataBearer);
+                    var salidaEncriptada = new RequestClientApi().Post(configuration.GetSection("ServicesAPIDSIA").GetSection("ObtieneTrab_Perc").Value, JsonConvert.SerializeObject(jsonEncriptado), dataBearer);
 
-                    if (salidaDesencriptada != "" && salidaDesencriptada != null)
+                    if (salidaEncriptada != "" && salidaEncriptada != null)
                     {
-                        _rows = JsonConvert.DeserializeObject<DesencriptarJson>(salidaDesencriptada);
-                        jsonlimpio = _rows.sJson.Replace(Environment.NewLine, "");
-                        jsonlimpio = jsonlimpio.Replace("  ", String.Empty);
-                        _dataTPC = JsonConvert.DeserializeObject<TrabPercCustom>(jsonlimpio);
-                        _data = _dataTPC.oLsTrabPerc;
+                        _dataEncriptadaReturn = JsonConvert.DeserializeObject<JsonForDesencript>(salidaEncriptada);
+
+                        var jsonDesRaw = new
+                        {
+                            sAesKey = configuration.GetSection("ConfigureCustom").GetSection("sClaveLogin").Value,
+                            sClave = configuration.GetSection("ConfigureCustom").GetSection("sClave").Value,
+                            sEncrip = _dataEncriptadaReturn.sEncript.ToString()
+                        };
+
+                        var salidaDesencriptada = new RequestClientApi().Post(configuration.GetSection("ServicesAPIDSIA").GetSection("Desencriptar").Value, JsonConvert.SerializeObject(jsonDesRaw), dataBearer);
+
+                        if (salidaDesencriptada != "" && salidaDesencriptada != null)
+                        {
+                            _rows = JsonConvert.DeserializeObject<DesencriptarJson>(salidaDesencriptada);
+                            jsonlimpio = _rows.sJson.Replace(Environment.NewLine, "");
+                            jsonlimpio = jsonlimpio.Replace("  ", String.Empty);
+                            _dataTPC = JsonConvert.DeserializeObject<TrabPercCustom>(jsonlimpio);
+                            _data = _dataTPC.oLsTrabPerc;
+                        }
                     }
                 }
             }
@@ -519,57 +524,58 @@ namespace Hermes2018.Services
             IpeCustom _dataIPE = new IpeCustom();
             List<oLsIpe> _data = new List<oLsIpe>();
             string jsonlimpio = "";
-
             var configuration = new RestApiDSIA().GetConfiguration();
-            var dataBearer = configuration.GetSection("ConfigureCustom").GetSection("Bearer").Value;
-
-            var jsonEncrip = new
+            var dataBearer = ObtieneTokenLogin(ConstLoginConstancias.UsernameGeneral, ConstLoginConstancias.PasswordGeneral);
+            if (!string.IsNullOrEmpty(dataBearer))
             {
-                sNumper = numPer.ToString(),
-                sNumTipoPer = tipoPer.ToString(),
-                sClave = configuration.GetSection("ConfigureCustom").GetSection("sClave").Value
-            };
-
-            var jsonRaw = new
-            {
-                sAesKey = configuration.GetSection("ConfigureCustom").GetSection("sClaveLogin").Value,
-                sClave = configuration.GetSection("ConfigureCustom").GetSection("sClave").Value,
-                sJson = JsonConvert.SerializeObject(jsonEncrip)
-            };
-
-            var salida = new RequestClientApi().Post(configuration.GetSection("ServicesAPIDSIA").GetSection("Encriptar").Value, JsonConvert.SerializeObject(jsonRaw), dataBearer);
-
-            if (salida != "" && salida != null)
-            {
-                _dataReturn = JsonConvert.DeserializeObject<EncriptarJson>(salida);
-
-                var jsonEncriptado = new
+                var jsonEncrip = new
                 {
-                    sEncript = _dataReturn.sEncrip.ToString()
+                    sNumper = numPer.ToString(),
+                    sNumTipoPer = tipoPer.ToString(),
+                    sClave = configuration.GetSection("ConfigureCustom").GetSection("sClave").Value
                 };
 
-                var salidaEncriptada = new RequestClientApi().Post(configuration.GetSection("ServicesAPIDSIA").GetSection("ObtieneIpe").Value, JsonConvert.SerializeObject(jsonEncriptado), dataBearer);
-
-                if (salidaEncriptada != "" && salidaEncriptada != null)
+                var jsonRaw = new
                 {
-                    _dataEncriptadaReturn = JsonConvert.DeserializeObject<JsonForDesencript>(salidaEncriptada);
+                    sAesKey = configuration.GetSection("ConfigureCustom").GetSection("sClaveLogin").Value,
+                    sClave = configuration.GetSection("ConfigureCustom").GetSection("sClave").Value,
+                    sJson = JsonConvert.SerializeObject(jsonEncrip)
+                };
 
-                    var jsonDesRaw = new
+                var salida = new RequestClientApi().Post(configuration.GetSection("ServicesAPIDSIA").GetSection("Encriptar").Value, JsonConvert.SerializeObject(jsonRaw), dataBearer);
+
+                if (salida != "" && salida != null)
+                {
+                    _dataReturn = JsonConvert.DeserializeObject<EncriptarJson>(salida);
+
+                    var jsonEncriptado = new
                     {
-                        sAesKey = configuration.GetSection("ConfigureCustom").GetSection("sClaveLogin").Value,
-                        sClave = configuration.GetSection("ConfigureCustom").GetSection("sClave").Value,
-                        sEncrip = _dataEncriptadaReturn.sEncript.ToString()
+                        sEncript = _dataReturn.sEncrip.ToString()
                     };
 
-                    var salidaDesencriptada = new RequestClientApi().Post(configuration.GetSection("ServicesAPIDSIA").GetSection("Desencriptar").Value, JsonConvert.SerializeObject(jsonDesRaw), dataBearer);
+                    var salidaEncriptada = new RequestClientApi().Post(configuration.GetSection("ServicesAPIDSIA").GetSection("ObtieneIpe").Value, JsonConvert.SerializeObject(jsonEncriptado), dataBearer);
 
-                    if (salidaDesencriptada != "" && salidaDesencriptada != null)
+                    if (salidaEncriptada != "" && salidaEncriptada != null)
                     {
-                        _rows = JsonConvert.DeserializeObject<DesencriptarJson>(salidaDesencriptada);
-                        jsonlimpio = _rows.sJson.Replace(Environment.NewLine, "");
-                        jsonlimpio = jsonlimpio.Replace("  ", String.Empty);
-                        _dataIPE = JsonConvert.DeserializeObject<IpeCustom>(jsonlimpio);
-                        _data = _dataIPE.oLsIpe;
+                        _dataEncriptadaReturn = JsonConvert.DeserializeObject<JsonForDesencript>(salidaEncriptada);
+
+                        var jsonDesRaw = new
+                        {
+                            sAesKey = configuration.GetSection("ConfigureCustom").GetSection("sClaveLogin").Value,
+                            sClave = configuration.GetSection("ConfigureCustom").GetSection("sClave").Value,
+                            sEncrip = _dataEncriptadaReturn.sEncript.ToString()
+                        };
+
+                        var salidaDesencriptada = new RequestClientApi().Post(configuration.GetSection("ServicesAPIDSIA").GetSection("Desencriptar").Value, JsonConvert.SerializeObject(jsonDesRaw), dataBearer);
+
+                        if (salidaDesencriptada != "" && salidaDesencriptada != null)
+                        {
+                            _rows = JsonConvert.DeserializeObject<DesencriptarJson>(salidaDesencriptada);
+                            jsonlimpio = _rows.sJson.Replace(Environment.NewLine, "");
+                            jsonlimpio = jsonlimpio.Replace("  ", String.Empty);
+                            _dataIPE = JsonConvert.DeserializeObject<IpeCustom>(jsonlimpio);
+                            _data = _dataIPE.oLsIpe;
+                        }
                     }
                 }
             }
@@ -585,55 +591,57 @@ namespace Hermes2018.Services
             string jsonlimpio = "";
             List<oLsIpe> _data = new List<oLsIpe>();
             var configuration = new RestApiDSIA().GetConfiguration();
-            var dataBearer = configuration.GetSection("ConfigureCustom").GetSection("Bearer").Value;
-
-            var jsonEncrip = new
+            var dataBearer = ObtieneTokenLogin(ConstLoginConstancias.UsernameGeneral, ConstLoginConstancias.PasswordGeneral);
+            if (!string.IsNullOrEmpty(dataBearer))
             {
-                sNumper = numPer.ToString(),
-                sNumTipoPer = tipoPer.ToString(),
-                sClave = configuration.GetSection("ConfigureCustom").GetSection("sClave").Value
-            };
-
-            var jsonRaw = new
-            {
-                sAesKey = configuration.GetSection("ConfigureCustom").GetSection("sClaveLogin").Value,
-                sClave = configuration.GetSection("ConfigureCustom").GetSection("sClave").Value,
-                sJson = JsonConvert.SerializeObject(jsonEncrip)
-            };
-
-            var salida = new RequestClientApi().Post(configuration.GetSection("ServicesAPIDSIA").GetSection("Encriptar").Value, JsonConvert.SerializeObject(jsonRaw), dataBearer);
-
-            if (salida != "" && salida != null)
-            {
-                _dataReturn = JsonConvert.DeserializeObject<EncriptarJson>(salida);
-
-                var jsonEncriptado = new
+                var jsonEncrip = new
                 {
-                    sEncript = _dataReturn.sEncrip.ToString()
+                    sNumper = numPer.ToString(),
+                    sNumTipoPer = tipoPer.ToString(),
+                    sClave = configuration.GetSection("ConfigureCustom").GetSection("sClave").Value
                 };
 
-                var salidaEncriptada = new RequestClientApi().Post(configuration.GetSection("ServicesAPIDSIA").GetSection("ObtieneMag").Value, JsonConvert.SerializeObject(jsonEncriptado), dataBearer);
-
-                if (salidaEncriptada != "" && salidaEncriptada != null)
+                var jsonRaw = new
                 {
-                    _dataEncriptadaReturn = JsonConvert.DeserializeObject<JsonForDesencript>(salidaEncriptada);
+                    sAesKey = configuration.GetSection("ConfigureCustom").GetSection("sClaveLogin").Value,
+                    sClave = configuration.GetSection("ConfigureCustom").GetSection("sClave").Value,
+                    sJson = JsonConvert.SerializeObject(jsonEncrip)
+                };
 
-                    var jsonDesRaw = new
+                var salida = new RequestClientApi().Post(configuration.GetSection("ServicesAPIDSIA").GetSection("Encriptar").Value, JsonConvert.SerializeObject(jsonRaw), dataBearer);
+
+                if (salida != "" && salida != null)
+                {
+                    _dataReturn = JsonConvert.DeserializeObject<EncriptarJson>(salida);
+
+                    var jsonEncriptado = new
                     {
-                        sAesKey = configuration.GetSection("ConfigureCustom").GetSection("sClaveLogin").Value,
-                        sClave = configuration.GetSection("ConfigureCustom").GetSection("sClave").Value,
-                        sEncrip = _dataEncriptadaReturn.sEncript.ToString()
+                        sEncript = _dataReturn.sEncrip.ToString()
                     };
 
-                    var salidaDesencriptada = new RequestClientApi().Post(configuration.GetSection("ServicesAPIDSIA").GetSection("Desencriptar").Value, JsonConvert.SerializeObject(jsonDesRaw), dataBearer);
+                    var salidaEncriptada = new RequestClientApi().Post(configuration.GetSection("ServicesAPIDSIA").GetSection("ObtieneMag").Value, JsonConvert.SerializeObject(jsonEncriptado), dataBearer);
 
-                    if (salidaDesencriptada != "" && salidaDesencriptada != null)
+                    if (salidaEncriptada != "" && salidaEncriptada != null)
                     {
-                        _rows = JsonConvert.DeserializeObject<DesencriptarJson>(salidaDesencriptada);
-                        jsonlimpio = _rows.sJson.Replace(Environment.NewLine, "");
-                        jsonlimpio = jsonlimpio.Replace("  ", String.Empty);
-                        _dataMagC = JsonConvert.DeserializeObject<MagCustom>(jsonlimpio);
-                        _data = _dataMagC.oLsMag;
+                        _dataEncriptadaReturn = JsonConvert.DeserializeObject<JsonForDesencript>(salidaEncriptada);
+
+                        var jsonDesRaw = new
+                        {
+                            sAesKey = configuration.GetSection("ConfigureCustom").GetSection("sClaveLogin").Value,
+                            sClave = configuration.GetSection("ConfigureCustom").GetSection("sClave").Value,
+                            sEncrip = _dataEncriptadaReturn.sEncript.ToString()
+                        };
+
+                        var salidaDesencriptada = new RequestClientApi().Post(configuration.GetSection("ServicesAPIDSIA").GetSection("Desencriptar").Value, JsonConvert.SerializeObject(jsonDesRaw), dataBearer);
+
+                        if (salidaDesencriptada != "" && salidaDesencriptada != null)
+                        {
+                            _rows = JsonConvert.DeserializeObject<DesencriptarJson>(salidaDesencriptada);
+                            jsonlimpio = _rows.sJson.Replace(Environment.NewLine, "");
+                            jsonlimpio = jsonlimpio.Replace("  ", String.Empty);
+                            _dataMagC = JsonConvert.DeserializeObject<MagCustom>(jsonlimpio);
+                            _data = _dataMagC.oLsMag;
+                        }
                     }
                 }
             }
@@ -649,55 +657,57 @@ namespace Hermes2018.Services
             List<oLsOfiBajIPE> _data = new List<oLsOfiBajIPE>();
             string jsonlimpio = "";
             var configuration = new RestApiDSIA().GetConfiguration();
-            var dataBearer = configuration.GetSection("ConfigureCustom").GetSection("Bearer").Value;
-
-            var jsonEncrip = new
+            var dataBearer = ObtieneTokenLogin(ConstLoginConstancias.UsernameGeneral, ConstLoginConstancias.PasswordGeneral);
+            if (!string.IsNullOrEmpty(dataBearer))
             {
-                sNumper = numPer.ToString(),
-                sNumTipoPer = tipoPer.ToString(),
-                sClave = configuration.GetSection("ConfigureCustom").GetSection("sClave").Value
-            };
-
-            var jsonRaw = new
-            {
-                sAesKey = configuration.GetSection("ConfigureCustom").GetSection("sClaveLogin").Value,
-                sClave = configuration.GetSection("ConfigureCustom").GetSection("sClave").Value,
-                sJson = JsonConvert.SerializeObject(jsonEncrip)
-            };
-
-            var salida = new RequestClientApi().Post(configuration.GetSection("ServicesAPIDSIA").GetSection("Encriptar").Value, JsonConvert.SerializeObject(jsonRaw), dataBearer);
-
-            if (salida != "" && salida != null)
-            {
-                _dataReturn = JsonConvert.DeserializeObject<EncriptarJson>(salida);
-
-                var jsonEncriptado = new
+                var jsonEncrip = new
                 {
-                    sEncript = _dataReturn.sEncrip.ToString()
+                    sNumper = numPer.ToString(),
+                    sNumTipoPer = tipoPer.ToString(),
+                    sClave = configuration.GetSection("ConfigureCustom").GetSection("sClave").Value
                 };
 
-                var salidaEncriptada = new RequestClientApi().Post(configuration.GetSection("ServicesAPIDSIA").GetSection("ObtieneOfiBajIPE").Value, JsonConvert.SerializeObject(jsonEncriptado), dataBearer);
-
-                if (salidaEncriptada != "" && salidaEncriptada != null)
+                var jsonRaw = new
                 {
-                    _dataEncriptadaReturn = JsonConvert.DeserializeObject<JsonForDesencript>(salidaEncriptada);
+                    sAesKey = configuration.GetSection("ConfigureCustom").GetSection("sClaveLogin").Value,
+                    sClave = configuration.GetSection("ConfigureCustom").GetSection("sClave").Value,
+                    sJson = JsonConvert.SerializeObject(jsonEncrip)
+                };
 
-                    var jsonDesRaw = new
+                var salida = new RequestClientApi().Post(configuration.GetSection("ServicesAPIDSIA").GetSection("Encriptar").Value, JsonConvert.SerializeObject(jsonRaw), dataBearer);
+
+                if (salida != "" && salida != null)
+                {
+                    _dataReturn = JsonConvert.DeserializeObject<EncriptarJson>(salida);
+
+                    var jsonEncriptado = new
                     {
-                        sAesKey = configuration.GetSection("ConfigureCustom").GetSection("sClaveLogin").Value,
-                        sClave = configuration.GetSection("ConfigureCustom").GetSection("sClave").Value,
-                        sEncrip = _dataEncriptadaReturn.sEncript.ToString()
+                        sEncript = _dataReturn.sEncrip.ToString()
                     };
 
-                    var salidaDesencriptada = new RequestClientApi().Post(configuration.GetSection("ServicesAPIDSIA").GetSection("Desencriptar").Value, JsonConvert.SerializeObject(jsonDesRaw), dataBearer);
+                    var salidaEncriptada = new RequestClientApi().Post(configuration.GetSection("ServicesAPIDSIA").GetSection("ObtieneOfiBajIPE").Value, JsonConvert.SerializeObject(jsonEncriptado), dataBearer);
 
-                    if (salidaDesencriptada != "" && salidaDesencriptada != null)
+                    if (salidaEncriptada != "" && salidaEncriptada != null)
                     {
-                        _rows = JsonConvert.DeserializeObject<DesencriptarJson>(salidaDesencriptada);
-                        jsonlimpio = _rows.sJson.Replace(Environment.NewLine, "");
-                        jsonlimpio = jsonlimpio.Replace("  ", String.Empty);
-                        _dataBIC = JsonConvert.DeserializeObject<OfiBajIPECustom>(jsonlimpio);
-                        _data = _dataBIC.oLsOfiBajIPE;
+                        _dataEncriptadaReturn = JsonConvert.DeserializeObject<JsonForDesencript>(salidaEncriptada);
+
+                        var jsonDesRaw = new
+                        {
+                            sAesKey = configuration.GetSection("ConfigureCustom").GetSection("sClaveLogin").Value,
+                            sClave = configuration.GetSection("ConfigureCustom").GetSection("sClave").Value,
+                            sEncrip = _dataEncriptadaReturn.sEncript.ToString()
+                        };
+
+                        var salidaDesencriptada = new RequestClientApi().Post(configuration.GetSection("ServicesAPIDSIA").GetSection("Desencriptar").Value, JsonConvert.SerializeObject(jsonDesRaw), dataBearer);
+
+                        if (salidaDesencriptada != "" && salidaDesencriptada != null)
+                        {
+                            _rows = JsonConvert.DeserializeObject<DesencriptarJson>(salidaDesencriptada);
+                            jsonlimpio = _rows.sJson.Replace(Environment.NewLine, "");
+                            jsonlimpio = jsonlimpio.Replace("  ", String.Empty);
+                            _dataBIC = JsonConvert.DeserializeObject<OfiBajIPECustom>(jsonlimpio);
+                            _data = _dataBIC.oLsOfiBajIPE;
+                        }
                     }
                 }
             }
@@ -713,55 +723,57 @@ namespace Hermes2018.Services
             List<oLsOfiBajIPE> _data = new List<oLsOfiBajIPE>();
             string jsonlimpio = "";
             var configuration = new RestApiDSIA().GetConfiguration();
-            var dataBearer = configuration.GetSection("ConfigureCustom").GetSection("Bearer").Value;
-
-            var jsonEncrip = new
+            var dataBearer = ObtieneTokenLogin(ConstLoginConstancias.UsernameGeneral, ConstLoginConstancias.PasswordGeneral);
+            if (!string.IsNullOrEmpty(dataBearer))
             {
-                sNumper = numPer.ToString(),
-                sNumTipoPer = tipoPer.ToString(),
-                sClave = configuration.GetSection("ConfigureCustom").GetSection("sClave").Value
-            };
-
-            var jsonRaw = new
-            {
-                sAesKey = configuration.GetSection("ConfigureCustom").GetSection("sClaveLogin").Value,
-                sClave = configuration.GetSection("ConfigureCustom").GetSection("sClave").Value,
-                sJson = JsonConvert.SerializeObject(jsonEncrip)
-            };
-
-            var salida = new RequestClientApi().Post(configuration.GetSection("ServicesAPIDSIA").GetSection("Encriptar").Value, JsonConvert.SerializeObject(jsonRaw), dataBearer);
-                        
-            if (salida != "" && salida != null)
-            {
-                _dataReturn = JsonConvert.DeserializeObject<EncriptarJson>(salida);
-
-                var jsonEncriptado = new
+                var jsonEncrip = new
                 {
-                    sEncript = _dataReturn.sEncrip.ToString()
+                    sNumper = numPer.ToString(),
+                    sNumTipoPer = tipoPer.ToString(),
+                    sClave = configuration.GetSection("ConfigureCustom").GetSection("sClave").Value
                 };
 
-                var salidaEncriptada = new RequestClientApi().Post(configuration.GetSection("ServicesAPIDSIA").GetSection("ObtieneOfiBajMAG").Value, JsonConvert.SerializeObject(jsonEncriptado), dataBearer);
-
-                if (salidaEncriptada != "" && salidaEncriptada != null)
+                var jsonRaw = new
                 {
-                    _dataEncriptadaReturn = JsonConvert.DeserializeObject<JsonForDesencript>(salidaEncriptada);
+                    sAesKey = configuration.GetSection("ConfigureCustom").GetSection("sClaveLogin").Value,
+                    sClave = configuration.GetSection("ConfigureCustom").GetSection("sClave").Value,
+                    sJson = JsonConvert.SerializeObject(jsonEncrip)
+                };
 
-                    var jsonDesRaw = new
+                var salida = new RequestClientApi().Post(configuration.GetSection("ServicesAPIDSIA").GetSection("Encriptar").Value, JsonConvert.SerializeObject(jsonRaw), dataBearer);
+
+                if (salida != "" && salida != null)
+                {
+                    _dataReturn = JsonConvert.DeserializeObject<EncriptarJson>(salida);
+
+                    var jsonEncriptado = new
                     {
-                        sAesKey = configuration.GetSection("ConfigureCustom").GetSection("sClaveLogin").Value,
-                        sClave = configuration.GetSection("ConfigureCustom").GetSection("sClave").Value,
-                        sEncrip = _dataEncriptadaReturn.sEncript.ToString()
+                        sEncript = _dataReturn.sEncrip.ToString()
                     };
 
-                    var salidaDesencriptada = new RequestClientApi().Post(configuration.GetSection("ServicesAPIDSIA").GetSection("Desencriptar").Value, JsonConvert.SerializeObject(jsonDesRaw), dataBearer);
+                    var salidaEncriptada = new RequestClientApi().Post(configuration.GetSection("ServicesAPIDSIA").GetSection("ObtieneOfiBajMAG").Value, JsonConvert.SerializeObject(jsonEncriptado), dataBearer);
 
-                    if (salidaDesencriptada != "" && salidaDesencriptada != null)
+                    if (salidaEncriptada != "" && salidaEncriptada != null)
                     {
-                        _rows = JsonConvert.DeserializeObject<DesencriptarJson>(salidaDesencriptada);
-                        jsonlimpio = _rows.sJson.Replace(Environment.NewLine, "");
-                        jsonlimpio = jsonlimpio.Replace("  ", String.Empty);
-                        _dataBMC = JsonConvert.DeserializeObject<OfiBajIPECustom>(jsonlimpio);
-                        _data = _dataBMC.oLsOfiBajIPE;
+                        _dataEncriptadaReturn = JsonConvert.DeserializeObject<JsonForDesencript>(salidaEncriptada);
+
+                        var jsonDesRaw = new
+                        {
+                            sAesKey = configuration.GetSection("ConfigureCustom").GetSection("sClaveLogin").Value,
+                            sClave = configuration.GetSection("ConfigureCustom").GetSection("sClave").Value,
+                            sEncrip = _dataEncriptadaReturn.sEncript.ToString()
+                        };
+
+                        var salidaDesencriptada = new RequestClientApi().Post(configuration.GetSection("ServicesAPIDSIA").GetSection("Desencriptar").Value, JsonConvert.SerializeObject(jsonDesRaw), dataBearer);
+
+                        if (salidaDesencriptada != "" && salidaDesencriptada != null)
+                        {
+                            _rows = JsonConvert.DeserializeObject<DesencriptarJson>(salidaDesencriptada);
+                            jsonlimpio = _rows.sJson.Replace(Environment.NewLine, "");
+                            jsonlimpio = jsonlimpio.Replace("  ", String.Empty);
+                            _dataBMC = JsonConvert.DeserializeObject<OfiBajIPECustom>(jsonlimpio);
+                            _data = _dataBMC.oLsOfiBajIPE;
+                        }
                     }
                 }
             }
@@ -776,58 +788,59 @@ namespace Hermes2018.Services
             VisaCustom _dataVS = new VisaCustom();
             List<oLsVisa> _data = new List<oLsVisa>();
             string jsonlimpio = "";
-
             var configuration = new RestApiDSIA().GetConfiguration();
-            var dataBearer = configuration.GetSection("ConfigureCustom").GetSection("Bearer").Value;
-
-            var jsonEncrip = new
+            var dataBearer = ObtieneTokenLogin(ConstLoginConstancias.UsernameGeneral, ConstLoginConstancias.PasswordGeneral);
+            if (!string.IsNullOrEmpty(dataBearer))
             {
-                sNumper = numPer.ToString(),
-                sNumTipoPer = tipoPer.ToString(),
-                sClave = configuration.GetSection("ConfigureCustom").GetSection("sClave").Value
-            };
-
-            var jsonRaw = new
-            {
-                sAesKey = configuration.GetSection("ConfigureCustom").GetSection("sClaveLogin").Value,
-                sClave = configuration.GetSection("ConfigureCustom").GetSection("sClave").Value,
-                sJson = JsonConvert.SerializeObject(jsonEncrip)
-            };
-
-            var salida = new RequestClientApi().Post(configuration.GetSection("ServicesAPIDSIA").GetSection("Encriptar").Value, JsonConvert.SerializeObject(jsonRaw), dataBearer);
-
-
-            if (salida != "" && salida != null)
-            {
-                _dataReturn = JsonConvert.DeserializeObject<EncriptarJson>(salida);
-
-                var jsonEncriptado = new
+                var jsonEncrip = new
                 {
-                    sEncript = _dataReturn.sEncrip.ToString()
+                    sNumper = numPer.ToString(),
+                    sNumTipoPer = tipoPer.ToString(),
+                    sClave = configuration.GetSection("ConfigureCustom").GetSection("sClave").Value
                 };
 
-                var salidaEncriptada = new RequestClientApi().Post(configuration.GetSection("ServicesAPIDSIA").GetSection("ObtieneVisa").Value, JsonConvert.SerializeObject(jsonEncriptado), dataBearer);
-
-                if (salidaEncriptada != "" && salidaEncriptada != null)
+                var jsonRaw = new
                 {
-                    _dataEncriptadaReturn = JsonConvert.DeserializeObject<JsonForDesencript>(salidaEncriptada);
+                    sAesKey = configuration.GetSection("ConfigureCustom").GetSection("sClaveLogin").Value,
+                    sClave = configuration.GetSection("ConfigureCustom").GetSection("sClave").Value,
+                    sJson = JsonConvert.SerializeObject(jsonEncrip)
+                };
 
-                    var jsonDesRaw = new
+                var salida = new RequestClientApi().Post(configuration.GetSection("ServicesAPIDSIA").GetSection("Encriptar").Value, JsonConvert.SerializeObject(jsonRaw), dataBearer);
+
+
+                if (salida != "" && salida != null)
+                {
+                    _dataReturn = JsonConvert.DeserializeObject<EncriptarJson>(salida);
+
+                    var jsonEncriptado = new
                     {
-                        sAesKey = configuration.GetSection("ConfigureCustom").GetSection("sClaveLogin").Value,
-                        sClave = configuration.GetSection("ConfigureCustom").GetSection("sClave").Value,
-                        sEncrip = _dataEncriptadaReturn.sEncript.ToString()
+                        sEncript = _dataReturn.sEncrip.ToString()
                     };
 
-                    var salidaDesencriptada = new RequestClientApi().Post(configuration.GetSection("ServicesAPIDSIA").GetSection("Desencriptar").Value, JsonConvert.SerializeObject(jsonDesRaw), dataBearer);
+                    var salidaEncriptada = new RequestClientApi().Post(configuration.GetSection("ServicesAPIDSIA").GetSection("ObtieneVisa").Value, JsonConvert.SerializeObject(jsonEncriptado), dataBearer);
 
-                    if (salidaDesencriptada != "" && salidaDesencriptada != null)
+                    if (salidaEncriptada != "" && salidaEncriptada != null)
                     {
-                        _rows = JsonConvert.DeserializeObject<DesencriptarJson>(salidaDesencriptada);
-                        jsonlimpio = _rows.sJson.Replace(Environment.NewLine, "");
-                        jsonlimpio = jsonlimpio.Replace("  ", String.Empty);
-                        _dataVS = JsonConvert.DeserializeObject<VisaCustom>(jsonlimpio);
-                        _data = _dataVS.oLsVisa;
+                        _dataEncriptadaReturn = JsonConvert.DeserializeObject<JsonForDesencript>(salidaEncriptada);
+
+                        var jsonDesRaw = new
+                        {
+                            sAesKey = configuration.GetSection("ConfigureCustom").GetSection("sClaveLogin").Value,
+                            sClave = configuration.GetSection("ConfigureCustom").GetSection("sClave").Value,
+                            sEncrip = _dataEncriptadaReturn.sEncript.ToString()
+                        };
+
+                        var salidaDesencriptada = new RequestClientApi().Post(configuration.GetSection("ServicesAPIDSIA").GetSection("Desencriptar").Value, JsonConvert.SerializeObject(jsonDesRaw), dataBearer);
+
+                        if (salidaDesencriptada != "" && salidaDesencriptada != null)
+                        {
+                            _rows = JsonConvert.DeserializeObject<DesencriptarJson>(salidaDesencriptada);
+                            jsonlimpio = _rows.sJson.Replace(Environment.NewLine, "");
+                            jsonlimpio = jsonlimpio.Replace("  ", String.Empty);
+                            _dataVS = JsonConvert.DeserializeObject<VisaCustom>(jsonlimpio);
+                            _data = _dataVS.oLsVisa;
+                        }
                     }
                 }
             }
@@ -843,56 +856,58 @@ namespace Hermes2018.Services
             List<oLsVisa> _data = new List<oLsVisa>();
             string jsonlimpio = "";
             var configuration = new RestApiDSIA().GetConfiguration();
-            var dataBearer = configuration.GetSection("ConfigureCustom").GetSection("Bearer").Value;
-
-            var jsonEncrip = new
+            var dataBearer = ObtieneTokenLogin(ConstLoginConstancias.UsernameGeneral, ConstLoginConstancias.PasswordGeneral);
+            if (!string.IsNullOrEmpty(dataBearer))
             {
-                sNumper = numPer.ToString(),
-                sNumTipoPer = tipoPer.ToString(),
-                sClave = configuration.GetSection("ConfigureCustom").GetSection("sClave").Value
-            };
-
-            var jsonRaw = new
-            {
-                sAesKey = configuration.GetSection("ConfigureCustom").GetSection("sClaveLogin").Value,
-                sClave = configuration.GetSection("ConfigureCustom").GetSection("sClave").Value,
-                sJson = JsonConvert.SerializeObject(jsonEncrip)
-            };
-
-            var salida = new RequestClientApi().Post(configuration.GetSection("ServicesAPIDSIA").GetSection("Encriptar").Value, JsonConvert.SerializeObject(jsonRaw), dataBearer);
-                                    
-            if (salida != "" && salida != null)
-            {
-                _dataReturn = JsonConvert.DeserializeObject<EncriptarJson>(salida);
-
-                var jsonEncriptado = new
+                var jsonEncrip = new
                 {
-                    sEncript = _dataReturn.sEncrip.ToString()
+                    sNumper = numPer.ToString(),
+                    sNumTipoPer = tipoPer.ToString(),
+                    sClave = configuration.GetSection("ConfigureCustom").GetSection("sClave").Value
                 };
 
-                var salidaEncriptada = new RequestClientApi().Post(configuration.GetSection("ServicesAPIDSIA").GetSection("ObtieneVisaDep").Value, JsonConvert.SerializeObject(jsonEncriptado), dataBearer);
-
-                if (salidaEncriptada != "" && salidaEncriptada != null)
+                var jsonRaw = new
                 {
-                    _dataEncriptadaReturn = JsonConvert.DeserializeObject<JsonForDesencript>(salidaEncriptada);
+                    sAesKey = configuration.GetSection("ConfigureCustom").GetSection("sClaveLogin").Value,
+                    sClave = configuration.GetSection("ConfigureCustom").GetSection("sClave").Value,
+                    sJson = JsonConvert.SerializeObject(jsonEncrip)
+                };
 
-                    var jsonDesRaw = new
+                var salida = new RequestClientApi().Post(configuration.GetSection("ServicesAPIDSIA").GetSection("Encriptar").Value, JsonConvert.SerializeObject(jsonRaw), dataBearer);
+
+                if (salida != "" && salida != null)
+                {
+                    _dataReturn = JsonConvert.DeserializeObject<EncriptarJson>(salida);
+
+                    var jsonEncriptado = new
                     {
-                        sAesKey = configuration.GetSection("ConfigureCustom").GetSection("sClaveLogin").Value,
-                        sClave = configuration.GetSection("ConfigureCustom").GetSection("sClave").Value,
-                        sEncrip = _dataEncriptadaReturn.sEncript.ToString()
+                        sEncript = _dataReturn.sEncrip.ToString()
                     };
 
-                    var salidaDesencriptada = new RequestClientApi().Post(configuration.GetSection("ServicesAPIDSIA").GetSection("Desencriptar").Value, JsonConvert.SerializeObject(jsonDesRaw), dataBearer);
+                    var salidaEncriptada = new RequestClientApi().Post(configuration.GetSection("ServicesAPIDSIA").GetSection("ObtieneVisaDep").Value, JsonConvert.SerializeObject(jsonEncriptado), dataBearer);
 
-                    if (salidaDesencriptada != "" && salidaDesencriptada != null)
+                    if (salidaEncriptada != "" && salidaEncriptada != null)
                     {
-                        _rows = JsonConvert.DeserializeObject<DesencriptarJson>(salidaDesencriptada);
-                        jsonlimpio = _rows.sJson.Replace(Environment.NewLine, "");
-                        jsonlimpio = jsonlimpio.Replace("  ", String.Empty);
-                        _dataVDC = JsonConvert.DeserializeObject<VisaDepCustom>(jsonlimpio);
-                        _data = _dataVDC.oLsVisaDep;
+                        _dataEncriptadaReturn = JsonConvert.DeserializeObject<JsonForDesencript>(salidaEncriptada);
 
+                        var jsonDesRaw = new
+                        {
+                            sAesKey = configuration.GetSection("ConfigureCustom").GetSection("sClaveLogin").Value,
+                            sClave = configuration.GetSection("ConfigureCustom").GetSection("sClave").Value,
+                            sEncrip = _dataEncriptadaReturn.sEncript.ToString()
+                        };
+
+                        var salidaDesencriptada = new RequestClientApi().Post(configuration.GetSection("ServicesAPIDSIA").GetSection("Desencriptar").Value, JsonConvert.SerializeObject(jsonDesRaw), dataBearer);
+
+                        if (salidaDesencriptada != "" && salidaDesencriptada != null)
+                        {
+                            _rows = JsonConvert.DeserializeObject<DesencriptarJson>(salidaDesencriptada);
+                            jsonlimpio = _rows.sJson.Replace(Environment.NewLine, "");
+                            jsonlimpio = jsonlimpio.Replace("  ", String.Empty);
+                            _dataVDC = JsonConvert.DeserializeObject<VisaDepCustom>(jsonlimpio);
+                            _data = _dataVDC.oLsVisaDep;
+
+                        }
                     }
                 }
             }
@@ -908,120 +923,154 @@ namespace Hermes2018.Services
             List<oLsPRODEP> _data = new List<oLsPRODEP>();
             string jsonlimpio = "";
             var configuration = new RestApiDSIA().GetConfiguration();
-            var dataBearer = configuration.GetSection("ConfigureCustom").GetSection("Bearer").Value;
-
-            var jsonEncrip = new
+            var dataBearer = ObtieneTokenLogin(ConstLoginConstancias.UsernameGeneral, ConstLoginConstancias.PasswordGeneral);
+            if (!string.IsNullOrEmpty(dataBearer))
             {
-                sNumper = numPer.ToString(),
-                sNumTipoPer = tipoPer.ToString(),
-                sClave = configuration.GetSection("ConfigureCustom").GetSection("sClave").Value
-            };
-
-            var jsonRaw = new
-            {
-                sAesKey = configuration.GetSection("ConfigureCustom").GetSection("sClaveLogin").Value,
-                sClave = configuration.GetSection("ConfigureCustom").GetSection("sClave").Value,
-                sJson = JsonConvert.SerializeObject(jsonEncrip)
-            };
-
-            var salida = new RequestClientApi().Post(configuration.GetSection("ServicesAPIDSIA").GetSection("Encriptar").Value, JsonConvert.SerializeObject(jsonRaw), dataBearer);
-
-            if (salida != "" && salida != null)
-            {
-                _dataReturn = JsonConvert.DeserializeObject<EncriptarJson>(salida);
-
-                var jsonEncriptado = new
+                var jsonEncrip = new
                 {
-                    sEncript = _dataReturn.sEncrip.ToString()
+                    sNumper = numPer.ToString(),
+                    sNumTipoPer = tipoPer.ToString(),
+                    sClave = configuration.GetSection("ConfigureCustom").GetSection("sClave").Value
                 };
 
-                var salidaEncriptada = new RequestClientApi().Post(configuration.GetSection("ServicesAPIDSIA").GetSection("ObtienePRODep").Value, JsonConvert.SerializeObject(jsonEncriptado), dataBearer);
-
-                if (salidaEncriptada != "" && salidaEncriptada != null)
+                var jsonRaw = new
                 {
-                    _dataEncriptadaReturn = JsonConvert.DeserializeObject<JsonForDesencript>(salidaEncriptada);
+                    sAesKey = configuration.GetSection("ConfigureCustom").GetSection("sClaveLogin").Value,
+                    sClave = configuration.GetSection("ConfigureCustom").GetSection("sClave").Value,
+                    sJson = JsonConvert.SerializeObject(jsonEncrip)
+                };
 
-                    var jsonDesRaw = new
+                var salida = new RequestClientApi().Post(configuration.GetSection("ServicesAPIDSIA").GetSection("Encriptar").Value, JsonConvert.SerializeObject(jsonRaw), dataBearer);
+
+                if (salida != "" && salida != null)
+                {
+                    _dataReturn = JsonConvert.DeserializeObject<EncriptarJson>(salida);
+
+                    var jsonEncriptado = new
                     {
-                        sAesKey = configuration.GetSection("ConfigureCustom").GetSection("sClaveLogin").Value,
-                        sClave = configuration.GetSection("ConfigureCustom").GetSection("sClave").Value,
-                        sEncrip = _dataEncriptadaReturn.sEncript.ToString()
+                        sEncript = _dataReturn.sEncrip.ToString()
                     };
 
-                    var salidaDesencriptada = new RequestClientApi().Post(configuration.GetSection("ServicesAPIDSIA").GetSection("Desencriptar").Value, JsonConvert.SerializeObject(jsonDesRaw), dataBearer);
+                    var salidaEncriptada = new RequestClientApi().Post(configuration.GetSection("ServicesAPIDSIA").GetSection("ObtienePRODep").Value, JsonConvert.SerializeObject(jsonEncriptado), dataBearer);
 
-                    if (salidaDesencriptada != "" && salidaDesencriptada != null)
+                    if (salidaEncriptada != "" && salidaEncriptada != null)
                     {
-                        _rows = JsonConvert.DeserializeObject<DesencriptarJson>(salidaDesencriptada);
-                        jsonlimpio = _rows.sJson.Replace(Environment.NewLine, "");
-                        jsonlimpio = jsonlimpio.Replace("  ", String.Empty);
-                        _dataprodep = JsonConvert.DeserializeObject<ProdepCustom>(jsonlimpio);
-                        _data = _dataprodep.oLsPRODEP;
+                        _dataEncriptadaReturn = JsonConvert.DeserializeObject<JsonForDesencript>(salidaEncriptada);
+
+                        var jsonDesRaw = new
+                        {
+                            sAesKey = configuration.GetSection("ConfigureCustom").GetSection("sClaveLogin").Value,
+                            sClave = configuration.GetSection("ConfigureCustom").GetSection("sClave").Value,
+                            sEncrip = _dataEncriptadaReturn.sEncript.ToString()
+                        };
+
+                        var salidaDesencriptada = new RequestClientApi().Post(configuration.GetSection("ServicesAPIDSIA").GetSection("Desencriptar").Value, JsonConvert.SerializeObject(jsonDesRaw), dataBearer);
+
+                        if (salidaDesencriptada != "" && salidaDesencriptada != null)
+                        {
+                            _rows = JsonConvert.DeserializeObject<DesencriptarJson>(salidaDesencriptada);
+                            jsonlimpio = _rows.sJson.Replace(Environment.NewLine, "");
+                            jsonlimpio = jsonlimpio.Replace("  ", String.Empty);
+                            _dataprodep = JsonConvert.DeserializeObject<ProdepCustom>(jsonlimpio);
+                            _data = _dataprodep.oLsPRODEP;
+                        }
                     }
                 }
             }
             return _data;
         }
 
-        public oLoginTP ObtieneCveLogin_TP(string sCveLogin)
+        public List<OLsLoginNP> ObtieneInfoCveLogin_NPER(string sCveLogin, int? numPer)
         {
-            EncriptarJson _dataReturn = new EncriptarJson();
-            JsonForDesencript _dataEncriptadaReturn = new JsonForDesencript();
-            DesencriptarJson _rows = new DesencriptarJson();
-            LoginDataCustom _loginDataCustom = new LoginDataCustom();
-            oLoginTP _data = new oLoginTP();
+            EncriptarJson _encriptarJson = new EncriptarJson();
+            JsonForDesencript _jsonForDesencript = new JsonForDesencript();
+            DesencriptarJson _desencriptarJson = new DesencriptarJson();
+            LoginInfoDatacustom _loginDataCustom = new LoginInfoDatacustom();
+            List<OLsLoginNP> _oLsLoginNP = new List<OLsLoginNP>();
             var configuration = new RestApiDSIA().GetConfiguration();
-            var dataBearer = configuration.GetSection("ConfigureCustom").GetSection("Bearer").Value;
+            var dataBearer = ObtieneTokenLogin(ConstLoginConstancias.UsernameGeneral, ConstLoginConstancias.PasswordGeneral);
             string jsonlimpio = "";
-
-            var jsonForEncript = new
+            if (!string.IsNullOrEmpty(dataBearer))
             {
-                sCveLogin = sCveLogin,
-                sClave = configuration.GetSection("ConfigureCustom").GetSection("sClave").Value
-            };
-
-            var jsonRaw = new
-            {
-                sAesKey = configuration.GetSection("ConfigureCustom").GetSection("sClaveLogin").Value,
-                sClave = configuration.GetSection("ConfigureCustom").GetSection("sClave").Value,
-                sJson = JsonConvert.SerializeObject(jsonForEncript)
-            };
-
-            var salida = new RequestClientApi().Post(configuration.GetSection("ServicesAPIDSIA").GetSection("Encriptar").Value, JsonConvert.SerializeObject(jsonRaw), dataBearer);
-
-            if (salida != "" && salida != null)
-            {
-                _dataReturn = JsonConvert.DeserializeObject<EncriptarJson>(salida);
-                var jsonEncriptado = new
+                var jsonForEncript = new
                 {
-                    sEncript = _dataReturn.sEncrip.ToString()
+                    sCveLogin = (!string.IsNullOrEmpty(sCveLogin)) ? sCveLogin : null,
+                    sNPer = (numPer != 0 ) ? numPer.ToString() : null,
+                    sClave = configuration.GetSection("ConfigureCustom").GetSection("sClave").Value
                 };
 
-                var salidaEncriptada = new RequestClientApi().Post(configuration.GetSection("ServicesAPIDSIA").GetSection("ObtieneCveLogin_TP").Value, JsonConvert.SerializeObject(jsonEncriptado), dataBearer);
-
-                if (salidaEncriptada != "" && salidaEncriptada != null)
+                var jsonRaw = new
                 {
-                    _dataEncriptadaReturn = JsonConvert.DeserializeObject<JsonForDesencript>(salidaEncriptada);
-                    var jsonDesRaw = new
+                    sAesKey = configuration.GetSection("ConfigureCustom").GetSection("sClaveLogin").Value,
+                    sClave = configuration.GetSection("ConfigureCustom").GetSection("sClave").Value,
+                    sJson = JsonConvert.SerializeObject(jsonForEncript)
+                };
+
+                var salida = new RequestClientApi().Post(configuration.GetSection("ServicesAPIDSIA").GetSection("Encriptar").Value, JsonConvert.SerializeObject(jsonRaw), dataBearer);
+
+                if (salida != "" && salida != null)
+                {
+                    _encriptarJson = JsonConvert.DeserializeObject<EncriptarJson>(salida);
+                    var jsonEncriptado = new
                     {
-                        sAesKey = configuration.GetSection("ConfigureCustom").GetSection("sClaveLogin").Value,
-                        sClave = configuration.GetSection("ConfigureCustom").GetSection("sClave").Value,
-                        sEncrip = _dataEncriptadaReturn.sEncript.ToString()
+                        sEncript = _encriptarJson.sEncrip.ToString()
                     };
 
-                    var salidaDesencriptada = new RequestClientApi().Post(configuration.GetSection("ServicesAPIDSIA").GetSection("Desencriptar").Value, JsonConvert.SerializeObject(jsonDesRaw), dataBearer);
+                    var salidaEncriptada = new RequestClientApi().Post(configuration.GetSection("ServicesAPIDSIA").GetSection("ObtieneInfoCveLogin_NPER").Value, JsonConvert.SerializeObject(jsonEncriptado), dataBearer);
 
-                    if (salidaDesencriptada != "" && salidaDesencriptada != null)
+                    if (salidaEncriptada != "" && salidaEncriptada != null)
                     {
-                        _rows = JsonConvert.DeserializeObject<DesencriptarJson>(salidaDesencriptada);
-                        jsonlimpio = _rows.sJson.Replace(Environment.NewLine, "");
-                        jsonlimpio = jsonlimpio.Replace("  ", String.Empty);
-                        _loginDataCustom = JsonConvert.DeserializeObject<LoginDataCustom>(jsonlimpio);
-                        _data = _loginDataCustom.oLoginTP;
+                        _jsonForDesencript = JsonConvert.DeserializeObject<JsonForDesencript>(salidaEncriptada);
+                        var jsonDesRaw = new
+                        {
+                            sAesKey = configuration.GetSection("ConfigureCustom").GetSection("sClaveLogin").Value,
+                            sClave = configuration.GetSection("ConfigureCustom").GetSection("sClave").Value,
+                            sEncrip = _jsonForDesencript.sEncript.ToString()
+                        };
+
+                        var salidaDesencriptada = new RequestClientApi().Post(configuration.GetSection("ServicesAPIDSIA").GetSection("Desencriptar").Value, JsonConvert.SerializeObject(jsonDesRaw), dataBearer);
+
+                        if (salidaDesencriptada != "" && salidaDesencriptada != null)
+                        {
+                            _desencriptarJson = JsonConvert.DeserializeObject<DesencriptarJson>(salidaDesencriptada);
+                            jsonlimpio = _desencriptarJson.sJson.Replace(Environment.NewLine, "");
+                            jsonlimpio = jsonlimpio.Replace("  ", String.Empty);
+                            _loginDataCustom = JsonConvert.DeserializeObject<LoginInfoDatacustom>(jsonlimpio);
+                            _oLsLoginNP = _loginDataCustom.oLsLoginNP;
+                        }
                     }
                 }
             }
-            return _data;
+            return _oLsLoginNP;
+        }
+        public string ObtieneTokenLogin(string username, string password)
+        {
+            LoginCustom _login = new LoginCustom();
+            var configuration = new RestApiDSIA().GetConfiguration();
+            var dataBearer = configuration.GetSection("ConfigureCustom").GetSection("Bearer").Value;
+            string token = "";
+            var jsonUsrInfoCustom = new
+            {
+                sUserId = username,
+                sPass = password,
+                sClave = configuration.GetSection("ConfigureCustom").GetSection("sClave").Value
+            };
+
+            var jsonLoginCustom = new
+            {
+                sUserId = username,
+                sPass = password,
+                sClave = configuration.GetSection("ConfigureCustom").GetSection("sClave").Value,
+                usrInfo = jsonUsrInfoCustom
+            };
+
+            var salida = new RequestClientApi().Post(configuration.GetSection("ServicesAPIDSIA").GetSection("Login2").Value, JsonConvert.SerializeObject(jsonLoginCustom), dataBearer);
+            if (salida != "" && salida != null)
+            {
+                _login = JsonConvert.DeserializeObject<LoginCustom>(salida);
+                token = _login.UsrToken.sTokenUV;
+            }
+            return token;
         }
     }
 }

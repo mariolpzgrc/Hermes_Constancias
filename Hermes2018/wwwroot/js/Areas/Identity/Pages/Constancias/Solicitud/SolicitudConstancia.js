@@ -30,13 +30,12 @@ $(document).ready(function () {
     objUser.username = $("#user").text();
     objUser.usersession = $('#FolioSession').val();
     objWebRoot.token = $('#TokenWebApi').val();
-    console.log(objWebRoot.token);
     ObtenerTipodePersonalByUser(objUser.username);
     ObtenerSeguimientosConstancia(1);
 });
 
 function ObtenerTipodePersonalByUser(username) {
-    objTipoPersonalByUser.urln = objWebRoot.route + 'api/constancias/ObtieneCveLogin_TP'
+    objTipoPersonalByUser.urln = objWebRoot.route + 'api/constancias/ObtieneInfoCveLogin_NPER'
     $.ajax({
         url: objTipoPersonalByUser.urln,
         data: JSON.stringify({ sCveLogin: username }),
@@ -48,9 +47,9 @@ function ObtenerTipodePersonalByUser(username) {
         },
         success: function (data) {
             if (data) {
-                objUser.numeroPersonal = data.iNumPer;
                 objTipoPersonalByUser.info = Object.keys(new Object());
-                objTipoPersonalByUser.info = data.TipoPersonal;
+                objTipoPersonalByUser.info = data;
+                objUser.numeroPersonal = data[0].iNumPer;
             }
         },
         error: function (xhr, estatus, error) {
@@ -61,7 +60,7 @@ function ObtenerTipodePersonalByUser(username) {
                 $('#select-tipos-personal').empty();
                 $('#select-tipos-personal').append($('<option></option>').val("0").html("Seleccione el tipo de personal."));
                 $.each(objTipoPersonalByUser.info, function (index, tipoPersonal) {
-                    $('#select-tipos-personal').append($('<option></option>').val(tipoPersonal.Id).html(tipoPersonal.Id + " - " + tipoPersonal.TipoPersonal));
+                    $('#select-tipos-personal').append($('<option></option>').val(tipoPersonal.iTipo_Per).html(tipoPersonal.sTipo_Per));
                 });
             } else {
                 $('#select-tipos-personal').empty();

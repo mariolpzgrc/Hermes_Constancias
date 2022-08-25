@@ -99,7 +99,7 @@ function ObtenerConstancia(id) {
             ObtenerInfoConstancia();
             break;
         case 5:
-            if (objUserInfo.tipoPersonal != Eventual) {           
+            if (objUserInfo.tipoPersonal != Eventual) {
                 objGetInfoConstancia.urlCons = 'api/constancias/ObtieneIpe';
                 ObtenerInfoConstancia();
             } else {
@@ -141,7 +141,7 @@ function ObtenerConstancia(id) {
         case 10:
             if (objUserInfo.tipoPersonal === Funcionario || objUserInfo.tipoPersonal === Confianza || objUserInfo.tipoPersonal === Academico) {
                 objGetInfoConstancia.urlCons = 'api/constancias/ObtieneVisaDep';
-                ObtenerConstanciaVisaDep();
+                ObtenerInfoConstancia();
             } else {
                 window.history.back();
                 alert(objGetInfoConstancia.mensajeAdvertencia);
@@ -150,7 +150,7 @@ function ObtenerConstancia(id) {
         case 11:
             if (objUserInfo.tipoPersonal === Academico) {
                 objGetInfoConstancia.urlCons = 'api/constancias/ObtienePRODep';
-                ObtenerConstanciaVisaDep();
+                ObtenerInfoConstancia();
             } else {
                 window.history.back();
                 alert(objGetInfoConstancia.mensajeAdvertencia);
@@ -159,7 +159,7 @@ function ObtenerConstancia(id) {
         case 12:
             if (objUserInfo.tipoPersonal === Academico) {
                 objGetInfoConstancia.urlCons = '';
-                ObtenerConstanciaVisaDep();
+                ObtenerInfoConstancia();
             } else {
                 window.history.back();
                 alert(objGetInfoConstancia.mensajeAdvertencia);
@@ -168,7 +168,7 @@ function ObtenerConstancia(id) {
         case 13:
             if (objUserInfo.tipoPersonal !== Eventual) {
                 objGetInfoConstancia.urlCons = '';
-                ObtenerConstanciaVisaDep();
+                ObtenerInfoConstancia();
             } else {
                 window.history.back();
                 alert(objGetInfoConstancia.mensajeAdvertencia);
@@ -177,7 +177,7 @@ function ObtenerConstancia(id) {
         case 14:
             if (objUserInfo.tipoPersonal !== Eventual) {
                 objGetInfoConstancia.urlCons = '';
-                ObtenerConstanciaVisaDep();
+                ObtenerInfoConstancia();
             } else {
                 window.history.back();
                 alert(objGetInfoConstancia.mensajeAdvertencia);
@@ -208,35 +208,38 @@ function ObtenerInfoConstancia() {
                 objGetInfoConstancia.info = Object.keys(new Object());
                 objGetInfoConstancia.info = data[0];
             }
-            else
-            {
+            else {
                 alert(objGetInfoConstancia.mensajeError);
             }
         },
         error: function () {
             alert(objGetInfoConstancia.mensajeError);
-        }, 
+        },
         complete: function (xhr, estatus) {
-            $('#nombrePersonal').text(objGetInfoConstancia.info.sNombre);
-            $('#numeroPersonal').text(objGetInfoConstancia.info.sNumPer);
-            $('#fechaIngreso').text((new Date(objGetInfoConstancia.info.dtFIngreso).toLocaleDateString("es-ES", options).toLocaleUpperCase()));
-            objSegConstancia.CveDep = objGetInfoConstancia.info.sNumDep;
-            $('#dependencia').text(objGetInfoConstancia.info.sDescDep);
-            objSegConstancia.NombreDep = objGetInfoConstancia.info.sDescDep;
-            $('#region').text(objGetInfoConstancia.info.sDesRegion);
-            objSegConstancia.idRegion = objGetInfoConstancia.info.sRegion;
-            objSegConstancia.Region = objGetInfoConstancia.info.sDesRegion;
-            $('#tipoPersonal').text(objGetInfoConstancia.info.sDesTPE);
-            $('#tipoContratacion').text(objGetInfoConstancia.info.sDesCont);
-            $('#categoriasueldo').text(objGetInfoConstancia.info.sDescCat);
-            $('#puesto').text(objGetInfoConstancia.info.sDesPuesto);
-            sueldo = (objGetInfoConstancia.info.sSueldo !== "0") ? objGetInfoConstancia.info.sSueldo : (objGetInfoConstancia.info.sSuelPrest !== "0") ? objGetInfoConstancia.info.sSuelPrest : "0.00";
-            console.log(sueldo);
-            valor = parseFloat(sueldo).toFixed(2);
-            letras = numeroALetras(valor, monedaMXN);
-            $('#sueldo').text("$ " + sueldo + " - " + letras + " 00/100 M.N.");
-            $('#periodo').text(objGetInfoConstancia.info.sNPeri);
-            $('#horas').text(objGetInfoConstancia.info.sHrs);
+            if (objGetInfoConstancia.info) {
+                $('#nombrePersonal').text(objGetInfoConstancia.info.sNombre);
+                $('#numeroPersonal').text(objGetInfoConstancia.info.sNumPer);
+                $('#fechaIngreso').text((new Date(objGetInfoConstancia.info.dtFIngreso).toLocaleDateString("es-ES", options).toLocaleUpperCase()));
+                objSegConstancia.CveDep = objGetInfoConstancia.info.sNumDep;
+                $('#dependencia').text(objGetInfoConstancia.info.sDescDep);
+                objSegConstancia.NombreDep = objGetInfoConstancia.info.sDescDep;
+                $('#region').text(objGetInfoConstancia.info.sDesRegion);
+                objSegConstancia.idRegion = objGetInfoConstancia.info.sRegion;
+                objSegConstancia.Region = objGetInfoConstancia.info.sDesRegion;
+                $('#tipoPersonal').text(objGetInfoConstancia.info.sDesTPE);
+                $('#tipoContratacion').text(objGetInfoConstancia.info.sDesCont);
+                $('#categoriasueldo').text(objGetInfoConstancia.info.sDescCat);
+                $('#puesto').text(objGetInfoConstancia.info.sDesPuesto);
+                sueldo = (objGetInfoConstancia.info.sSueldo != null) ? objGetInfoConstancia.info.sSueldo : (objGetInfoConstancia.info.sSuelPrest != null) ? objGetInfoConstancia.info.sSuelPrest : "0.00";
+                console.log(sueldo);
+                valor = parseFloat(sueldo).toFixed(2);
+                letras = numeroALetras(valor, monedaMXN);
+                $('#sueldo').text("$ " + sueldo + " - " + letras + " 00/100 M.N.");
+                $('#periodo').text(objGetInfoConstancia.info.sNPeri);
+                $('#horas').text(objGetInfoConstancia.info.sHrs);
+            } else {
+                alert("No se pudo carggar la información.");
+            }
         }
     });
 }
