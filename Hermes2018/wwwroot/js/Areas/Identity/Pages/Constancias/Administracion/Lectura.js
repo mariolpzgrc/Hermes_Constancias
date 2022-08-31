@@ -42,19 +42,22 @@ function ObtenerInfoConstancia() {
             xhr.setRequestHeader("Authorization", "Bearer " + objWebRoot.token);
         },
         success: function (data) {
-            objGetInfoConstancia.info = Object.keys(new Object());
-            objGetInfoConstancia.info = data;
-            $('#folio').text(Mayuscula(objGetInfoConstancia.info.Folio));
-            $('#tipoConstancia').text(objGetInfoConstancia.info.NombreConstancia);
-            $('#idtipoConstancia').text(objGetInfoConstancia.info.ConstanciaId)
-            $('#tituloConstancia').text(objGetInfoConstancia.info.NombreConstancia);
-            $('#constanciaPara').text(objGetInfoConstancia.info.NombreUsuario.toUpperCase() +' ('+ objGetInfoConstancia.info.UsuarioId+')');
-            objInfoUserConstancia.NoPersonal = objGetInfoConstancia.info.NoPersonal;
-            objInfoUserConstancia.tipoConstancia = objGetInfoConstancia.info.ConstanciaId;
-            objInfoUserConstancia.username = objGetInfoConstancia.info.UsuarioId;
-            objInfoUserConstancia.estado = objGetInfoConstancia.info.EstadoId;
-            OcultarElementos(objInfoUserConstancia.estado);
-            ObtenerTipodePersonalByUser(objInfoUserConstancia.username);
+            if (data) {
+                objGetInfoConstancia.info = Object.keys(new Object());
+                objGetInfoConstancia.info = data;
+                $('#folio').text(Mayuscula(objGetInfoConstancia.info.Folio));
+                $('#tipoConstancia').text(objGetInfoConstancia.info.NombreConstancia);
+                $('#idtipoConstancia').text(objGetInfoConstancia.info.ConstanciaId)
+                $('#tituloConstancia').text(objGetInfoConstancia.info.NombreConstancia);
+                $('#constanciaPara').text(objGetInfoConstancia.info.NombreUsuario.toUpperCase() + ' (' + objGetInfoConstancia.info.UsuarioId + ')');
+                objInfoUserConstancia.NoPersonal = objGetInfoConstancia.info.NoPersonal;
+                objGetInfoConstancia.tipoPersonal = objGetInfoConstancia.info.TipoPersonal;
+                objInfoUserConstancia.tipoConstancia = objGetInfoConstancia.info.ConstanciaId;
+                objInfoUserConstancia.username = objGetInfoConstancia.info.UsuarioId;
+                objInfoUserConstancia.estado = objGetInfoConstancia.info.EstadoId;
+                OcultarElementos(objInfoUserConstancia.estado);
+                ObtenerConstancia(objInfoUserConstancia.tipoConstancia);
+            }
         },
         error: function () {
             alert('No pudó terminar la operación');
@@ -102,31 +105,8 @@ function OcultarElementos(estado) {
     }
 }
 
-function ObtenerTipodePersonalByUser(username) {
-    objGetInfoUSerConstancia.urln = objWebRoot.route + 'api/constancias/ObtieneCveLogin_TP'
-    $.ajax({
-        url: objGetInfoUSerConstancia.urln,
-        data: JSON.stringify({ sCveLogin: username }),
-        type: "POST",
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        beforeSend: function (xhr) {
-            xhr.setRequestHeader("Authorization", "Bearer " + objWebRoot.token);
-        },
-        success: function (data) {
-            objGetInfoUSerConstancia.info = Object.keys(new Object());
-            objGetInfoUSerConstancia.info = data;
-            objInfoUserConstancia.tipoPersonal = objGetInfoUSerConstancia.info.TipoPersonal[0].Id;
-            $('#idtpersonal').text(objInfoUserConstancia.tipoPersonal);
-            ObtenerConstancia(objInfoUserConstancia.tipoConstancia);
-        },
-        error: function (xhr, estatus, error) {
-            console.log(data);
-        },
-    });
-}
-
 function ObtenerConstancia(id) {
+    parseInt(id);
     switch (id) {
         case 1:
             if (objInfoUserConstancia.tipoPersonal === Funcionario || objInfoUserConstancia.tipoPersonal === Confianza || objInfoUserConstancia.tipoPersonal === Academico) {
@@ -245,7 +225,6 @@ function ObtenerConstanciaServicioMedico() {
                 objGetInfoConstanciaSolicitada.info = Object.keys(new Object());
                 objGetInfoConstanciaSolicitada.info = data[0];
             } else {
-                console.log(data);
             }
         },
         error: function () {
@@ -286,7 +265,6 @@ function ObtenerConstanciaServcioMedicoDep(){
                 objGetInfoConstanciaSolicitada.info = Object.keys(new Object());
                 objGetInfoConstanciaSolicitada.info = data[0];
             } else {
-                console.log(data);
             }
         },
         error: function () {
@@ -321,7 +299,7 @@ function ObtenerConstanciaTrabajoPercepciones() {
                 objGetInfoConstanciaSolicitada.info = Object.keys(new Object());
                 objGetInfoConstanciaSolicitada.info = data[0];
             } else {
-                console.log(data);
+                
             }
         },
         error: function () {
@@ -374,7 +352,7 @@ function ObtenerConstanciaVisa() {
                 objGetInfoConstanciaSolicitada.info = data[0];
                 objSegConstancia.director = objGetInfoConstanciaSolicitada.info.sDirecPers;
             } else {
-                console.log(data);
+                
             }
         },
         error: function () {
@@ -419,7 +397,7 @@ function ObtenerConstanciaAltaAfiliacionIPE() {
                 objGetInfoConstanciaSolicitada.info = Object.keys(new Object());
                 objGetInfoConstanciaSolicitada.info = data[0];
             } else {
-                console.log(data);
+                
             }
         },
         error: function () {
@@ -472,7 +450,7 @@ function ObtenerConstanciaAltaAfiliacionMagisterio() {
                 objGetInfoConstanciaSolicitada.info = data[0];
                 objSegConstancia.director = objGetInfoConstanciaSolicitada.info.sDirecPers;
             } else {
-                console.log(data);
+                
             }
         },
         error: function () {
@@ -525,7 +503,7 @@ function ObtenerConstanciaBajaAfiliacionMagisterio() {
                 objGetInfoConstanciaSolicitada.info = data[0];
                 objSegConstancia.director = objGetInfoConstanciaSolicitada.info.sDirecPers;
             } else {
-                console.log(data);
+                
             }
         },
         error: function () {
@@ -562,7 +540,7 @@ function ObtenerConstanciaVisaDep() {
                 objGetInfoConstanciaSolicitada.info = data[0];
                 objSegConstancia.director = objGetInfoConstanciaSolicitada.info.sDirecPers;
             } else {
-                console.log(data);
+                
             }
         },
         error: function () {
@@ -608,7 +586,7 @@ function ObtenerConstanciaPRODep() {
                 objGetInfoConstanciaSolicitada.info = Object.keys(new Object());
                 objGetInfoConstanciaSolicitada.info = data[0];
             } else {
-                console.log(data);
+                
             }
         },
         error: function () {
@@ -692,7 +670,7 @@ function GuardarEstadoConstaciaCancelada() {
             xhr.setRequestHeader("Authorization", "Bearer " + objWebRoot.token);
         },
         success: function (data) {
-            console.log(data);
+            
             if (data.CodeResponse === 0) {
                 document.getElementById("getConstancia").style.display = 'none';
                 document.getElementById("cancelarConstancia").style.display = 'none';
@@ -789,7 +767,7 @@ function GuardarEstadoConstanciaImpresa() {
                 document.getElementById("entregarConstancia").style.display = "";
                 $('#constanciaModal').modal('hide');
             } else {
-                console.log(data);
+                
             }
         },
         error: function () {

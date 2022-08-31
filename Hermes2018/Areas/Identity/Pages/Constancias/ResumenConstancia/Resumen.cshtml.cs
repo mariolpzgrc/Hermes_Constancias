@@ -38,18 +38,13 @@ namespace Hermes2018.Areas.Identity.Pages.Constancias.ResumenConstancia
         public int Tipo { get; set; }
         public int TipoPersonal { get; set; }
 
-        public async Task OnGetAsync(int tipo, int tipoPersonal)
+        public void OnGet(int tipo, int tipoPersonal)
         {
             var infoUsuarioClaims = _usuarioClaimService.ObtenerInfoUsuarioClaims(User);
             string usuario = infoUsuarioClaims.UserName;
             Tipo = tipo;
             TipoPersonal = tipoPersonal;
 
-        }
-
-        public async Task<IActionResult> OnPost()
-        {
-            return RedirectToPage("/Constancias/Solicitud/SolicitudConstancia/", null);
         }
     }
 }

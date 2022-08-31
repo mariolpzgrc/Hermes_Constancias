@@ -231,7 +231,6 @@ function ObtenerInfoConstancia() {
                 $('#categoriasueldo').text(objGetInfoConstancia.info.sDescCat);
                 $('#puesto').text(objGetInfoConstancia.info.sDesPuesto);
                 sueldo = (objGetInfoConstancia.info.sSueldo != null) ? objGetInfoConstancia.info.sSueldo : (objGetInfoConstancia.info.sSuelPrest != null) ? objGetInfoConstancia.info.sSuelPrest : "0.00";
-                console.log(sueldo);
                 valor = parseFloat(sueldo).toFixed(2);
                 letras = numeroALetras(valor, monedaMXN);
                 $('#sueldo').text("$ " + sueldo + " - " + letras + " 00/100 M.N.");
@@ -259,8 +258,6 @@ function GuardarSolicitudConstancia() {
             xhr.setRequestHeader("Authorization", "Bearer " + objWebRoot.token);
         },
         success: function (data) {
-            console.log(data);
-            console.log(data.CodeResponse);
             if (data.CodeResponse === 0) {
                 window.alert("Solicitud completa.")
                 window.location.href = objWebRoot.route + 'Constancias/Solicitud/SolicitudConstancia';

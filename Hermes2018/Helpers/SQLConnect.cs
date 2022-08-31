@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,8 @@ using System.Net;
 using System.Threading.Tasks;
 
 
-namespace Hermes2018 {
+namespace Hermes2018
+{
     public static class Extensions
     {
         public static Boolean NoEsVacio(this Object str)
@@ -315,17 +317,13 @@ namespace Hermes2018 {
             return urlFiendly;
         }
     }
-
-
-
-
 }
 
 namespace Hermes2018.Helpers
 {
     public class RequestClientApi
     {
-
+        private readonly ILogger<RequestClientApi> _logger;
         public string Get(String urlApiREST)
         {
             var request = (HttpWebRequest)WebRequest.Create(urlApiREST);
@@ -351,7 +349,7 @@ namespace Hermes2018.Helpers
             }
             catch (WebException ex)
             {
-                //Utileria.escribeLog(ex + "");
+                _logger.LogError("Error de petición: " + ex.Message);
             }
             return returnJson;
         }
@@ -395,7 +393,7 @@ namespace Hermes2018.Helpers
             }
             catch (WebException ex)
             {
-                //Utileria.escribeLog(ex + "");
+                _logger.LogError("Error de petición: " + ex.Message);
             }
             return returnJson;
         }
@@ -414,23 +412,27 @@ namespace Hermes2018.Helpers
 
     }
 
-    public class LoginTP {
+    public class LoginTP
+    {
 
         public int iNumPer { get; set; }
         public string sTipPer { get; set; }
 
-        public List<TipoPersonalCustom> TipoPersonal {
-            get {
+        public List<TipoPersonalCustom> TipoPersonal
+        {
+            get
+            {
                 List<TipoPersonalCustom> tipos = new List<TipoPersonalCustom>();
-    
+
                 string[] tiposP = sTipPer.Split(",");
                 string[] tipoValue = null;
                 TipoPersonalCustom tip = null;
-                foreach (var data in tiposP) {
+                foreach (var data in tiposP)
+                {
                     tipoValue = data.Split("-");
                     tip = new TipoPersonalCustom();
                     tip.Id = Convert.ToInt32(tipoValue[0].Trim());
-                    tip.TipoPersonal = Convert.ToString(tipoValue[1].Trim()) ;
+                    tip.TipoPersonal = Convert.ToString(tipoValue[1].Trim());
                     tipos.Add(tip);
                 }
                 return tipos;
@@ -441,7 +443,8 @@ namespace Hermes2018.Helpers
 
 
 
-    public class UsrToken {
+    public class UsrToken
+    {
         public String sTokenUV { get; set; }
         public String sTokenMS { get; set; }
         public String dtExpira { get; set; }
@@ -450,14 +453,16 @@ namespace Hermes2018.Helpers
         public String sClave { get; set; }
         public UsrToken() { }
     }
-    public class LoginSPRH {
+    public class LoginSPRH
+    {
         public LoginTP UsrToken { get; set; }
         public LoginSPRH() { }
     }
 
-    public class TipoPersonalCustom {
+    public class TipoPersonalCustom
+    {
 
-        public Int32 Id{get;set;}
+        public Int32 Id { get; set; }
         public String TipoPersonal { get; set; }
         public TipoPersonalCustom() { }
     }
@@ -489,7 +494,8 @@ namespace Hermes2018.Helpers
             return new RequestClientApi().Post(configuation.GetSection("ServicesAPIDSIA").GetSection("ObtieneServMed").Value, JsonConvert.SerializeObject(jsonRaw), dataBearer);
         }
 
-        public string GetConnection() {
+        public string GetConnection()
+        {
             var configuation = GetConfiguration();
             return configuation.GetSection("ConnectionStrings").GetSection("DefaultConnection").Value;
 
@@ -507,7 +513,7 @@ namespace Hermes2018.Helpers
                 sClave = configuation.GetSection("ConfigureCustom").GetSection("sClave").Value
             };
             return new RequestClientApi().Post(configuation.GetSection("ServicesAPIDSIA").GetSection("ObtieneServMedDep").Value, JsonConvert.SerializeObject(jsonRaw), dataBearer);
-        
+
         }
 
         public string ObtieneLogin2(string sUserId, string sPass)
@@ -529,10 +535,7 @@ namespace Hermes2018.Helpers
         public RestApiDSIA()
         {
         }
-
     }
-
-
 
     public class SearchCatalog
     {

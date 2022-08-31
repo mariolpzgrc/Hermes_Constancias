@@ -1,15 +1,10 @@
-using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Threading.Tasks;
 using Hermes2018.Services;
 using Hermes2018.Services.Interfaces;
 using Hermes2018.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Newtonsoft.Json;
 
 namespace Hermes2018.Areas.Identity.Pages.Constancias
 {
@@ -49,18 +44,9 @@ namespace Hermes2018.Areas.Identity.Pages.Constancias
         {
             IdConstanciaSolicitada = idConstanciaSolicitada;
             IdConstancia = idConstancia;
-
-
-            /*string resultado = _constanciaService.ObtieneServMed(34004, 3);
-            List<ConstanciaViewModel> data = new List<ConstanciaViewModel>();
-            if (resultado != "")
-                JsonConvert.DeserializeObject<List<ConstanciaViewModel>>(resultado);*/
-
-            //Pongo el modelo ya llenado
-
         }
 
-        public async Task<FileResult> OnPostBaseAsync()
+        /*public async Task<FileResult> OnPostBaseAsync()
         {
             var nombreConstancia = "";
 
@@ -121,6 +107,6 @@ namespace Hermes2018.Areas.Identity.Pages.Constancias
             {
                 return File(_descargarConstanciaPDFService.DescargarOficioBajaIPEMagisterio(), System.Net.Mime.MediaTypeNames.Application.Pdf, string.Format("{0}.pdf", nombreConstancia));
             }
-        }     
+        }    */ 
     }
 }
